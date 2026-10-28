@@ -1,0 +1,19 @@
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+frontend/.env.*
+
+# Backend - Laravel
+backend/vendor/
+backend/.env
+backend/.env.*
+backend/storage/logs/*
+backend/storage/framework/cache/*
+backend/storage/framework/sessions/*
+backend/storage/framework/views/*
+
+# Secrets and generated files
+*.log
+.DS_Store
+Thumbs.db

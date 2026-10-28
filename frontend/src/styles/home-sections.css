@@ -1,0 +1,306 @@
+/* ==========================================
+   WHY CHOOSE PREVORT WARMUP + VORT
+========================================== */
+
+.prevort-section {
+  padding: clamp(52px, 6vw, 84px) 0;
+  background-color: #ffffff;
+}
+
+.prevort-container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.prevort-title {
+  color: #16a34a;
+  font-size: clamp(26px, 3.2vw, 36px);
+  font-weight: 850;
+  text-align: center;
+  margin: 0 0 clamp(32px, 4.5vw, 48px);
+  letter-spacing: -0.02em;
+}
+
+.prevort-card {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 22px;
+  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.04);
+  padding: clamp(28px, 4vw, 44px);
+  margin-bottom: clamp(28px, 4vw, 40px);
+}
+
+.prevort-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(24px, 3.5vw, 36px) clamp(28px, 4vw, 48px);
+}
+
+.prevort-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.prevort-item-title {
+  color: #1e293b;
+  font-size: 16px;
+  font-weight: 800;
+  margin: 0 0 8px;
+}
+
+.prevort-item-desc {
+  color: #64748b;
+  font-size: 13.5px;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.prevort-cta-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.prevort-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 28px;
+  background-color: #16a34a;
+  color: #ffffff;
+  border-radius: 9999px;
+  font-size: 15px;
+  font-weight: 750;
+  text-decoration: none;
+  box-shadow: 0 6px 20px rgba(22, 163, 74, 0.28);
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.prevort-cta-btn:hover {
+  background-color: #15803d;
+  box-shadow: 0 8px 24px rgba(22, 163, 74, 0.38);
+  transform: translateY(-2px);
+  color: #ffffff;
+}
+
+/* ==========================================
+   FREQUENTLY ASKED QUESTIONS SECTION
+========================================== */
+
+.faq-section-modern {
+  padding: clamp(52px, 6vw, 84px) 0;
+  background-color: #ffffff;
+}
+
+.faq-container-modern {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.faq-title-modern {
+  color: #16a34a;
+  font-size: clamp(26px, 3.2vw, 36px);
+  font-weight: 850;
+  text-align: center;
+  margin: 0 0 clamp(32px, 4.5vw, 46px);
+  letter-spacing: -0.02em;
+}
+
+.faq-list-modern {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.faq-card-modern {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.faq-card-modern:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+.faq-card-modern.open {
+  border-color: #86efac;
+}
+
+.faq-question-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 22px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  color: #1e293b;
+  font-size: 15px;
+  font-weight: 750;
+}
+
+.faq-question-btn:focus-visible {
+  outline: 2px solid #16a34a;
+  outline-offset: -2px;
+}
+
+.faq-chevron {
+  color: #64748b;
+  flex-shrink: 0;
+  transition: transform 0.25s ease, color 0.2s ease;
+}
+
+.faq-card-modern.open .faq-chevron {
+  transform: rotate(180deg);
+  color: #16a34a;
+}
+
+.faq-answer-wrap {
+  padding: 0 22px 18px;
+  color: #475569;
+  font-size: 13.5px;
+  line-height: 1.65;
+}
+
+.faq-actions-modern {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.faq-view-all-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 18px;
+  background-color: #16a34a;
+  color: #ffffff;
+  border-radius: 9999px;
+  font-size: 12.5px;
+  font-weight: 750;
+  text-decoration: none;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.faq-view-all-btn:hover {
+  background-color: #15803d;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* ==========================================
+   IMPORTANT INFORMATION (SOLID GREEN BG)
+========================================== */
+
+.important-info-section {
+  padding: clamp(56px, 7vw, 92px) 0;
+  background-color: #16a34a;
+  color: #ffffff;
+}
+
+.important-info-container {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.important-info-title {
+  color: #ffffff;
+  font-size: clamp(28px, 3.6vw, 38px);
+  font-weight: 850;
+  text-align: center;
+  margin: 0 0 clamp(32px, 4.5vw, 48px);
+  letter-spacing: -0.02em;
+}
+
+.important-info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.important-info-card {
+  background-color: #ffffff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.important-info-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+}
+
+.important-info-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 22px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  color: #111827;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.important-info-btn:focus-visible {
+  outline: 2px solid #16a34a;
+  outline-offset: -2px;
+}
+
+.important-info-chevron {
+  color: #4b5563;
+  flex-shrink: 0;
+  transition: transform 0.25s ease, color 0.2s ease;
+}
+
+.important-info-card.open .important-info-chevron {
+  transform: rotate(180deg);
+  color: #16a34a;
+}
+
+.important-info-answer {
+  padding: 0 22px 20px;
+  color: #374151;
+  font-size: 13.5px;
+  line-height: 1.65;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .prevort-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .faq-question-btn,
+  .important-info-btn {
+    padding: 16px 18px;
+    font-size: 14px;
+  }
+
+  .faq-answer-wrap,
+  .important-info-answer {
+    padding: 0 18px 16px;
+    font-size: 13px;
+  }
+}
+

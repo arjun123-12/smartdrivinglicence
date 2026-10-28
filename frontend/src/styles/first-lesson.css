@@ -1,0 +1,557 @@
+/* ==========================================
+   FIRST LESSON / BOOK LESSON PREMIUM STYLES
+========================================== */
+
+.first-lesson-page {
+  background-color: #f8fafc;
+  color: #1e293b;
+  overflow-x: hidden;
+}
+
+/* 1. Hero Section */
+.fl-hero {
+  position: relative;
+  background: linear-gradient(135deg, #09182d 0%, #0d2847 60%, #12375f 100%);
+  color: #ffffff;
+  padding: clamp(52px, 7vw, 92px) 0 clamp(48px, 6vw, 76px);
+  overflow: hidden;
+}
+
+.fl-hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 80% 20%, rgba(22, 163, 74, 0.15), transparent 40%),
+                    radial-gradient(circle at 20% 80%, rgba(255, 181, 46, 0.12), transparent 45%);
+  pointer-events: none;
+}
+
+.fl-hero-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.fl-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  background-color: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 9999px;
+  color: #ffb52e;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+  backdrop-filter: blur(8px);
+}
+
+.fl-pill-dot {
+  width: 7px;
+  height: 7px;
+  background-color: #ffb52e;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #ffb52e;
+}
+
+.fl-hero-title {
+  color: #ffffff;
+  font-size: clamp(34px, 4.5vw, 56px);
+  font-weight: 850;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  margin: 0 0 20px;
+}
+
+.fl-hero-title span {
+  color: #ffb52e;
+}
+
+.fl-hero-desc {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: clamp(15px, 1.3vw, 17.5px);
+  line-height: 1.7;
+  max-width: 740px;
+  margin: 0 auto 32px;
+}
+
+/* Value Props Ribbon */
+.fl-value-ribbon {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(12px, 2vw, 24px);
+  margin-bottom: 24px;
+}
+
+.fl-value-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+  backdrop-filter: blur(6px);
+}
+
+.fl-value-item svg {
+  color: #16a34a;
+  flex-shrink: 0;
+}
+
+/* 2. Booking Engine Container */
+.fl-booking-section {
+  padding: clamp(40px, 5vw, 72px) 0;
+}
+
+.fl-booking-card {
+  max-width: 1060px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 24px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+  padding: clamp(24px, 3.5vw, 44px);
+}
+
+.fl-booking-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.fl-booking-title-group h2 {
+  font-size: 22px;
+  font-weight: 850;
+  color: #0f172a;
+  margin: 0 0 4px;
+}
+
+.fl-booking-title-group p {
+  color: #64748b;
+  font-size: 13.5px;
+  margin: 0;
+}
+
+.fl-price-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  background-color: #eaf7ef;
+  border: 1.5px solid #86efac;
+  border-radius: 14px;
+  padding: 8px 16px;
+  color: #15803d;
+}
+
+.fl-price-amount {
+  font-size: 26px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.fl-price-sub {
+  font-size: 11px;
+  font-weight: 750;
+  text-transform: uppercase;
+}
+
+/* 3. Included Features (4 Cards) */
+.fl-included-section {
+  padding: clamp(52px, 6vw, 84px) 0;
+  background-color: #ffffff;
+}
+
+.fl-section-title {
+  color: #16a34a;
+  font-size: clamp(26px, 3.2vw, 36px);
+  font-weight: 850;
+  text-align: center;
+  margin: 0 0 12px;
+  letter-spacing: -0.02em;
+}
+
+.fl-section-desc {
+  color: #64748b;
+  font-size: 15px;
+  text-align: center;
+  max-width: 620px;
+  margin: 0 auto clamp(36px, 5vw, 52px);
+  line-height: 1.6;
+}
+
+.fl-features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(16px, 2.5vw, 24px);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.fl-feature-card {
+  background-color: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 26px 22px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.fl-feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  border-color: #86efac;
+}
+
+.fl-feature-icon-wrap {
+  width: 48px;
+  height: 48px;
+  background-color: #eaf7ef;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  color: #16a34a;
+  margin-bottom: 18px;
+}
+
+.fl-feature-title {
+  color: #0f172a;
+  font-size: 16.5px;
+  font-weight: 800;
+  margin: 0 0 10px;
+  line-height: 1.35;
+}
+
+.fl-feature-desc {
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* 4. Interactive Roadmap Estimator */
+.fl-estimator-section {
+  padding: clamp(52px, 6vw, 84px) 0;
+  background: linear-gradient(180deg, #f8fafc 0%, #edf7f0 100%);
+}
+
+.fl-estimator-card {
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 24px;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.05);
+  padding: clamp(28px, 4vw, 44px);
+}
+
+.fl-estimator-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: clamp(28px, 4vw, 48px);
+  align-items: center;
+}
+
+.fl-slider-group {
+  margin-bottom: 22px;
+}
+
+.fl-slider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-weight: 750;
+  color: #1e293b;
+  font-size: 14px;
+}
+
+.fl-slider-val {
+  color: #16a34a;
+  font-size: 16px;
+  font-weight: 850;
+}
+
+.fl-slider-input {
+  width: 100%;
+  accent-color: #16a34a;
+  cursor: pointer;
+}
+
+.fl-radio-group {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.fl-radio-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 14px;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 12px;
+  background-color: #f8fafc;
+  color: #334155;
+  font-size: 13px;
+  font-weight: 750;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.fl-radio-btn.active {
+  border-color: #16a34a;
+  background-color: #eaf7ef;
+  color: #15803d;
+}
+
+/* Estimator Result Box */
+.fl-estimator-result {
+  background: linear-gradient(135deg, #09182d 0%, #16375d 100%);
+  color: #ffffff;
+  border-radius: 18px;
+  padding: 28px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 8px 26px rgba(9, 24, 45, 0.2);
+}
+
+.fl-result-badge {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #ffb52e;
+  font-weight: 850;
+  margin-bottom: 8px;
+}
+
+.fl-result-hours {
+  font-size: clamp(38px, 4vw, 46px);
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.fl-result-hours span {
+  font-size: 18px;
+  color: #ffb52e;
+}
+
+.fl-result-label {
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 18px;
+}
+
+.fl-result-checklist {
+  list-style: none;
+  margin: 0 0 20px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+  width: 100%;
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.fl-result-checklist li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.fl-result-btn {
+  width: 100%;
+  padding: 12px 20px;
+  background-color: #16a34a;
+  color: #ffffff;
+  border: none;
+  border-radius: 11px;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.fl-result-btn:hover {
+  background-color: #15803d;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* 5. 3-Step Journey */
+.fl-steps-section {
+  padding: clamp(52px, 6vw, 84px) 0;
+  background-color: #ffffff;
+}
+
+.fl-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(20px, 3vw, 32px);
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.fl-step-card {
+  text-align: center;
+  padding: 24px 20px;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  position: relative;
+}
+
+.fl-step-number {
+  width: 44px;
+  height: 44px;
+  background-color: #16a34a;
+  color: #ffffff;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  font-weight: 850;
+  margin: 0 auto 16px;
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+}
+
+.fl-step-title {
+  color: #0f172a;
+  font-size: 16.5px;
+  font-weight: 800;
+  margin: 0 0 8px;
+}
+
+.fl-step-desc {
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* 6. Guarantee Banner */
+.fl-guarantee-wrap {
+  max-width: 960px;
+  margin: clamp(36px, 5vw, 64px) auto;
+  padding: clamp(24px, 3vw, 36px);
+  background: linear-gradient(135deg, #eaf7ef 0%, #f0fdf4 100%);
+  border: 2px solid #86efac;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.fl-guarantee-icon {
+  width: 58px;
+  height: 58px;
+  background-color: #16a34a;
+  color: #ffffff;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.fl-guarantee-text h4 {
+  font-size: 17px;
+  font-weight: 850;
+  color: #15803d;
+  margin: 0 0 4px;
+}
+
+.fl-guarantee-text p {
+  color: #334155;
+  font-size: 13.5px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* 7. Bottom CTA Banner */
+.fl-cta-banner {
+  background: linear-gradient(135deg, #09182d 0%, #0d2847 100%);
+  color: #ffffff;
+  padding: clamp(52px, 6vw, 76px) 24px;
+  text-align: center;
+}
+
+.fl-cta-container {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.fl-cta-title {
+  color: #ffffff;
+  font-size: clamp(28px, 3.5vw, 40px);
+  font-weight: 850;
+  margin: 0 0 16px;
+}
+
+.fl-cta-desc {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 15px;
+  line-height: 1.65;
+  margin: 0 0 28px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .fl-features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .fl-estimator-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .fl-features-grid,
+  .fl-steps-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fl-booking-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .fl-price-badge {
+    align-items: flex-start;
+  }
+
+  .fl-guarantee-wrap {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+

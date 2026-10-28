@@ -1,0 +1,246 @@
+/* ==========================================
+   LICENCEMATE STYLE FOOTER
+========================================== */
+
+.site-footer-premium {
+  background-color: #071526;
+  color: #8da2bc;
+  padding-top: clamp(52px, 6vw, 76px);
+  padding-bottom: 32px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 13px;
+  position: relative;
+}
+
+.footer-premium-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.footer-premium-grid {
+  display: grid;
+  grid-template-columns: minmax(300px, 1.4fr) repeat(3, minmax(160px, 1fr));
+  gap: clamp(28px, 4vw, 56px);
+  margin-bottom: clamp(40px, 5vw, 64px);
+}
+
+/* Brand Column */
+.footer-brand-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-logo-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  margin-bottom: 16px;
+}
+
+.footer-logo-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background-color: #ffb52e;
+  border: 2px solid #16a34a;
+  border-radius: 6px;
+  color: #071526;
+  font-weight: 900;
+  font-size: 15px;
+  line-height: 1;
+}
+
+.footer-logo-text {
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 850;
+  letter-spacing: -0.02em;
+}
+
+.footer-tagline {
+  color: #8da2bc;
+  font-size: 13.5px;
+  line-height: 1.6;
+  margin: 0 0 22px;
+  max-width: 380px;
+}
+
+/* Contact List */
+.footer-contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  color: #8da2bc;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.footer-contact-item svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: #64748b;
+}
+
+.footer-contact-item a {
+  color: #8da2bc;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-contact-item a:hover {
+  color: #ffffff;
+}
+
+.footer-contact-address-title {
+  display: block;
+  font-weight: 600;
+  color: #94a3b8;
+}
+
+.footer-contact-address-sub {
+  display: block;
+  color: #64748b;
+  font-size: 12.5px;
+}
+
+/* Link Columns */
+.footer-col-title {
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 18px;
+}
+
+.footer-col-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-col-links a {
+  color: #8da2bc;
+  text-decoration: none;
+  font-size: 13px;
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: inline-block;
+}
+
+.footer-col-links a:hover {
+  color: #ffffff;
+  transform: translateX(2px);
+}
+
+/* Bottom Bar */
+.footer-bottom-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.footer-bottom-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.footer-copyright {
+  color: #8da2bc;
+  font-size: 12.5px;
+  font-weight: 500;
+}
+
+.footer-legal-subline {
+  color: #55687f;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.footer-social-links {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.footer-social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #8da2bc;
+  transition: color 0.2s ease, transform 0.2s ease;
+  text-decoration: none;
+}
+
+.footer-social-icon:hover {
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* Floating Chat Bubble Widget */
+.footer-floating-chat {
+  position: fixed;
+  bottom: 22px;
+  left: 22px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background-color: #16a34a;
+  color: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 8px 24px rgba(22, 163, 74, 0.45);
+  cursor: pointer;
+  border: none;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  text-decoration: none;
+}
+
+.footer-floating-chat:hover {
+  transform: scale(1.08);
+  background-color: #15803d;
+  color: #ffffff;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .footer-premium-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 36px;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer-premium-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .footer-bottom-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+  }
+}
+
