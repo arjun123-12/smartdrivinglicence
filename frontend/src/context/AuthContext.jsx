@@ -13,13 +13,17 @@ export function AuthProvider({ children }) {
       if (token) {
         try {
           const res = await authService.me();
-          setUser(res.user);
-        } catch {
-          // Token expired or invalid
-          setUser(null);
-          setToken(null);
-          localStorage.removeItem('smartdriving_token');
-          localStorage.removeItem('smartdriving_user');
+          if (res?.user) {
+            setUser(res.user);
+          }
+        } catch (err) {
+          // Only invalidate token if the server explicitly rejected authentication
+          if (err.response && (err.response.status === 401 || err.response.status === 403)) {
+            setUser(null);
+            setToken(null);
+            localStorage.removeItem('smartdriving_token');
+            localStorage.removeItem('smartdriving_user');
+          }
         }
       }
       setIsLoading(false);

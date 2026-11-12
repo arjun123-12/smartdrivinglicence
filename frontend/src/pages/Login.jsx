@@ -22,12 +22,20 @@ export default function Login() {
 
     try {
       const data = await login({ email, password });
-      if (from) {
-        navigate(from, { replace: true });
-      } else if (data.user?.is_admin || data.user?.role === 'admin') {
-        navigate('/admin', { replace: true });
+      const isAdminUser = data.user?.is_admin || data.user?.role === 'admin';
+
+      if (isAdminUser) {
+        if (from && from.startsWith('/admin')) {
+          navigate(from, { replace: true });
+        } else {
+          navigate('/admin', { replace: true });
+        }
       } else {
-        navigate('/dashboard', { replace: true });
+        if (from && !from.startsWith('/admin')) {
+          navigate(from, { replace: true });
+        } else {
+          navigate('/dashboard', { replace: true });
+        }
       }
     } catch (err) {
       setErrorMessage(err.response?.data?.message || 'Invalid email or password credentials.');

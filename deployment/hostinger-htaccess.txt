@@ -1,0 +1,24 @@
+# ==============================================================================
+# Hostinger Shared Web Hosting (.htaccess for public_html)
+# Place this .htaccess in your public_html folder if using Hostinger Web Hosting
+# ==============================================================================
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # 1. Route all /api requests to Laravel public/index.php
+    RewriteRule ^api/(.*)$ backend/public/index.php [L,QSA]
+
+    # 2. Route storage to backend storage
+    RewriteRule ^storage/(.*)$ backend/storage/app/public/$1 [L]
+
+    # 3. For all other requests, if the file exists in frontend/dist, serve it
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # 4. Otherwise, redirect to React index.html for client-side routing
+    RewriteRule ^ index.html [L]
+</IfModule>
+
