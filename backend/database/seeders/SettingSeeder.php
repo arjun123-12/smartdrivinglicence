@@ -10,11 +10,12 @@ class SettingSeeder extends Seeder
     public function run(): void
     {
         $settings = [
-            ['key' => 'business_name', 'value' => 'SmartDriving South Australia', 'group' => 'general', 'type' => 'string', 'description' => 'Business display name'],
-            ['key' => 'business_abn', 'value' => '45 612 890 123', 'group' => 'general', 'type' => 'string', 'description' => 'Australian Business Number'],
-            ['key' => 'business_phone', 'value' => '+61 412 345 678', 'group' => 'contact', 'type' => 'string', 'description' => 'Primary customer phone'],
-            ['key' => 'business_email', 'value' => 'support@smartdriving.com.au', 'group' => 'contact', 'type' => 'string', 'description' => 'Support email address'],
-            ['key' => 'business_address', 'value' => '120 King William Street, Adelaide SA 5000', 'group' => 'contact', 'type' => 'string', 'description' => 'Registered office location'],
+            ['key' => 'business_name', 'value' => 'A1 Smart Driving', 'group' => 'general', 'type' => 'string', 'description' => 'Business display name'],
+            ['key' => 'business_legal_name', 'value' => 'MB & HB GROUP PTY LTD', 'group' => 'general', 'type' => 'string', 'description' => 'Registered legal entity'],
+            ['key' => 'business_abn', 'value' => '92 662 509 720', 'group' => 'general', 'type' => 'string', 'description' => 'Australian Business Number (ABN)'],
+            ['key' => 'business_phone', 'value' => '0430 580 111', 'group' => 'contact', 'type' => 'string', 'description' => 'Primary customer phone'],
+            ['key' => 'business_email', 'value' => 'enquiries@a1smartdriving.com.au', 'group' => 'contact', 'type' => 'string', 'description' => 'Support email address'],
+            ['key' => 'business_address', 'value' => 'Adelaide, South Australia', 'group' => 'contact', 'type' => 'string', 'description' => 'Registered office location'],
             ['key' => 'booking_lead_time_hours', 'value' => '12', 'group' => 'booking', 'type' => 'integer', 'description' => 'Minimum hours before lesson can be booked'],
             ['key' => 'cancellation_cutoff_hours', 'value' => '24', 'group' => 'booking', 'type' => 'integer', 'description' => 'Hours before lesson for free cancellation'],
             ['key' => 'vort_notice_period_days', 'value' => '3', 'group' => 'booking', 'type' => 'integer', 'description' => 'Minimum business days notice required by SA Government for VORT'],

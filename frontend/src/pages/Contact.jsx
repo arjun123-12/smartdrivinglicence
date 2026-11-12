@@ -67,7 +67,7 @@ export default function Contact() {
                     Phone Support
                   </div>
                   <div style={{ fontWeight: 700, fontSize: '1.1rem', color: 'var(--color-primary)' }}>
-                    (08) 8234 5678 / +61 412 345 678
+                    <a href="tel:0430580111" style={{ color: 'inherit', textDecoration: 'none' }}>0430 580 111</a>
                   </div>
                 </div>
               </div>
@@ -81,7 +81,7 @@ export default function Contact() {
                     Email Enquiries
                   </div>
                   <div style={{ fontWeight: 700, fontSize: '1.1rem', color: 'var(--color-primary)' }}>
-                    support@smartdriving.com.au
+                    <a href="mailto:enquiries@a1smartdriving.com.au" style={{ color: 'inherit', textDecoration: 'none' }}>enquiries@a1smartdriving.com.au</a>
                   </div>
                 </div>
               </div>
@@ -92,10 +92,13 @@ export default function Contact() {
                 </div>
                 <div>
                   <div style={{ fontSize: 'var(--font-size-xs)', textTransform: 'uppercase', color: 'var(--color-text-muted)', fontWeight: 700 }}>
-                    Adelaide Head Office
+                    Location & Business Entity
                   </div>
                   <div style={{ fontWeight: 700, fontSize: '1rem', color: 'var(--color-primary)' }}>
-                    120 King William Street, Adelaide SA 5000
+                    Adelaide, South Australia
+                  </div>
+                  <div style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-muted)', marginTop: '0.2rem' }}>
+                    MB &amp; HB GROUP PTY LTD · ABN 92 662 509 720
                   </div>
                 </div>
               </div>

@@ -26,22 +26,15 @@ export default function Footer() {
               <ul className="footer-contact-list">
                 <li className="footer-contact-item">
                   <Mail size={16} />
-                  <a href="mailto:support@a1smartdriving.com.au">support@a1smartdriving.com.au</a>
+                  <a href="mailto:enquiries@a1smartdriving.com.au">enquiries@a1smartdriving.com.au</a>
                 </li>
                 <li className="footer-contact-item">
                   <Phone size={16} />
-                  <a href="tel:1300138626">1300 138 626</a>
+                  <a href="tel:0430580111">0430 580 111</a>
                 </li>
                 <li className="footer-contact-item">
                   <MapPin size={16} />
-                  <span>101/37-39 Walsh St, Thebarton SA 5031</span>
-                </li>
-                <li className="footer-contact-item">
-                  <MapPin size={16} />
-                  <div>
-                    <span className="footer-contact-address-title">Sydney · Technical office</span>
-                    <span className="footer-contact-address-sub">55 Pyrmont Bridge Road, Pyrmont NSW 2009</span>
-                  </div>
+                  <span>Adelaide, South Australia</span>
                 </li>
               </ul>
             </div>
@@ -86,7 +79,7 @@ export default function Footer() {
                 &copy; {new Date().getFullYear()} A1 Smart Driving. All rights reserved.
               </span>
               <span className="footer-legal-subline">
-                A1 Smart Driving Adelaide Driving School · A1 Smart Driving Pty Ltd · ABN 41 690 289 715
+                MB &amp; HB GROUP PTY LTD trading as A1 Smart Driving · ABN 92 662 509 720 · Adelaide, South Australia
               </span>
             </div>
 

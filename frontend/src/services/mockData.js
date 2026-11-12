@@ -342,10 +342,11 @@ export const mockCustomers = [
 ];
 
 export const mockSettings = [
-  { id: 1, key: 'company_name', value: 'SmartDriving South Australia', description: 'Business Legal Name' },
-  { id: 2, key: 'company_abn', value: '41 690 289 715', description: 'Australian Business Number (ABN)' },
-  { id: 3, key: 'contact_email', value: 'admin@smartdriving.com.au', description: 'Platform Support Email' },
-  { id: 4, key: 'contact_phone', value: '1300 138 626', description: 'Toll-free Hotline' },
-  { id: 5, key: 'first_lesson_promo_price', value: '99', description: 'Special First Lesson Price ($ AUD)' },
+  { id: 1, key: 'company_name', value: 'MB & HB GROUP PTY LTD trading as A1 Smart Driving', description: 'Business Legal Name' },
+  { id: 2, key: 'company_abn', value: '92 662 509 720', description: 'Australian Business Number (ABN)' },
+  { id: 3, key: 'contact_email', value: 'enquiries@a1smartdriving.com.au', description: 'Platform Support Email' },
+  { id: 4, key: 'contact_phone', value: '0430 580 111', description: 'Support Hotline' },
+  { id: 5, key: 'business_location', value: 'Adelaide, South Australia', description: 'Operating Location' },
+  { id: 6, key: 'first_lesson_promo_price', value: '99', description: 'Special First Lesson Price ($ AUD)' },
 ];
 

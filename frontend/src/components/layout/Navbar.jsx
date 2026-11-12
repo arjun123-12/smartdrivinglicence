@@ -76,9 +76,9 @@ export default function Navbar() {
             <span>Your journey to confident driving starts here.</span>
           </p>
 
-          <a href="tel:+61000000000" className="sd-topbar-contact">
+          <a href="tel:0430580111" className="sd-topbar-contact">
             <Phone size={14} />
-            <span>Talk to our team</span>
+            <span>0430 580 111</span>
           </a>
         </div>
       </div>
