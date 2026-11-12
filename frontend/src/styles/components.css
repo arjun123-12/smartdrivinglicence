@@ -168,7 +168,7 @@
   position: absolute;
   top: -12px;
   right: var(--spacing-lg);
-  background: linear-gradient(135deg, var(--color-accent), #ea580c);
+  background: linear-gradient(135deg, var(--color-accent), #c52223);
   color: #ffffff;
   font-size: var(--font-size-xs);
   font-weight: 700;
@@ -222,7 +222,7 @@
   width: 96px;
   height: 96px;
   border-radius: var(--radius-full);
-  background: linear-gradient(135deg, var(--color-primary-light), #c7d2fe);
+  background: linear-gradient(135deg, var(--color-primary-light), #DCE5DE);
   display: flex;
   align-items: center;
   justify-content: center;

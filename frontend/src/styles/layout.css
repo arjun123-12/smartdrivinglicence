@@ -82,7 +82,7 @@
 
 /* Page Header */
 .page-header {
-  background: linear-gradient(135deg, var(--color-primary) 0%, #1a427a 100%);
+  background: linear-gradient(135deg, #0D2645 0%, #163B66 100%);
   color: #ffffff;
   padding: var(--spacing-2xl) 0;
   text-align: center;
@@ -104,7 +104,7 @@
 /* Hero Section */
 .hero {
   position: relative;
-  background: linear-gradient(135deg, #091e38 0%, #163b75 60%, #1e4a91 100%);
+  background: linear-gradient(135deg, #08192E 0%, #0D2645 60%, #163B66 100%);
   color: #ffffff;
   padding: calc(var(--spacing-3xl) + 1rem) 0 var(--spacing-3xl) 0;
   overflow: hidden;
@@ -117,7 +117,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  background: radial-gradient(circle at 85% 20%, rgba(245, 158, 11, 0.15) 0%, transparent 50%);
+  background: radial-gradient(circle at 85% 20%, rgba(27, 108, 49, 0.2) 0%, transparent 50%);
   pointer-events: none;
 }
 

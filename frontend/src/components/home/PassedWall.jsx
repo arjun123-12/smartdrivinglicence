@@ -92,7 +92,7 @@ export default function PassedWall() {
           </div>
 
           <h2 className="passwall-title">
-            Passed with<br />LicenceMate
+            Passed with<br />A1 Smart Driving
           </h2>
 
           <p className="passwall-desc">
@@ -124,11 +124,11 @@ export default function PassedWall() {
                     <div className="passwall-card-bottom">
                       <span className="passwall-card-name">{learner.name}</span>
                       <span className="passwall-card-location">
-                        <MapPin size={10} color="#ffb52e" />
+                        <MapPin size={10} color="#E12D2E" />
                         {learner.suburb}
                       </span>
                       <span className="passwall-card-watermark">
-                        ● LicenceMate
+                        ● A1 Smart Driving
                       </span>
                     </div>
                   </div>
@@ -157,11 +157,11 @@ export default function PassedWall() {
                       <div className="passwall-card-bottom">
                         <span className="passwall-card-name">{learner.name}</span>
                         <span className="passwall-card-location">
-                          <MapPin size={10} color="#ffb52e" />
+                          <MapPin size={10} color="#E12D2E" />
                           {learner.suburb}
                         </span>
                         <span className="passwall-card-watermark">
-                          ● LicenceMate
+                          ● A1 Smart Driving
                         </span>
                       </div>
                     </div>

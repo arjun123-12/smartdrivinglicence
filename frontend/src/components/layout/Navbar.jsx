@@ -87,18 +87,11 @@ export default function Navbar() {
       <div className="sd-mainbar">
         <div className="sd-container sd-mainbar-inner">
           <Link to="/" className="sd-brand" onClick={closeMenu}>
-            <span className="sd-brand-icon">
-              <Car size={27} strokeWidth={2.2} />
-            </span>
-
-            <span className="sd-brand-copy">
-              <span className="sd-brand-name">
-                Smart<span>Driving</span>
-              </span>
-              <span className="sd-brand-tagline">
-                DRIVE WITH CONFIDENCE
-              </span>
-            </span>
+            <img
+              src="/logo.png"
+              alt="A1 Smart Driving"
+              className="sd-brand-logo-img"
+            />
           </Link>
 
           {/* Desktop navigation */}

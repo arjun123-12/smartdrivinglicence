@@ -1,5 +1,6 @@
 /* ==========================================
    WHAT IS A VORT SECTION
+   A1 SMART DRIVING THEME
 ========================================== */
 
 .vort-intro-section {
@@ -41,7 +42,7 @@
   transform: rotate(-14deg);
   display: grid;
   place-items: center;
-  color: #111827;
+  color: #0D2645;
   font-size: 70px;
   font-weight: 900;
   line-height: 1;
@@ -52,9 +53,9 @@
   position: relative;
   width: 140px;
   height: 185px;
-  background-color: #3b82f6;
+  background-color: #0D2645;
   border-radius: 18px;
-  box-shadow: 0 12px 32px rgba(37, 99, 235, 0.25);
+  box-shadow: 0 12px 32px rgba(13, 38, 69, 0.25);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -67,7 +68,7 @@
   top: -10px;
   width: 52px;
   height: 22px;
-  background-color: #f59e0b;
+  background-color: #1B6C31;
   border-radius: 6px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
@@ -93,8 +94,8 @@
   width: 16px;
   height: 16px;
   border-radius: 4px;
-  background-color: #dcfce7;
-  color: #16a34a;
+  background-color: #EBF5EE;
+  color: #1B6C31;
   display: grid;
   place-items: center;
   flex-shrink: 0;
@@ -102,7 +103,7 @@
 
 .vort-check-line {
   height: 6px;
-  background-color: #cbd5e1;
+  background-color: #DCE5DE;
   border-radius: 3px;
   flex-grow: 1;
 }
@@ -113,9 +114,9 @@
   bottom: 25px;
   width: 125px;
   height: 125px;
-  background-color: #ef4444;
+  background-color: #E12D2E;
   border-radius: 20px;
-  box-shadow: 0 8px 24px rgba(239, 68, 68, 0.35);
+  box-shadow: 0 8px 24px rgba(225, 45, 46, 0.35);
   transform: rotate(14deg);
   display: grid;
   place-items: center;
@@ -128,7 +129,7 @@
 
 /* Content */
 .vort-intro-title {
-  color: #16a34a;
+  color: #1B6C31;
   font-size: clamp(26px, 3.2vw, 34px);
   font-weight: 850;
   margin: 0 0 16px;
@@ -136,14 +137,14 @@
 }
 
 .vort-intro-desc {
-  color: #475569;
+  color: #5A6E7F;
   font-size: 14.5px;
   line-height: 1.7;
   margin: 0 0 22px;
 }
 
 .vort-who-title {
-  color: #1e293b;
+  color: #0D2645;
   font-size: 16px;
   font-weight: 850;
   margin: 0 0 14px;
@@ -162,13 +163,13 @@
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  color: #475569;
+  color: #5A6E7F;
   font-size: 13.5px;
   line-height: 1.5;
 }
 
 .vort-who-item svg {
-  color: #16a34a;
+  color: #1B6C31;
   flex-shrink: 0;
   margin-top: 2px;
 }
@@ -184,19 +185,19 @@
   align-items: center;
   gap: 8px;
   padding: 13px 28px;
-  background-color: #16a34a;
+  background-color: #1B6C31;
   color: #ffffff;
   border-radius: 9999px;
   font-size: 15px;
   font-weight: 750;
   text-decoration: none;
-  box-shadow: 0 6px 20px rgba(22, 163, 74, 0.28);
+  box-shadow: 0 6px 20px rgba(27, 108, 49, 0.28);
   transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .vort-cta-btn:hover {
-  background-color: #15803d;
-  box-shadow: 0 8px 24px rgba(22, 163, 74, 0.38);
+  background-color: #145325;
+  box-shadow: 0 8px 24px rgba(27, 108, 49, 0.38);
   transform: translateY(-2px);
   color: #ffffff;
 }
@@ -217,7 +218,7 @@
 }
 
 .student-stories-title {
-  color: #16a34a;
+  color: #1B6C31;
   font-size: clamp(26px, 3.2vw, 36px);
   font-weight: 850;
   text-align: center;
@@ -240,10 +241,10 @@
 
 .student-story-card {
   background-color: #ffffff;
-  border: 1px solid #e5e9f0;
+  border: 1px solid #DCE5DE;
   border-radius: 18px;
   overflow: hidden;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 18px rgba(13, 38, 69, 0.04);
   display: flex;
   flex-direction: column;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -251,7 +252,7 @@
 
 .student-story-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 26px rgba(13, 38, 69, 0.08);
 }
 
 .student-story-card-single {
@@ -262,7 +263,7 @@
 .student-story-img-wrap {
   width: 100%;
   height: 155px;
-  background-color: #f1f5f9;
+  background-color: #F1F6F2;
   overflow: hidden;
 }
 
@@ -283,14 +284,14 @@
 }
 
 .student-story-name {
-  color: #1e293b;
+  color: #0D2645;
   font-size: 15px;
   font-weight: 800;
   margin-bottom: 2px;
 }
 
 .student-story-suburb {
-  color: #8da2bc;
+  color: #5A6E7F;
   font-size: 11.5px;
   font-style: italic;
   margin-bottom: 8px;
@@ -299,7 +300,7 @@
 .student-story-stars {
   display: flex;
   gap: 3px;
-  color: #ffb52e;
+  color: #F59E0B;
   margin-bottom: 12px;
 }
 
@@ -312,7 +313,7 @@
 }
 
 .student-story-passed {
-  color: #94a3b8;
+  color: #8da2bc;
   font-size: 10.5px;
   font-style: italic;
   margin-top: auto;
@@ -320,12 +321,12 @@
 
 .student-stories-footer {
   text-align: center;
-  color: #64748b;
+  color: #5A6E7F;
   font-size: 13px;
 }
 
 .student-stories-footer strong {
-  color: #16a34a;
+  color: #1B6C31;
   font-weight: 750;
 }
 
@@ -348,4 +349,3 @@
     margin-right: auto;
   }
 }
-

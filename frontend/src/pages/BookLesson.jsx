@@ -293,15 +293,15 @@ export default function BookLesson() {
 
                 <ul className="fl-result-checklist">
                   <li>
-                    <CheckCircle size={15} color="#22c55e" />
+                    <CheckCircle size={15} color="#1B6C31" />
                     <span>Focus: <strong>{rec.stage}</strong></span>
                   </li>
                   <li>
-                    <CheckCircle size={15} color="#22c55e" />
+                    <CheckCircle size={15} color="#1B6C31" />
                     <span>All 5 VORT Slow-Speed Maneuvers</span>
                   </li>
                   <li>
-                    <CheckCircle size={15} color="#22c55e" />
+                    <CheckCircle size={15} color="#1B6C31" />
                     <span>Official SA DIT Test Route Practice</span>
                   </li>
                 </ul>

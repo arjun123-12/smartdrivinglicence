@@ -41,9 +41,9 @@ export default function OldWayVsNewWay() {
             </ul>
           </div>
 
-          {/* The LicenceMate Way */}
+          {/* The A1 Smart Driving Way */}
           <div className="comparison-card comparison-card-new">
-            <h3 className="comparison-card-title">The LicenceMate Way</h3>
+            <h3 className="comparison-card-title">The A1 Smart Driving Way</h3>
             <ul className="comparison-list">
               <li className="comparison-item">
                 <span className="comparison-icon-green">

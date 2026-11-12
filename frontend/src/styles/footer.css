@@ -1,13 +1,13 @@
 /* ==========================================
-   LICENCEMATE STYLE FOOTER
+   A1 SMART DRIVING FOOTER
 ========================================== */
 
 .site-footer-premium {
-  background-color: #071526;
+  background-color: #08192E;
   color: #8da2bc;
   padding-top: clamp(52px, 6vw, 76px);
   padding-bottom: 32px;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   font-size: 13px;
   position: relative;
 }
@@ -39,16 +39,33 @@
   margin-bottom: 16px;
 }
 
+.footer-logo-img {
+  height: 48px;
+  width: auto;
+  max-width: 220px;
+  object-fit: contain;
+  background: #ffffff;
+  padding: 6px 14px;
+  border-radius: 9px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  display: block;
+  transition: transform 0.25s ease;
+}
+
+.footer-logo-img:hover {
+  transform: scale(1.02);
+}
+
 .footer-logo-badge {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 28px;
   height: 28px;
-  background-color: #ffb52e;
-  border: 2px solid #16a34a;
+  background-color: #E12D2E;
+  border: 2px solid #1B6C31;
   border-radius: 6px;
-  color: #071526;
+  color: #ffffff;
   font-weight: 900;
   font-size: 15px;
   line-height: 1;
@@ -207,10 +224,10 @@
   justify-content: center;
   width: 48px;
   height: 48px;
-  background-color: #16a34a;
+  background-color: #1B6C31;
   color: #ffffff;
   border-radius: 50%;
-  box-shadow: 0 8px 24px rgba(22, 163, 74, 0.45);
+  box-shadow: 0 8px 24px rgba(27, 108, 49, 0.45);
   cursor: pointer;
   border: none;
   transition: transform 0.2s ease, background-color 0.2s ease;
@@ -219,7 +236,7 @@
 
 .footer-floating-chat:hover {
   transform: scale(1.08);
-  background-color: #15803d;
+  background-color: #145325;
   color: #ffffff;
 }
 

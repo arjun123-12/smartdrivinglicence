@@ -11,7 +11,7 @@
 /* Hero Section */
 .pkg-hero {
   position: relative;
-  background: linear-gradient(135deg, #09182d 0%, #0d2847 60%, #16375d 100%);
+  background: linear-gradient(135deg, #08192E 0%, #0D2645 60%, #163B66 100%);
   color: #ffffff;
   padding: clamp(52px, 7vw, 92px) 0 clamp(48px, 6vw, 76px);
   text-align: center;
@@ -20,8 +20,8 @@
 .pkg-hero-bg {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle at 80% 20%, rgba(22, 163, 74, 0.16), transparent 45%),
-                    radial-gradient(circle at 15% 85%, rgba(255, 181, 46, 0.12), transparent 40%);
+  background-image: radial-gradient(circle at 80% 20%, rgba(27, 108, 49, 0.22), transparent 45%),
+                    radial-gradient(circle at 15% 85%, rgba(225, 45, 46, 0.12), transparent 40%);
   pointer-events: none;
 }
 
@@ -41,7 +41,7 @@
   background-color: rgba(255, 255, 255, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: 9999px;
-  color: #ffb52e;
+  color: #ffffff;
   font-size: 11.5px;
   font-weight: 800;
   letter-spacing: 0.07em;
@@ -53,9 +53,9 @@
 .pkg-pill-dot {
   width: 7px;
   height: 7px;
-  background-color: #ffb52e;
+  background-color: #E12D2E;
   border-radius: 50%;
-  box-shadow: 0 0 8px #ffb52e;
+  box-shadow: 0 0 8px #E12D2E;
 }
 
 .pkg-hero-title {
@@ -68,7 +68,7 @@
 }
 
 .pkg-hero-title span {
-  color: #ffb52e;
+  color: #4ADE80;
 }
 
 .pkg-hero-desc {
@@ -102,7 +102,7 @@
 }
 
 .pkg-value-item svg {
-  color: #16a34a;
+  color: #1B6C31;
   flex-shrink: 0;
 }
 
@@ -128,10 +128,10 @@
 }
 
 .pkg-filter-btn.active {
-  background-color: #16a34a;
+  background-color: #1B6C31;
   color: #ffffff;
-  border-color: #16a34a;
-  box-shadow: 0 4px 14px rgba(22, 163, 74, 0.3);
+  border-color: #1B6C31;
+  box-shadow: 0 4px 14px rgba(27, 108, 49, 0.3);
 }
 
 /* Packages Grid */
@@ -152,18 +152,18 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 6px 24px rgba(13, 38, 69, 0.05);
   transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
 .pkg-card-premium:hover {
   transform: translateY(-6px);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 16px 40px rgba(13, 38, 69, 0.1);
 }
 
 .pkg-card-premium.featured {
-  border-color: #16a34a;
-  box-shadow: 0 12px 36px rgba(22, 163, 74, 0.15);
+  border-color: #1B6C31;
+  box-shadow: 0 12px 36px rgba(27, 108, 49, 0.18);
 }
 
 .pkg-badge-top {
@@ -171,20 +171,20 @@
   top: -13px;
   left: 50%;
   transform: translateX(-50%);
-  background: linear-gradient(135deg, #ffb52e 0%, #f59e0b 100%);
-  color: #0f172a;
+  background: linear-gradient(135deg, #E12D2E 0%, #C52223 100%);
+  color: #ffffff;
   font-size: 11px;
   font-weight: 850;
   text-transform: uppercase;
   letter-spacing: 0.07em;
   padding: 5px 16px;
   border-radius: 9999px;
-  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.35);
+  box-shadow: 0 4px 12px rgba(225, 45, 46, 0.35);
   white-space: nowrap;
 }
 
 .pkg-card-title {
-  color: #0f172a;
+  color: #0D2645;
   font-size: 19px;
   font-weight: 850;
   margin: 0 0 6px;
@@ -207,7 +207,7 @@
 .pkg-price-now {
   font-size: 36px;
   font-weight: 900;
-  color: #15803d;
+  color: #1B6C31;
   line-height: 1;
 }
 
@@ -221,7 +221,7 @@
 .pkg-hourly-rate {
   font-size: 11.5px;
   font-weight: 750;
-  color: #16a34a;
+  color: #1B6C31;
   text-transform: uppercase;
   letter-spacing: 0.04em;
   margin-bottom: 18px;
@@ -264,7 +264,7 @@
 }
 
 .pkg-feature-item svg {
-  color: #16a34a;
+  color: #1B6C31;
   flex-shrink: 0;
   margin-top: 1px;
 }
@@ -286,25 +286,25 @@
 }
 
 .pkg-book-btn.primary {
-  background-color: #16a34a;
+  background-color: #1B6C31;
   color: #ffffff;
-  box-shadow: 0 4px 14px rgba(22, 163, 74, 0.25);
+  box-shadow: 0 4px 14px rgba(27, 108, 49, 0.25);
 }
 
 .pkg-book-btn.primary:hover {
-  background-color: #15803d;
+  background-color: #145325;
   color: #ffffff;
   transform: translateY(-2px);
 }
 
 .pkg-book-btn.accent {
-  background-color: #ffb52e;
-  color: #0f172a;
-  box-shadow: 0 4px 14px rgba(255, 181, 46, 0.35);
+  background-color: #0D2645;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(13, 38, 69, 0.3);
 }
 
 .pkg-book-btn.accent:hover {
-  background-color: #f59e0b;
+  background-color: #163B66;
   transform: translateY(-2px);
 }
 
@@ -317,7 +317,7 @@
 .pkg-calc-card {
   max-width: 960px;
   margin: 0 auto;
-  background: linear-gradient(135deg, #f8fafc 0%, #edf7f0 100%);
+  background: linear-gradient(135deg, #f8fafc 0%, #EBF5EE 100%);
   border: 1.5px solid #cbd5e1;
   border-radius: 24px;
   padding: clamp(28px, 4vw, 44px);

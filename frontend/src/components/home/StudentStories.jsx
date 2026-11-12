@@ -9,7 +9,7 @@ const topStories = [
     suburb: 'Clearview',
     image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80',
     quote:
-      '“My instructor told me to book with his examiner but they were booked out for weeks. I tried to find somewhere who could do sooner and eventually found LicenceMate and just booked my test for 5 days later.”',
+      '“My instructor told me to book with his examiner but they were booked out for weeks. I tried to find somewhere who could do sooner and eventually found A1 Smart Driving and just booked my test for 5 days later.”',
     passed: 'Passed: April 2024',
   },
   {
@@ -18,7 +18,7 @@ const topStories = [
     suburb: 'Glenelg',
     image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=80',
     quote:
-      '“I was looking around to book a test directly and most schools I called didn’t have someone who spoke Hindi which I really wanted. I saw LicenceMate and found Satish and was really easy to book after that.”',
+      '“I was looking around to book a test directly and most schools I called didn’t have someone who spoke Hindi which I really wanted. I saw A1 Smart Driving and found Satish and was really easy to book after that.”',
     passed: 'Passed: May 2024',
   },
   {
@@ -27,7 +27,7 @@ const topStories = [
     suburb: 'Adelaide',
     image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80',
     quote:
-      '“I was looking for a female examiner but I called around and couldn’t find anyone for a month. On LicenceMate, I found a few and just went ahead and booked for the following weekend.”',
+      '“I was looking for a female examiner but I called around and couldn’t find anyone for a month. On A1 Smart Driving, I found a few and just went ahead and booked for the following weekend.”',
     passed: 'Passed: May 2024',
   },
 ];
@@ -38,7 +38,7 @@ const bottomStory = {
   suburb: 'Henley Beach',
   image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80',
   quote:
-    '“Got a few quotes from some schools around me which quoted around $350 to $450. Had a look on LicenceMate and compared prices and got one for $300.”',
+    '“Got a few quotes from some schools around me which quoted around $350 to $450. Had a look on A1 Smart Driving and compared prices and got one for $300.”',
   passed: 'Passed: June 2024',
 };
 

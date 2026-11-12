@@ -136,8 +136,8 @@ export default function LessonPackages() {
               style={{
                 width: '46px',
                 height: '46px',
-                backgroundColor: '#eaf7ef',
-                color: '#15803d',
+                backgroundColor: '#EBF5EE',
+                color: '#1B6C31',
                 borderRadius: '12px',
                 display: 'grid',
                 placeItems: 'center',
@@ -267,7 +267,7 @@ export default function LessonPackages() {
               <span
                 style={{
                   display: 'inline-block',
-                  color: '#16a34a',
+                  color: '#1B6C31',
                   fontWeight: 800,
                   fontSize: '11px',
                   textTransform: 'uppercase',
@@ -277,7 +277,7 @@ export default function LessonPackages() {
               >
                 Instant Pricing Transparency
               </span>
-              <h2 style={{ fontSize: 'clamp(24px, 3vw, 32px)', fontWeight: 850, color: '#0f172a', margin: 0 }}>
+              <h2 style={{ fontSize: 'clamp(24px, 3vw, 32px)', fontWeight: 850, color: '#0D2645', margin: 0 }}>
                 Calculate Your Package Savings
               </h2>
             </div>
@@ -286,7 +286,7 @@ export default function LessonPackages() {
               <div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px', fontWeight: 750 }}>
                   <span style={{ color: '#1e293b' }}>Select Hours You Plan to Drive:</span>
-                  <span style={{ color: '#16a34a', fontSize: '18px', fontWeight: 850 }}>{calcHours} Hours</span>
+                  <span style={{ color: '#1B6C31', fontSize: '18px', fontWeight: 850 }}>{calcHours} Hours</span>
                 </div>
                 <input
                   type="range"
@@ -295,7 +295,7 @@ export default function LessonPackages() {
                   step="5"
                   value={calcHours}
                   onChange={(e) => setCalcHours(Number(e.target.value))}
-                  style={{ width: '100%', accentColor: '#16a34a', cursor: 'pointer' }}
+                  style={{ width: '100%', accentColor: '#1B6C31', cursor: 'pointer' }}
                 />
                 <div className="flex-between" style={{ fontSize: '11px', color: '#64748b', marginTop: '6px' }}>
                   <span>5 Hours (Starter)</span>
@@ -308,7 +308,7 @@ export default function LessonPackages() {
                     <span>Standard Pay-As-You-Go ($140/hr):</span>
                     <span style={{ textDecoration: 'line-through' }}>${payAsYouGoTotal} AUD</span>
                   </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '15px', fontWeight: 800, color: '#15803d' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '15px', fontWeight: 800, color: '#145325' }}>
                     <span>Bundled Package Rate ($126/hr):</span>
                     <span>${packageTotal} AUD</span>
                   </div>
@@ -381,45 +381,45 @@ export default function LessonPackages() {
                 </tr>
                 <tr>
                   <td><strong>Free Door-to-Door Pickup</strong></td>
-                  <td><CheckCircle size={17} color="#16a34a" /></td>
-                  <td><CheckCircle size={17} color="#16a34a" /></td>
-                  <td><CheckCircle size={17} color="#16a34a" /></td>
-                  <td><CheckCircle size={17} color="#16a34a" /></td>
+                  <td><CheckCircle size={17} color="#1B6C31" /></td>
+                  <td><CheckCircle size={17} color="#1B6C31" /></td>
+                  <td><CheckCircle size={17} color="#1B6C31" /></td>
+                  <td><CheckCircle size={17} color="#1B6C31" /></td>
                 </tr>
                 <tr>
                   <td><strong>SA Logbook Hours Sign-Off</strong></td>
-                  <td><CheckCircle size={17} color="#16a34a" /></td>
-                  <td><CheckCircle size={17} color="#16a34a" /></td>
-                  <td><CheckCircle size={17} color="#16a34a" /></td>
-                  <td><CheckCircle size={17} color="#16a34a" /></td>
+                  <td><CheckCircle size={17} color="#1B6C31" /></td>
+                  <td><CheckCircle size={17} color="#1B6C31" /></td>
+                  <td><CheckCircle size={17} color="#1B6C31" /></td>
+                  <td><CheckCircle size={17} color="#1B6C31" /></td>
                 </tr>
                 <tr>
                   <td><strong>All 5 VORT Slow-Speed Maneuvers</strong></td>
                   <td>Optional</td>
-                  <td><CheckCircle size={17} color="#16a34a" /></td>
-                  <td><CheckCircle size={17} color="#16a34a" /></td>
-                  <td><CheckCircle size={17} color="#16a34a" /></td>
+                  <td><CheckCircle size={17} color="#1B6C31" /></td>
+                  <td><CheckCircle size={17} color="#1B6C31" /></td>
+                  <td><CheckCircle size={17} color="#1B6C31" /></td>
                 </tr>
                 <tr>
                   <td><strong>Instructor-Marked Mock VORT Test</strong></td>
                   <td>—</td>
                   <td>—</td>
-                  <td><CheckCircle size={17} color="#16a34a" /></td>
-                  <td><CheckCircle size={17} color="#16a34a" /> (x2 Tests)</td>
+                  <td><CheckCircle size={17} color="#1B6C31" /></td>
+                  <td><CheckCircle size={17} color="#1B6C31" /> (x2 Tests)</td>
                 </tr>
                 <tr>
                   <td><strong>Official VORT Test Car Hire</strong></td>
                   <td>—</td>
                   <td>Optional Upgrade</td>
                   <td>Optional Upgrade</td>
-                  <td><CheckCircle size={17} color="#16a34a" /> Included</td>
+                  <td><CheckCircle size={17} color="#1B6C31" /> Included</td>
                 </tr>
                 <tr>
                   <td><strong>Free Instructor Switching Anytime</strong></td>
-                  <td><CheckCircle size={17} color="#16a34a" /></td>
-                  <td><CheckCircle size={17} color="#16a34a" /></td>
-                  <td><CheckCircle size={17} color="#16a34a" /></td>
-                  <td><CheckCircle size={17} color="#16a34a" /></td>
+                  <td><CheckCircle size={17} color="#1B6C31" /></td>
+                  <td><CheckCircle size={17} color="#1B6C31" /></td>
+                  <td><CheckCircle size={17} color="#1B6C31" /></td>
+                  <td><CheckCircle size={17} color="#1B6C31" /></td>
                 </tr>
               </tbody>
             </table>
@@ -431,7 +431,7 @@ export default function LessonPackages() {
       <section style={{ padding: 'clamp(52px, 6vw, 84px) 0', backgroundColor: '#f8fafc' }}>
         <div className="container" style={{ maxWidth: '820px' }}>
           <div style={{ textAlign: 'center', marginBottom: '36px' }}>
-            <h2 style={{ fontSize: 'clamp(24px, 3vw, 32px)', fontWeight: 850, color: '#16a34a', margin: '0 0 8px' }}>
+            <h2 style={{ fontSize: 'clamp(24px, 3vw, 32px)', fontWeight: 850, color: '#1B6C31', margin: '0 0 8px' }}>
               Package Questions Answered
             </h2>
             <p style={{ color: '#64748b', fontSize: '14px', margin: 0 }}>

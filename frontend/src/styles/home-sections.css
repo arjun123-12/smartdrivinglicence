@@ -1,5 +1,6 @@
 /* ==========================================
    WHY CHOOSE PREVORT WARMUP + VORT
+   A1 SMART DRIVING BRAND PALETTE
 ========================================== */
 
 .prevort-section {
@@ -14,7 +15,7 @@
 }
 
 .prevort-title {
-  color: #16a34a;
+  color: #1B6C31;
   font-size: clamp(26px, 3.2vw, 36px);
   font-weight: 850;
   text-align: center;
@@ -24,9 +25,9 @@
 
 .prevort-card {
   background-color: #ffffff;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #DCE5DE;
   border-radius: 22px;
-  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 6px 28px rgba(13, 38, 69, 0.05);
   padding: clamp(28px, 4vw, 44px);
   margin-bottom: clamp(28px, 4vw, 40px);
 }
@@ -43,14 +44,14 @@
 }
 
 .prevort-item-title {
-  color: #1e293b;
+  color: #0D2645;
   font-size: 16px;
   font-weight: 800;
   margin: 0 0 8px;
 }
 
 .prevort-item-desc {
-  color: #64748b;
+  color: #5A6E7F;
   font-size: 13.5px;
   line-height: 1.65;
   margin: 0;
@@ -66,19 +67,19 @@
   align-items: center;
   gap: 8px;
   padding: 13px 28px;
-  background-color: #16a34a;
+  background-color: #1B6C31;
   color: #ffffff;
   border-radius: 9999px;
   font-size: 15px;
   font-weight: 750;
   text-decoration: none;
-  box-shadow: 0 6px 20px rgba(22, 163, 74, 0.28);
+  box-shadow: 0 6px 20px rgba(27, 108, 49, 0.28);
   transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .prevort-cta-btn:hover {
-  background-color: #15803d;
-  box-shadow: 0 8px 24px rgba(22, 163, 74, 0.38);
+  background-color: #145325;
+  box-shadow: 0 8px 24px rgba(27, 108, 49, 0.38);
   transform: translateY(-2px);
   color: #ffffff;
 }
@@ -99,7 +100,7 @@
 }
 
 .faq-title-modern {
-  color: #16a34a;
+  color: #1B6C31;
   font-size: clamp(26px, 3.2vw, 36px);
   font-weight: 850;
   text-align: center;
@@ -116,20 +117,20 @@
 
 .faq-card-modern {
   background-color: #ffffff;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #DCE5DE;
   border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 2px 10px rgba(13, 38, 69, 0.03);
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .faq-card-modern:hover {
-  border-color: #cbd5e1;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  border-color: #A3D4AF;
+  box-shadow: 0 4px 16px rgba(13, 38, 69, 0.06);
 }
 
 .faq-card-modern.open {
-  border-color: #86efac;
+  border-color: #1B6C31;
 }
 
 .faq-question-btn {
@@ -144,25 +145,25 @@
   cursor: pointer;
   text-align: left;
   font: inherit;
-  color: #1e293b;
+  color: #0D2645;
   font-size: 15px;
   font-weight: 750;
 }
 
 .faq-question-btn:focus-visible {
-  outline: 2px solid #16a34a;
+  outline: 2px solid #1B6C31;
   outline-offset: -2px;
 }
 
 .faq-chevron {
-  color: #64748b;
+  color: #5A6E7F;
   flex-shrink: 0;
   transition: transform 0.25s ease, color 0.2s ease;
 }
 
 .faq-card-modern.open .faq-chevron {
   transform: rotate(180deg);
-  color: #16a34a;
+  color: #1B6C31;
 }
 
 .faq-answer-wrap {
@@ -184,29 +185,29 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 7px 18px;
-  background-color: #16a34a;
+  padding: 8px 20px;
+  background-color: #1B6C31;
   color: #ffffff;
   border-radius: 9999px;
-  font-size: 12.5px;
+  font-size: 13px;
   font-weight: 750;
   text-decoration: none;
   transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .faq-view-all-btn:hover {
-  background-color: #15803d;
+  background-color: #145325;
   color: #ffffff;
   transform: translateY(-1px);
 }
 
 /* ==========================================
-   IMPORTANT INFORMATION (SOLID GREEN BG)
+   IMPORTANT INFORMATION (A1 GREEN BG)
 ========================================== */
 
 .important-info-section {
   padding: clamp(56px, 7vw, 92px) 0;
-  background-color: #16a34a;
+  background-color: #1B6C31;
   color: #ffffff;
 }
 
@@ -256,25 +257,25 @@
   cursor: pointer;
   text-align: left;
   font: inherit;
-  color: #111827;
+  color: #0D2645;
   font-size: 15px;
   font-weight: 800;
 }
 
 .important-info-btn:focus-visible {
-  outline: 2px solid #16a34a;
+  outline: 2px solid #1B6C31;
   outline-offset: -2px;
 }
 
 .important-info-chevron {
-  color: #4b5563;
+  color: #5A6E7F;
   flex-shrink: 0;
   transition: transform 0.25s ease, color 0.2s ease;
 }
 
 .important-info-card.open .important-info-chevron {
   transform: rotate(180deg);
-  color: #16a34a;
+  color: #1B6C31;
 }
 
 .important-info-answer {
@@ -303,4 +304,3 @@
     font-size: 13px;
   }
 }
-

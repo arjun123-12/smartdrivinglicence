@@ -11,7 +11,7 @@
 /* 1. Hero Section */
 .fl-hero {
   position: relative;
-  background: linear-gradient(135deg, #09182d 0%, #0d2847 60%, #12375f 100%);
+  background: linear-gradient(135deg, #08192E 0%, #0D2645 60%, #163B66 100%);
   color: #ffffff;
   padding: clamp(52px, 7vw, 92px) 0 clamp(48px, 6vw, 76px);
   overflow: hidden;
@@ -20,8 +20,8 @@
 .fl-hero-bg {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle at 80% 20%, rgba(22, 163, 74, 0.15), transparent 40%),
-                    radial-gradient(circle at 20% 80%, rgba(255, 181, 46, 0.12), transparent 45%);
+  background-image: radial-gradient(circle at 80% 20%, rgba(27, 108, 49, 0.2), transparent 40%),
+                    radial-gradient(circle at 20% 80%, rgba(225, 45, 46, 0.12), transparent 45%);
   pointer-events: none;
 }
 
@@ -42,7 +42,7 @@
   background-color: rgba(255, 255, 255, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: 9999px;
-  color: #ffb52e;
+  color: #ffffff;
   font-size: 11.5px;
   font-weight: 800;
   letter-spacing: 0.07em;
@@ -54,9 +54,9 @@
 .fl-pill-dot {
   width: 7px;
   height: 7px;
-  background-color: #ffb52e;
+  background-color: #E12D2E;
   border-radius: 50%;
-  box-shadow: 0 0 8px #ffb52e;
+  box-shadow: 0 0 8px #E12D2E;
 }
 
 .fl-hero-title {
@@ -69,7 +69,7 @@
 }
 
 .fl-hero-title span {
-  color: #ffb52e;
+  color: #4ADE80;
 }
 
 .fl-hero-desc {
@@ -104,7 +104,7 @@
 }
 
 .fl-value-item svg {
-  color: #16a34a;
+  color: #1B6C31;
   flex-shrink: 0;
 }
 
@@ -150,11 +150,11 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  background-color: #eaf7ef;
-  border: 1.5px solid #86efac;
+  background-color: #EBF5EE;
+  border: 1.5px solid #1B6C31;
   border-radius: 14px;
   padding: 8px 16px;
-  color: #15803d;
+  color: #1B6C31;
 }
 
 .fl-price-amount {
@@ -176,7 +176,7 @@
 }
 
 .fl-section-title {
-  color: #16a34a;
+  color: #1B6C31;
   font-size: clamp(26px, 3.2vw, 36px);
   font-weight: 850;
   text-align: center;
@@ -214,18 +214,18 @@
 
 .fl-feature-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-  border-color: #86efac;
+  box-shadow: 0 10px 30px rgba(13, 38, 69, 0.08);
+  border-color: #1B6C31;
 }
 
 .fl-feature-icon-wrap {
   width: 48px;
   height: 48px;
-  background-color: #eaf7ef;
+  background-color: #EBF5EE;
   border-radius: 12px;
   display: grid;
   place-items: center;
-  color: #16a34a;
+  color: #1B6C31;
   margin-bottom: 18px;
 }
 
@@ -282,14 +282,14 @@
 }
 
 .fl-slider-val {
-  color: #16a34a;
+  color: #1B6C31;
   font-size: 16px;
   font-weight: 850;
 }
 
 .fl-slider-input {
   width: 100%;
-  accent-color: #16a34a;
+  accent-color: #1B6C31;
   cursor: pointer;
 }
 
@@ -317,14 +317,14 @@
 }
 
 .fl-radio-btn.active {
-  border-color: #16a34a;
-  background-color: #eaf7ef;
-  color: #15803d;
+  border-color: #1B6C31;
+  background-color: #EBF5EE;
+  color: #145325;
 }
 
 /* Estimator Result Box */
 .fl-estimator-result {
-  background: linear-gradient(135deg, #09182d 0%, #16375d 100%);
+  background: linear-gradient(135deg, #08192E 0%, #0D2645 100%);
   color: #ffffff;
   border-radius: 18px;
   padding: 28px 24px;
@@ -332,14 +332,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0 8px 26px rgba(9, 24, 45, 0.2);
+  box-shadow: 0 8px 26px rgba(13, 38, 69, 0.25);
 }
 
 .fl-result-badge {
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: #ffb52e;
+  color: #4ADE80;
   font-weight: 850;
   margin-bottom: 8px;
 }
@@ -354,7 +354,7 @@
 
 .fl-result-hours span {
   font-size: 18px;
-  color: #ffb52e;
+  color: #4ADE80;
 }
 
 .fl-result-label {
@@ -385,7 +385,7 @@
 .fl-result-btn {
   width: 100%;
   padding: 12px 20px;
-  background-color: #16a34a;
+  background-color: #1B6C31;
   color: #ffffff;
   border: none;
   border-radius: 11px;
@@ -401,7 +401,7 @@
 }
 
 .fl-result-btn:hover {
-  background-color: #15803d;
+  background-color: #145325;
   color: #ffffff;
   transform: translateY(-1px);
 }
@@ -433,7 +433,7 @@
 .fl-step-number {
   width: 44px;
   height: 44px;
-  background-color: #16a34a;
+  background-color: #1B6C31;
   color: #ffffff;
   border-radius: 50%;
   display: grid;
@@ -463,8 +463,8 @@
   max-width: 960px;
   margin: clamp(36px, 5vw, 64px) auto;
   padding: clamp(24px, 3vw, 36px);
-  background: linear-gradient(135deg, #eaf7ef 0%, #f0fdf4 100%);
-  border: 2px solid #86efac;
+  background: linear-gradient(135deg, #EBF5EE 0%, #ffffff 100%);
+  border: 1.5px solid #1B6C31;
   border-radius: 20px;
   display: flex;
   align-items: center;
@@ -474,7 +474,7 @@
 .fl-guarantee-icon {
   width: 58px;
   height: 58px;
-  background-color: #16a34a;
+  background-color: #1B6C31;
   color: #ffffff;
   border-radius: 16px;
   display: grid;
@@ -485,7 +485,7 @@
 .fl-guarantee-text h4 {
   font-size: 17px;
   font-weight: 850;
-  color: #15803d;
+  color: #0D2645;
   margin: 0 0 4px;
 }
 
@@ -498,7 +498,7 @@
 
 /* 7. Bottom CTA Banner */
 .fl-cta-banner {
-  background: linear-gradient(135deg, #09182d 0%, #0d2847 100%);
+  background: linear-gradient(135deg, #08192E 0%, #0D2645 100%);
   color: #ffffff;
   padding: clamp(52px, 6vw, 76px) 24px;
   text-align: center;

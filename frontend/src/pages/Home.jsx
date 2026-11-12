@@ -89,7 +89,7 @@ export default function Home() {
         handleSearchSubmit={handleSearchSubmit}
       />
 
-      {/* 2. OLD WAY VS LICENCEMATE WAY COMPARISON */}
+      {/* 2. OLD WAY VS A1 SMART DRIVING WAY COMPARISON */}
       <OldWayVsNewWay />
 
       {/* 2. HOW IT WORKS */}
@@ -147,7 +147,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 3. PASSED WITH LICENCEMATE WALL */}
+      {/* 3. PASSED WITH A1 SMART DRIVING WALL */}
       <PassedWall />
 
       {/* 4. WHAT IS A VORT? */}

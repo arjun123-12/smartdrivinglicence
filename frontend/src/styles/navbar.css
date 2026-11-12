@@ -3,13 +3,15 @@
 ========================================= */
 
 .sd-header {
-    --sd-navy: #10213d;
-    --sd-navy-light: #19365c;
-    --sd-accent: #f6a623;
-    --sd-accent-hover: #e99512;
-    --sd-text: #25344b;
-    --sd-muted: #738097;
-    --sd-border: #e9edf3;
+    --sd-navy: #0D2645;
+    --sd-navy-light: #163B66;
+    --sd-accent: #1B6C31;
+    --sd-accent-hover: #145325;
+    --sd-red: #E12D2E;
+    --sd-red-hover: #C52223;
+    --sd-text: #0D2645;
+    --sd-muted: #5A6E7F;
+    --sd-border: #DCE5DE;
     --sd-white: #ffffff;
 
     position: sticky;
@@ -57,7 +59,7 @@
 }
 
 .sd-topbar-inner p svg {
-    color: var(--sd-accent);
+    color: var(--sd-red);
 }
 
 .sd-topbar-contact {
@@ -93,6 +95,19 @@
     flex-shrink: 0;
     color: var(--sd-navy);
     text-decoration: none;
+}
+
+.sd-brand-logo-img {
+    height: 48px;
+    width: auto;
+    max-width: 220px;
+    object-fit: contain;
+    display: block;
+    transition: transform 0.25s ease;
+}
+
+.sd-brand:hover .sd-brand-logo-img {
+    transform: scale(1.02);
 }
 
 .sd-brand-icon {
@@ -289,14 +304,15 @@
 }
 
 .sd-cta-button {
-    color: var(--sd-navy);
+    color: #ffffff;
     background: var(--sd-accent);
-    box-shadow: 0 4px 10px rgba(246, 166, 35, 0.15);
+    box-shadow: 0 4px 12px rgba(27, 108, 49, 0.25);
 }
 
 .sd-cta-button:hover {
+    color: #ffffff;
     background: var(--sd-accent-hover);
-    box-shadow: 0 7px 16px rgba(246, 166, 35, 0.24);
+    box-shadow: 0 7px 18px rgba(27, 108, 49, 0.35);
     transform: translateY(-1px);
 }
 

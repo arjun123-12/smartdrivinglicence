@@ -12,18 +12,21 @@ export default function Footer() {
             {/* 1. Brand Column */}
             <div className="footer-brand-wrap">
               <Link to="/" className="footer-logo-row">
-                <span className="footer-logo-badge">L</span>
-                <span className="footer-logo-text">LicenceMate</span>
+                <img
+                  src="/logo.png"
+                  alt="A1 Smart Driving"
+                  className="footer-logo-img"
+                />
               </Link>
 
               <p className="footer-tagline">
-                Your trusted partner in learning to drive. Book your VORT Test with LicenceMate.
+                Your trusted partner in learning to drive. Book your driving lessons & VORT Test with A1 Smart Driving.
               </p>
 
               <ul className="footer-contact-list">
                 <li className="footer-contact-item">
                   <Mail size={16} />
-                  <a href="mailto:support@licencemate.com.au">support@licencemate.com.au</a>
+                  <a href="mailto:support@a1smartdriving.com.au">support@a1smartdriving.com.au</a>
                 </li>
                 <li className="footer-contact-item">
                   <Phone size={16} />
@@ -58,7 +61,7 @@ export default function Footer() {
             <div>
               <h4 className="footer-col-title">FOR INSTRUCTORS</h4>
               <ul className="footer-col-links">
-                <li><Link to="/instructors">Work with LicenceMate</Link></li>
+                <li><Link to="/instructors">Work with A1 Smart Driving</Link></li>
                 <li><Link to="/instructor-terms">Instructor Terms and Conditions</Link></li>
               </ul>
             </div>
@@ -80,10 +83,10 @@ export default function Footer() {
           <div className="footer-bottom-bar">
             <div className="footer-bottom-left">
               <span className="footer-copyright">
-                &copy; {new Date().getFullYear()} LicenceMate. All rights reserved.
+                &copy; {new Date().getFullYear()} A1 Smart Driving. All rights reserved.
               </span>
               <span className="footer-legal-subline">
-                LicenceMate Adelaide Driving School · LicenceMate Pty Ltd · ABN 41 690 289 715
+                A1 Smart Driving Adelaide Driving School · A1 Smart Driving Pty Ltd · ABN 41 690 289 715
               </span>
             </div>
 

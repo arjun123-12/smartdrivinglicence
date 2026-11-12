@@ -1,5 +1,5 @@
 /* ==========================================
-   OLD WAY VS LICENCEMATE WAY COMPARISON
+   OLD WAY VS A1 SMART DRIVING COMPARISON
 ========================================== */
 
 .comparison-section {
@@ -9,7 +9,7 @@
 
 .comparison-title {
   margin: 0 0 clamp(32px, 4vw, 48px);
-  color: #16a34a;
+  color: #1B6C31;
   font-size: clamp(26px, 3.2vw, 36px);
   font-weight: 800;
   text-align: center;
@@ -28,7 +28,7 @@
   padding: clamp(24px, 3.2vw, 34px);
   background-color: #ffffff;
   border-radius: 20px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 4px 20px rgba(13, 38, 69, 0.04);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -37,18 +37,18 @@
 }
 
 .comparison-card-old {
-  border: 1.5px solid #fca5a5;
-  box-shadow: 0 6px 24px rgba(239, 68, 68, 0.05);
+  border: 1.5px solid rgba(225, 45, 46, 0.35);
+  box-shadow: 0 6px 24px rgba(225, 45, 46, 0.06);
 }
 
 .comparison-card-new {
-  border: 1.5px solid #22c55e;
-  box-shadow: 0 6px 24px rgba(34, 197, 94, 0.08);
+  border: 1.5px solid #1B6C31;
+  box-shadow: 0 6px 24px rgba(27, 108, 49, 0.12);
 }
 
 .comparison-card-title {
   margin: 0 0 24px;
-  color: #1e293b;
+  color: #0D2645;
   font-size: 19px;
   font-weight: 800;
   text-align: center;
@@ -81,7 +81,7 @@
   flex-shrink: 0;
   width: 20px;
   height: 20px;
-  color: #ef4444;
+  color: #E12D2E;
 }
 
 .comparison-icon-green {
@@ -91,7 +91,7 @@
   flex-shrink: 0;
   width: 20px;
   height: 20px;
-  color: #16a34a;
+  color: #1B6C31;
 }
 
 .comparison-cta-wrap {
@@ -106,25 +106,25 @@
   justify-content: center;
   gap: 8px;
   padding: 13px 28px;
-  background-color: #16a34a;
+  background-color: #1B6C31;
   color: #ffffff;
   border-radius: 9999px;
   font-size: 15px;
   font-weight: 700;
   text-decoration: none;
-  box-shadow: 0 6px 20px rgba(22, 163, 74, 0.28);
+  box-shadow: 0 6px 20px rgba(27, 108, 49, 0.28);
   transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .comparison-btn:hover {
-  background-color: #15803d;
-  box-shadow: 0 8px 24px rgba(22, 163, 74, 0.38);
+  background-color: #145325;
+  box-shadow: 0 8px 24px rgba(27, 108, 49, 0.38);
   transform: translateY(-2px);
   color: #ffffff;
 }
 
 .comparison-btn:focus-visible {
-  outline: 3px solid rgba(22, 163, 74, 0.4);
+  outline: 3px solid rgba(27, 108, 49, 0.4);
   outline-offset: 3px;
 }
 
