@@ -348,3 +348,4 @@ export const mockSettings = [
   { id: 4, key: 'contact_phone', value: '1300 138 626', description: 'Toll-free Hotline' },
   { id: 5, key: 'first_lesson_promo_price', value: '99', description: 'Special First Lesson Price ($ AUD)' },
 ];
+
