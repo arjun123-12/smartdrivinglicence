@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import adminService from '../../services/adminService';
+import { extractArray, safeArray } from '../../utils/apiHelpers';
+import { mockPackages } from '../../services/mockData';
 import { Plus, Edit, Trash2, CheckCircle, Package } from 'lucide-react';
 
 export default function AdminPackages() {
@@ -33,9 +35,10 @@ export default function AdminPackages() {
     setLoading(true);
     try {
       const data = await adminService.getPackages();
-      setPackages(data);
-    } catch {
-      // Fallback
+      setPackages(extractArray(data, mockPackages));
+    } catch (err) {
+      console.warn('AdminPackages load caught error, using fallback:', err);
+      setPackages(mockPackages);
     } finally {
       setLoading(false);
     }
@@ -75,7 +78,7 @@ export default function AdminPackages() {
       includes_pickup: pkg.includes_pickup,
       is_featured: pkg.is_featured,
       is_active: pkg.is_active,
-      features: pkg.features?.map((f) => ({ feature_text: f.feature_text, is_highlighted: f.is_highlighted })) || [],
+      features: safeArray(pkg.features).map((f) => ({ feature_text: f.feature_text, is_highlighted: f.is_highlighted })),
     });
     setModalOpen(true);
   };
@@ -114,18 +117,18 @@ export default function AdminPackages() {
   const addFeatureRow = () => {
     setFormData({
       ...formData,
-      features: [...formData.features, { feature_text: '', is_highlighted: false }],
+      features: [...safeArray(formData.features), { feature_text: '', is_highlighted: false }],
     });
   };
 
   const updateFeatureRow = (index, text, highlighted) => {
-    const updated = [...formData.features];
+    const updated = [...safeArray(formData.features)];
     updated[index] = { feature_text: text, is_highlighted: highlighted };
     setFormData({ ...formData, features: updated });
   };
 
   const removeFeatureRow = (index) => {
-    const updated = formData.features.filter((_, i) => i !== index);
+    const updated = safeArray(formData.features).filter((_, i) => i !== index);
     setFormData({ ...formData, features: updated });
   };
 
@@ -151,7 +154,7 @@ export default function AdminPackages() {
       )}
 
       <div className="grid grid-2">
-        {packages.map((pkg) => (
+        {safeArray(packages).map((pkg) => (
           <div key={pkg.id} className="card" style={{ padding: '1.5rem' }}>
             <div className="flex-between" style={{ marginBottom: '0.75rem' }}>
               <div>
@@ -179,7 +182,7 @@ export default function AdminPackages() {
             <div style={{ fontSize: 'var(--font-size-xs)', marginBottom: '1rem' }}>
               <strong>Inclusions:</strong>
               <ul style={{ margin: '0.25rem 0', paddingLeft: '1.25rem' }}>
-                {pkg.features?.map((f, i) => (
+                {safeArray(pkg.features).map((f, i) => (
                   <li key={i}>{f.feature_text}</li>
                 ))}
               </ul>
@@ -306,7 +309,7 @@ export default function AdminPackages() {
                   </button>
                 </div>
 
-                {formData.features.map((feat, idx) => (
+                {safeArray(formData.features).map((feat, idx) => (
                   <div key={idx} style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem', alignItems: 'center' }}>
                     <input
                       type="text"

@@ -88,7 +88,7 @@ export default function Hero({
                     onChange={(e) => setSearchLocation(e.target.value)}
                     required
                   >
-                    {locations.map((loc) => (
+                    {(Array.isArray(locations) ? locations : []).map((loc) => (
                       <option key={loc.id} value={loc.id}>
                         {loc.name} ({loc.postcode})
                         {loc.is_test_centre ? ' ★ DIT Centre' : ''}
@@ -109,7 +109,7 @@ export default function Hero({
                     onChange={(e) => setSearchService(e.target.value)}
                     required
                   >
-                    {services.map((srv) => (
+                    {(Array.isArray(services) ? services : []).map((srv) => (
                       <option key={srv.id} value={srv.id}>
                         {srv.name} — from ${srv.default_price} AUD
                       </option>

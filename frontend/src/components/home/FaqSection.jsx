@@ -37,7 +37,7 @@ export default function FaqSection({ faqs = defaultFaqs }) {
     setOpenIndex((prev) => (prev === index ? null : index));
   };
 
-  const displayFaqs = faqs && faqs.length > 0 ? faqs : defaultFaqs;
+  const displayFaqs = Array.isArray(faqs) && faqs.length > 0 ? faqs : defaultFaqs;
 
   return (
     <section className="faq-section-modern">
@@ -45,7 +45,7 @@ export default function FaqSection({ faqs = defaultFaqs }) {
         <h2 className="faq-title-modern">Frequently Asked Questions</h2>
 
         <div className="faq-list-modern">
-          {displayFaqs.map((faq, index) => {
+          {(Array.isArray(displayFaqs) ? displayFaqs : defaultFaqs).map((faq, index) => {
             const isOpen = openIndex === index;
             return (
               <div

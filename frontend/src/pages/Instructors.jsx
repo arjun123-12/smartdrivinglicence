@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import instructorService from '../services/instructorService';
 import bookingService from '../services/bookingService';
+import { extractArray, safeArray } from '../utils/apiHelpers';
+import { mockInstructors, mockLocations } from '../services/mockData';
 import { Star, ShieldCheck, Car, Award, MapPin, ArrowRight } from 'lucide-react';
 
 export default function Instructors() {
@@ -15,14 +17,18 @@ export default function Instructors() {
   useEffect(() => {
     async function load() {
       try {
-        const [insts, locs] = await Promise.all([
+        const results = await Promise.allSettled([
           instructorService.getInstructors(),
           bookingService.getLocations(),
         ]);
+        const insts = results[0].status === 'fulfilled' ? extractArray(results[0].value, mockInstructors) : mockInstructors;
+        const locs = results[1].status === 'fulfilled' ? extractArray(results[1].value, mockLocations) : mockLocations;
         setInstructors(insts);
         setLocations(locs);
-      } catch {
-        // Fallback
+      } catch (err) {
+        console.warn('Instructors load caught error, using fallbacks:', err);
+        setInstructors(mockInstructors);
+        setLocations(mockLocations);
       } finally {
         setLoading(false);
       }
@@ -30,7 +36,8 @@ export default function Instructors() {
     load();
   }, []);
 
-  const filtered = instructors.filter((inst) => {
+  const filtered = safeArray(instructors).filter((inst) => {
+    if (!inst) return false;
     if (filterTransmission !== 'all') {
       if (inst.car_transmission !== filterTransmission && inst.car_transmission !== 'both') {
         return false;
@@ -40,7 +47,7 @@ export default function Instructors() {
       return false;
     }
     if (filterLocationId) {
-      const match = inst.locations?.some((l) => l.id.toString() === filterLocationId);
+      const match = safeArray(inst.locations).some((l) => l?.id?.toString() === filterLocationId);
       if (!match) return false;
     }
     return true;
@@ -93,7 +100,7 @@ export default function Instructors() {
                 onChange={(e) => setFilterLocationId(e.target.value)}
               >
                 <option value="">All Adelaide Locations</option>
-                {locations.map((loc) => (
+                {safeArray(locations).map((loc) => (
                   <option key={loc.id} value={loc.id}>
                     {loc.name} {loc.is_test_centre ? '(VORT Hub)' : ''}
                   </option>
@@ -115,9 +122,14 @@ export default function Instructors() {
         </div>
 
         {/* Instructor Cards */}
-        <div className="grid grid-3">
-          {filtered.map((inst) => (
-            <div key={inst.id} className="card" style={{ padding: '1.75rem', display: 'flex', flexDirection: 'column' }}>
+        {filtered.length === 0 ? (
+          <div className="card" style={{ padding: '3rem', textAlign: 'center' }}>
+            <p style={{ color: 'var(--color-text-muted)', margin: 0 }}>No instructors found matching your filter criteria. Try selecting &quot;All Adelaide Locations&quot;.</p>
+          </div>
+        ) : (
+          <div className="grid grid-3">
+            {safeArray(filtered).map((inst) => (
+              <div key={inst.id} className="card" style={{ padding: '1.75rem', display: 'flex', flexDirection: 'column' }}>
               <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginBottom: '1rem' }}>
                 <img
                   src={inst.profile_image}
@@ -148,9 +160,9 @@ export default function Instructors() {
               </p>
 
               <div style={{ padding: '0.75rem', backgroundColor: 'var(--color-surface-subtle)', borderRadius: 'var(--radius-md)', fontSize: 'var(--font-size-xs)', marginBottom: '1.25rem' }}>
-                <div><strong>Vehicle:</strong> {inst.car_model} ({inst.car_transmission.toUpperCase()})</div>
+                <div><strong>Vehicle:</strong> {inst.car_model || 'Dual Control Car'} ({String(inst.car_transmission || 'auto').toUpperCase()})</div>
                 <div><strong>Qualifications:</strong> {inst.qualifications || 'Cert IV Transport & Logistics'}</div>
-                <div><strong>Hourly Rate:</strong> ${inst.base_hourly_rate} AUD {inst.vort_test_rate > 0 && `| VORT: $${inst.vort_test_rate} AUD`}</div>
+                <div><strong>Hourly Rate:</strong> ${inst.base_hourly_rate || '85'} AUD {inst.vort_test_rate > 0 && `| VORT: $${inst.vort_test_rate} AUD`}</div>
               </div>
 
               <div style={{ display: 'flex', gap: '0.5rem' }}>
@@ -174,6 +186,7 @@ export default function Instructors() {
             </div>
           ))}
         </div>
+      )}
       </div>
     </div>
   );

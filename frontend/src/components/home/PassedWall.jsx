@@ -110,7 +110,7 @@ export default function PassedWall() {
           <div className="passwall-grid">
             {/* Row 1 */}
             <div className="passwall-row">
-              {row1Learners.map((learner) => (
+              {(Array.isArray(row1Learners) ? row1Learners : []).map((learner) => (
                 <div key={learner.id} className="passwall-card">
                   <img
                     src={learner.image}
@@ -138,7 +138,7 @@ export default function PassedWall() {
 
             {/* Row 2 */}
             <div className="passwall-row">
-              {row2Learners.map((learner) =>
+              {(Array.isArray(row2Learners) ? row2Learners : []).map((learner) =>
                 learner.isPlaceholder ? (
                   <div key={learner.id} className="passwall-card-placeholder">
                     {learner.text}

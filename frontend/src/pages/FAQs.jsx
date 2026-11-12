@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../services/api';
+import { extractArray, safeArray } from '../utils/apiHelpers';
+import { mockFaqs } from '../services/mockData';
 import { HelpCircle, ChevronDown, ChevronUp, ArrowRight } from 'lucide-react';
 
 export default function FAQs() {
@@ -13,13 +15,18 @@ export default function FAQs() {
     async function load() {
       try {
         const res = await api.get('/faqs');
-        setFaqs(res.data.data);
+        const list = extractArray(res, mockFaqs);
+        setFaqs(list);
         // Default open first 2
-        if (res.data.data.length > 0) {
-          setOpenIds({ [res.data.data[0].id]: true, [res.data.data[1]?.id]: true });
+        if (list.length > 0) {
+          setOpenIds({ [list[0].id]: true, [list[1]?.id]: true });
         }
-      } catch {
-        // Fallback
+      } catch (err) {
+        console.warn('FAQs load caught error, using fallback:', err);
+        setFaqs(mockFaqs);
+        if (mockFaqs.length > 0) {
+          setOpenIds({ [mockFaqs[0].id]: true, [mockFaqs[1]?.id]: true });
+        }
       } finally {
         setLoading(false);
       }
@@ -33,7 +40,8 @@ export default function FAQs() {
 
   const categories = ['all', 'vort', 'lessons', 'packages', 'general'];
 
-  const filtered = faqs.filter((f) => {
+  const filtered = safeArray(faqs).filter((f) => {
+    if (!f) return false;
     if (selectedCategory === 'all') return true;
     return f.category === selectedCategory;
   });
@@ -68,7 +76,7 @@ export default function FAQs() {
 
         {/* Accordions */}
         <div style={{ maxWidth: '850px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          {filtered.map((faq) => {
+          {safeArray(filtered).map((faq) => {
             const isOpen = !!openIds[faq.id];
             return (
               <div key={faq.id} className="card" style={{ overflow: 'hidden' }}>

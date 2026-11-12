@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import adminService from '../../services/adminService';
+import { extractArray, safeArray } from '../../utils/apiHelpers';
+import { mockBookings } from '../../services/mockData';
 import { Search, Filter, Calendar, Clock, Edit, CheckCircle, AlertCircle, RefreshCw } from 'lucide-react';
 
 export default function AdminBookings() {
@@ -30,9 +32,10 @@ export default function AdminBookings() {
     setAlertMsg('');
     try {
       const data = await adminService.getBookings({ status: statusFilter, search });
-      setBookings(data?.data || []);
-    } catch {
-      // Fallback
+      setBookings(extractArray(data, mockBookings));
+    } catch (err) {
+      console.warn('AdminBookings load caught error, using fallback:', err);
+      setBookings(mockBookings);
     } finally {
       setLoading(false);
     }
@@ -162,14 +165,14 @@ export default function AdminBookings() {
                     <div className="loading-spinner" style={{ margin: '0 auto' }} />
                   </td>
                 </tr>
-              ) : bookings.length === 0 ? (
+              ) : safeArray(bookings).length === 0 ? (
                 <tr>
                   <td colSpan="8" style={{ textAlign: 'center', color: 'var(--color-text-muted)', padding: '2rem' }}>
                     No bookings found matching current filters.
                   </td>
                 </tr>
               ) : (
-                bookings.map((b) => (
+                safeArray(bookings).map((b) => (
                   <tr key={b.id}>
                     <td style={{ fontWeight: 700, color: 'var(--color-primary)' }}>
                       {b.booking_reference}

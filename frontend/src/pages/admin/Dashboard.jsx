@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import adminService from '../../services/adminService';
+import { extractArray, safeArray } from '../../utils/apiHelpers';
+import { mockDashboardStats } from '../../services/mockData';
 import {
   DollarSign,
   CalendarCheck,
@@ -40,8 +42,8 @@ export default function AdminDashboard() {
   }
 
   const stats = data?.stats || {};
-  const recentBookings = data?.recent_bookings || [];
-  const recentLogs = data?.recent_logs || [];
+  const recentBookings = extractArray(data?.recent_bookings, mockDashboardStats.recent_bookings);
+  const recentLogs = extractArray(data?.recent_logs, mockDashboardStats.recent_logs);
 
   return (
     <div>
@@ -154,7 +156,7 @@ export default function AdminDashboard() {
                     </td>
                   </tr>
                 ) : (
-                  recentBookings.map((b) => (
+                  safeArray(recentBookings).map((b) => (
                     <tr key={b.id}>
                       <td style={{ fontWeight: 700 }}>{b.booking_reference}</td>
                       <td>{b.customer?.name}</td>
@@ -183,7 +185,7 @@ export default function AdminDashboard() {
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-            {recentLogs.map((log) => (
+            {safeArray(recentLogs).map((log) => (
               <div
                 key={log.id}
                 style={{
@@ -197,7 +199,7 @@ export default function AdminDashboard() {
               >
                 <div>
                   <div style={{ fontWeight: 700, color: 'var(--color-primary)' }}>
-                    {log.action.replaceAll('_', ' ').toUpperCase()}
+                    {log.action ? String(log.action).replaceAll('_', ' ').toUpperCase() : 'AUDIT ACTION'}
                   </div>
                   <div style={{ color: 'var(--color-text-muted)' }}>
                     Entity: {log.entity_type} {log.entity_id ? `#${log.entity_id}` : ''} | By: {log.user?.name || 'System / Guest'}

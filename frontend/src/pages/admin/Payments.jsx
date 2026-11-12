@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import adminService from '../../services/adminService';
+import { extractArray, safeArray } from '../../utils/apiHelpers';
 import { CreditCard, RotateCcw, CheckCircle, AlertCircle, RefreshCw } from 'lucide-react';
 
 export default function AdminPayments() {
@@ -21,9 +22,9 @@ export default function AdminPayments() {
     setLoading(true);
     try {
       const data = await adminService.getPayments();
-      setPayments(data?.data || []);
+      setPayments(extractArray(data, []));
     } catch {
-      // Fallback
+      setPayments([]);
     } finally {
       setLoading(false);
     }
@@ -104,7 +105,7 @@ export default function AdminPayments() {
                   </td>
                 </tr>
               ) : (
-                payments.map((p) => (
+                safeArray(payments).map((p) => (
                   <tr key={p.id}>
                     <td style={{ fontWeight: 700, color: 'var(--color-primary)' }}>{p.payment_reference}</td>
                     <td>{p.booking?.booking_reference}</td>

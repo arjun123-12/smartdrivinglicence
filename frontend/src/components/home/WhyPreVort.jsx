@@ -38,7 +38,7 @@ export default function WhyPreVort() {
 
         <div className="prevort-card">
           <div className="prevort-grid">
-            {reasons.map((r) => (
+            {(Array.isArray(reasons) ? reasons : []).map((r) => (
               <div key={r.id} className="prevort-item">
                 <h3 className="prevort-item-title">{r.title}</h3>
                 <p className="prevort-item-desc">{r.description}</p>

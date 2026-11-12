@@ -4,6 +4,15 @@ import bookingService from '../services/bookingService';
 import packageService from '../services/packageService';
 import instructorService from '../services/instructorService';
 import api from '../services/api';
+import { extractArray, safeArray } from '../utils/apiHelpers';
+import {
+  mockLocations,
+  mockServices,
+  mockPackages,
+  mockInstructors,
+  mockTestimonials,
+  mockFaqs,
+} from '../services/mockData';
 import Hero from '../components/home/Hero';
 import OldWayVsNewWay from '../components/home/OldWayVsNewWay';
 import PassedWall from '../components/home/PassedWall';
@@ -45,7 +54,7 @@ export default function Home() {
   useEffect(() => {
     async function loadData() {
       try {
-        const [locsRes, servsRes, pkgsRes, instrsRes, testsRes, faqsRes] = await Promise.all([
+        const results = await Promise.allSettled([
           bookingService.getLocations(),
           bookingService.getServices(),
           packageService.getPackages(),
@@ -54,18 +63,34 @@ export default function Home() {
           api.get('/faqs'),
         ]);
 
-        setLocations(locsRes);
-        setServices(servsRes);
-        setPackages(pkgsRes);
-        setInstructors(instrsRes.slice(0, 4));
-        setTestimonials(testsRes.data.data.slice(0, 3));
-        setFaqs(faqsRes.data.data.slice(0, 4));
+        const locs = results[0].status === 'fulfilled' ? extractArray(results[0].value, mockLocations) : mockLocations;
+        const servs = results[1].status === 'fulfilled' ? extractArray(results[1].value, mockServices) : mockServices;
+        const pkgs = results[2].status === 'fulfilled' ? extractArray(results[2].value, mockPackages) : mockPackages;
+        const instrs = results[3].status === 'fulfilled' ? extractArray(results[3].value, mockInstructors) : mockInstructors;
+        const tests = results[4].status === 'fulfilled' ? extractArray(results[4].value, mockTestimonials) : mockTestimonials;
+        const fqs = results[5].status === 'fulfilled' ? extractArray(results[5].value, mockFaqs) : mockFaqs;
 
-        if (locsRes.length > 0) {
-          setSearchLocation(locsRes[0].id.toString());
+        setLocations(locs);
+        setServices(servs);
+        setPackages(pkgs);
+        setInstructors(instrs.slice(0, 4));
+        setTestimonials(tests.slice(0, 3));
+        setFaqs(fqs.slice(0, 4));
+
+        if (locs.length > 0 && locs[0]?.id) {
+          setSearchLocation(locs[0].id.toString());
         }
       } catch (err) {
-        // Fallback gracefully
+        console.warn('Home page loadData caught error, using fallbacks:', err);
+        setLocations(mockLocations);
+        setServices(mockServices);
+        setPackages(mockPackages);
+        setInstructors(mockInstructors.slice(0, 4));
+        setTestimonials(mockTestimonials.slice(0, 3));
+        setFaqs(mockFaqs.slice(0, 4));
+        if (mockLocations.length > 0) {
+          setSearchLocation(mockLocations[0].id.toString());
+        }
       }
     }
     loadData();
@@ -171,7 +196,7 @@ export default function Home() {
           </div>
 
           <div className="grid grid-4">
-            {packages.map((pkg) => (
+            {safeArray(packages).map((pkg) => (
               <div key={pkg.id} className={`package-card card ${pkg.is_featured ? 'featured' : ''}`}>
                 {pkg.is_featured && <div className="package-badge">Most Popular</div>}
                 <div className="card-body">
@@ -193,8 +218,8 @@ export default function Home() {
                   </p>
 
                   <ul className="package-features">
-                    {pkg.features?.map((f) => (
-                      <li key={f.id}>
+                    {safeArray(pkg.features).map((f) => (
+                      <li key={f.id || f.feature_text}>
                         <CheckCircle size={15} color={f.is_highlighted ? 'var(--color-secondary)' : 'var(--color-success)'} style={{ flexShrink: 0 }} />
                         <span>{f.feature_text}</span>
                       </li>
@@ -233,7 +258,7 @@ export default function Home() {
           </div>
 
           <div className="grid grid-4">
-            {instructors.map((inst) => (
+            {safeArray(instructors).map((inst) => (
               <div key={inst.id} className="instructor-card card">
                 <img
                   src={inst.profile_image}
@@ -250,16 +275,16 @@ export default function Home() {
                 </div>
 
                 <p style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-muted)', marginBottom: '1rem', flex: 1 }}>
-                  {inst.bio?.slice(0, 110)}...
+                  {(inst.bio || 'Professional South Australian accredited driving instructor.').slice(0, 110)}...
                 </p>
 
                 <div style={{ width: '100%', fontSize: 'var(--font-size-xs)', borderTop: '1px solid var(--color-border)', paddingTop: '0.75rem', marginBottom: '1rem', textAlign: 'left' }}>
-                  <div><strong>Vehicle:</strong> {inst.car_model} ({inst.car_transmission.toUpperCase()})</div>
-                  <div><strong>Rate:</strong> ${inst.base_hourly_rate}/hr {inst.vort_test_rate > 0 && `| VORT: $${inst.vort_test_rate}`}</div>
+                  <div><strong>Vehicle:</strong> {inst.car_model || 'Dual Control Car'} ({inst.car_transmission ? inst.car_transmission.toUpperCase() : 'AUTO'})</div>
+                  <div><strong>Rate:</strong> ${inst.base_hourly_rate || '85'}/hr {inst.vort_test_rate > 0 && `| VORT: $${inst.vort_test_rate}`}</div>
                 </div>
 
                 <Link to={`/book-lesson?instructor_id=${inst.id}`} className="button button-outline button-sm button-full">
-                  Book with {inst.name.split(' ')[0]}
+                  Book with {inst.name ? inst.name.split(' ')[0] : 'Instructor'}
                 </Link>
               </div>
             ))}

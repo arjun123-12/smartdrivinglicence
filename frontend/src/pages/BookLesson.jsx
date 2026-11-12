@@ -374,7 +374,7 @@ export default function BookLesson() {
           </p>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            {faqs.map((faq, idx) => {
+            {(Array.isArray(faqs) ? faqs : []).map((faq, idx) => {
               const isOpen = openFaq === idx;
               return (
                 <div

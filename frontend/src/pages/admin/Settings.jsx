@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import adminService from '../../services/adminService';
+import { extractArray, safeArray } from '../../utils/apiHelpers';
 import { Settings, Shield, Save, CheckCircle, RefreshCw } from 'lucide-react';
 
 export default function AdminSettings() {
@@ -17,10 +18,14 @@ export default function AdminSettings() {
     setLoading(true);
     try {
       const data = await adminService.getSettings();
-      setSettings(data.settings || []);
-      setAuditLogs(data.audit_logs?.data || []);
+      const rawSettings = data?.settings || (Array.isArray(data) ? data : []);
+      setSettings(extractArray(rawSettings, []));
+
+      const rawLogs = data?.audit_logs || data?.logs || [];
+      setAuditLogs(extractArray(rawLogs, []));
     } catch {
-      // Fallback
+      setSettings([]);
+      setAuditLogs([]);
     } finally {
       setLoading(false);
     }
@@ -28,7 +33,7 @@ export default function AdminSettings() {
 
   const handleValueChange = (key, val) => {
     setSettings((prev) =>
-      prev.map((s) => (s.key === key ? { ...s, value: val } : s))
+      safeArray(prev).map((s) => (s.key === key ? { ...s, value: val } : s))
     );
   };
 
@@ -85,20 +90,24 @@ export default function AdminSettings() {
 
           <form onSubmit={handleSave}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              {settings.map((s) => (
-                <div key={s.id} className="form-group" style={{ margin: 0 }}>
-                  <label className="form-label" style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <span>{s.description || s.key}</span>
-                    <span style={{ fontSize: '11px', color: 'var(--color-text-muted)' }}>{s.key}</span>
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    value={s.value || ''}
-                    onChange={(e) => handleValueChange(s.key, e.target.value)}
-                  />
-                </div>
-              ))}
+              {safeArray(settings).length === 0 ? (
+                <p style={{ color: 'var(--color-text-muted)', fontSize: 'var(--font-size-sm)' }}>No settings available.</p>
+              ) : (
+                safeArray(settings).map((s) => (
+                  <div key={s.id || s.key} className="form-group" style={{ margin: 0 }}>
+                    <label className="form-label" style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <span>{s.description || s.key}</span>
+                      <span style={{ fontSize: '11px', color: 'var(--color-text-muted)' }}>{s.key}</span>
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      value={s.value || ''}
+                      onChange={(e) => handleValueChange(s.key, e.target.value)}
+                    />
+                  </div>
+                ))
+              )}
             </div>
 
             <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '1.5rem' }}>
@@ -116,35 +125,39 @@ export default function AdminSettings() {
           </h3>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', maxHeight: '550px', overflowY: 'auto' }}>
-            {auditLogs.map((log) => (
-              <div
-                key={log.id}
-                style={{
-                  padding: '0.75rem',
-                  backgroundColor: 'var(--color-surface-subtle)',
-                  borderRadius: 'var(--radius-sm)',
-                  fontSize: 'var(--font-size-xs)',
-                  borderLeft: '3px solid var(--color-secondary)',
-                }}
-              >
-                <div className="flex-between">
-                  <span style={{ fontWeight: 700, color: 'var(--color-primary)' }}>
-                    {log.action.replaceAll('_', ' ').toUpperCase()}
-                  </span>
-                  <span style={{ color: 'var(--color-text-muted)' }}>
-                    {new Date(log.created_at).toLocaleString()}
-                  </span>
-                </div>
-                <div style={{ color: 'var(--color-text)', marginTop: '0.25rem' }}>
-                  User: <strong>{log.user?.name || 'Guest / Webhook'}</strong> | Target: {log.entity_type} {log.entity_id ? `#${log.entity_id}` : ''}
-                </div>
-                {log.ip_address && (
-                  <div style={{ fontSize: '10px', color: 'var(--color-text-muted)', marginTop: '0.2rem' }}>
-                    IP: {log.ip_address}
+            {safeArray(auditLogs).length === 0 ? (
+              <p style={{ color: 'var(--color-text-muted)', fontSize: 'var(--font-size-sm)' }}>No audit log entries found.</p>
+            ) : (
+              safeArray(auditLogs).map((log) => (
+                <div
+                  key={log.id}
+                  style={{
+                    padding: '0.75rem',
+                    backgroundColor: 'var(--color-surface-subtle)',
+                    borderRadius: 'var(--radius-sm)',
+                    fontSize: 'var(--font-size-xs)',
+                    borderLeft: '3px solid var(--color-secondary)',
+                  }}
+                >
+                  <div className="flex-between">
+                    <span style={{ fontWeight: 700, color: 'var(--color-primary)' }}>
+                      {String(log.action || 'ACTIVITY').replaceAll('_', ' ').toUpperCase()}
+                    </span>
+                    <span style={{ color: 'var(--color-text-muted)' }}>
+                      {log.created_at ? new Date(log.created_at).toLocaleString() : ''}
+                    </span>
                   </div>
-                )}
-              </div>
-            ))}
+                  <div style={{ color: 'var(--color-text)', marginTop: '0.25rem' }}>
+                    User: <strong>{log.user?.name || 'Guest / Webhook'}</strong> | Target: {log.entity_type} {log.entity_id ? `#${log.entity_id}` : ''}
+                  </div>
+                  {log.ip_address && (
+                    <div style={{ fontSize: '10px', color: 'var(--color-text-muted)', marginTop: '0.2rem' }}>
+                      IP: {log.ip_address}
+                    </div>
+                  )}
+                </div>
+              ))
+            )}
           </div>
         </div>
       </div>

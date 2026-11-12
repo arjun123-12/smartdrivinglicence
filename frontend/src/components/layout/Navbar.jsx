@@ -55,7 +55,7 @@ export default function Navbar() {
     `sd-nav-link${isActive ? ' active' : ''}`;
 
   const renderNavItems = (items) =>
-    items.map((item) => (
+    (Array.isArray(items) ? items : []).map((item) => (
       <NavLink
         key={item.to}
         to={item.to}

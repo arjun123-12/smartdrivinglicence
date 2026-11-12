@@ -42,7 +42,7 @@ export default function ImportantInfo() {
         <h2 className="important-info-title">Important Information</h2>
 
         <div className="important-info-list">
-          {importantCards.map((card, index) => {
+          {(Array.isArray(importantCards) ? importantCards : []).map((card, index) => {
             const isOpen = openIndex === index;
             return (
               <div

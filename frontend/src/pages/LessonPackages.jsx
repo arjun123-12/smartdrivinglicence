@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import packageService from '../services/packageService';
+import { extractArray, safeArray } from '../utils/apiHelpers';
+import { mockPackages } from '../services/mockData';
 import {
   CheckCircle,
   ArrowRight,
@@ -27,9 +29,10 @@ export default function LessonPackages() {
     async function load() {
       try {
         const data = await packageService.getPackages();
-        setPackages(data);
+        setPackages(extractArray(data, mockPackages));
       } catch (err) {
-        // Fallback gracefully
+        console.warn('LessonPackages load caught error, using fallback:', err);
+        setPackages(mockPackages);
       } finally {
         setLoading(false);
       }
@@ -42,10 +45,11 @@ export default function LessonPackages() {
   };
 
   // Filtered packages
-  const filteredPackages = packages.filter((pkg) => {
-    if (activeFilter === 'fast-track') return pkg.lesson_hours <= 5;
-    if (activeFilter === 'popular') return pkg.is_featured;
-    if (activeFilter === 'comprehensive') return pkg.lesson_hours >= 10;
+  const filteredPackages = safeArray(packages).filter((pkg) => {
+    if (!pkg) return false;
+    if (activeFilter === 'fast-track') return Number(pkg.lesson_hours) <= 5;
+    if (activeFilter === 'popular') return Boolean(pkg.is_featured);
+    if (activeFilter === 'comprehensive') return Number(pkg.lesson_hours) >= 10;
     return true;
   });
 
@@ -206,8 +210,8 @@ export default function LessonPackages() {
             </div>
           ) : (
             <div className="pkg-grid-main">
-              {filteredPackages.map((pkg) => {
-                const hourlyRate = Math.round(Number(pkg.current_price) / Number(pkg.lesson_hours));
+              {safeArray(filteredPackages).map((pkg) => {
+                const hourlyRate = Math.round(Number(pkg.current_price || 0) / Math.max(1, Number(pkg.lesson_hours || 1)));
                 return (
                   <div
                     key={pkg.id}
@@ -229,15 +233,15 @@ export default function LessonPackages() {
                       )}
                     </div>
                     <span className="pkg-hourly-rate">
-                      ~${hourlyRate}/Hour · Save ${Number(pkg.original_price || 0) - Number(pkg.current_price)}
+                      ~${hourlyRate}/Hour · Save ${Number(pkg.original_price || 0) - Number(pkg.current_price || 0)}
                     </span>
 
                     <p className="pkg-card-desc">{pkg.short_description}</p>
 
-                    <div className="pkg-inclusions-title">What's Included:</div>
+                    <div className="pkg-inclusions-title">What&apos;s Included:</div>
                     <ul className="pkg-features-list">
-                      {pkg.features?.map((f) => (
-                        <li key={f.id} className="pkg-feature-item">
+                      {safeArray(pkg.features).map((f) => (
+                        <li key={f.id || f.feature_text} className="pkg-feature-item">
                           <CheckCircle size={15} />
                           <span>{f.feature_text}</span>
                         </li>
@@ -440,7 +444,7 @@ export default function LessonPackages() {
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            {faqs.map((faq, idx) => {
+            {safeArray(faqs).map((faq, idx) => {
               const isOpen = openFaq === idx;
               return (
                 <div

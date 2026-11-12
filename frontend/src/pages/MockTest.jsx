@@ -146,13 +146,13 @@ export default function MockTest() {
           </div>
 
           <div className="mock-stages-grid">
-            {stages.map((stage, idx) => (
+            {(Array.isArray(stages) ? stages : []).map((stage, idx) => (
               <div key={idx} className="mock-stage-card">
                 <span className="mock-stage-badge">{stage.badge}</span>
                 <h3 className="mock-stage-title">{stage.title}</h3>
                 <p className="mock-stage-desc">{stage.desc}</p>
                 <ul className="mock-stage-checklist">
-                  {stage.items.map((item, i) => (
+                  {(Array.isArray(stage?.items) ? stage.items : []).map((item, i) => (
                     <li key={i}>
                       <CheckCircle size={15} />
                       <span>{item}</span>
@@ -269,7 +269,7 @@ export default function MockTest() {
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            {faqs.map((faq, idx) => {
+            {(Array.isArray(faqs) ? faqs : []).map((faq, idx) => {
               const isOpen = openFaq === idx;
               return (
                 <div

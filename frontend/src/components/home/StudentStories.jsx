@@ -79,7 +79,7 @@ export default function StudentStories() {
 
         {/* Top 3 Cards */}
         <div className="student-stories-grid-top">
-          {topStories.map((story) => (
+          {(Array.isArray(topStories) ? topStories : []).map((story) => (
             <StoryCard key={story.id} story={story} />
           ))}
         </div>

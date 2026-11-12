@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import bookingService from '../../services/bookingService';
+import { extractArray, safeArray } from '../../utils/apiHelpers';
 import { Calendar, Clock, Car, Award, AlertCircle, ArrowRight, CheckCircle } from 'lucide-react';
 
 export default function CustomerDashboard() {
@@ -13,9 +14,9 @@ export default function CustomerDashboard() {
     async function load() {
       try {
         const res = await bookingService.getCustomerBookings('upcoming');
-        setUpcomingBookings(res?.data || []);
+        setUpcomingBookings(extractArray(res, []));
       } catch {
-        // Fallback
+        setUpcomingBookings([]);
       } finally {
         setLoading(false);
       }
@@ -60,7 +61,7 @@ export default function CustomerDashboard() {
             <Calendar size={20} color="var(--color-secondary)" />
           </div>
           <div style={{ fontSize: '2rem', fontWeight: 800, color: 'var(--color-primary)' }}>
-            {upcomingBookings.length}
+            {safeArray(upcomingBookings).length}
           </div>
           <div style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-muted)', marginTop: '0.25rem' }}>
             Confirmed on schedule
@@ -103,7 +104,7 @@ export default function CustomerDashboard() {
         <div className="flex-between" style={{ marginBottom: '1.25rem' }}>
           <h3>Next Scheduled Appointment</h3>
           <Link to="/dashboard/bookings" style={{ fontSize: 'var(--font-size-sm)', fontWeight: 600 }}>
-            View All ({upcomingBookings.length})
+            View All ({safeArray(upcomingBookings).length})
           </Link>
         </div>
 
@@ -111,7 +112,7 @@ export default function CustomerDashboard() {
           <div className="flex-center" style={{ padding: '2rem' }}>
             <div className="loading-spinner" />
           </div>
-        ) : upcomingBookings.length === 0 ? (
+        ) : safeArray(upcomingBookings).length === 0 ? (
           <div className="empty-state" style={{ padding: '2rem' }}>
             <Calendar size={36} color="var(--color-text-muted)" style={{ margin: '0 auto 0.5rem auto' }} />
             <h4>No Upcoming Bookings</h4>
@@ -129,7 +130,7 @@ export default function CustomerDashboard() {
           </div>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            {upcomingBookings.slice(0, 2).map((b) => (
+            {safeArray(upcomingBookings).slice(0, 2).map((b) => (
               <div
                 key={b.id}
                 className="card"

@@ -10,13 +10,20 @@ import {
   mockTestimonials,
   mockSettings,
 } from './mockData';
+import { extractArray } from '../utils/apiHelpers';
 
 export const adminService = {
   // Dashboard
   async getDashboardStats() {
     try {
       const res = await api.get('/admin/dashboard');
-      return res.data;
+      const data = res.data || res;
+      return {
+        status: data.status || 'success',
+        stats: data.stats || mockDashboardStats.stats,
+        recent_bookings: extractArray(data.recent_bookings, mockDashboardStats.recent_bookings),
+        recent_logs: extractArray(data.recent_logs, mockDashboardStats.recent_logs),
+      };
     } catch {
       return mockDashboardStats;
     }
@@ -26,7 +33,7 @@ export const adminService = {
   async getBookings(params = {}) {
     try {
       const res = await api.get('/admin/bookings', { params });
-      return res.data.data;
+      return extractArray(res, mockBookings);
     } catch {
       return mockBookings;
     }
@@ -63,7 +70,7 @@ export const adminService = {
   async getInstructors() {
     try {
       const res = await api.get('/admin/instructors');
-      return res.data.data;
+      return extractArray(res, mockInstructors);
     } catch {
       return mockInstructors;
     }
@@ -100,7 +107,7 @@ export const adminService = {
   async getPackages() {
     try {
       const res = await api.get('/admin/packages');
-      return res.data.data;
+      return extractArray(res, mockPackages);
     } catch {
       return mockPackages;
     }
@@ -137,7 +144,7 @@ export const adminService = {
   async getCustomers(params = {}) {
     try {
       const res = await api.get('/admin/customers', { params });
-      return res.data.data;
+      return extractArray(res, mockCustomers);
     } catch {
       return mockCustomers;
     }
@@ -146,7 +153,7 @@ export const adminService = {
   async getCustomer(id) {
     try {
       const res = await api.get(`/admin/customers/${id}`);
-      return res.data.data;
+      return res.data?.data || res.data || mockCustomers[0];
     } catch {
       return mockCustomers.find((c) => c.id === Number(id)) || mockCustomers[0];
     }
@@ -165,7 +172,7 @@ export const adminService = {
   async getServices() {
     try {
       const res = await api.get('/admin/services');
-      return res.data.data;
+      return extractArray(res, mockServices);
     } catch {
       return mockServices;
     }
@@ -193,9 +200,22 @@ export const adminService = {
   async getAvailability(params = {}) {
     try {
       const res = await api.get('/admin/availability', { params });
-      return res.data;
+      const raw = res.data || res;
+      return {
+        status: raw.status || 'success',
+        instructors: extractArray(raw.instructors || raw.data?.instructors, mockInstructors),
+        selected_instructor_id: raw.selected_instructor_id || (mockInstructors[0]?.id || 1),
+        schedules: extractArray(raw.schedules || raw.data?.schedules, []),
+        exceptions: extractArray(raw.exceptions || raw.data?.exceptions, []),
+      };
     } catch {
-      return { status: 'success', data: [] };
+      return {
+        status: 'success',
+        instructors: mockInstructors,
+        selected_instructor_id: mockInstructors[0]?.id || 1,
+        schedules: [],
+        exceptions: [],
+      };
     }
   },
 
@@ -230,7 +250,7 @@ export const adminService = {
   async getPayments(params = {}) {
     try {
       const res = await api.get('/admin/payments', { params });
-      return res.data.data;
+      return extractArray(res, []);
     } catch {
       return [
         {
@@ -260,7 +280,7 @@ export const adminService = {
   async getFaqs() {
     try {
       const res = await api.get('/admin/faqs');
-      return res.data.data;
+      return extractArray(res, mockFaqs);
     } catch {
       return mockFaqs;
     }
@@ -297,7 +317,7 @@ export const adminService = {
   async getTestimonials() {
     try {
       const res = await api.get('/admin/testimonials');
-      return res.data.data;
+      return extractArray(res, mockTestimonials);
     } catch {
       return mockTestimonials;
     }

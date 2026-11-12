@@ -1,11 +1,12 @@
 import api from './api';
 import { mockPackages } from './mockData';
+import { extractArray } from '../utils/apiHelpers';
 
 export const packageService = {
   async getPackages() {
     try {
       const res = await api.get('/packages');
-      return res.data.data;
+      return extractArray(res, mockPackages);
     } catch {
       return mockPackages;
     }
@@ -14,7 +15,7 @@ export const packageService = {
   async getPackage(idOrSlug) {
     try {
       const res = await api.get(`/packages/${idOrSlug}`);
-      return res.data.data;
+      return res.data?.data || res.data || mockPackages[0];
     } catch {
       return mockPackages.find((p) => p.slug === idOrSlug || p.id === Number(idOrSlug)) || mockPackages[0];
     }

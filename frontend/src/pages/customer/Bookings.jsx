@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import bookingService from '../../services/bookingService';
+import { extractArray, safeArray } from '../../utils/apiHelpers';
 import { Calendar, Clock, MapPin, Car, AlertCircle, CheckCircle, XCircle } from 'lucide-react';
 
 export default function CustomerBookings() {
@@ -21,9 +22,9 @@ export default function CustomerBookings() {
     setAlertMsg('');
     try {
       const data = await bookingService.getCustomerBookings(tab);
-      setBookings(data?.data || []);
+      setBookings(extractArray(data, []));
     } catch {
-      // Fallback
+      setBookings([]);
     } finally {
       setLoading(false);
     }
@@ -96,7 +97,7 @@ export default function CustomerBookings() {
         <div className="flex-center" style={{ minHeight: '300px' }}>
           <div className="loading-spinner" />
         </div>
-      ) : bookings.length === 0 ? (
+      ) : safeArray(bookings).length === 0 ? (
         <div className="empty-state">
           <Calendar size={48} color="var(--color-text-muted)" style={{ margin: '0 auto 1rem auto' }} />
           <h3>No Bookings Found in This View</h3>
@@ -111,7 +112,7 @@ export default function CustomerBookings() {
         </div>
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-          {bookings.map((booking) => {
+          {safeArray(bookings).map((booking) => {
             const isCancelled = booking.booking_status === 'cancelled';
             const isCompleted = booking.booking_status === 'completed';
             const isConfirmed = booking.booking_status === 'confirmed';

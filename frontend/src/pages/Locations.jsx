@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import bookingService from '../services/bookingService';
+import { extractArray, safeArray } from '../utils/apiHelpers';
+import { mockLocations } from '../services/mockData';
 import { MapPin, Search, CheckCircle, Car, ArrowRight } from 'lucide-react';
 
 export default function Locations() {
@@ -12,9 +14,10 @@ export default function Locations() {
     async function load() {
       try {
         const data = await bookingService.getLocations();
-        setLocations(data);
-      } catch {
-        // Fallback
+        setLocations(extractArray(data, mockLocations));
+      } catch (err) {
+        console.warn('Locations load caught error, using fallback:', err);
+        setLocations(mockLocations);
       } finally {
         setLoading(false);
       }
@@ -22,12 +25,15 @@ export default function Locations() {
     load();
   }, []);
 
-  const filtered = locations.filter((loc) => {
-    const q = search.toLowerCase();
-    return loc.name.toLowerCase().includes(q) || loc.postcode.includes(q);
+  const filtered = safeArray(locations).filter((loc) => {
+    if (!loc) return false;
+    const q = (search || '').toLowerCase();
+    const name = (loc.name || '').toLowerCase();
+    const postcode = (loc.postcode || '').toString();
+    return name.includes(q) || postcode.includes(q);
   });
 
-  const testCentres = filtered.filter((l) => l.is_test_centre);
+  const testCentres = filtered.filter((l) => Boolean(l.is_test_centre));
   const suburbs = filtered.filter((l) => !l.is_test_centre);
 
   return (
@@ -68,7 +74,7 @@ export default function Locations() {
           </div>
 
           <div className="grid grid-3">
-            {testCentres.map((centre) => (
+            {safeArray(testCentres).map((centre) => (
               <div key={centre.id} className="card" style={{ padding: '1.5rem', border: '2px solid var(--color-secondary)' }}>
                 <div className="flex-between" style={{ marginBottom: '0.75rem' }}>
                   <div style={{ fontWeight: 800, fontSize: '1.2rem', color: 'var(--color-primary)' }}>
@@ -109,7 +115,7 @@ export default function Locations() {
           </div>
 
           <div className="grid grid-4">
-            {suburbs.map((sub) => (
+            {safeArray(suburbs).map((sub) => (
               <div key={sub.id} className="card" style={{ padding: '1.25rem' }}>
                 <div className="flex-between" style={{ marginBottom: '0.5rem' }}>
                   <span style={{ fontWeight: 700, color: 'var(--color-primary)' }}>{sub.name}</span>

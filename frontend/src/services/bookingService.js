@@ -1,11 +1,12 @@
 import api from './api';
 import { mockServices, mockLocations } from './mockData';
+import { extractArray } from '../utils/apiHelpers';
 
 export const bookingService = {
   async getServices() {
     try {
       const res = await api.get('/services');
-      return res.data.data;
+      return extractArray(res, mockServices);
     } catch {
       return mockServices;
     }
@@ -14,7 +15,7 @@ export const bookingService = {
   async getLocations(params = {}) {
     try {
       const res = await api.get('/locations', { params });
-      return res.data.data;
+      return extractArray(res, mockLocations);
     } catch {
       return mockLocations;
     }
@@ -23,12 +24,12 @@ export const bookingService = {
   async searchLocations(q) {
     try {
       const res = await api.get('/locations/search', { params: { q } });
-      return res.data.data;
+      return extractArray(res, mockLocations);
     } catch {
       if (!q) return mockLocations;
       const lower = q.toLowerCase();
       return mockLocations.filter(
-        (l) => l.name.toLowerCase().includes(lower) || l.postcode.includes(lower)
+        (l) => l.name?.toLowerCase().includes(lower) || l.postcode?.includes(lower)
       );
     }
   },
@@ -36,9 +37,10 @@ export const bookingService = {
   async searchAvailability(params) {
     try {
       const res = await api.get('/availability/search', { params });
-      return res.data;
+      const slots = extractArray(res?.data?.slots || res?.data?.data || res?.data || res, []);
+      return { status: 'success', slots, count: slots.length };
     } catch {
-      return { status: 'success', slots: [] };
+      return { status: 'success', slots: [], count: 0 };
     }
   },
 
@@ -86,7 +88,7 @@ export const bookingService = {
   async getCustomerBookings(tab = 'all') {
     try {
       const res = await api.get('/customer/bookings', { params: { tab } });
-      return res.data.data;
+      return extractArray(res, []);
     } catch {
       return [];
     }

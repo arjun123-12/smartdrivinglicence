@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import adminService from '../../services/adminService';
+import { extractArray, safeArray } from '../../utils/apiHelpers';
 import { Star, CheckCircle, Trash2, Power, Plus } from 'lucide-react';
 
 export default function AdminTestimonials() {
@@ -27,9 +28,9 @@ export default function AdminTestimonials() {
     setLoading(true);
     try {
       const data = await adminService.getTestimonials();
-      setTestimonials(data);
+      setTestimonials(extractArray(data, []));
     } catch {
-      // Fallback
+      setTestimonials([]);
     } finally {
       setLoading(false);
     }
@@ -91,43 +92,53 @@ export default function AdminTestimonials() {
         </div>
       )}
 
-      <div className="grid grid-3">
-        {testimonials.map((t) => (
-          <div key={t.id} className="card" style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column' }}>
-            <div className="flex-between" style={{ marginBottom: '0.75rem' }}>
-              <div style={{ display: 'flex', gap: '2px', color: '#f59e0b' }}>
-                {[...Array(t.rating)].map((_, i) => (
-                  <Star key={i} size={16} fill="#f59e0b" />
-                ))}
+      {loading ? (
+        <div className="card" style={{ padding: '2rem', textAlign: 'center' }}>
+          <div className="loading-spinner" style={{ margin: '0 auto' }} />
+        </div>
+      ) : safeArray(testimonials).length === 0 ? (
+        <div className="card" style={{ padding: '2rem', textAlign: 'center', color: 'var(--color-text-muted)' }}>
+          No testimonials recorded yet.
+        </div>
+      ) : (
+        <div className="grid grid-3">
+          {safeArray(testimonials).map((t) => (
+            <div key={t.id} className="card" style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column' }}>
+              <div className="flex-between" style={{ marginBottom: '0.75rem' }}>
+                <div style={{ display: 'flex', gap: '2px', color: '#f59e0b' }}>
+                  {[...Array(Math.max(1, Math.min(5, Number(t.rating) || 5)))].map((_, i) => (
+                    <Star key={i} size={16} fill="#f59e0b" />
+                  ))}
+                </div>
+                <span className={`badge ${t.is_approved ? 'badge-success' : 'badge-warning'}`}>
+                  {t.is_approved ? 'Published' : 'Pending'}
+                </span>
               </div>
-              <span className={`badge ${t.is_approved ? 'badge-success' : 'badge-warning'}`}>
-                {t.is_approved ? 'Published' : 'Pending'}
-              </span>
-            </div>
 
-            <p style={{ fontSize: 'var(--font-size-sm)', fontStyle: 'italic', color: 'var(--color-text)', flex: 1, marginBottom: '1rem' }}>
-              "{t.feedback}"
-            </p>
+              <p style={{ fontSize: 'var(--font-size-sm)', fontStyle: 'italic', color: 'var(--color-text)', flex: 1, marginBottom: '1rem' }}>
+                "{t.feedback}"
+              </p>
 
-            <div style={{ fontSize: 'var(--font-size-xs)', borderTop: '1px solid var(--color-border)', paddingTop: '0.75rem', marginBottom: '1rem' }}>
-              <div style={{ fontWeight: 700 }}>{t.name} ({t.suburb}, SA)</div>
-              <div style={{ color: 'var(--color-text-muted)' }}>{t.test_type} | {t.instructor_name}</div>
-            </div>
+              <div style={{ fontSize: 'var(--font-size-xs)', borderTop: '1px solid var(--color-border)', paddingTop: '0.75rem', marginBottom: '1rem' }}>
+                <div style={{ fontWeight: 700 }}>{t.name} ({t.suburb}, SA)</div>
+                <div style={{ color: 'var(--color-text-muted)' }}>{t.test_type} | {t.instructor_name}</div>
+              </div>
 
-            <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'flex-end' }}>
-              <button
-                onClick={() => handleToggle(t.id)}
-                className={`button button-sm ${t.is_approved ? 'button-outline' : 'button-secondary'}`}
-              >
-                {t.is_approved ? 'Unpublish' : 'Approve & Publish'}
-              </button>
-              <button onClick={() => handleDelete(t.id)} className="button button-sm button-outline" style={{ color: 'var(--color-error)' }}>
-                <Trash2 size={14} />
-              </button>
+              <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'flex-end' }}>
+                <button
+                  onClick={() => handleToggle(t.id)}
+                  className={`button button-sm ${t.is_approved ? 'button-outline' : 'button-secondary'}`}
+                >
+                  {t.is_approved ? 'Unpublish' : 'Approve & Publish'}
+                </button>
+                <button onClick={() => handleDelete(t.id)} className="button button-sm button-outline" style={{ color: 'var(--color-error)' }}>
+                  <Trash2 size={14} />
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
 
       {modalOpen && (
         <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 100, padding: '1rem' }}>

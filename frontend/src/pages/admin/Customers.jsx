@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import adminService from '../../services/adminService';
+import { extractArray, safeArray } from '../../utils/apiHelpers';
+import { mockCustomers } from '../../services/mockData';
 import { Search, UserCheck, Eye, Power, RefreshCw } from 'lucide-react';
 
 export default function AdminCustomers() {
@@ -16,9 +18,10 @@ export default function AdminCustomers() {
     setLoading(true);
     try {
       const data = await adminService.getCustomers({ search });
-      setCustomers(data?.data || []);
-    } catch {
-      // Fallback
+      setCustomers(extractArray(data, mockCustomers));
+    } catch (err) {
+      console.warn('AdminCustomers load caught error, using fallback:', err);
+      setCustomers(mockCustomers);
     } finally {
       setLoading(false);
     }
@@ -98,14 +101,14 @@ export default function AdminCustomers() {
                     <div className="loading-spinner" style={{ margin: '0 auto' }} />
                   </td>
                 </tr>
-              ) : customers.length === 0 ? (
+              ) : safeArray(customers).length === 0 ? (
                 <tr>
                   <td colSpan="7" style={{ textAlign: 'center', color: 'var(--color-text-muted)', padding: '2rem' }}>
                     No customer accounts found.
                   </td>
                 </tr>
               ) : (
-                customers.map((c) => (
+                safeArray(customers).map((c) => (
                   <tr key={c.id}>
                     <td style={{ fontWeight: 700, color: 'var(--color-primary)' }}>{c.name}</td>
                     <td>
@@ -167,12 +170,12 @@ export default function AdminCustomers() {
               </div>
             </div>
 
-            <h4 style={{ fontSize: '1.1rem', marginBottom: '0.75rem' }}>Booking History ({viewCustomer.bookings?.length || 0})</h4>
+            <h4 style={{ fontSize: '1.1rem', marginBottom: '0.75rem' }}>Booking History ({safeArray(viewCustomer.bookings).length})</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-              {viewCustomer.bookings?.length === 0 ? (
+              {safeArray(viewCustomer.bookings).length === 0 ? (
                 <div style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-muted)' }}>No bookings yet.</div>
               ) : (
-                viewCustomer.bookings?.map((b) => (
+                safeArray(viewCustomer.bookings).map((b) => (
                   <div key={b.id} style={{ padding: '0.75rem', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-sm)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: 'var(--font-size-xs)' }}>
                     <div>
                       <div style={{ fontWeight: 700 }}>{b.service_type?.name} ({b.booking_reference})</div>

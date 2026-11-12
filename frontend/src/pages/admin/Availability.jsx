@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import adminService from '../../services/adminService';
+import { extractArray, safeArray } from '../../utils/apiHelpers';
+import { mockInstructors } from '../../services/mockData';
 import { Clock, Plus, Trash2, CheckCircle, Calendar, AlertCircle } from 'lucide-react';
 
 const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -26,14 +28,21 @@ export default function AdminAvailability() {
     setLoading(true);
     try {
       const res = await adminService.getAvailability(id ? { instructor_id: id } : {});
-      setInstructors(res.instructors || []);
-      if (!selectedInstructorId && res.selected_instructor_id) {
+      const insts = extractArray(res?.instructors, mockInstructors);
+      setInstructors(insts);
+      if (!selectedInstructorId && res?.selected_instructor_id) {
         setSelectedInstructorId(res.selected_instructor_id.toString());
+      } else if (!selectedInstructorId && insts.length > 0) {
+        setSelectedInstructorId(insts[0].id.toString());
       }
-      setSchedules(res.schedules || []);
-      setExceptions(res.exceptions || []);
-    } catch {
-      // Fallback
+      setSchedules(extractArray(res?.schedules, []));
+      setExceptions(extractArray(res?.exceptions, []));
+    } catch (err) {
+      console.warn('AdminAvailability load caught error, using fallback:', err);
+      setInstructors(mockInstructors);
+      if (mockInstructors.length > 0) setSelectedInstructorId(mockInstructors[0].id.toString());
+      setSchedules([]);
+      setExceptions([]);
     } finally {
       setLoading(false);
     }
@@ -41,7 +50,7 @@ export default function AdminAvailability() {
 
   const handleScheduleChange = (dayOfWeek, field, value) => {
     setSchedules((prev) =>
-      prev.map((s) => (s.day_of_week === dayOfWeek ? { ...s, [field]: value } : s))
+      safeArray(prev).map((s) => (s.day_of_week === dayOfWeek ? { ...s, [field]: value } : s))
     );
   };
 
@@ -52,7 +61,7 @@ export default function AdminAvailability() {
     try {
       await adminService.updateSchedule({
         instructor_id: selectedInstructorId,
-        schedules: schedules.map((s) => ({
+        schedules: safeArray(schedules).map((s) => ({
           day_of_week: s.day_of_week,
           start_time: s.start_time,
           end_time: s.end_time,
@@ -117,7 +126,7 @@ export default function AdminAvailability() {
             value={selectedInstructorId}
             onChange={(e) => setSelectedInstructorId(e.target.value)}
           >
-            {instructors.map((inst) => (
+            {safeArray(instructors).map((inst) => (
               <option key={inst.id} value={inst.id}>
                 {inst.name}
               </option>
@@ -244,14 +253,14 @@ export default function AdminAvailability() {
 
           {/* Exceptions List */}
           <div className="card" style={{ padding: '1.5rem' }}>
-            <h4 style={{ marginBottom: '1rem' }}>Upcoming Leave & Exceptions ({exceptions.length})</h4>
+            <h4 style={{ marginBottom: '1rem' }}>Upcoming Leave & Exceptions ({safeArray(exceptions).length})</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-              {exceptions.length === 0 ? (
+              {safeArray(exceptions).length === 0 ? (
                 <div style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-muted)' }}>
                   No upcoming exceptions or leave booked for this instructor.
                 </div>
               ) : (
-                exceptions.map((ex) => (
+                safeArray(exceptions).map((ex) => (
                   <div
                     key={ex.id}
                     style={{

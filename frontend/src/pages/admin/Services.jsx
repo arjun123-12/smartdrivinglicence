@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import adminService from '../../services/adminService';
+import { extractArray, safeArray } from '../../utils/apiHelpers';
+import { mockServices } from '../../services/mockData';
 import { Plus, Edit, CheckCircle, Briefcase } from 'lucide-react';
 
 export default function AdminServices() {
@@ -27,9 +29,10 @@ export default function AdminServices() {
     setLoading(true);
     try {
       const data = await adminService.getServices();
-      setServices(data);
-    } catch {
-      // Fallback
+      setServices(extractArray(data, mockServices));
+    } catch (err) {
+      console.warn('AdminServices load caught error, using fallback:', err);
+      setServices(mockServices);
     } finally {
       setLoading(false);
     }
@@ -123,7 +126,7 @@ export default function AdminServices() {
                   </td>
                 </tr>
               ) : (
-                services.map((srv) => (
+                safeArray(services).map((srv) => (
                   <tr key={srv.id}>
                     <td>
                       <div style={{ fontWeight: 700, color: 'var(--color-primary)' }}>{srv.name}</div>

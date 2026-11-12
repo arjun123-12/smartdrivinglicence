@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import adminService from '../../services/adminService';
 import bookingService from '../../services/bookingService';
+import { extractArray, safeArray } from '../../utils/apiHelpers';
+import { mockInstructors, mockLocations } from '../../services/mockData';
 import { Plus, Edit, CheckCircle, Shield, Award, Power, RefreshCw } from 'lucide-react';
 
 export default function AdminInstructors() {
@@ -35,14 +37,20 @@ export default function AdminInstructors() {
   const loadData = async () => {
     setLoading(true);
     try {
-      const [insts, locs] = await Promise.all([
+      const results = await Promise.allSettled([
         adminService.getInstructors(),
         bookingService.getLocations(),
       ]);
+
+      const insts = results[0].status === 'fulfilled' ? extractArray(results[0].value, mockInstructors) : mockInstructors;
+      const locs = results[1].status === 'fulfilled' ? extractArray(results[1].value, mockLocations) : mockLocations;
+
       setInstructors(insts);
       setLocations(locs);
-    } catch {
-      // Fallback
+    } catch (err) {
+      console.warn('AdminInstructors load caught error, using fallbacks:', err);
+      setInstructors(mockInstructors);
+      setLocations(mockLocations);
     } finally {
       setLoading(false);
     }
@@ -90,7 +98,7 @@ export default function AdminInstructors() {
       car_year: inst.car_year || '2023',
       base_hourly_rate: inst.base_hourly_rate,
       vort_test_rate: inst.vort_test_rate,
-      location_ids: inst.locations?.map((l) => l.id) || [],
+      location_ids: safeArray(inst.locations).map((l) => l.id),
     });
     setModalOpen(true);
   };
@@ -157,7 +165,7 @@ export default function AdminInstructors() {
                     <div className="loading-spinner" style={{ margin: '0 auto' }} />
                   </td>
                 </tr>
-              ) : instructors.map((inst) => (
+              ) : safeArray(instructors).map((inst) => (
                 <tr key={inst.id}>
                   <td>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
@@ -201,7 +209,7 @@ export default function AdminInstructors() {
                     )}
                   </td>
                   <td style={{ fontSize: 'var(--font-size-xs)' }}>
-                    {inst.locations?.map((l) => l.name).join(', ') || 'Metropolitan Adelaide'}
+                    {safeArray(inst.locations).map((l) => l.name).join(', ') || 'Metropolitan Adelaide'}
                   </td>
                   <td>
                     <span className={`badge ${inst.is_active ? 'badge-success' : 'badge-danger'}`}>

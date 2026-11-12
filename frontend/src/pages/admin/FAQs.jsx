@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import adminService from '../../services/adminService';
+import { extractArray, safeArray } from '../../utils/apiHelpers';
 import { Plus, Edit, Trash2, CheckCircle, HelpCircle } from 'lucide-react';
 
 export default function AdminFaqs() {
@@ -26,9 +27,9 @@ export default function AdminFaqs() {
     setLoading(true);
     try {
       const data = await adminService.getFaqs();
-      setFaqs(data);
+      setFaqs(extractArray(data, []));
     } catch {
-      // Fallback
+      setFaqs([]);
     } finally {
       setLoading(false);
     }
@@ -40,7 +41,7 @@ export default function AdminFaqs() {
       category: 'vort',
       question: '',
       answer: '',
-      display_order: faqs.length + 1,
+      display_order: safeArray(faqs).length + 1,
       is_active: true,
     });
     setModalOpen(true);
@@ -111,27 +112,37 @@ export default function AdminFaqs() {
       )}
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-        {faqs.map((faq) => (
-          <div key={faq.id} className="card" style={{ padding: '1.25rem' }}>
-            <div className="flex-between" style={{ marginBottom: '0.5rem' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <span className="badge badge-info" style={{ textTransform: 'uppercase' }}>{faq.category}</span>
-                <span style={{ fontWeight: 700, fontSize: '1.05rem', color: 'var(--color-primary)' }}>{faq.question}</span>
-              </div>
-              <div style={{ display: 'flex', gap: '0.4rem' }}>
-                <button onClick={() => openEdit(faq)} className="button button-sm button-outline">
-                  <Edit size={14} /> Edit
-                </button>
-                <button onClick={() => handleDelete(faq.id)} className="button button-sm button-outline" style={{ color: 'var(--color-error)' }}>
-                  <Trash2 size={14} />
-                </button>
-              </div>
-            </div>
-            <p style={{ fontSize: 'var(--font-size-sm)', color: 'var(--color-text-muted)', margin: 0, lineHeight: 1.6 }}>
-              {faq.answer}
-            </p>
+        {loading ? (
+          <div className="card" style={{ padding: '2rem', textAlign: 'center' }}>
+            <div className="loading-spinner" style={{ margin: '0 auto' }} />
           </div>
-        ))}
+        ) : safeArray(faqs).length === 0 ? (
+          <div className="card" style={{ padding: '2rem', textAlign: 'center', color: 'var(--color-text-muted)' }}>
+            No FAQs recorded yet.
+          </div>
+        ) : (
+          safeArray(faqs).map((faq) => (
+            <div key={faq.id} className="card" style={{ padding: '1.25rem' }}>
+              <div className="flex-between" style={{ marginBottom: '0.5rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <span className="badge badge-info" style={{ textTransform: 'uppercase' }}>{faq.category}</span>
+                  <span style={{ fontWeight: 700, fontSize: '1.05rem', color: 'var(--color-primary)' }}>{faq.question}</span>
+                </div>
+                <div style={{ display: 'flex', gap: '0.4rem' }}>
+                  <button onClick={() => openEdit(faq)} className="button button-sm button-outline">
+                    <Edit size={14} /> Edit
+                  </button>
+                  <button onClick={() => handleDelete(faq.id)} className="button button-sm button-outline" style={{ color: 'var(--color-error)' }}>
+                    <Trash2 size={14} />
+                  </button>
+                </div>
+              </div>
+              <p style={{ fontSize: 'var(--font-size-sm)', color: 'var(--color-text-muted)', margin: 0, lineHeight: 1.6 }}>
+                {faq.answer}
+              </p>
+            </div>
+          ))
+        )}
       </div>
 
       {modalOpen && (
