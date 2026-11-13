@@ -37,8 +37,8 @@
 }
 
 .comparison-card-old {
-  border: 1.5px solid rgba(225, 45, 46, 0.35);
-  box-shadow: 0 6px 24px rgba(225, 45, 46, 0.06);
+  border: 1.5px solid #CBD5E1;
+  box-shadow: 0 4px 16px rgba(13, 38, 69, 0.05);
 }
 
 .comparison-card-new {
@@ -81,7 +81,7 @@
   flex-shrink: 0;
   width: 20px;
   height: 20px;
-  color: #E12D2E;
+  color: #64748B;
 }
 
 .comparison-icon-green {

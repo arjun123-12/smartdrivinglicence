@@ -10,14 +10,14 @@
   --color-secondary-light: #E8EFF8;     /* Soft navy-tinted surface */
   --color-secondary-dark: #08192E;      /* Midnight dark navy for footer/headers */
 
-  --color-accent: #E12D2E;              /* Crimson Red from the "A" road peak */
-  --color-accent-hover: #C52223;        /* Darker crimson red */
-  --color-accent-light: #FDE8E8;        /* Soft red surface */
+  --color-accent: #F59E0B;              /* Warm Amber Gold */
+  --color-accent-hover: #D97706;        /* Deep amber / warm gold */
+  --color-accent-light: #FEF3C7;        /* Soft amber surface */
 
   /* Specific A1 Palette shortcuts */
   --color-a1-green: #1B6C31;
   --color-a1-navy: #0D2645;
-  --color-a1-red: #E12D2E;
+  --color-a1-gold: #F59E0B;
 
   /* Neutrals */
   --color-background: #F8FAF8;
@@ -35,9 +35,9 @@
   --color-warning: #D97706;
   --color-warning-bg: #FFFBEB;
   --color-warning-border: #FDE68A;
-  --color-error: #E12D2E;
-  --color-error-bg: #FDE8E8;
-  --color-error-border: #F8B4B4;
+  --color-error: #DC2626;
+  --color-error-bg: #FEF2F2;
+  --color-error-border: #FECACA;
   --color-info: #0D2645;
   --color-info-bg: #E8EFF8;
   --color-info-border: #B7D0EC;

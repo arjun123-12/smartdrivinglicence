@@ -160,15 +160,15 @@
 }
 
 .package-card.featured {
-  border-color: var(--color-accent);
-  box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.2);
+  border-color: var(--color-primary);
+  box-shadow: 0 10px 25px -5px rgba(27, 108, 49, 0.2);
 }
 
 .package-badge {
   position: absolute;
   top: -12px;
   right: var(--spacing-lg);
-  background: linear-gradient(135deg, var(--color-accent), #c52223);
+  background: linear-gradient(135deg, #1B6C31, #145325);
   color: #ffffff;
   font-size: var(--font-size-xs);
   font-weight: 700;
@@ -261,7 +261,8 @@
   margin-bottom: 0.35rem;
 }
 
-.form-control, .form-select {
+.form-control,
+.form-select {
   width: 100%;
   padding: 0.75rem 1rem;
   font-size: var(--font-size-sm);
@@ -272,7 +273,8 @@
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
-.form-control:focus, .form-select:focus {
+.form-control:focus,
+.form-select:focus {
   border-color: var(--color-secondary);
   box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.15);
   outline: none;
@@ -482,10 +484,13 @@
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-.empty-state, .error-state {
+.empty-state,
+.error-state {
   text-align: center;
   padding: var(--spacing-3xl) var(--spacing-lg);
   border: 2px dashed var(--color-border);
@@ -493,7 +498,8 @@
   background-color: var(--color-surface);
 }
 
-.empty-state h3, .error-state h3 {
+.empty-state h3,
+.error-state h3 {
   margin-top: var(--spacing-md);
   margin-bottom: var(--spacing-xs);
 }
@@ -532,4 +538,3 @@
   border: 1px solid var(--color-warning-border);
   color: #92400e;
 }
-

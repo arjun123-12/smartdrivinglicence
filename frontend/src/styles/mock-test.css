@@ -20,8 +20,8 @@
 .mock-hero-bg {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle at 80% 20%, rgba(27, 108, 49, 0.2), transparent 45%),
-                    radial-gradient(circle at 20% 80%, rgba(225, 45, 46, 0.12), transparent 40%);
+  background-image: radial-gradient(circle at 80% 20%, rgba(27, 108, 49, 0.25), transparent 45%),
+                    radial-gradient(circle at 20% 80%, rgba(22, 59, 102, 0.3), transparent 50%);
   pointer-events: none;
 }
 

@@ -7,8 +7,8 @@
     --sd-navy-light: #163B66;
     --sd-accent: #1B6C31;
     --sd-accent-hover: #145325;
-    --sd-red: #E12D2E;
-    --sd-red-hover: #C52223;
+    --sd-gold: #F59E0B;
+    --sd-gold-hover: #D97706;
     --sd-text: #0D2645;
     --sd-muted: #5A6E7F;
     --sd-border: #DCE5DE;
@@ -59,7 +59,7 @@
 }
 
 .sd-topbar-inner p svg {
-    color: var(--sd-red);
+    color: var(--sd-gold);
 }
 
 .sd-topbar-contact {

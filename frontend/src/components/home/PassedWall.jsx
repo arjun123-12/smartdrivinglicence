@@ -124,7 +124,7 @@ export default function PassedWall() {
                     <div className="passwall-card-bottom">
                       <span className="passwall-card-name">{learner.name}</span>
                       <span className="passwall-card-location">
-                        <MapPin size={10} color="#E12D2E" />
+                        <MapPin size={10} color="#1B6C31" />
                         {learner.suburb}
                       </span>
                       <span className="passwall-card-watermark">
@@ -157,7 +157,7 @@ export default function PassedWall() {
                       <div className="passwall-card-bottom">
                         <span className="passwall-card-name">{learner.name}</span>
                         <span className="passwall-card-location">
-                          <MapPin size={10} color="#E12D2E" />
+                          <MapPin size={10} color="#1B6C31" />
                           {learner.suburb}
                         </span>
                         <span className="passwall-card-watermark">

@@ -46,7 +46,7 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background-color: #E12D2E;
+  background-color: #1B6C31;
 }
 
 .passwall-title {
@@ -174,11 +174,11 @@
   width: 24px;
   height: 24px;
   background-color: #ffffff;
-  border: 1.5px solid #E12D2E;
+  border: 1.5px solid #1B6C31;
   border-radius: 4px;
   display: grid;
   place-items: center;
-  color: #E12D2E;
+  color: #1B6C31;
   font-weight: 900;
   font-size: 13px;
   line-height: 1;

@@ -20,8 +20,8 @@
 .pkg-hero-bg {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle at 80% 20%, rgba(27, 108, 49, 0.22), transparent 45%),
-                    radial-gradient(circle at 15% 85%, rgba(225, 45, 46, 0.12), transparent 40%);
+  background-image: radial-gradient(circle at 80% 20%, rgba(27, 108, 49, 0.25), transparent 45%),
+                    radial-gradient(circle at 15% 85%, rgba(22, 59, 102, 0.3), transparent 45%);
   pointer-events: none;
 }
 
@@ -53,9 +53,9 @@
 .pkg-pill-dot {
   width: 7px;
   height: 7px;
-  background-color: #E12D2E;
+  background-color: #1B6C31;
   border-radius: 50%;
-  box-shadow: 0 0 8px #E12D2E;
+  box-shadow: 0 0 8px #1B6C31;
 }
 
 .pkg-hero-title {
@@ -171,7 +171,7 @@
   top: -13px;
   left: 50%;
   transform: translateX(-50%);
-  background: linear-gradient(135deg, #E12D2E 0%, #C52223 100%);
+  background: linear-gradient(135deg, #1B6C31 0%, #145325 100%);
   color: #ffffff;
   font-size: 11px;
   font-weight: 850;
@@ -179,7 +179,7 @@
   letter-spacing: 0.07em;
   padding: 5px 16px;
   border-radius: 9999px;
-  box-shadow: 0 4px 12px rgba(225, 45, 46, 0.35);
+  box-shadow: 0 4px 12px rgba(27, 108, 49, 0.35);
   white-space: nowrap;
 }
 

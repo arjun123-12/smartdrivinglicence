@@ -20,8 +20,8 @@
 .fl-hero-bg {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle at 80% 20%, rgba(27, 108, 49, 0.2), transparent 40%),
-                    radial-gradient(circle at 20% 80%, rgba(225, 45, 46, 0.12), transparent 45%);
+  background-image: radial-gradient(circle at 80% 20%, rgba(27, 108, 49, 0.25), transparent 45%),
+                    radial-gradient(circle at 20% 80%, rgba(22, 59, 102, 0.3), transparent 50%);
   pointer-events: none;
 }
 
@@ -54,9 +54,9 @@
 .fl-pill-dot {
   width: 7px;
   height: 7px;
-  background-color: #E12D2E;
+  background-color: #1B6C31;
   border-radius: 50%;
-  box-shadow: 0 0 8px #E12D2E;
+  box-shadow: 0 0 8px #1B6C31;
 }
 
 .fl-hero-title {
