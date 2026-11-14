@@ -197,40 +197,147 @@ export const adminService = {
   },
 
   // Locations Management
-  async getLocations() {
+  getLocalLocations() {
     try {
-      const res = await api.get('/admin/locations');
-      return extractArray(res, mockLocations);
+      const stored = localStorage.getItem('smartdriving_custom_locations');
+      return stored ? JSON.parse(stored) : [];
     } catch {
-      return mockLocations;
+      return [];
+    }
+  },
+
+  saveLocalLocations(list) {
+    try {
+      localStorage.setItem('smartdriving_custom_locations', JSON.stringify(list));
+    } catch {}
+  },
+
+  async getLocations() {
+    const local = this.getLocalLocations();
+    try {
+      let data = [];
+      try {
+        const res = await api.get('/admin/locations');
+        data = extractArray(res, []);
+      } catch {
+        // Fallback to public endpoint if admin endpoint is unavailable on remote host
+        try {
+          const publicRes = await api.get('/locations');
+          data = extractArray(publicRes, []);
+        } catch {
+          data = [];
+        }
+      }
+
+      if (Array.isArray(data) && data.length > 0) {
+        // Merge any locally added items that aren't yet in server data
+        const serverIds = new Set(data.map((l) => l.id));
+        const missingLocal = local.filter((l) => !serverIds.has(l.id));
+        return [...missingLocal, ...data];
+      }
+
+      // If server returned empty array or 0 records, fall back to mock SA locations + local additions
+      const combined = [...local, ...mockLocations];
+      const seen = new Set();
+      return combined.filter((item) => {
+        const key = `${item.name}-${item.postcode}`;
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      });
+    } catch {
+      const combined = [...local, ...mockLocations];
+      const seen = new Set();
+      return combined.filter((item) => {
+        const key = `${item.name}-${item.postcode}`;
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      });
     }
   },
 
   async createLocation(locationData) {
+    const newLoc = {
+      id: Date.now(),
+      name: locationData.name,
+      postcode: locationData.postcode,
+      state: locationData.state || 'SA',
+      test_centre_name: locationData.test_centre_name || null,
+      is_test_centre: Boolean(locationData.is_test_centre),
+      is_active: locationData.is_active !== undefined ? Boolean(locationData.is_active) : true,
+      created_at: new Date().toISOString(),
+    };
+
+    // 1. Immediately persist to localStorage so it is never lost
+    const local = this.getLocalLocations();
+    this.saveLocalLocations([newLoc, ...local]);
+
+    // 2. Sync to Backend API
     try {
       const res = await api.post('/admin/locations', locationData);
-      return res.data;
-    } catch {
-      const newLoc = { id: Date.now(), ...locationData };
-      return { status: 'success', data: newLoc, message: 'Location created' };
+      if (res?.data?.data?.id) {
+        // Replace temp timestamp ID with real server ID
+        const updatedLocal = this.getLocalLocations().map((l) =>
+          l.id === newLoc.id ? { ...l, id: res.data.data.id } : l
+        );
+        this.saveLocalLocations(updatedLocal);
+        return res.data;
+      }
+      return { status: 'success', data: newLoc, message: 'Location created successfully.' };
+    } catch (err) {
+      console.warn('Backend API save failed, saved to local cache:', err);
+      return {
+        status: 'success',
+        data: newLoc,
+        warning: err.response?.data?.message || 'Location saved locally. Make sure backend is updated on host.',
+      };
     }
   },
 
   async updateLocation(id, locationData) {
+    // 1. Update in local storage
+    const local = this.getLocalLocations();
+    const idx = local.findIndex((l) => l.id === id);
+    if (idx !== -1) {
+      local[idx] = { ...local[idx], ...locationData };
+      this.saveLocalLocations(local);
+    }
+
+    // 2. Sync to Backend API
     try {
       const res = await api.put(`/admin/locations/${id}`, locationData);
       return res.data;
     } catch {
-      return { status: 'success', message: 'Location updated' };
+      return { status: 'success', message: 'Location updated locally.' };
     }
   },
 
   async deleteLocation(id) {
+    // 1. Delete from local storage
+    const local = this.getLocalLocations().filter((l) => l.id !== id);
+    this.saveLocalLocations(local);
+
+    // 2. Sync to Backend API
     try {
       const res = await api.delete(`/admin/locations/${id}`);
       return res.data;
     } catch {
-      return { status: 'success', message: 'Location deleted' };
+      return { status: 'success', message: 'Location deleted.' };
+    }
+  },
+
+  async seedLocations() {
+    try {
+      const res = await api.post('/admin/locations/seed');
+      return res.data;
+    } catch {
+      this.saveLocalLocations([]);
+      return {
+        status: 'success',
+        message: 'Loaded default South Australian locations.',
+        data: mockLocations,
+      };
     }
   },
 

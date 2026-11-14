@@ -99,6 +99,7 @@ Route::prefix('v1')->group(function () {
 
         Route::get('/locations', [AdminLocationController::class, 'index']);
         Route::post('/locations', [AdminLocationController::class, 'store']);
+        Route::post('/locations/seed', [AdminLocationController::class, 'seedDefaultLocations']);
         Route::put('/locations/{id}', [AdminLocationController::class, 'update']);
         Route::delete('/locations/{id}', [AdminLocationController::class, 'destroy']);
 

@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import adminService from '../../services/adminService';
 import { extractArray, safeArray } from '../../utils/apiHelpers';
-import { MapPin, Plus, Edit, Trash2, CheckCircle, Search, Star, Power } from 'lucide-react';
+import { MapPin, Plus, Edit, Trash2, CheckCircle, Search, Star, Power, RefreshCw, AlertCircle } from 'lucide-react';
 
 export default function AdminLocations() {
   const [locations, setLocations] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [seeding, setSeeding] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterType, setFilterType] = useState('all');
 
   // Modal State
   const [modalOpen, setModalOpen] = useState(false);
   const [editingId, setEditingId] = useState(null);
+  const [formError, setFormError] = useState('');
   const [formData, setFormData] = useState({
     name: '',
     postcode: '',
@@ -39,8 +41,23 @@ export default function AdminLocations() {
     }
   };
 
+  const handleSeedLocations = async () => {
+    if (!window.confirm('Import 260+ authentic South Australia suburbs & official DIT test centres?')) return;
+    setSeeding(true);
+    try {
+      const res = await adminService.seedLocations();
+      setAlertMsg(res.message || 'South Australia locations imported successfully.');
+      await loadLocations();
+    } catch {
+      setAlertMsg('Failed to import locations.');
+    } finally {
+      setSeeding(false);
+    }
+  };
+
   const openAdd = () => {
     setEditingId(null);
+    setFormError('');
     setFormData({
       name: '',
       postcode: '',
@@ -54,6 +71,7 @@ export default function AdminLocations() {
 
   const openEdit = (loc) => {
     setEditingId(loc.id);
+    setFormError('');
     setFormData({
       name: loc.name,
       postcode: loc.postcode,
@@ -68,18 +86,23 @@ export default function AdminLocations() {
   const handleSave = async (e) => {
     e.preventDefault();
     setSaving(true);
+    setFormError('');
     try {
       if (editingId) {
-        await adminService.updateLocation(editingId, formData);
-        setAlertMsg('Location updated successfully.');
+        const res = await adminService.updateLocation(editingId, formData);
+        setAlertMsg(res?.message || 'Location updated successfully.');
       } else {
-        await adminService.createLocation(formData);
-        setAlertMsg('New location created successfully.');
+        const res = await adminService.createLocation(formData);
+        if (res?.warning) {
+          setAlertMsg(res.warning);
+        } else {
+          setAlertMsg('New location created successfully.');
+        }
       }
       setModalOpen(false);
-      loadLocations();
+      await loadLocations();
     } catch (err) {
-      alert(err.response?.data?.message || 'Failed to save location.');
+      setFormError(err.response?.data?.message || err.message || 'Failed to save location.');
     } finally {
       setSaving(false);
     }
@@ -128,9 +151,20 @@ export default function AdminLocations() {
             Manage the locations and official DIT hubs displayed in the Hero Search Card and booking wizards
           </p>
         </div>
-        <button onClick={openAdd} className="button button-primary">
-          <Plus size={16} /> Add Location / Centre
-        </button>
+        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+          <button
+            onClick={handleSeedLocations}
+            disabled={seeding}
+            className="button button-outline"
+            title="Import 260+ authentic South Australian suburbs and DIT testing centres"
+          >
+            <RefreshCw size={15} style={{ animation: seeding ? 'spin 1s linear infinite' : 'none' }} />
+            {seeding ? 'Importing SA Locations...' : 'Import 260+ SA Locations'}
+          </button>
+          <button onClick={openAdd} className="button button-primary">
+            <Plus size={16} /> Add Location / Centre
+          </button>
+        </div>
       </div>
 
       {alertMsg && (
@@ -201,8 +235,23 @@ export default function AdminLocations() {
                 </tr>
               ) : safeArray(filtered).length === 0 ? (
                 <tr>
-                  <td colSpan="6" style={{ textAlign: 'center', color: 'var(--color-text-muted)', padding: '2rem' }}>
-                    No locations found matching your filter criteria.
+                  <td colSpan="6" style={{ textAlign: 'center', padding: '3rem 1.5rem', color: 'var(--color-text-muted)' }}>
+                    <MapPin size={36} style={{ margin: '0 auto 0.75rem auto', opacity: 0.4 }} />
+                    <div style={{ fontWeight: 600, fontSize: '1rem', color: 'var(--color-text-main)', marginBottom: '0.25rem' }}>
+                      No locations found matching your filter criteria.
+                    </div>
+                    <p style={{ fontSize: 'var(--font-size-sm)', maxWidth: '480px', margin: '0 auto 1.25rem auto' }}>
+                      Populate your database and Hero dropdown with over 260 authentic South Australian suburbs and DIT testing centres.
+                    </p>
+                    <div style={{ display: 'inline-flex', gap: '0.75rem' }}>
+                      <button onClick={openAdd} className="button button-primary button-sm">
+                        <Plus size={15} /> Add Single Location
+                      </button>
+                      <button onClick={handleSeedLocations} disabled={seeding} className="button button-outline button-sm">
+                        <RefreshCw size={15} style={{ animation: seeding ? 'spin 1s linear infinite' : 'none' }} />
+                        {seeding ? 'Importing SA Locations...' : 'Import 260+ SA Locations'}
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ) : (
@@ -277,6 +326,13 @@ export default function AdminLocations() {
             <p style={{ color: 'var(--color-text-muted)', fontSize: 'var(--font-size-sm)', margin: '0.25rem 0 1.25rem 0' }}>
               Locations configured here immediately populate the Hero Search Dropdown on the homepage.
             </p>
+
+            {formError && (
+              <div className="alert alert-error" style={{ marginBottom: '1rem', fontSize: 'var(--font-size-sm)' }}>
+                <AlertCircle size={16} />
+                <span>{formError}</span>
+              </div>
+            )}
 
             <form onSubmit={handleSave}>
               <div className="grid grid-2">

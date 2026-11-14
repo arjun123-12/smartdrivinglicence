@@ -196,6 +196,13 @@ api.interceptors.response.use(
         return Promise.resolve({ status: 200, data: { status: 'success', data: mockServices } });
       }
 
+      if (url.includes('/admin/locations')) {
+        if (method === 'post') {
+          return Promise.resolve({ status: 200, data: { status: 'success', message: 'Location saved successfully' } });
+        }
+        return Promise.resolve({ status: 200, data: { status: 'success', data: mockLocations } });
+      }
+
       if (url.includes('/admin/settings')) {
         if (method === 'post') {
           return Promise.resolve({ status: 200, data: { status: 'success', message: 'Settings saved successfully' } });

@@ -87,5 +87,21 @@ class AdminLocationController extends Controller
             'message' => 'Location deleted successfully.',
         ]);
     }
+
+    public function seedDefaultLocations(): JsonResponse
+    {
+        (new \Database\Seeders\LocationSeeder())->run();
+
+        $locations = Location::orderBy('is_test_centre', 'desc')
+            ->orderBy('name', 'asc')
+            ->get();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Successfully seeded South Australia locations and DIT test centres (' . $locations->count() . ' total).',
+            'data' => $locations,
+            'count' => $locations->count(),
+        ]);
+    }
 }
 
