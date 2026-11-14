@@ -47,6 +47,7 @@ export default function Home() {
   const [instructors, setInstructors] = useState([]);
   const [testimonials, setTestimonials] = useState([]);
   const [faqs, setFaqs] = useState([]);
+  const [heroConfig, setHeroConfig] = useState({});
 
   const [searchLocation, setSearchLocation] = useState('');
   const [searchService, setSearchService] = useState('1'); // default VORT test
@@ -61,6 +62,7 @@ export default function Home() {
           instructorService.getInstructors(),
           api.get('/testimonials'),
           api.get('/faqs'),
+          bookingService.getPublicSettings(),
         ]);
 
         const locs = results[0].status === 'fulfilled' ? extractArray(results[0].value, mockLocations) : mockLocations;
@@ -69,6 +71,7 @@ export default function Home() {
         const instrs = results[3].status === 'fulfilled' ? extractArray(results[3].value, mockInstructors) : mockInstructors;
         const tests = results[4].status === 'fulfilled' ? extractArray(results[4].value, mockTestimonials) : mockTestimonials;
         const fqs = results[5].status === 'fulfilled' ? extractArray(results[5].value, mockFaqs) : mockFaqs;
+        const pubSettings = results[6].status === 'fulfilled' ? (results[6].value || {}) : {};
 
         setLocations(locs);
         setServices(servs);
@@ -76,6 +79,7 @@ export default function Home() {
         setInstructors(instrs.slice(0, 4));
         setTestimonials(tests.slice(0, 3));
         setFaqs(fqs.slice(0, 4));
+        setHeroConfig(pubSettings);
 
         if (locs.length > 0 && locs[0]?.id) {
           setSearchLocation(locs[0].id.toString());
@@ -88,6 +92,7 @@ export default function Home() {
         setInstructors(mockInstructors.slice(0, 4));
         setTestimonials(mockTestimonials.slice(0, 3));
         setFaqs(mockFaqs.slice(0, 4));
+        setHeroConfig({});
         if (mockLocations.length > 0) {
           setSearchLocation(mockLocations[0].id.toString());
         }
@@ -112,6 +117,7 @@ export default function Home() {
         searchService={searchService}
         setSearchService={setSearchService}
         handleSearchSubmit={handleSearchSubmit}
+        heroConfig={heroConfig}
       />
 
       {/* 2. OLD WAY VS A1 SMART DRIVING WAY COMPARISON */}

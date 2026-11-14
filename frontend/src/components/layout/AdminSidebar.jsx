@@ -8,6 +8,7 @@ import {
   Package,
   UserCheck,
   Briefcase,
+  MapPin,
   Clock,
   CreditCard,
   HelpCircle,
@@ -80,6 +81,12 @@ export default function AdminSidebar() {
             <NavLink to="/admin/services" className={({ isActive }) => (isActive ? 'active' : '')}>
               <Briefcase size={17} />
               <span>Services</span>
+            </NavLink>
+          </li>
+          <li className="dashboard-nav-item">
+            <NavLink to="/admin/locations" className={({ isActive }) => (isActive ? 'active' : '')}>
+              <MapPin size={17} />
+              <span>Locations &amp; Hubs</span>
             </NavLink>
           </li>
           <li className="dashboard-nav-item">

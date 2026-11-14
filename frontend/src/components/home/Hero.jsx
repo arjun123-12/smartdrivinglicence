@@ -22,7 +22,25 @@ export default function Hero({
   searchService = '',
   setSearchService = () => {},
   handleSearchSubmit = () => {},
+  heroConfig = {},
 }) {
+  const isEnabled =
+    heroConfig?.hero_search_enabled === undefined ||
+    heroConfig?.hero_search_enabled === null ||
+    heroConfig?.hero_search_enabled === '1' ||
+    heroConfig?.hero_search_enabled === true;
+  const title = heroConfig?.hero_search_title || 'Find Your Driving Service';
+  const subtitle =
+    heroConfig?.hero_search_subtitle ||
+    'Choose your location and service to get started.';
+  const locationLabel =
+    heroConfig?.hero_search_location_label || 'Your suburb or test centre';
+  const serviceLabel = heroConfig?.hero_search_service_label || 'Service required';
+  const buttonText =
+    heroConfig?.hero_search_button_text || 'Find Available Slots';
+  const noteText =
+    heroConfig?.hero_search_note ||
+    'Easy online booking for your next driving step';
   return (
     <section className="hero hero-premium">
       <div className="hero-background" aria-hidden="true" />
@@ -60,79 +78,81 @@ export default function Hero({
             </div>
           </div>
 
-          {/* Booking search card */}
-          <form
-            onSubmit={handleSearchSubmit}
-            className="hero-search-card"
-          >
-            <div className="hero-search-heading">
-              <div className="hero-search-icon">
-                <Search size={21} />
-              </div>
-              <div>
-                <h2>Find Your Driving Service</h2>
-                <p>Choose your location and service to get started.</p>
-              </div>
-            </div>
-
-            <div className="hero-search-fields">
-              <div className="hero-field">
-                <label htmlFor="hero-location">
-                  Your suburb or test centre
-                </label>
-                <div className="hero-select-wrap">
-                  <MapPin size={18} />
-                  <select
-                    id="hero-location"
-                    value={searchLocation}
-                    onChange={(e) => setSearchLocation(e.target.value)}
-                    required
-                  >
-                    {(Array.isArray(locations) ? locations : []).map((loc) => (
-                      <option key={loc.id} value={loc.id}>
-                        {loc.name} ({loc.postcode})
-                        {loc.is_test_centre ? ' ★ DIT Centre' : ''}
-                      </option>
-                    ))}
-                  </select>
-                  <ChevronDown size={16} className="hero-select-arrow" />
-                </div>
-              </div>
-
-              <div className="hero-field">
-                <label htmlFor="hero-service">Service required</label>
-                <div className="hero-select-wrap">
-                  <CalendarDays size={18} />
-                  <select
-                    id="hero-service"
-                    value={searchService}
-                    onChange={(e) => setSearchService(e.target.value)}
-                    required
-                  >
-                    {(Array.isArray(services) ? services : []).map((srv) => (
-                      <option key={srv.id} value={srv.id}>
-                        {srv.name} — from ${srv.default_price} AUD
-                      </option>
-                    ))}
-                  </select>
-                  <ChevronDown size={16} className="hero-select-arrow" />
-                </div>
-              </div>
-            </div>
-
-            <button
-              type="submit"
-              className="hero-search-submit"
+          {/* Booking search card - Managed via Admin Panel */}
+          {isEnabled && (
+            <form
+              onSubmit={handleSearchSubmit}
+              className="hero-search-card"
             >
-              Find Available Slots
-              <ArrowRight size={19} />
-            </button>
+              <div className="hero-search-heading">
+                <div className="hero-search-icon">
+                  <Search size={21} />
+                </div>
+                <div>
+                  <h2>{title}</h2>
+                  <p>{subtitle}</p>
+                </div>
+              </div>
 
-            <p className="hero-search-note">
-              <LockKeyhole size={14} />
-              Easy online booking for your next driving step
-            </p>
-          </form>
+              <div className="hero-search-fields">
+                <div className="hero-field">
+                  <label htmlFor="hero-location">
+                    {locationLabel}
+                  </label>
+                  <div className="hero-select-wrap">
+                    <MapPin size={18} />
+                    <select
+                      id="hero-location"
+                      value={searchLocation}
+                      onChange={(e) => setSearchLocation(e.target.value)}
+                      required
+                    >
+                      {(Array.isArray(locations) ? locations : []).map((loc) => (
+                        <option key={loc.id} value={loc.id}>
+                          {loc.name} ({loc.postcode})
+                          {loc.is_test_centre ? ' ★ DIT Centre' : ''}
+                        </option>
+                      ))}
+                    </select>
+                    <ChevronDown size={16} className="hero-select-arrow" />
+                  </div>
+                </div>
+
+                <div className="hero-field">
+                  <label htmlFor="hero-service">{serviceLabel}</label>
+                  <div className="hero-select-wrap">
+                    <CalendarDays size={18} />
+                    <select
+                      id="hero-service"
+                      value={searchService}
+                      onChange={(e) => setSearchService(e.target.value)}
+                      required
+                    >
+                      {(Array.isArray(services) ? services : []).map((srv) => (
+                        <option key={srv.id} value={srv.id}>
+                          {srv.name} — from ${srv.default_price} AUD
+                        </option>
+                      ))}
+                    </select>
+                    <ChevronDown size={16} className="hero-select-arrow" />
+                  </div>
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                className="hero-search-submit"
+              >
+                {buttonText}
+                <ArrowRight size={19} />
+              </button>
+
+              <p className="hero-search-note">
+                <LockKeyhole size={14} />
+                {noteText}
+              </p>
+            </form>
+          )}
 
           {/* Main calls to action */}
           <div className="hero-actions hero-premium-actions">

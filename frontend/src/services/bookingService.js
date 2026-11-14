@@ -102,6 +102,15 @@ export const bookingService = {
       return { status: 'success', message: 'Booking cancelled' };
     }
   },
+
+  async getPublicSettings() {
+    try {
+      const res = await api.get('/settings/public');
+      return res.data?.settings || res.data || {};
+    } catch {
+      return {};
+    }
+  },
 };
 
 export default bookingService;

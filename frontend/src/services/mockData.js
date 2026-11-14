@@ -348,5 +348,12 @@ export const mockSettings = [
   { id: 4, key: 'contact_phone', value: '0430 580 111', description: 'Support Hotline' },
   { id: 5, key: 'business_location', value: 'Adelaide, South Australia', description: 'Operating Location' },
   { id: 6, key: 'first_lesson_promo_price', value: '99', description: 'Special First Lesson Price ($ AUD)' },
+  { id: 7, key: 'hero_search_title', value: 'Find Your Driving Service', description: 'Hero Search Card Heading' },
+  { id: 8, key: 'hero_search_subtitle', value: 'Choose your location and service to get started.', description: 'Hero Search Card Subtitle' },
+  { id: 9, key: 'hero_search_location_label', value: 'Your suburb or test centre', description: 'Hero Location Label' },
+  { id: 10, key: 'hero_search_service_label', value: 'Service required', description: 'Hero Service Label' },
+  { id: 11, key: 'hero_search_button_text', value: 'Find Available Slots', description: 'Hero Submit Button Text' },
+  { id: 12, key: 'hero_search_note', value: 'Easy online booking for your next driving step', description: 'Hero Security Note' },
+  { id: 13, key: 'hero_search_enabled', value: '1', description: 'Enable Hero Search Card' },
 ];
 

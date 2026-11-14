@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\V1\Admin\AdminDashboardController;
 use App\Http\Controllers\Api\V1\Admin\AdminEnquiryController;
 use App\Http\Controllers\Api\V1\Admin\AdminFaqController;
 use App\Http\Controllers\Api\V1\Admin\AdminInstructorController;
+use App\Http\Controllers\Api\V1\Admin\AdminLocationController;
 use App\Http\Controllers\Api\V1\Admin\AdminPackageController;
 use App\Http\Controllers\Api\V1\Admin\AdminPaymentController;
 use App\Http\Controllers\Api\V1\Admin\AdminServiceController;
@@ -95,6 +96,11 @@ Route::prefix('v1')->group(function () {
         Route::get('/services', [AdminServiceController::class, 'index']);
         Route::post('/services', [AdminServiceController::class, 'store']);
         Route::put('/services/{id}', [AdminServiceController::class, 'update']);
+
+        Route::get('/locations', [AdminLocationController::class, 'index']);
+        Route::post('/locations', [AdminLocationController::class, 'store']);
+        Route::put('/locations/{id}', [AdminLocationController::class, 'update']);
+        Route::delete('/locations/{id}', [AdminLocationController::class, 'destroy']);
 
         Route::get('/availability', [AdminAvailabilityController::class, 'index']);
         Route::post('/availability/schedule', [AdminAvailabilityController::class, 'updateSchedule']);

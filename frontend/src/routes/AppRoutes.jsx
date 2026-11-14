@@ -39,6 +39,7 @@ import AdminInstructors from '../pages/admin/Instructors';
 import AdminPackages from '../pages/admin/Packages';
 import AdminCustomers from '../pages/admin/Customers';
 import AdminServices from '../pages/admin/Services';
+import AdminLocations from '../pages/admin/Locations';
 import AdminAvailability from '../pages/admin/Availability';
 import AdminPayments from '../pages/admin/Payments';
 import AdminFaqs from '../pages/admin/FAQs';
@@ -96,6 +97,7 @@ export default function AppRoutes() {
         <Route path="packages" element={<AdminPackages />} />
         <Route path="customers" element={<AdminCustomers />} />
         <Route path="services" element={<AdminServices />} />
+        <Route path="locations" element={<AdminLocations />} />
         <Route path="availability" element={<AdminAvailability />} />
         <Route path="payments" element={<AdminPayments />} />
         <Route path="faqs" element={<AdminFaqs />} />

@@ -31,7 +31,10 @@ class AdminSettingController extends Controller
         ]);
 
         foreach ($validated['settings'] as $item) {
-            Setting::where('key', $item['key'])->update(['value' => $item['value']]);
+            Setting::updateOrCreate(
+                ['key' => $item['key']],
+                ['value' => $item['value'] ?? '']
+            );
         }
 
         AuditLog::create([

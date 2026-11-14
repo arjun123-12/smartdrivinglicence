@@ -21,6 +21,13 @@ class SettingSeeder extends Seeder
             ['key' => 'vort_notice_period_days', 'value' => '3', 'group' => 'booking', 'type' => 'integer', 'description' => 'Minimum business days notice required by SA Government for VORT'],
             ['key' => 'currency', 'value' => 'AUD', 'group' => 'payment', 'type' => 'string', 'description' => 'Billing currency code'],
             ['key' => 'payment_gateway', 'value' => 'stripe_mock', 'group' => 'payment', 'type' => 'string', 'description' => 'Payment gateway mode (stripe_mock / stripe)'],
+            ['key' => 'hero_search_title', 'value' => 'Find Your Driving Service', 'group' => 'hero', 'type' => 'string', 'description' => 'Hero search box heading'],
+            ['key' => 'hero_search_subtitle', 'value' => 'Choose your location and service to get started.', 'group' => 'hero', 'type' => 'string', 'description' => 'Hero search box subheading'],
+            ['key' => 'hero_search_location_label', 'value' => 'Your suburb or test centre', 'group' => 'hero', 'type' => 'string', 'description' => 'Location dropdown field label'],
+            ['key' => 'hero_search_service_label', 'value' => 'Service required', 'group' => 'hero', 'type' => 'string', 'description' => 'Service dropdown field label'],
+            ['key' => 'hero_search_button_text', 'value' => 'Find Available Slots', 'group' => 'hero', 'type' => 'string', 'description' => 'Search button call to action text'],
+            ['key' => 'hero_search_note', 'value' => 'Easy online booking for your next driving step', 'group' => 'hero', 'type' => 'string', 'description' => 'Security/trust note under search button'],
+            ['key' => 'hero_search_enabled', 'value' => '1', 'group' => 'hero', 'type' => 'boolean', 'description' => 'Show or hide the hero search card'],
         ];
 
         foreach ($settings as $setting) {

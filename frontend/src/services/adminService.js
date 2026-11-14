@@ -196,6 +196,44 @@ export const adminService = {
     }
   },
 
+  // Locations Management
+  async getLocations() {
+    try {
+      const res = await api.get('/admin/locations');
+      return extractArray(res, mockLocations);
+    } catch {
+      return mockLocations;
+    }
+  },
+
+  async createLocation(locationData) {
+    try {
+      const res = await api.post('/admin/locations', locationData);
+      return res.data;
+    } catch {
+      const newLoc = { id: Date.now(), ...locationData };
+      return { status: 'success', data: newLoc, message: 'Location created' };
+    }
+  },
+
+  async updateLocation(id, locationData) {
+    try {
+      const res = await api.put(`/admin/locations/${id}`, locationData);
+      return res.data;
+    } catch {
+      return { status: 'success', message: 'Location updated' };
+    }
+  },
+
+  async deleteLocation(id) {
+    try {
+      const res = await api.delete(`/admin/locations/${id}`);
+      return res.data;
+    } catch {
+      return { status: 'success', message: 'Location deleted' };
+    }
+  },
+
   // Availability
   async getAvailability(params = {}) {
     try {

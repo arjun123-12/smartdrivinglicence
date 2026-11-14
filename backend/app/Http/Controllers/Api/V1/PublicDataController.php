@@ -78,6 +78,13 @@ class PublicDataController extends Controller
             'booking_lead_time_hours',
             'cancellation_cutoff_hours',
             'vort_notice_period_days',
+            'hero_search_title',
+            'hero_search_subtitle',
+            'hero_search_location_label',
+            'hero_search_service_label',
+            'hero_search_button_text',
+            'hero_search_note',
+            'hero_search_enabled',
         ];
 
         $settings = Setting::whereIn('key', $keys)->pluck('value', 'key');
