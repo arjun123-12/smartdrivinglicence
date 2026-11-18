@@ -193,6 +193,31 @@
   line-height: 1.4;
 }
 
+.footer-bottom-legal-links {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.footer-bottom-legal-links a {
+  color: #8da2bc;
+  text-decoration: none;
+  font-size: 12px;
+  transition: color 0.2s ease;
+}
+
+.footer-bottom-legal-links a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.footer-bottom-legal-links .sep {
+  color: #43556c;
+  font-size: 11px;
+}
+
 .footer-social-links {
   display: flex;
   align-items: center;

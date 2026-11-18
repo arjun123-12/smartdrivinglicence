@@ -46,7 +46,8 @@ export default function Footer() {
                 <li><Link to="/how-it-works">How It Works</Link></li>
                 <li><Link to="/faqs">Lesson FAQs</Link></li>
                 <li><Link to="/faqs">VORT Test FAQs</Link></li>
-                <li><Link to="/terms">Learner Terms and Conditions</Link></li>
+                <li><Link to="/terms">Terms &amp; Conditions</Link></li>
+                <li><Link to="/terms">Booking &amp; Cancellation Policy</Link></li>
               </ul>
             </div>
 
@@ -55,7 +56,7 @@ export default function Footer() {
               <h4 className="footer-col-title">FOR INSTRUCTORS</h4>
               <ul className="footer-col-links">
                 <li><Link to="/instructors">Work with A1 Smart Driving</Link></li>
-                <li><Link to="/instructor-terms">Instructor Terms and Conditions</Link></li>
+                <li><Link to="/terms">Instructor Terms and Conditions</Link></li>
               </ul>
             </div>
 
@@ -66,8 +67,8 @@ export default function Footer() {
                 <li><Link to="/about">About Us</Link></li>
                 <li><Link to="/locations">Locations</Link></li>
                 <li><Link to="/contact">Contact</Link></li>
-                <li><Link to="/contact">Support</Link></li>
                 <li><Link to="/privacy">Privacy Policy</Link></li>
+                <li><Link to="/terms">Terms &amp; Conditions</Link></li>
               </ul>
             </div>
           </div>
@@ -81,6 +82,13 @@ export default function Footer() {
               <span className="footer-legal-subline">
                 MB &amp; HB GROUP PTY LTD trading as A1 Smart Driving · ABN 92 662 509 720 · Adelaide, South Australia
               </span>
+              <div className="footer-bottom-legal-links">
+                <Link to="/privacy">Privacy Policy</Link>
+                <span className="sep">·</span>
+                <Link to="/terms">Terms &amp; Conditions</Link>
+                <span className="sep">·</span>
+                <Link to="/terms">Cancellation &amp; Lesson Credit Policy</Link>
+              </div>
             </div>
 
             <div className="footer-social-links">
