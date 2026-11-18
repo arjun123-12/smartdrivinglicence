@@ -105,6 +105,8 @@ Route::prefix('v1')->group(function () {
 
         Route::get('/availability', [AdminAvailabilityController::class, 'index']);
         Route::post('/availability/schedule', [AdminAvailabilityController::class, 'updateSchedule']);
+        Route::post('/availability/seed-default', [AdminAvailabilityController::class, 'seedDefaultSchedule']);
+        Route::post('/availability/assign-locations', [AdminAvailabilityController::class, 'assignLocations']);
         Route::post('/availability/exceptions', [AdminAvailabilityController::class, 'storeException']);
         Route::delete('/availability/exceptions/{id}', [AdminAvailabilityController::class, 'destroyException']);
 

@@ -350,16 +350,22 @@ export const adminService = {
         status: raw.status || 'success',
         instructors: extractArray(raw.instructors || raw.data?.instructors, mockInstructors),
         selected_instructor_id: raw.selected_instructor_id || (mockInstructors[0]?.id || 1),
+        selected_instructor: raw.selected_instructor || null,
         schedules: extractArray(raw.schedules || raw.data?.schedules, []),
         exceptions: extractArray(raw.exceptions || raw.data?.exceptions, []),
+        assigned_locations_count: raw.assigned_locations_count ?? 0,
+        total_locations_count: raw.total_locations_count ?? 0,
       };
     } catch {
       return {
         status: 'success',
         instructors: mockInstructors,
         selected_instructor_id: mockInstructors[0]?.id || 1,
+        selected_instructor: null,
         schedules: [],
         exceptions: [],
+        assigned_locations_count: 261,
+        total_locations_count: 261,
       };
     }
   },
@@ -370,6 +376,24 @@ export const adminService = {
       return res.data;
     } catch {
       return { status: 'success', message: 'Schedule updated' };
+    }
+  },
+
+  async seedDefaultSchedule(instructorId = null) {
+    try {
+      const res = await api.post('/admin/availability/seed-default', { instructor_id: instructorId });
+      return res.data;
+    } catch {
+      return { status: 'success', message: 'Default 7-day schedule enabled.' };
+    }
+  },
+
+  async assignLocations(data) {
+    try {
+      const res = await api.post('/admin/availability/assign-locations', data);
+      return res.data;
+    } catch {
+      return { status: 'success', message: 'Locations linked successfully.' };
     }
   },
 

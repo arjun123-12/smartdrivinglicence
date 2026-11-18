@@ -141,6 +141,39 @@ export default function BookingWizard({ defaultServiceSlug = null, forcedIsTest 
     }
   }, [step, selectedServiceId, selectedLocationId, selectedDate, selectedTransmission]);
 
+  // Helper for 7-day quick date navigation
+  const getNext7Days = () => {
+    const list = [];
+    const base = new Date();
+    for (let i = 0; i < 7; i++) {
+      const d = new Date(base);
+      d.setDate(base.getDate() + i);
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      const dateStr = `${y}-${m}-${day}`;
+      const dayName = i === 0 ? 'Today' : i === 1 ? 'Tomorrow' : d.toLocaleDateString('en-AU', { weekday: 'short' });
+      const dayNum = d.toLocaleDateString('en-AU', { day: 'numeric', month: 'short' });
+      list.push({ dateStr, dayName, dayNum });
+    }
+    return list;
+  };
+
+  const handleNextDay = () => {
+    const parts = (selectedDate || '').split('-').map(Number);
+    if (parts.length === 3) {
+      const next = new Date(parts[0], parts[1] - 1, parts[2] + 1);
+      const y = next.getFullYear();
+      const m = String(next.getMonth() + 1).padStart(2, '0');
+      const d = String(next.getDate()).padStart(2, '0');
+      setSelectedDate(`${y}-${m}-${d}`);
+    } else {
+      const next = new Date();
+      next.setDate(next.getDate() + 1);
+      setSelectedDate(next.toISOString().split('T')[0]);
+    }
+  };
+
   const fetchSlots = async () => {
     setLoadingSlots(true);
     setErrorMessage('');
@@ -154,6 +187,9 @@ export default function BookingWizard({ defaultServiceSlug = null, forcedIsTest 
       });
       const slots = extractArray(res?.slots || res?.data?.slots || res?.data || res, []);
       setAvailableSlots(slots);
+      if (slots.length > 0) {
+        setSelectedSlot(slots[0]); // Auto-select first slot so user can proceed immediately
+      }
     } catch (err) {
       setErrorMessage(err.response?.data?.message || 'Could not fetch availability slots for selected date.');
       setAvailableSlots([]);
@@ -398,12 +434,48 @@ export default function BookingWizard({ defaultServiceSlug = null, forcedIsTest 
               </button>
             </div>
 
+            {/* Quick 7-Day Date Navigation Pills */}
+            <div style={{ display: 'flex', gap: '0.5rem', overflowX: 'auto', paddingBottom: '0.5rem', marginBottom: '1rem' }}>
+              {getNext7Days().map((d) => {
+                const isCurrent = selectedDate === d.dateStr;
+                return (
+                  <button
+                    key={d.dateStr}
+                    type="button"
+                    onClick={() => setSelectedDate(d.dateStr)}
+                    style={{
+                      padding: '0.45rem 0.85rem',
+                      borderRadius: 'var(--radius-sm)',
+                      border: isCurrent ? '2px solid var(--color-secondary)' : '1px solid var(--color-border)',
+                      backgroundColor: isCurrent ? 'var(--color-secondary)' : 'var(--color-surface)',
+                      color: isCurrent ? '#ffffff' : 'inherit',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      minWidth: '78px',
+                      fontWeight: 600,
+                      transition: 'all 0.15s ease',
+                      boxShadow: isCurrent ? '0 2px 8px rgba(27,108,49,0.25)' : 'none',
+                    }}
+                  >
+                    <span style={{ fontSize: '11px', textTransform: 'uppercase', opacity: isCurrent ? 0.95 : 0.7 }}>
+                      {d.dayName}
+                    </span>
+                    <span style={{ fontSize: '13px', fontWeight: 800 }}>
+                      {d.dayNum}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
             {/* Date selector toolbar */}
-            <div className="card" style={{ padding: '1rem', backgroundColor: 'var(--color-surface-subtle)', marginBottom: '1.5rem' }}>
+            <div className="card" style={{ padding: '0.85rem 1rem', backgroundColor: 'var(--color-surface-subtle)', marginBottom: '1.25rem' }}>
               <div className="flex" style={{ gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                   <Calendar size={18} color="var(--color-secondary)" />
-                  <span style={{ fontWeight: 600, fontSize: 'var(--font-size-sm)' }}>Select Date:</span>
+                  <span style={{ fontWeight: 600, fontSize: 'var(--font-size-sm)' }}>Or Custom Date:</span>
                 </div>
                 <input
                   type="date"
@@ -432,11 +504,8 @@ export default function BookingWizard({ defaultServiceSlug = null, forcedIsTest 
                   All instructors servicing {selectedLocation?.name} are fully booked on {selectedDate}. Try selecting the next available day.
                 </p>
                 <button
-                  onClick={() => {
-                    const next = new Date(selectedDate);
-                    next.setDate(next.getDate() + 1);
-                    setSelectedDate(next.toISOString().split('T')[0]);
-                  }}
+                  type="button"
+                  onClick={handleNextDay}
                   className="button button-secondary"
                 >
                   Check Next Day
@@ -444,9 +513,14 @@ export default function BookingWizard({ defaultServiceSlug = null, forcedIsTest 
               </div>
             ) : (
               <div>
-                <p style={{ fontWeight: 600, fontSize: 'var(--font-size-sm)', marginBottom: '0.75rem' }}>
-                  Pick a Start Time ({availableSlots.length} available slots):
-                </p>
+                <div className="flex-between" style={{ marginBottom: '0.75rem', flexWrap: 'wrap', gap: '0.5rem' }}>
+                  <p style={{ fontWeight: 700, fontSize: 'var(--font-size-sm)', margin: 0 }}>
+                    Select an Appointment Time ({availableSlots.length} available):
+                  </p>
+                  <span style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-secondary)', fontWeight: 600 }}>
+                    {selectedSlot ? `✓ Selected: ${selectedSlot.display_time}` : 'Click any slot to select'}
+                  </span>
+                </div>
 
                 <div className="slot-grid" style={{ marginBottom: '1.5rem' }}>
                   {safeArray(availableSlots).map((slot, idx) => {
@@ -457,12 +531,24 @@ export default function BookingWizard({ defaultServiceSlug = null, forcedIsTest 
                         type="button"
                         className={`time-slot ${isSelected ? 'selected' : ''}`}
                         onClick={() => handleSlotSelect(slot)}
+                        style={{
+                          border: isSelected ? '2px solid var(--color-secondary)' : '1px solid var(--color-border)',
+                          backgroundColor: isSelected ? 'var(--color-secondary)' : 'var(--color-surface)',
+                          color: isSelected ? '#ffffff' : 'inherit',
+                          transform: isSelected ? 'scale(1.02)' : 'none',
+                          boxShadow: isSelected ? '0 4px 12px rgba(27,108,49,0.25)' : 'none',
+                        }}
                       >
-                        <div style={{ fontSize: '1.05rem', fontWeight: 700 }}>{slot.display_time}</div>
-                        <div style={{ fontSize: '11px', opacity: 0.85 }}>{slot.instructor_name}</div>
-                        <div style={{ fontSize: '11px', color: isSelected ? '#ffffff' : 'var(--color-secondary)', fontWeight: 600, marginTop: '2px' }}>
+                        <div style={{ fontSize: '1.05rem', fontWeight: 800 }}>{slot.display_time}</div>
+                        <div style={{ fontSize: '11px', opacity: isSelected ? 0.95 : 0.85 }}>{slot.instructor_name}</div>
+                        <div style={{ fontSize: '11px', color: isSelected ? '#ffffff' : 'var(--color-secondary)', fontWeight: 700, marginTop: '2px' }}>
                           ${slot.price} AUD
                         </div>
+                        {isSelected && (
+                          <div style={{ fontSize: '10px', fontWeight: 800, marginTop: '3px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                            ✓ Selected
+                          </div>
+                        )}
                       </button>
                     );
                   })}

@@ -59,6 +59,26 @@ class AvailabilityController extends Controller
 
         $instructors = $instructorQuery->get();
 
+        // Fallback: If no instructors explicitly mapped to this specific suburb yet,
+        // use accredited active instructors (examiners for VORT tests) servicing Greater Adelaide
+        if ($instructors->isEmpty()) {
+            $fallbackQuery = Instructor::where('is_active', true);
+            if ($service->is_test) {
+                $fallbackQuery->where('is_examiner', true);
+            }
+            if (!empty($validated['instructor_id'])) {
+                $fallbackQuery->where('id', $validated['instructor_id']);
+            }
+            if (!empty($validated['transmission'])) {
+                $trans = $validated['transmission'];
+                $fallbackQuery->where(function ($q) use ($trans) {
+                    $q->where('car_transmission', $trans)
+                      ->orWhere('car_transmission', 'both');
+                });
+            }
+            $instructors = $fallbackQuery->get();
+        }
+
         $leadHours = (int) Setting::get('booking_lead_time_hours', 12);
         $minimumStartTime = Carbon::now('Australia/Adelaide')->addHours($leadHours);
 
@@ -71,8 +91,15 @@ class AvailabilityController extends Controller
                 ->where('is_active', true)
                 ->get();
 
+            // If instructor has no explicit schedule record for this day, provide default working hours (08:30 - 17:30)
             if ($schedules->isEmpty()) {
-                continue;
+                $schedules = collect([
+                    (object) [
+                        'start_time' => '08:30:00',
+                        'end_time' => '17:30:00',
+                        'is_active' => true,
+                    ]
+                ]);
             }
 
             // Check full-day or partial exception for this date
