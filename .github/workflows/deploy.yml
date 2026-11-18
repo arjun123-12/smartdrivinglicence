@@ -1,0 +1,121 @@
+
+name: Deploy SmartDriving to Hostinger
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: smartdriving-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    env:
+      SSH_HOST: ${{ secrets.SSH_HOST }}
+      SSH_PORT: ${{ secrets.SSH_PORT }}
+      SSH_USER: ${{ secrets.SSH_USER }}
+      DEPLOY_PATH: /home/u639671687/domains/a1smartdriving.com.au
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install frontend dependencies
+        working-directory: frontend
+        run: npm ci
+
+      - name: Build React frontend
+        working-directory: frontend
+        env:
+          VITE_API_BASE_URL: https://a1smartdriving.com.au/api/v1
+        run: npm run build
+
+      - name: Configure SSH connection
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/deploy_key
+          printf '%s\n' "$SSH_KNOWN_HOSTS" | tr -d '\r' > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/known_hosts
+
+          cat > ~/.ssh/config <<EOF
+          Host smartdriving
+            HostName $SSH_HOST
+            User $SSH_USER
+            Port $SSH_PORT
+            IdentityFile ~/.ssh/deploy_key
+            IdentitiesOnly yes
+            BatchMode yes
+            StrictHostKeyChecking yes
+          EOF
+
+          chmod 600 ~/.ssh/config
+
+      - name: Verify hosting connection
+        run: |
+          ssh smartdriving "echo SSH_DEPLOY_OK"
+          ssh smartdriving "test -f '$DEPLOY_PATH/backend/.env' && test -f '$DEPLOY_PATH/public_html/api.php' && test -f '$DEPLOY_PATH/public_html/.htaccess'"
+
+      - name: Upload Laravel backend
+        run: |
+          rsync -az \
+            --exclude='.env' \
+            --exclude='.env.*' \
+            --exclude='.git' \
+            --exclude='vendor/' \
+            --exclude='node_modules/' \
+            --exclude='storage/' \
+            --exclude='bootstrap/cache/' \
+            --exclude='public/uploads/' \
+            --exclude='public/storage' \
+            backend/ "smartdriving:$DEPLOY_PATH/backend/"
+
+      - name: Configure Laravel backend
+        run: |
+          ssh smartdriving "cd '$DEPLOY_PATH/backend' && \
+            composer install --no-dev --optimize-autoloader --no-interaction --no-scripts && \
+            php artisan package:discover --ansi && \
+            php artisan config:clear && \
+            php artisan route:clear && \
+            php artisan view:clear"
+
+      - name: Upload React frontend
+        run: |
+          rsync -az \
+            --chmod=D755,F644 \
+            --exclude='.htaccess' \
+            --exclude='api.php' \
+            --exclude='.env*' \
+            --exclude='index.html' \
+            --exclude='uploads/' \
+            --exclude='storage/' \
+            frontend/dist/ "smartdriving:$DEPLOY_PATH/public_html/"
+
+          rsync -az \
+            --chmod=F644 \
+            frontend/dist/index.html \
+            "smartdriving:$DEPLOY_PATH/public_html/index.html"
+
+      - name: Verify live website
+        run: |
+          curl -fsSL --retry 3 https://a1smartdriving.com.au/ -o /dev/null
+          curl -fsSL --retry 3 https://a1smartdriving.com.au/api/v1/faqs -o /dev/null
+          echo "SmartDriving deployment successful!"
