@@ -25,6 +25,8 @@ import Contact from '../pages/Contact';
 import FAQs from '../pages/FAQs';
 import PrivacyPolicy from '../pages/PrivacyPolicy';
 import Terms from '../pages/Terms';
+import BookingConfirmed from '../pages/booking/BookingConfirmed';
+import BookingCancelled from '../pages/booking/BookingCancelled';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import ForgotPassword from '../pages/ForgotPassword';
@@ -71,6 +73,8 @@ export default function AppRoutes() {
         <Route path="/terms-and-conditions" element={<Terms />} />
         <Route path="/booking-terms" element={<Terms />} />
         <Route path="/instructor-terms" element={<Terms />} />
+        <Route path="/booking/confirmed" element={<BookingConfirmed />} />
+        <Route path="/booking/cancelled" element={<BookingCancelled />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />

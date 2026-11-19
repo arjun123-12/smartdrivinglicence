@@ -6,11 +6,11 @@ import '../../styles/comparison.css';
 export default function OldWayVsNewWay() {
   return (
     <section className="comparison-section">
-      <div className="container">
+      {/* <div className="container">
         <h2 className="comparison-title">Still Booking Tests the Old Way?</h2>
 
         <div className="comparison-grid">
-          {/* The Old Way */}
+       
           <div className="comparison-card comparison-card-old">
             <h3 className="comparison-card-title">The Old Way</h3>
             <ul className="comparison-list">
@@ -41,7 +41,7 @@ export default function OldWayVsNewWay() {
             </ul>
           </div>
 
-          {/* The A1 Smart Driving Way */}
+       
           <div className="comparison-card comparison-card-new">
             <h3 className="comparison-card-title">The A1 Smart Driving Way</h3>
             <ul className="comparison-list">
@@ -73,14 +73,14 @@ export default function OldWayVsNewWay() {
           </div>
         </div>
 
-        {/* CTA Button */}
+      
         <div className="comparison-cta-wrap">
           <Link to="/book-test" className="comparison-btn">
             Find My VORT Slot Now
             <ArrowRight size={17} />
           </Link>
         </div>
-      </div>
+      </div> */}
     </section>
   );
 }

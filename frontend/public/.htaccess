@@ -2,6 +2,10 @@
   RewriteEngine On
   RewriteBase /
 
+  # Allow backend API routes to pass through to Laravel on shared Apache hosts
+  RewriteCond %{REQUEST_URI} ^/api [NC]
+  RewriteRule ^ - [L]
+
   # If an existing file or directory is requested, serve it directly
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d

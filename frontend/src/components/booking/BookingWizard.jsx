@@ -97,21 +97,33 @@ export default function BookingWizard({ defaultServiceSlug = null, forcedIsTest 
         const locationsRes = results[1].status === 'fulfilled' ? extractArray(results[1].value, mockLocations) : mockLocations;
 
         let filteredServices = servicesRes;
-        if (forcedIsTest !== null) {
-          filteredServices = safeArray(servicesRes).filter((s) => s.is_test === forcedIsTest);
+        if (forcedIsTest !== null && forcedIsTest !== undefined) {
+          const matched = safeArray(servicesRes).filter((s) => {
+            const isTest = s.is_test === true || s.is_test === 1 || s.is_test === '1' || s.is_test === 'true';
+            return isTest === Boolean(forcedIsTest);
+          });
+          if (matched.length > 0) {
+            filteredServices = matched;
+          }
         }
 
         setServices(filteredServices);
         setLocations(locationsRes);
 
         // Preselect service
+        let serviceToSelect = null;
         if (defaultServiceSlug) {
-          const match = safeArray(filteredServices).find((s) => s.slug === defaultServiceSlug);
-          if (match) setSelectedServiceId(match.id.toString());
-        } else if (searchParams.get('service_id')) {
-          setSelectedServiceId(searchParams.get('service_id'));
-        } else if (safeArray(filteredServices).length > 0) {
-          setSelectedServiceId(filteredServices[0].id.toString());
+          serviceToSelect = safeArray(filteredServices).find((s) => s.slug === defaultServiceSlug);
+        }
+        if (!serviceToSelect && searchParams.get('service_id')) {
+          serviceToSelect = safeArray(filteredServices).find((s) => s.id.toString() === searchParams.get('service_id'));
+        }
+        if (!serviceToSelect && safeArray(filteredServices).length > 0) {
+          serviceToSelect = filteredServices[0];
+        }
+
+        if (serviceToSelect) {
+          setSelectedServiceId(serviceToSelect.id.toString());
         }
 
         // Preselect location from query param if given
@@ -123,9 +135,17 @@ export default function BookingWizard({ defaultServiceSlug = null, forcedIsTest 
         }
       } catch (err) {
         console.warn('Booking wizard init caught error, using fallbacks:', err);
-        setServices(mockServices);
+        let fallbackServices = mockServices;
+        if (forcedIsTest !== null && forcedIsTest !== undefined) {
+          const matched = safeArray(mockServices).filter((s) => {
+            const isTest = s.is_test === true || s.is_test === 1 || s.is_test === '1' || s.is_test === 'true';
+            return isTest === Boolean(forcedIsTest);
+          });
+          if (matched.length > 0) fallbackServices = matched;
+        }
+        setServices(fallbackServices);
         setLocations(mockLocations);
-        if (mockServices.length > 0) setSelectedServiceId(mockServices[0].id.toString());
+        if (fallbackServices.length > 0) setSelectedServiceId(fallbackServices[0].id.toString());
         if (mockLocations.length > 0) setSelectedLocationId(mockLocations[0].id.toString());
       } finally {
         setLoadingInitial(false);
@@ -222,14 +242,22 @@ export default function BookingWizard({ defaultServiceSlug = null, forcedIsTest 
     setStep(3);
   };
 
-  const handleStep3Submit = async (e) => {
+  const handleStep3Submit = (e) => {
     e.preventDefault();
     if (!customerDetails.name || !customerDetails.email || !customerDetails.phone || !customerDetails.pickup_address) {
       setErrorMessage('Please fill in all required customer and pickup address fields.');
       return;
     }
 
-    setSubmittingBooking(true);
+    setErrorMessage('');
+    setStep(4);
+  };
+
+  const handlePayAndBookStripe = async (e) => {
+    if (e) e.preventDefault();
+    if (!selectedSlot) return;
+
+    setProcessingPayment(true);
     setErrorMessage('');
 
     try {
@@ -237,6 +265,7 @@ export default function BookingWizard({ defaultServiceSlug = null, forcedIsTest 
         service_type_id: selectedSlot.service_type_id,
         instructor_id: selectedSlot.instructor_id,
         location_id: selectedSlot.location_id,
+        package_id: searchParams.get('package_id') || undefined,
         start_time: selectedSlot.start_time,
         end_time: selectedSlot.end_time,
         pickup_address: customerDetails.pickup_address,
@@ -248,37 +277,14 @@ export default function BookingWizard({ defaultServiceSlug = null, forcedIsTest 
         licence_type: customerDetails.licence_type,
       };
 
-      const res = await bookingService.createBooking(payload);
-      setCreatedBooking(res.booking);
-      setPaymentData((prev) => ({ ...prev, cardholder_name: customerDetails.name }));
-      setStep(4);
+      const res = await paymentService.createStripeCheckoutSession(payload);
+      if (res && res.checkout_url) {
+        window.location.href = res.checkout_url;
+      } else {
+        throw new Error('Unable to create Stripe checkout session. Please try again.');
+      }
     } catch (err) {
-      setErrorMessage(err.response?.data?.message || 'Could not reserve slot. It may have just been booked.');
-    } finally {
-      setSubmittingBooking(false);
-    }
-  };
-
-  const handlePaymentSubmit = async (e) => {
-    e.preventDefault();
-    if (!createdBooking) return;
-
-    setProcessingPayment(true);
-    setErrorMessage('');
-
-    try {
-      const res = await paymentService.processPayment({
-        booking_reference: createdBooking.booking_reference,
-        payment_method: paymentData.payment_method,
-        cardholder_name: paymentData.cardholder_name,
-        card_last4: '4242',
-      });
-
-      setConfirmedBooking(res.booking);
-      setStep(5);
-    } catch (err) {
-      setErrorMessage(err.response?.data?.message || 'Payment failed. Please verify your details.');
-    } finally {
+      setErrorMessage(err.response?.data?.message || err.message || 'Payment initiation failed. Please try again.');
       setProcessingPayment(false);
     }
   };
@@ -363,7 +369,7 @@ export default function BookingWizard({ defaultServiceSlug = null, forcedIsTest 
                       {service.description}
                     </div>
                     <div className="flex-between" style={{ marginTop: 'auto', paddingTop: '0.5rem', borderTop: '1px dashed var(--color-border)' }}>
-                      <span style={{ fontSize: 'var(--font-size-xs)', fontWeight: 600 }}>{service.default_duration_minutes} Minutes</span>
+                      <span style={{ fontSize: 'var(--font-size-xs)', fontWeight: 600 }}>{service.default_duration_minutes || service.duration_minutes || 60} Minutes</span>
                       <span style={{ fontWeight: 800, color: 'var(--color-secondary)' }}>From ${service.default_price} AUD</span>
                     </div>
                   </label>
@@ -695,107 +701,68 @@ export default function BookingWizard({ defaultServiceSlug = null, forcedIsTest 
               <button type="button" onClick={() => setStep(2)} className="button button-outline">
                 <ArrowLeft size={16} /> Back
               </button>
-              <button type="submit" disabled={submittingBooking} className="button button-primary button-lg">
-                {submittingBooking ? 'Holding Slot...' : 'Hold Slot & Proceed to Pay'} <ArrowRight size={18} />
+              <button type="submit" className="button button-primary button-lg">
+                Review & Pay <ArrowRight size={18} />
               </button>
             </div>
           </form>
         )}
 
-        {/* STEP 4: PAYMENT */}
-        {step === 4 && createdBooking && (
-          <form onSubmit={handlePaymentSubmit}>
+        {/* STEP 4: ORDER REVIEW & SECURE STRIPE CHECKOUT */}
+        {step === 4 && selectedSlot && (
+          <div>
             <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
               <ShieldCheck size={36} color="var(--color-secondary)" style={{ margin: '0 auto' }} />
-              <h3 style={{ marginTop: '0.5rem' }}>Complete Your Secure Booking</h3>
+              <h3 style={{ marginTop: '0.5rem' }}>Review & Complete Booking</h3>
               <p style={{ color: 'var(--color-text-muted)', fontSize: 'var(--font-size-sm)' }}>
-                Booking Ref: <strong>{createdBooking.booking_reference}</strong> (Slot reserved for 15 minutes)
+                You will be redirected to Stripe Checkout for secure card payment in AUD.
               </p>
             </div>
 
             <div className="card" style={{ padding: '1.25rem', backgroundColor: 'var(--color-surface-subtle)', marginBottom: '1.5rem' }}>
               <div className="flex-between" style={{ borderBottom: '1px solid var(--color-border)', paddingBottom: '0.75rem', marginBottom: '0.75rem' }}>
-                <span style={{ fontWeight: 600 }}>{createdBooking.service_type?.name}</span>
-                <span style={{ fontWeight: 700 }}>${createdBooking.price_snapshot} AUD</span>
+                <span style={{ fontWeight: 600, fontSize: 'var(--font-size-base)' }}>{selectedSlot.service_name}</span>
+                <span style={{ fontWeight: 800, fontSize: 'var(--font-size-lg)', color: 'var(--color-primary)' }}>${selectedSlot.price} AUD</span>
               </div>
-              <div style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-muted)' }}>
-                Instructor: {createdBooking.instructor?.name} | {new Date(createdBooking.start_time).toLocaleDateString()} @ {new Date(createdBooking.start_time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-              </div>
-            </div>
-
-            <div className="form-group">
-              <label className="form-label">Payment Method</label>
-              <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
-                <button
-                  type="button"
-                  className={`button button-full ${paymentData.payment_method === 'card' ? 'button-primary' : 'button-outline'}`}
-                  onClick={() => setPaymentData({ ...paymentData, payment_method: 'card' })}
-                >
-                  <CreditCard size={16} /> Credit / Debit Card
-                </button>
+              <div className="grid grid-2" style={{ fontSize: 'var(--font-size-sm)', gap: '0.5rem' }}>
+                <div><strong>Instructor:</strong> {selectedSlot.instructor_name}</div>
+                <div><strong>Location:</strong> {selectedLocation?.name || 'Selected Suburb'}</div>
+                <div><strong>Date:</strong> {new Date(selectedSlot.start_time).toLocaleDateString()}</div>
+                <div><strong>Time:</strong> {selectedSlot.display_time}</div>
+                <div><strong>Learner:</strong> {customerDetails.name}</div>
+                <div><strong>Contact:</strong> {customerDetails.phone}</div>
+                <div style={{ gridColumn: 'span 2' }}><strong>Pickup Address:</strong> {customerDetails.pickup_address}</div>
               </div>
             </div>
 
-            <div className="form-group">
-              <label className="form-label">Cardholder Name</label>
-              <input
-                type="text"
-                className="form-control"
-                required
-                value={paymentData.cardholder_name}
-                onChange={(e) => setPaymentData({ ...paymentData, cardholder_name: e.target.value })}
-              />
-            </div>
-
-            <div className="form-group">
-              <label className="form-label">Card Number</label>
-              <input
-                type="text"
-                className="form-control"
-                required
-                value={paymentData.card_number}
-                onChange={(e) => setPaymentData({ ...paymentData, card_number: e.target.value })}
-                placeholder="4242 4242 4242 4242"
-              />
-              <span className="form-hint">Test gateway enabled: any card numbers are securely verified by backend simulation.</span>
-            </div>
-
-            <div className="grid grid-2">
-              <div className="form-group">
-                <label className="form-label">Expiry (MM/YY)</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  required
-                  value={paymentData.expiry}
-                  onChange={(e) => setPaymentData({ ...paymentData, expiry: e.target.value })}
-                  placeholder="12/28"
-                />
-              </div>
-              <div className="form-group">
-                <label className="form-label">CVC Security Code</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  required
-                  maxLength="4"
-                  value={paymentData.cvc}
-                  onChange={(e) => setPaymentData({ ...paymentData, cvc: e.target.value })}
-                  placeholder="123"
-                />
+            <div style={{ backgroundColor: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: '8px', padding: '1rem', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <ShieldCheck size={24} color="#16a34a" style={{ flexShrink: 0 }} />
+              <div style={{ fontSize: 'var(--font-size-xs)', color: '#166534' }}>
+                <strong>Stripe Sandbox Hosted Checkout:</strong> Upon clicking Pay, your slot is held atomically on the server and you are redirected to Stripe. We accept Visa, Mastercard, and American Express. Full payment in AUD is processed upon completion.
               </div>
             </div>
 
-            <div style={{ marginTop: '1.5rem' }}>
+            <div className="flex-between" style={{ gap: '1rem', flexWrap: 'wrap' }}>
               <button
-                type="submit"
+                type="button"
+                onClick={() => setStep(3)}
                 disabled={processingPayment}
-                className="button button-accent button-full button-lg"
+                className="button button-outline"
               >
-                {processingPayment ? 'Verifying Payment...' : `Pay $${createdBooking.price_snapshot} AUD & Confirm Booking`}
+                <ArrowLeft size={16} /> Back to Details
+              </button>
+              <button
+                type="button"
+                onClick={handlePayAndBookStripe}
+                disabled={processingPayment}
+                className="button button-accent button-lg"
+                style={{ flex: 1, minWidth: '240px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}
+              >
+                <CreditCard size={18} />
+                {processingPayment ? 'Redirecting to Stripe...' : `Pay $${selectedSlot.price} AUD & Book Slot`}
               </button>
             </div>
-          </form>
+          </div>
         )}
 
         {/* STEP 5: CONFIRMATION */}

@@ -20,6 +20,7 @@ class Booking extends Model
         'price_snapshot',
         'currency',
         'payment_status',
+        'expires_at',
         'pickup_address',
         'notes',
         'cancellation_reason',
@@ -31,6 +32,7 @@ class Booking extends Model
         'start_time' => 'datetime',
         'end_time' => 'datetime',
         'cancelled_at' => 'datetime',
+        'expires_at' => 'datetime',
         'price_snapshot' => 'decimal:2',
     ];
 

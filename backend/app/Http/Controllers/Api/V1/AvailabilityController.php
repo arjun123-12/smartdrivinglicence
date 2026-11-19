@@ -116,10 +116,19 @@ class AvailabilityController extends Controller
                 continue;
             }
 
-            // Get existing bookings for this instructor on this date
+            // Get active and unexpired bookings for this instructor on this date
             $existingBookings = Booking::where('instructor_id', $instructor->id)
                 ->whereDate('start_time', $targetDate)
-                ->whereIn('booking_status', ['confirmed', 'pending', 'in_progress'])
+                ->where(function ($q) {
+                    $q->whereIn('booking_status', ['confirmed', 'in_progress'])
+                      ->orWhere(function ($pendingQ) {
+                          $pendingQ->where('booking_status', 'pending')
+                                   ->where(function ($expQ) {
+                                       $expQ->whereNull('expires_at')
+                                            ->orWhere('expires_at', '>', Carbon::now('Australia/Adelaide'));
+                                   });
+                      });
+                })
                 ->get(['id', 'start_time', 'end_time']);
 
             foreach ($schedules as $sched) {

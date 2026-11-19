@@ -11,6 +11,8 @@ class Payment extends Model
         'payment_reference',
         'gateway',
         'transaction_id',
+        'stripe_session_id',
+        'idempotency_key',
         'amount',
         'currency',
         'payment_status',

@@ -123,59 +123,124 @@ export default function Home() {
       {/* 2. OLD WAY VS A1 SMART DRIVING WAY COMPARISON */}
       <OldWayVsNewWay />
 
-      {/* 2. HOW IT WORKS */}
-      <section className="section section-subtle">
-        <div className="container">
-          <div className="section-header">
-            <span className="section-tag">Simple 4-Step Process</span>
-            <h2 className="section-title">How Booking Works</h2>
-            <p className="section-description">
-              Getting your P-plates in South Australia is easy. Book your accredited instructor or VORT examiner in under 3 minutes.
+      {/* 2. HOW BOOKING WORKS */}
+      <section className="booking-process-section">
+
+        {/* Decorative background */}
+        <div className="bp-decoration bp-decoration-top" />
+        <div className="bp-decoration bp-decoration-bottom" />
+
+        <div className="container bp-container">
+
+          {/* Section Heading */}
+          <div className="bp-header">
+
+            <div className="bp-tag-wrapper">
+              <span className="bp-tag-line" />
+
+              <span className="bp-tag">
+                Simple 4-Step Process
+              </span>
+
+              <span className="bp-tag-line" />
+            </div>
+
+            <h2 className="bp-title">
+              How Booking <span>Works</span>
+            </h2>
+
+            <p className="bp-description">
+              Getting your P-plates in South Australia is easy.
+              Book your accredited instructor or VORT examiner
+              in under 3 minutes.
             </p>
+
           </div>
 
-          <div className="grid grid-4">
-            <div className="card" style={{ padding: '1.75rem', textAlign: 'center' }}>
-              <div style={{ width: '56px', height: '56px', borderRadius: '50%', backgroundColor: 'var(--color-primary-light)', color: 'var(--color-secondary)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1rem auto' }}>
-                <MapPin size={28} />
-              </div>
-              <div style={{ fontWeight: 800, fontSize: 'var(--font-size-lg)', marginBottom: '0.5rem' }}>1. Choose Location</div>
-              <p style={{ fontSize: 'var(--font-size-sm)', color: 'var(--color-text-muted)' }}>
-                Select your Adelaide suburb or preferred test centre hub (Thebarton, Port Adelaide, Marion).
-              </p>
-            </div>
+          {/* Booking Process Cards */}
+          <div className="bp-grid">
 
-            <div className="card" style={{ padding: '1.75rem', textAlign: 'center' }}>
-              <div style={{ width: '56px', height: '56px', borderRadius: '50%', backgroundColor: 'var(--color-primary-light)', color: 'var(--color-secondary)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1rem auto' }}>
-                <Calendar size={28} />
-              </div>
-              <div style={{ fontWeight: 800, fontSize: 'var(--font-size-lg)', marginBottom: '0.5rem' }}>2. Pick Date & Time</div>
-              <p style={{ fontSize: 'var(--font-size-sm)', color: 'var(--color-text-muted)' }}>
-                Real-time appointment slots from our verified database with immediate availability confirmation.
-              </p>
-            </div>
+            {[
+              {
+                number: '01',
+                icon: MapPin,
+                title: 'Choose Location',
+                description:
+                  'Select your Adelaide suburb or preferred test centre hub (Thebarton, Port Adelaide, Marion).',
+              },
+              {
+                number: '02',
+                icon: Calendar,
+                title: 'Pick Date & Time',
+                description:
+                  'Real-time appointment slots from our verified database with immediate availability confirmation.',
+              },
+              {
+                number: '03',
+                icon: ShieldCheck,
+                title: 'Secure Reservation',
+                description:
+                  'Instant card payment with double-booking prevention and email confirmation.',
+              },
+              {
+                number: '04',
+                icon: Car,
+                title: 'Take Your Test',
+                description:
+                  'Meet your instructor with a dual-control vehicle and take the next step towards your Certificate of Competency.',
+              },
+            ].map((step, index) => {
+              const Icon = step.icon;
 
-            <div className="card" style={{ padding: '1.75rem', textAlign: 'center' }}>
-              <div style={{ width: '56px', height: '56px', borderRadius: '50%', backgroundColor: 'var(--color-primary-light)', color: 'var(--color-secondary)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1rem auto' }}>
-                <ShieldCheck size={28} />
-              </div>
-              <div style={{ fontWeight: 800, fontSize: 'var(--font-size-lg)', marginBottom: '0.5rem' }}>3. Secure Reservation</div>
-              <p style={{ fontSize: 'var(--font-size-sm)', color: 'var(--color-text-muted)' }}>
-                Instant card payment with atomic double-booking prevention and email confirmation.
-              </p>
-            </div>
+              return (
+                <article
+                  key={step.number}
+                  className="bp-card"
+                  style={{ '--step-index': index }}
+                >
 
-            <div className="card" style={{ padding: '1.75rem', textAlign: 'center' }}>
-              <div style={{ width: '56px', height: '56px', borderRadius: '50%', backgroundColor: 'var(--color-primary-light)', color: 'var(--color-secondary)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1rem auto' }}>
-                <Car size={28} />
-              </div>
-              <div style={{ fontWeight: 800, fontSize: 'var(--font-size-lg)', marginBottom: '0.5rem' }}>4. Pass Your Test</div>
-              <p style={{ fontSize: 'var(--font-size-sm)', color: 'var(--color-text-muted)' }}>
-                Your instructor meets you with a dual-control vehicle. Score 90%+ and obtain your Certificate of Competency!
-              </p>
-            </div>
+                  {/* Step Number */}
+                  <div className="bp-step-number">
+                    {step.number}
+                  </div>
+
+                  {/* Premium Icon */}
+                  <div className="bp-icon-wrapper">
+
+                    <div className="bp-icon">
+
+                      <Icon
+                        size={34}
+                        strokeWidth={1.8}
+                        aria-hidden="true"
+                      />
+
+                    </div>
+
+                  </div>
+
+                  {/* Card Content */}
+                  <div className="bp-card-content">
+
+                    <h3>{step.title}</h3>
+
+                    <span className="bp-card-divider" />
+
+                    <p>{step.description}</p>
+
+                  </div>
+
+                  {/* Bottom Accent */}
+                  <div className="bp-card-accent" />
+
+                </article>
+              );
+            })}
+
           </div>
+
         </div>
+
       </section>
 
       {/* 3. PASSED WITH A1 SMART DRIVING WALL */}

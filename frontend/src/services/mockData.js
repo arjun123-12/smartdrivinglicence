@@ -29,11 +29,11 @@ export const mockCustomerUser = {
 };
 
 export const mockServices = [
-  { id: 1, name: 'VORT Driving Test', default_price: '240.00', duration_minutes: 90, description: 'Official South Australia Vehicle On Road Test' },
-  { id: 2, name: 'PreVORT Warmup + VORT Test Bundle', default_price: '340.00', duration_minutes: 150, description: '1-hr warm-up lesson followed immediately by the official VORT test' },
-  { id: 3, name: 'Standard Driving Lesson (60 Mins)', default_price: '85.00', duration_minutes: 60, description: 'Single 1-hour personalized driving lesson' },
-  { id: 4, name: 'Double Driving Lesson (120 Mins)', default_price: '160.00', duration_minutes: 120, description: 'Intensive 2-hour dual-session for rapid skill progression' },
-  { id: 5, name: 'First Lesson & Skill Assessment ($99 Special)', default_price: '99.00', duration_minutes: 90, description: 'Comprehensive introductory lesson & official VORT readiness assessment' },
+  { id: 1, name: 'VORT Driving Test', slug: 'vort-test', is_test: true, default_price: '240.00', default_duration_minutes: 90, duration_minutes: 90, description: 'Official South Australia Vehicle On Road Test' },
+  { id: 2, name: 'PreVORT Warmup + VORT Test Bundle', slug: 'prevort-warmup-test', is_test: true, default_price: '340.00', default_duration_minutes: 150, duration_minutes: 150, description: '1-hr warm-up lesson followed immediately by the official VORT test' },
+  { id: 3, name: 'Standard Driving Lesson (60 Mins)', slug: 'driving-lesson-60', is_test: false, default_price: '85.00', default_duration_minutes: 60, duration_minutes: 60, description: 'Single 1-hour personalized driving lesson' },
+  { id: 4, name: 'Double Driving Lesson (120 Mins)', slug: 'driving-lesson-120', is_test: false, default_price: '160.00', default_duration_minutes: 120, duration_minutes: 120, description: 'Intensive 2-hour dual-session for rapid skill progression' },
+  { id: 5, name: 'First Lesson & Skill Assessment ($99 Special)', slug: 'first-lesson-assessment', is_test: false, default_price: '99.00', default_duration_minutes: 90, duration_minutes: 90, description: 'Comprehensive introductory lesson & official VORT readiness assessment' },
 ];
 
 export const mockLocations = [

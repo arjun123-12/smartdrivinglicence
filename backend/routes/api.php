@@ -49,7 +49,15 @@ Route::prefix('v1')->group(function () {
     Route::post('/bookings/calculate-price', [BookingController::class, 'calculatePrice']);
     Route::post('/bookings', [BookingController::class, 'store']);
     Route::get('/bookings/{reference}', [BookingController::class, 'show']);
+    Route::get('/bookings/{reference}/payment-status', [PaymentController::class, 'getBookingPaymentStatus']);
 
+    // Stripe Sandbox Checkout & Webhook
+    Route::post('/payments/stripe/checkout-session', [PaymentController::class, 'createStripeCheckoutSession']);
+    Route::post('/payments/stripe/resume', [PaymentController::class, 'resumeStripeCheckoutSession']);
+    Route::post('/payments/stripe/cancel', [PaymentController::class, 'cancelStripeCheckoutSession']);
+    Route::post('/webhooks/stripe', [PaymentController::class, 'stripeWebhook']);
+
+    // Legacy simulation endpoints
     Route::post('/payments/process', [PaymentController::class, 'processPayment']);
     Route::post('/payments/webhook', [PaymentController::class, 'webhook']);
 
