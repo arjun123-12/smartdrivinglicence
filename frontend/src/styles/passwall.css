@@ -1,112 +1,265 @@
 /* ==========================================
-   PASSED WITH A1 SMART DRIVING - WALL OF FAME
+   A1 SMART DRIVING - PASSED WALL OF FAME
 ========================================== */
 
 .passwall-section {
-  padding: clamp(52px, 6vw, 88px) 0;
-  background: linear-gradient(180deg, #f4f8f5 0%, #ffffff 100%);
-  overflow: hidden;
+  --pw-navy: #0b2136;
+  --pw-navy-dark: #061725;
+  --pw-green: #196b35;
+  --pw-green-dark: #105326;
+  --pw-green-light: #ebf5ee;
+  --pw-gold: #f59e0b;
+  --pw-text: #102743;
+  --pw-muted: #64748b;
+
   position: relative;
+  overflow: hidden;
+  padding: clamp(60px, 7vw, 100px) 0;
+  background: linear-gradient(180deg, #f4f8f5 0%, #ffffff 100%);
 }
+
+/* ==========================================
+   MAIN CONTAINER (GRID LAYOUT)
+========================================== */
 
 .passwall-container {
   display: grid;
-  grid-template-columns: minmax(280px, 340px) 1fr;
-  gap: clamp(32px, 4vw, 56px);
+  grid-template-columns: minmax(290px, 360px) minmax(0, 1fr);
+  gap: clamp(36px, 5vw, 64px);
   align-items: center;
   max-width: 1400px;
+  width: calc(100% - 48px);
   margin: 0 auto;
-  padding: 0 24px;
+  box-sizing: border-box;
 }
 
+/* ==========================================
+   LEFT EDITORIAL CONTENT
+========================================== */
+
 .passwall-content {
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  z-index: 2;
+  min-width: 0;
 }
 
 .passwall-tag {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
   padding: 6px 14px;
-  background-color: #EBF5EE;
-  border: 1px solid rgba(27, 108, 49, 0.25);
+  margin-bottom: 18px;
+  background-color: var(--pw-green-light);
+  border: 1px solid rgba(25, 107, 53, 0.22);
   border-radius: 9999px;
-  color: #1B6C31;
+  color: var(--pw-green);
   font-size: 11px;
   font-weight: 800;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  margin-bottom: 16px;
 }
 
 .passwall-tag-dot {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background-color: #1B6C31;
+  background-color: var(--pw-green);
 }
 
 .passwall-title {
-  margin: 0 0 14px;
-  color: #0D2645;
-  font-size: clamp(32px, 3.8vw, 44px);
+  margin: 0 0 16px;
+  color: var(--pw-navy);
+  font-size: clamp(38px, 4vw, 56px);
   font-weight: 850;
-  line-height: 1.15;
-  letter-spacing: -0.025em;
+  line-height: 1.08;
+  letter-spacing: -2.3px;
+}
+
+.passwall-title span {
+  color: var(--pw-green);
 }
 
 .passwall-desc {
   margin: 0 0 24px;
-  color: #4b5563;
-  font-size: 15px;
-  line-height: 1.6;
-  max-width: 320px;
+  color: var(--pw-muted);
+  font-size: clamp(14px, 1.2vw, 16px);
+  line-height: 1.7;
+  max-width: 360px;
+}
+
+.passwall-content-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 13px;
 }
 
 .passwall-btn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 9px;
   padding: 13px 26px;
-  background-color: #1B6C31;
+  background-color: var(--pw-green);
   color: #ffffff;
   border-radius: 9999px;
   font-size: 14.5px;
   font-weight: 750;
   text-decoration: none;
-  box-shadow: 0 6px 20px rgba(27, 108, 49, 0.3);
-  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 6px 20px rgba(25, 107, 53, 0.28);
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .passwall-btn:hover {
-  background-color: #145325;
-  box-shadow: 0 8px 24px rgba(27, 108, 49, 0.4);
+  background-color: var(--pw-green-dark);
+  box-shadow: 0 8px 24px rgba(25, 107, 53, 0.38);
   transform: translateY(-2px);
   color: #ffffff;
 }
 
-/* Gallery track area */
+.passwall-cta-caption {
+  color: var(--pw-muted);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}
+
+/* ==========================================
+   GALLERY NAVIGATION
+========================================== */
+
+.passwall-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  width: 100%;
+  margin-top: 36px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(11, 33, 54, 0.12);
+}
+
+.passwall-navigation-label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.passwall-navigation-label > span {
+  color: var(--pw-navy);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.passwall-navigation-label small {
+  color: var(--pw-muted);
+  font-size: 12px;
+}
+
+.passwall-navigation-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.passwall-nav-btn {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  background: #ffffff;
+  border: 1px solid rgba(11, 33, 54, 0.14);
+  border-radius: 50%;
+  color: var(--pw-navy);
+  cursor: pointer;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.passwall-nav-btn:last-child {
+  background: var(--pw-green);
+  color: #ffffff;
+  border-color: var(--pw-green);
+}
+
+.passwall-nav-btn:hover {
+  background: var(--pw-navy);
+  color: #ffffff;
+  border-color: var(--pw-navy);
+  transform: translateY(-2px);
+}
+
+.passwall-nav-btn:focus-visible,
+.passwall-card-placeholder:focus-visible,
+.passwall-grid:focus-visible {
+  outline: 2px solid var(--pw-green);
+  outline-offset: 3px;
+}
+
+/* ==========================================
+   GALLERY HEADER
+========================================== */
+
 .passwall-gallery-wrap {
   position: relative;
   overflow: hidden;
   width: 100%;
   min-width: 0;
-  mask-image: linear-gradient(to right, black 85%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+  mask-image: linear-gradient(to right, black 88%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, black 88%, transparent 100%);
 }
+
+.passwall-gallery-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 0 6px 14px;
+}
+
+.passwall-gallery-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--pw-navy);
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.passwall-gallery-eyebrow svg {
+  color: #b68b29;
+}
+
+.passwall-gallery-count {
+  color: var(--pw-muted);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* ==========================================
+   STAGGERED GALLERY LAYOUT
+========================================== */
 
 .passwall-grid {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 15px;
   overflow-x: auto;
   scroll-behavior: smooth;
-  padding-bottom: 12px;
+  padding: 8px 6px 20px;
   scrollbar-width: thin;
-  scrollbar-color: #1B6C31 transparent;
+  scrollbar-color: var(--pw-green) transparent;
+  outline: none;
 }
 
 .passwall-grid::-webkit-scrollbar {
@@ -118,35 +271,46 @@
 }
 
 .passwall-grid::-webkit-scrollbar-thumb {
-  background: #1B6C31;
+  background: var(--pw-green);
   border-radius: 9999px;
 }
 
 .passwall-row {
   display: flex;
-  gap: 12px;
-  min-width: max-content;
+  gap: 14px;
 }
 
-/* Individual photo card */
+/* Offset second row for editorial appearance */
+.passwall-row:nth-child(2) {
+  padding-left: 38px;
+}
+
+/* ==========================================
+   LEARNER CARD
+========================================== */
+
 .passwall-card {
   position: relative;
-  width: 142px;
-  height: 196px;
-  border-radius: 12px;
+  width: clamp(155px, 12.5vw, 185px);
+  height: clamp(210px, 17vw, 255px);
+  border-radius: 15px;
   overflow: hidden;
   background-color: #e2e8f0;
-  box-shadow: 0 4px 12px rgba(13, 38, 69, 0.1);
+  box-shadow: 0 6px 18px rgba(11, 33, 54, 0.12);
   flex-shrink: 0;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .passwall-card:hover {
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 8px 20px rgba(13, 38, 69, 0.18);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(11, 33, 54, 0.22);
 }
 
 .passwall-card-img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -156,95 +320,257 @@
 .passwall-card-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg,
-      rgba(0, 0, 0, 0.05) 0%,
-      rgba(0, 0, 0, 0.1) 40%,
-      rgba(0, 0, 0, 0.8) 100%);
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.08) 0%,
+    rgba(0, 0, 0, 0.18) 40%,
+    rgba(6, 23, 37, 0.90) 100%
+  );
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 8px;
+  padding: 12px;
+  box-sizing: border-box;
 }
 
-/* P-plate badge top left */
+/* Top badges */
+.passwall-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 6px;
+  width: 100%;
+}
+
 .passwall-p-plate {
-  align-self: flex-start;
-  width: 24px;
-  height: 24px;
-  background-color: #ffffff;
-  border: 1.5px solid #1B6C31;
-  border-radius: 4px;
   display: grid;
   place-items: center;
-  color: #1B6C31;
+  width: 29px;
+  height: 31px;
+  background-color: #ffffff;
+  border: 1.5px solid var(--pw-green);
+  border-radius: 5px;
+  color: var(--pw-green);
   font-weight: 900;
-  font-size: 13px;
+  font-size: 19px;
   line-height: 1;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
-/* Bottom info */
+.passwall-success-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 5px 8px;
+  background: rgba(255, 255, 255, 0.93);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 30px;
+  color: var(--pw-green);
+  font-size: 9px;
+  font-weight: 800;
+  backdrop-filter: blur(8px);
+}
+
+/* Card bottom info */
 .passwall-card-bottom {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  gap: 3px;
+  align-items: flex-start;
+  text-align: left;
+  gap: 4px;
+  padding: 4px 2px;
 }
 
 .passwall-card-name {
-  background-color: #facc15;
-  color: #0D2645;
-  font-size: 10px;
+  display: block;
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  color: #ffffff;
+  font-size: clamp(17px, 1.6vw, 22px);
   font-weight: 800;
-  padding: 2px 7px;
-  border-radius: 4px;
-  line-height: 1.2;
+  letter-spacing: -0.5px;
+  line-height: 1.25;
+  box-shadow: none;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .passwall-card-location {
   display: flex;
   align-items: center;
-  gap: 3px;
-  color: #ffffff;
-  font-size: 9px;
-  font-weight: 700;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+  justify-content: flex-start;
+  gap: 5px;
+  color: rgba(255, 255, 255, 0.93);
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.passwall-card-location svg {
+  color: #94dcaa;
 }
 
 .passwall-card-watermark {
-  align-self: center;
-  margin-top: 4px;
-  color: rgba(255, 255, 255, 0.85);
+  margin-top: 3px;
+  padding-top: 9px;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.75);
   font-size: 8px;
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+  font-weight: 600;
+  letter-spacing: 1.1px;
+  text-align: left;
 }
 
-/* Placeholder card "New passes every week" */
+/* ==========================================
+   PREMIUM PLACEHOLDER CARD
+========================================== */
+
 .passwall-card-placeholder {
-  width: 142px;
-  height: 196px;
-  border: 2px dashed #1B6C31;
-  border-radius: 12px;
-  background-color: #EBF5EE;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 14px;
+  width: clamp(155px, 12.5vw, 185px);
+  height: clamp(210px, 17vw, 255px);
+  border-radius: 15px;
+  padding: 20px;
+  background: linear-gradient(145deg, #1b6c31, #0a3e22);
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  box-shadow: 0 6px 18px rgba(11, 33, 54, 0.12);
+  color: #ffffff;
+  text-align: left;
+  text-decoration: none;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.passwall-trophy-icon {
+  display: grid;
+  place-items: center;
+  width: 47px;
+  height: 47px;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  border-radius: 13px;
+  color: #f2d37e;
+}
+
+.passwall-placeholder-content {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.passwall-placeholder-content > span {
+  color: #e7d48e;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.passwall-placeholder-content strong {
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 750;
+  line-height: 1.15;
+  letter-spacing: -0.4px;
+}
+
+.passwall-placeholder-content p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.passwall-placeholder-arrow {
+  display: grid;
+  place-items: center;
+  width: 31px;
+  height: 31px;
+  flex-shrink: 0;
+  margin-top: auto;
+  margin-left: auto;
+  background: #ffffff;
+  border-radius: 50%;
+  color: var(--pw-green);
+  transition: transform 0.3s ease;
+}
+
+.passwall-card-placeholder:hover {
+  color: #ffffff;
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(11, 33, 54, 0.22);
+}
+
+.passwall-card-placeholder:hover .passwall-placeholder-arrow {
+  transform: translate(3px, -3px);
+}
+
+/* ==========================================
+   GALLERY FOOTER
+========================================== */
+
+.passwall-gallery-footer {
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 16px;
-  flex-shrink: 0;
-  color: #1B6C31;
-  font-size: 12.5px;
-  font-weight: 800;
-  line-height: 1.35;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 13px 6px 0;
+  color: var(--pw-muted);
+  font-size: 11px;
 }
 
-/* Responsive */
+.passwall-scroll-indicator {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--pw-green);
+  font-weight: 700;
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 1100px) {
+  .passwall-container {
+    grid-template-columns: minmax(260px, 300px) minmax(0, 1fr);
+    gap: 32px;
+  }
+
+  .passwall-title {
+    font-size: 42px;
+  }
+
+  .passwall-card,
+  .passwall-card-placeholder {
+    width: 160px;
+    height: 230px;
+  }
+
+  .passwall-card-placeholder {
+    padding: 15px;
+  }
+}
+
 @media (max-width: 992px) {
   .passwall-container {
-    grid-template-columns: 1fr;
-    gap: 32px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 36px;
   }
 
   .passwall-content {
@@ -253,6 +579,141 @@
   }
 
   .passwall-desc {
+    max-width: 520px;
+  }
+
+  .passwall-title {
+    font-size: 46px;
+  }
+
+  .passwall-title br {
+    display: none;
+  }
+
+  .passwall-title span {
+    margin-left: 0.18em;
+  }
+
+  .passwall-content-actions {
+    align-items: center;
+  }
+
+  .passwall-navigation {
     max-width: 500px;
+    text-align: left;
+  }
+
+  .passwall-gallery-wrap {
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .passwall-container {
+    width: calc(100% - 32px);
+  }
+
+  .passwall-title {
+    font-size: 36px;
+    letter-spacing: -1.3px;
+  }
+
+  .passwall-navigation {
+    margin-top: 24px;
+    padding-top: 16px;
+  }
+
+  .passwall-nav-btn {
+    width: 37px;
+    height: 37px;
+  }
+
+  .passwall-gallery-heading {
+    padding-bottom: 9px;
+  }
+
+  .passwall-gallery-eyebrow {
+    font-size: 11px;
+  }
+
+  .passwall-gallery-count {
+    font-size: 10px;
+  }
+
+  .passwall-grid,
+  .passwall-row {
+    gap: 10px;
+  }
+
+  .passwall-row:nth-child(2) {
+    padding-left: 20px;
+  }
+
+  .passwall-card,
+  .passwall-card-placeholder {
+    width: 140px;
+    height: 210px;
+    border-radius: 12px;
+  }
+
+  .passwall-card-name {
+    font-size: 17px;
+  }
+
+  .passwall-card-location {
+    font-size: 9px;
+  }
+
+  .passwall-success-badge {
+    font-size: 8px;
+    padding: 4px 6px;
+  }
+
+  .passwall-p-plate {
+    width: 24px;
+    height: 26px;
+    font-size: 16px;
+  }
+
+  .passwall-card-watermark {
+    font-size: 7px;
+    letter-spacing: 0.7px;
+  }
+
+  .passwall-card-placeholder {
+    padding: 13px;
+    gap: 10px;
+  }
+
+  .passwall-trophy-icon {
+    width: 37px;
+    height: 37px;
+  }
+
+  .passwall-trophy-icon svg {
+    width: 23px;
+    height: 23px;
+  }
+
+  .passwall-placeholder-content strong {
+    font-size: 17px;
+  }
+
+  .passwall-placeholder-content p {
+    font-size: 10px;
+  }
+
+  .passwall-gallery-footer {
+    font-size: 9px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .passwall-nav-btn:hover,
+  .passwall-card-placeholder:hover .passwall-placeholder-arrow,
+  .passwall-card:hover,
+  .passwall-card-placeholder:hover {
+    transform: none;
   }
 }
