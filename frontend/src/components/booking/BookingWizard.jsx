@@ -401,19 +401,13 @@ export default function BookingWizard({ defaultServiceSlug = null, forcedIsTest 
                 <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.25rem' }}>
                   <button
                     type="button"
-                    className={`button button-full ${selectedTransmission === 'auto' ? 'button-primary' : 'button-outline'}`}
-                    onClick={() => setSelectedTransmission('auto')}
+                    className="button button-full button-primary"
+                    style={{ cursor: 'default' }}
                   >
-                    Automatic
-                  </button>
-                  <button
-                    type="button"
-                    className={`button button-full ${selectedTransmission === 'manual' ? 'button-primary' : 'button-outline'}`}
-                    onClick={() => setSelectedTransmission('manual')}
-                  >
-                    Manual
+                    Automatic (Dual-Control)
                   </button>
                 </div>
+                <span className="form-hint">All lessons and tests are exclusively conducted in modern automatic dual-control vehicles.</span>
               </div>
             </div>
 

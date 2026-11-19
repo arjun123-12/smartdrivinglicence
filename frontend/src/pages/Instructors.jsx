@@ -38,11 +38,6 @@ export default function Instructors() {
 
   const filtered = safeArray(instructors).filter((inst) => {
     if (!inst) return false;
-    if (filterTransmission !== 'all') {
-      if (inst.car_transmission !== filterTransmission && inst.car_transmission !== 'both') {
-        return false;
-      }
-    }
     if (filterExaminerOnly && !inst.is_examiner) {
       return false;
     }
@@ -83,12 +78,10 @@ export default function Instructors() {
               <label className="form-label">Transmission</label>
               <select
                 className="form-select"
-                value={filterTransmission}
-                onChange={(e) => setFilterTransmission(e.target.value)}
+                value="auto"
+                disabled
               >
-                <option value="all">All Transmissions</option>
-                <option value="auto">Automatic Only</option>
-                <option value="manual">Manual Only</option>
+                <option value="auto">100% Automatic Fleet</option>
               </select>
             </div>
 
@@ -160,7 +153,7 @@ export default function Instructors() {
                 </p>
 
                 <div style={{ padding: '0.75rem', backgroundColor: 'var(--color-surface-subtle)', borderRadius: 'var(--radius-md)', fontSize: 'var(--font-size-xs)', marginBottom: '1.25rem' }}>
-                  <div><strong>Vehicle:</strong> {inst.car_model || 'Dual Control Car'} ({String(inst.car_transmission || 'auto').toUpperCase()})</div>
+                  <div><strong>Vehicle:</strong> {inst.car_model || 'Dual Control Car'} (Automatic)</div>
                   <div><strong>Qualifications:</strong> {inst.qualifications || 'Cert IV Transport & Logistics'}</div>
                   <div><strong>Hourly Rate:</strong> ${inst.base_hourly_rate || '85'} AUD {inst.vort_test_rate > 0 && `| VORT: $${inst.vort_test_rate} AUD`}</div>
                 </div>

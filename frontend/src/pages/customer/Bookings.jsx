@@ -152,7 +152,7 @@ export default function CustomerBookings() {
                     <div style={{ color: 'var(--color-text-muted)', fontSize: 'var(--font-size-xs)' }}>INSTRUCTOR</div>
                     <div style={{ fontWeight: 600, marginTop: '0.2rem' }}>{booking.instructor?.name}</div>
                     <div style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-muted)' }}>
-                      {booking.instructor?.car_model} ({booking.instructor?.car_transmission?.toUpperCase()})
+                      {booking.instructor?.car_model} (Automatic)
                     </div>
                   </div>
 

@@ -46,7 +46,7 @@ class PackageController extends Controller
             'supervised_hours' => 'nullable|integer|min:0|max:200',
             'target_timeline' => 'nullable|string|in:asap,within_1_month,within_3_months,flexible',
             'current_licence' => 'nullable|string|in:learner,provisional_1,provisional_2,overseas,none',
-            'transmission_preference' => 'nullable|string|in:auto,manual,either',
+            'transmission_preference' => 'nullable|string|in:auto',
             'name' => 'nullable|string|max:255',
             'email' => 'nullable|email|max:255',
             'phone' => 'nullable|string|max:25',

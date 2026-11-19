@@ -26,7 +26,7 @@ class AvailabilityController extends Controller
             'location_id' => 'required|exists:locations,id',
             'date' => 'required|date|after_or_equal:today',
             'instructor_id' => 'nullable|exists:instructors,id',
-            'transmission' => 'nullable|in:auto,manual,both',
+            'transmission' => 'nullable|string',
         ]);
 
         $service = ServiceType::findOrFail($validated['service_type_id']);

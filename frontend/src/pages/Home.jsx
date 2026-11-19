@@ -350,7 +350,7 @@ export default function Home() {
                 </p>
 
                 <div style={{ width: '100%', fontSize: 'var(--font-size-xs)', borderTop: '1px solid var(--color-border)', paddingTop: '0.75rem', marginBottom: '1rem', textAlign: 'left' }}>
-                  <div><strong>Vehicle:</strong> {inst.car_model || 'Dual Control Car'} ({inst.car_transmission ? inst.car_transmission.toUpperCase() : 'AUTO'})</div>
+                  <div><strong>Vehicle:</strong> {inst.car_model || 'Dual Control Car'} (Automatic)</div>
                   <div><strong>Rate:</strong> ${inst.base_hourly_rate || '85'}/hr {inst.vort_test_rate > 0 && `| VORT: $${inst.vort_test_rate}`}</div>
                 </div>
 

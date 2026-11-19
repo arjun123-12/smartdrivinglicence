@@ -325,8 +325,6 @@ export default function AdminInstructors() {
                     onChange={(e) => setFormData({ ...formData, car_transmission: e.target.value })}
                   >
                     <option value="auto">Automatic</option>
-                    <option value="manual">Manual</option>
-                    <option value="both">Both</option>
                   </select>
                 </div>
 

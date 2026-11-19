@@ -166,12 +166,12 @@ export const mockInstructors = [
     email: 'liam.oconnor@smartdriving.com.au',
     phone: '0412 888 104',
     is_examiner: 0,
-    car_transmission: 'both',
-    car_model: '2023 Volkswagen Golf Dual Control (Manual & Auto)',
+    car_transmission: 'auto',
+    car_model: '2023 Volkswagen Golf Dual Control (Automatic)',
     base_hourly_rate: '90.00',
     vort_test_rate: '230.00',
     is_active: 1,
-    bio: 'Manual driving specialist. Master clutch control, hill starts, and smooth gear transitions.',
+    bio: 'Dual-control automatic specialist. Master hazard perception, smooth steering, and parking confidence.',
   },
 ];
 

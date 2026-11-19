@@ -73,8 +73,8 @@ export default function BookLesson() {
       a: 'You only need to bring your valid South Australian Learner’s Permit (or interim paper permit) and your official South Australian Driving Companion logbook (or app logbook login) so your instructor can sign off your completed hours.',
     },
     {
-      q: 'Can I choose between an automatic and a manual car?',
-      a: 'Yes! We have modern 5-star ANCAP dual-controlled vehicles in both automatic and manual transmissions available across Adelaide.',
+      q: 'What transmission are your training vehicles?',
+      a: 'All our training and test vehicles are modern 5-star ANCAP safety-rated automatic cars fitted with certified dual controls for maximum comfort, safety, and stress-free learning across Adelaide.',
     },
   ];
 
@@ -237,17 +237,10 @@ export default function BookLesson() {
                   <div className="fl-radio-group">
                     <button
                       type="button"
-                      className={`fl-radio-btn ${transmission === 'auto' ? 'active' : ''}`}
-                      onClick={() => setTransmission('auto')}
+                      className="fl-radio-btn active"
+                      style={{ cursor: 'default' }}
                     >
-                      <Car size={16} /> Automatic Car
-                    </button>
-                    <button
-                      type="button"
-                      className={`fl-radio-btn ${transmission === 'manual' ? 'active' : ''}`}
-                      onClick={() => setTransmission('manual')}
-                    >
-                      <Car size={16} /> Manual Car
+                      <Car size={16} /> Automatic (Dual-Control Fleet)
                     </button>
                   </div>
                 </div>
@@ -329,7 +322,7 @@ export default function BookLesson() {
               <div className="fl-step-number">1</div>
               <h3 className="fl-step-title">Book Online in 2 Minutes</h3>
               <p className="fl-step-desc">
-                Select your Adelaide suburb, choose automatic or manual, and pick a convenient day and time from live instructor availability.
+                Select your Adelaide suburb and pick a convenient day and time from live instructor availability.
               </p>
             </div>
 

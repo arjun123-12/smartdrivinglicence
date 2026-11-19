@@ -45,7 +45,7 @@ export default function MockTest() {
         '45° and 90° Angle Parking',
         '3-Point Turn in narrow residential streets',
         'U-Turn with full 360° observation checks',
-        'Hill Start without roll-back (manual & auto)',
+        'Hill Start without roll-back (automatic)',
       ],
     },
     {
