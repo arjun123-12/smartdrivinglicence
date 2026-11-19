@@ -68,20 +68,7 @@ export default function Navbar() {
 
   return (
     <header className="sd-header">
-      {/* Slim announcement bar */}
-      <div className="sd-topbar">
-        <div className="sd-container sd-topbar-inner">
-          <p>
-            <Sparkles size={14} />
-            <span>Your journey to confident driving starts here.</span>
-          </p>
 
-          <a href="tel:0430580111" className="sd-topbar-contact">
-            <Phone size={14} />
-            <span>0430 580 111</span>
-          </a>
-        </div>
-      </div>
 
       {/* Main navigation */}
       <div className="sd-mainbar">
