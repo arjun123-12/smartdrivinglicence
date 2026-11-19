@@ -103,6 +103,21 @@ export const adminService = {
     }
   },
 
+  async reviewInstructorApplication(id) {
+    const res = await api.get(`/admin/instructors/${id}/review`);
+    return res.data;
+  },
+
+  async approveInstructorApplication(id) {
+    const res = await api.post(`/admin/instructors/${id}/approve`);
+    return res.data;
+  },
+
+  async requestInstructorChanges(id, reason) {
+    const res = await api.post(`/admin/instructors/${id}/request-changes`, { reason });
+    return res.data;
+  },
+
   // Packages
   async getPackages() {
     try {

@@ -131,5 +131,121 @@ class AdminInstructorController extends Controller
             'is_active' => $instructor->is_active,
         ]);
     }
+
+    /**
+     * Get complete application review details including vehicle, contact, profile, and private document preview URLs.
+     */
+    public function reviewApplication(int $id): JsonResponse
+    {
+        $instructor = Instructor::with(['locations', 'examinerCredentials'])->findOrFail($id);
+
+        return response()->json([
+            'status' => 'success',
+            'data' => [
+                'id' => $instructor->id,
+                'name' => $instructor->name,
+                'email' => $instructor->email,
+                'phone' => $instructor->phone,
+                'phone_verified_at' => $instructor->phone_verified_at,
+                'verification_status' => $instructor->verification_status,
+                'is_active' => $instructor->is_active,
+                'admin_feedback' => $instructor->admin_feedback,
+                'profile_image' => $instructor->profile_image,
+                'bio' => $instructor->bio,
+                'experience_years' => $instructor->experience_years,
+                'languages' => $instructor->languages,
+                'car_make' => $instructor->car_make,
+                'car_model' => $instructor->car_model,
+                'car_year' => $instructor->car_year,
+                'car_transmission' => $instructor->car_transmission,
+                'car_rego' => $instructor->car_rego,
+                'car_dual_controls' => $instructor->car_dual_controls,
+                'documents' => [
+                    'wwcc' => [
+                        'has_document' => !empty($instructor->doc_wwcc_path),
+                        'preview_url' => !empty($instructor->doc_wwcc_path) ? "/api/v1/instructors/{$instructor->id}/documents/wwcc" : null,
+                    ],
+                    'licence' => [
+                        'has_document' => !empty($instructor->doc_licence_path),
+                        'preview_url' => !empty($instructor->doc_licence_path) ? "/api/v1/instructors/{$instructor->id}/documents/licence" : null,
+                    ],
+                    'permit' => [
+                        'has_document' => !empty($instructor->doc_permit_path),
+                        'preview_url' => !empty($instructor->doc_permit_path) ? "/api/v1/instructors/{$instructor->id}/documents/permit" : null,
+                    ],
+                ],
+                'created_at' => $instructor->created_at,
+                'updated_at' => $instructor->updated_at,
+            ],
+        ]);
+    }
+
+    /**
+     * Approve an instructor application.
+     */
+    public function approveApplication(Request $request, int $id): JsonResponse
+    {
+        $instructor = Instructor::findOrFail($id);
+        $instructor->verification_status = 'approved';
+        $instructor->is_active = true;
+        $instructor->admin_feedback = null;
+        $instructor->save();
+
+        if ($instructor->user) {
+            $instructor->user->is_active = true;
+            $instructor->user->save();
+        }
+
+        AuditLog::create([
+            'user_id' => $request->user()->id,
+            'action' => 'admin_approved_instructor',
+            'entity_type' => 'Instructor',
+            'entity_id' => (string) $instructor->id,
+            'new_values' => ['verification_status' => 'approved', 'is_active' => true],
+            'ip_address' => $request->ip(),
+            'user_agent' => $request->userAgent(),
+        ]);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => "Instructor {$instructor->name} approved successfully.",
+            'instructor' => $instructor,
+        ]);
+    }
+
+    /**
+     * Request changes on an instructor application with specific reason.
+     */
+    public function requestChanges(Request $request, int $id): JsonResponse
+    {
+        $validated = $request->validate([
+            'reason' => 'required|string|min:5|max:2000',
+        ]);
+
+        $instructor = Instructor::findOrFail($id);
+        $instructor->verification_status = 'changes_requested';
+        $instructor->admin_feedback = $validated['reason'];
+        $instructor->is_active = false;
+        $instructor->save();
+
+        AuditLog::create([
+            'user_id' => $request->user()->id,
+            'action' => 'admin_requested_instructor_changes',
+            'entity_type' => 'Instructor',
+            'entity_id' => (string) $instructor->id,
+            'new_values' => [
+                'verification_status' => 'changes_requested',
+                'reason' => $validated['reason'],
+            ],
+            'ip_address' => $request->ip(),
+            'user_agent' => $request->userAgent(),
+        ]);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Changes requested from instructor.',
+            'instructor' => $instructor,
+        ]);
+    }
 }
 

@@ -35,8 +35,9 @@ class AvailabilityController extends Controller
         $dayOfWeek = $targetDate->dayOfWeek; // 0 (Sun) to 6 (Sat)
         $durationMinutes = $service->default_duration_minutes ?? 60;
 
-        // Query eligible instructors
+        // Query eligible instructors (only verified / approved active instructors)
         $instructorQuery = Instructor::where('is_active', true)
+            ->whereIn('verification_status', ['approved', 'verified'])
             ->whereHas('locations', function ($q) use ($location) {
                 $q->where('locations.id', $location->id);
             });
@@ -62,7 +63,8 @@ class AvailabilityController extends Controller
         // Fallback: If no instructors explicitly mapped to this specific suburb yet,
         // use accredited active instructors (examiners for VORT tests) servicing Greater Adelaide
         if ($instructors->isEmpty()) {
-            $fallbackQuery = Instructor::where('is_active', true);
+            $fallbackQuery = Instructor::where('is_active', true)
+                ->whereIn('verification_status', ['approved', 'verified']);
             if ($service->is_test) {
                 $fallbackQuery->where('is_examiner', true);
             }

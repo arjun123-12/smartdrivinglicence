@@ -66,6 +66,21 @@ export function AuthProvider({ children }) {
     }
   };
 
+  const setAuthSession = (newUser, newToken) => {
+    setUser(newUser);
+    setToken(newToken);
+    if (newToken) {
+      localStorage.setItem('smartdriving_token', newToken);
+    } else {
+      localStorage.removeItem('smartdriving_token');
+    }
+    if (newUser) {
+      localStorage.setItem('smartdriving_user', JSON.stringify(newUser));
+    } else {
+      localStorage.removeItem('smartdriving_user');
+    }
+  };
+
   const updateUser = (updatedUser) => {
     setUser(updatedUser);
     localStorage.setItem('smartdriving_user', JSON.stringify(updatedUser));
@@ -79,9 +94,11 @@ export function AuthProvider({ children }) {
     register,
     logout,
     updateUser,
+    setAuthSession,
     isAuthenticated: !!token && !!user,
     isAdmin: user?.role === 'admin' || user?.is_admin === true,
     isCustomer: user?.role === 'customer',
+    isInstructor: user?.role === 'instructor',
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

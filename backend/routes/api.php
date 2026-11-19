@@ -16,6 +16,7 @@ use App\Http\Controllers\Api\V1\Admin\AdminTestimonialController;
 use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\AvailabilityController;
 use App\Http\Controllers\Api\V1\BookingController;
+use App\Http\Controllers\Api\V1\InstructorAuthController;
 use App\Http\Controllers\Api\V1\InstructorController;
 use App\Http\Controllers\Api\V1\LocationController;
 use App\Http\Controllers\Api\V1\PackageController;
@@ -28,6 +29,13 @@ Route::prefix('v1')->group(function () {
     // Public authentication
     Route::post('/auth/login', [AuthController::class, 'login']);
     Route::post('/auth/register', [AuthController::class, 'register']);
+
+    // Instructor Signup & SMS OTP Login
+    Route::post('/instructors/signup', [InstructorAuthController::class, 'signup']);
+    Route::post('/instructors/verify-phone', [InstructorAuthController::class, 'verifyPhone']);
+    Route::post('/instructors/resend-otp', [InstructorAuthController::class, 'resendOtp']);
+    Route::post('/auth/instructor/send-otp', [InstructorAuthController::class, 'sendLoginOtp']);
+    Route::post('/auth/instructor/verify-otp', [InstructorAuthController::class, 'verifyLoginOtp']);
 
     // Public catalog & lookup
     Route::get('/services', [ServiceTypeController::class, 'index']);
@@ -67,12 +75,17 @@ Route::prefix('v1')->group(function () {
     Route::post('/contact', [PublicDataController::class, 'submitEnquiry']);
     Route::get('/settings/public', [PublicDataController::class, 'businessSettings']);
 
-    // Authenticated user / customer routes
+    // Authenticated user / customer / instructor routes
     Route::middleware('auth:sanctum')->group(function () {
         Route::get('/auth/me', [AuthController::class, 'me']);
         Route::put('/auth/profile', [AuthController::class, 'updateProfile']);
         Route::put('/auth/password', [AuthController::class, 'changePassword']);
         Route::post('/auth/logout', [AuthController::class, 'logout']);
+
+        // Instructor private application & document routes
+        Route::get('/instructors/me/application', [InstructorAuthController::class, 'getApplicationStatus']);
+        Route::post('/instructors/me/resubmit', [InstructorAuthController::class, 'resubmitApplication']);
+        Route::get('/instructors/{id}/documents/{type}', [InstructorAuthController::class, 'viewDocument']);
 
         Route::get('/customer/bookings', [BookingController::class, 'customerBookings']);
         Route::post('/customer/bookings/{id}/cancel', [BookingController::class, 'cancel']);
@@ -89,6 +102,9 @@ Route::prefix('v1')->group(function () {
 
         Route::get('/instructors', [AdminInstructorController::class, 'index']);
         Route::post('/instructors', [AdminInstructorController::class, 'store']);
+        Route::get('/instructors/{id}/review', [AdminInstructorController::class, 'reviewApplication']);
+        Route::post('/instructors/{id}/approve', [AdminInstructorController::class, 'approveApplication']);
+        Route::post('/instructors/{id}/request-changes', [AdminInstructorController::class, 'requestChanges']);
         Route::put('/instructors/{id}', [AdminInstructorController::class, 'update']);
         Route::patch('/instructors/{id}/toggle', [AdminInstructorController::class, 'toggleStatus']);
 

@@ -55,7 +55,9 @@ export default function Footer() {
             <div>
               <h4 className="footer-col-title">FOR INSTRUCTORS</h4>
               <ul className="footer-col-links">
-                <li><Link to="/instructors">Work with A1 Smart Driving</Link></li>
+                <li><Link to="/instructor/signup">Apply as Instructor</Link></li>
+                <li><Link to="/instructor/login">Instructor Portal (SMS Login)</Link></li>
+                <li><Link to="/instructors">Instructor Directory</Link></li>
                 <li><Link to="/terms">Instructor Terms and Conditions</Link></li>
               </ul>
             </div>

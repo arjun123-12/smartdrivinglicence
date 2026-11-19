@@ -15,7 +15,7 @@ import {
 import '../../styles/navbar.css';
 
 export default function Navbar() {
-  const { isAuthenticated, isAdmin, logout } = useAuth();
+  const { isAuthenticated, isAdmin, isInstructor, logout } = useAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [resourcesOpen, setResourcesOpen] = useState(false);
   const resourceRef = useRef(null);
@@ -78,6 +78,8 @@ export default function Navbar() {
     { to: '/first-lesson', label: 'First Lesson Quiz' },
     { to: '/mock-test', label: 'VORT Mock Test' },
     { to: '/how-it-works', label: 'How It Works' },
+    { to: '/instructor/signup', label: 'Become an Instructor' },
+    { to: '/instructor/login', label: 'Instructor Portal (SMS)' },
     { to: '/faqs', label: 'FAQs' },
     { to: '/about', label: 'About Us' },
   ];
@@ -155,14 +157,25 @@ export default function Navbar() {
                   </Link>
                 )}
 
-                <Link
-                  to="/dashboard"
-                  className="sd-account-button"
-                  onClick={closeMenu}
-                >
-                  <UserRound size={17} />
-                  <span>Dashboard</span>
-                </Link>
+                {isInstructor ? (
+                  <Link
+                    to="/instructor/status"
+                    className="sd-account-button"
+                    onClick={closeMenu}
+                  >
+                    <Car size={17} />
+                    <span>Instructor Portal</span>
+                  </Link>
+                ) : (
+                  <Link
+                    to="/dashboard"
+                    className="sd-account-button"
+                    onClick={closeMenu}
+                  >
+                    <UserRound size={17} />
+                    <span>Dashboard</span>
+                  </Link>
+                )}
 
                 <button
                   type="button"
@@ -258,14 +271,25 @@ export default function Navbar() {
                 </NavLink>
               )}
 
-              <NavLink
-                to="/dashboard"
-                className={navClass}
-                onClick={closeMenu}
-              >
-                <UserRound size={18} />
-                <span>My Dashboard</span>
-              </NavLink>
+              {isInstructor ? (
+                <NavLink
+                  to="/instructor/status"
+                  className={navClass}
+                  onClick={closeMenu}
+                >
+                  <Car size={18} />
+                  <span>Instructor Portal</span>
+                </NavLink>
+              ) : (
+                <NavLink
+                  to="/dashboard"
+                  className={navClass}
+                  onClick={closeMenu}
+                >
+                  <UserRound size={18} />
+                  <span>My Dashboard</span>
+                </NavLink>
+              )}
 
               <button
                 type="button"

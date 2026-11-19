@@ -12,6 +12,7 @@ class InstructorController extends Controller
     public function index(Request $request): JsonResponse
     {
         $query = Instructor::where('is_active', true)
+            ->whereIn('verification_status', ['approved', 'verified'])
             ->with(['locations', 'examinerCredentials']);
 
         if ($request->filled('transmission')) {
@@ -46,6 +47,7 @@ class InstructorController extends Controller
     public function show(int $id): JsonResponse
     {
         $instructor = Instructor::where('is_active', true)
+            ->whereIn('verification_status', ['approved', 'verified'])
             ->with(['locations', 'examinerCredentials', 'availabilities' => function ($q) {
                 $q->where('is_active', true);
             }])

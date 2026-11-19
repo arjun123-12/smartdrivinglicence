@@ -31,6 +31,12 @@ import Login from '../pages/Login';
 import Register from '../pages/Register';
 import ForgotPassword from '../pages/ForgotPassword';
 
+// Instructor Portal Pages
+import InstructorSignup from '../pages/instructor/InstructorSignup';
+import InstructorLogin from '../pages/instructor/InstructorLogin';
+import InstructorVerifyPhone from '../pages/instructor/InstructorVerifyPhone';
+import InstructorStatus from '../pages/instructor/InstructorStatus';
+
 // Customer Pages
 import CustomerDashboard from '../pages/customer/Dashboard';
 import CustomerBookings from '../pages/customer/Bookings';
@@ -78,6 +84,12 @@ export default function AppRoutes() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
+
+        {/* Instructor Portal Routes */}
+        <Route path="/instructor/signup" element={<InstructorSignup />} />
+        <Route path="/instructor/login" element={<InstructorLogin />} />
+        <Route path="/instructor/verify-phone" element={<InstructorVerifyPhone />} />
+        <Route path="/instructor/status" element={<InstructorStatus />} />
       </Route>
 
       {/* Customer Protected Pages with CustomerLayout */}
