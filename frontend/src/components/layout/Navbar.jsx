@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import {
   Car,
@@ -9,8 +9,8 @@ import {
   ShieldCheck,
   LogOut,
   ChevronDown,
-  Phone,
-  Sparkles,
+  ArrowRight,
+  ArrowUpRight,
 } from 'lucide-react';
 import '../../styles/navbar.css';
 
@@ -18,7 +18,38 @@ export default function Navbar() {
   const { isAuthenticated, isAdmin, logout } = useAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [resourcesOpen, setResourcesOpen] = useState(false);
+  const resourceRef = useRef(null);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Close menus on route change
+  useEffect(() => {
+    setMobileOpen(false);
+    setResourcesOpen(false);
+  }, [location.pathname]);
+
+  // Close dropdown on outside click or Escape key
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (resourceRef.current && !resourceRef.current.contains(event.target)) {
+        setResourcesOpen(false);
+      }
+    };
+
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setResourcesOpen(false);
+        setMobileOpen(false);
+      }
+    };
+
+    document.addEventListener('pointerdown', handleOutsideClick);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('pointerdown', handleOutsideClick);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
 
   const closeMenu = () => {
     setMobileOpen(false);
@@ -54,25 +85,11 @@ export default function Navbar() {
   const navClass = ({ isActive }) =>
     `sd-nav-link${isActive ? ' active' : ''}`;
 
-  const renderNavItems = (items) =>
-    (Array.isArray(items) ? items : []).map((item) => (
-      <NavLink
-        key={item.to}
-        to={item.to}
-        className={navClass}
-        onClick={closeMenu}
-      >
-        {item.label}
-      </NavLink>
-    ));
-
   return (
     <header className="sd-header">
-
-
-      {/* Main navigation */}
       <div className="sd-mainbar">
         <div className="sd-container sd-mainbar-inner">
+          {/* Brand Logo */}
           <Link to="/" className="sd-brand" onClick={closeMenu}>
             <img
               src="/logo.png"
@@ -81,37 +98,49 @@ export default function Navbar() {
             />
           </Link>
 
-          {/* Desktop navigation */}
-          <nav
-            className="sd-desktop-nav"
-            aria-label="Main navigation"
-          >
-            {renderNavItems(navItems)}
+          {/* Desktop Navigation */}
+          <nav className="sd-desktop-nav" aria-label="Main navigation">
+            {navItems.map((item) => (
+              <NavLink
+                key={item.to}
+                to={item.to}
+                className={navClass}
+                onClick={closeMenu}
+              >
+                {item.label}
+              </NavLink>
+            ))}
 
-            <div className="sd-resource-wrap">
+            {/* Resources Dropdown */}
+            <div className="sd-resource-wrap" ref={resourceRef}>
               <button
                 type="button"
-                className={`sd-nav-link sd-resource-trigger${resourcesOpen ? ' active' : ''
-                  }`}
+                className={`sd-nav-link sd-resource-trigger${resourcesOpen ? ' active' : ''}`}
                 onClick={() => setResourcesOpen((open) => !open)}
                 aria-expanded={resourcesOpen}
               >
-                Resources
-                <ChevronDown
-                  size={15}
-                  className={resourcesOpen ? 'sd-chevron-open' : ''}
-                />
+                <span>Resources</span>
+                <ChevronDown size={15} className={`sd-chevron-icon ${resourcesOpen ? 'is-open' : ''}`} />
               </button>
 
               {resourcesOpen && (
                 <div className="sd-resource-menu">
-                  {renderNavItems(resourceItems)}
+                  {resourceItems.map((res) => (
+                    <NavLink
+                      key={res.to}
+                      to={res.to}
+                      className={navClass}
+                      onClick={closeMenu}
+                    >
+                      {res.label}
+                    </NavLink>
+                  ))}
                 </div>
               )}
             </div>
           </nav>
 
-          {/* Account actions */}
+          {/* Header Action Buttons */}
           <div className="sd-header-actions">
             {isAuthenticated ? (
               <>
@@ -160,13 +189,13 @@ export default function Navbar() {
                   className="sd-cta-button"
                   onClick={closeMenu}
                 >
-                  Book a Test
-                  <span aria-hidden="true">↗</span>
+                  <span>Book a Test</span>
+                  <ArrowUpRight size={16} />
                 </Link>
               </>
             )}
 
-            {/* Mobile menu toggle */}
+            {/* Mobile Toggle Button */}
             <button
               type="button"
               className="sd-mobile-toggle"
@@ -181,7 +210,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile navigation drawer */}
+      {/* Mobile Navigation Drawer */}
       <div
         id="sd-mobile-menu"
         className={`sd-mobile-menu${mobileOpen ? ' is-open' : ''}`}
@@ -190,8 +219,27 @@ export default function Navbar() {
         <nav className="sd-mobile-nav" aria-label="Mobile navigation">
           <p className="sd-mobile-label">EXPLORE</p>
 
-          {renderNavItems(navItems)}
-          {renderNavItems(resourceItems)}
+          {navItems.map((item) => (
+            <NavLink
+              key={item.to}
+              to={item.to}
+              className={navClass}
+              onClick={closeMenu}
+            >
+              {item.label}
+            </NavLink>
+          ))}
+
+          {resourceItems.map((item) => (
+            <NavLink
+              key={item.to}
+              to={item.to}
+              className={navClass}
+              onClick={closeMenu}
+            >
+              {item.label}
+            </NavLink>
+          ))}
 
           <div className="sd-mobile-divider" />
 
@@ -206,7 +254,7 @@ export default function Navbar() {
                   onClick={closeMenu}
                 >
                   <ShieldCheck size={18} />
-                  Admin Panel
+                  <span>Admin Panel</span>
                 </NavLink>
               )}
 
@@ -216,7 +264,7 @@ export default function Navbar() {
                 onClick={closeMenu}
               >
                 <UserRound size={18} />
-                My Dashboard
+                <span>My Dashboard</span>
               </NavLink>
 
               <button
@@ -225,7 +273,7 @@ export default function Navbar() {
                 onClick={handleLogout}
               >
                 <LogOut size={18} />
-                Log Out
+                <span>Log Out</span>
               </button>
             </>
           ) : (
@@ -243,7 +291,8 @@ export default function Navbar() {
                 className="sd-cta-button sd-mobile-cta"
                 onClick={closeMenu}
               >
-                Create Account <span aria-hidden="true">↗</span>
+                <span>Create Account</span>
+                <ArrowUpRight size={15} />
               </Link>
             </div>
           )}
@@ -263,7 +312,7 @@ export default function Navbar() {
         </nav>
       </div>
 
-      {/* Mobile backdrop */}
+      {/* Mobile Backdrop */}
       {mobileOpen && (
         <button
           type="button"
