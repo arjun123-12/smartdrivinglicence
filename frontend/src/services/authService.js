@@ -1,22 +1,43 @@
 import api from './api';
-import { mockAdminUser, mockCustomerUser } from './mockData';
+import { mockAdminUser, mockCustomerUser, mockTesterUser } from './mockData';
 
 export const authService = {
-  async login(credentials) {
+  async getSiteStatus() {
+    try {
+      const response = await api.get('/site/status');
+      return response.data;
+    } catch {
+      return {
+        status: 'success',
+        development_mode: false,
+        preview_allowed: false,
+      };
+    }
+  },
+
+  async login(credentials, options = {}) {
     const email = (credentials?.email || '').toLowerCase().trim();
     const password = (credentials?.password || '').trim();
 
     const validAdminPass = ['password123!', 'admin', 'admin123', 'admin@123', '12345678', 'password'];
     const validCustomerPass = ['password123!', 'learner', 'learner123', 'customer', 'password', '12345678'];
+    const validTesterPass = ['password123!', 'tester', 'tester123', 'password', '12345678'];
 
     const isStaticAdmin = (email.includes('admin') || email === 'admin@smartdriving.com.au') &&
       (validAdminPass.includes(password.toLowerCase()) || password === 'Password123!');
+
+    const isStaticTester = (email.includes('tester') || email === 'tester@smartdriving.com.au' || email === 'stripetest@smartdriving.com.au') &&
+      (validTesterPass.includes(password.toLowerCase()) || password === 'Password123!');
 
     const isStaticCustomer = (email.includes('learner') || email.includes('customer') || email === 'learner@smartdriving.com.au') &&
       (validCustomerPass.includes(password.toLowerCase()) || password === 'Password123!');
 
     try {
-      const response = await api.post('/auth/login', credentials);
+      const payload = {
+        ...credentials,
+        require_preview: options.isSecureLogin || options.require_preview || false,
+      };
+      const response = await api.post('/auth/login', payload);
       if (response.data.token) {
         localStorage.setItem('smartdriving_token', response.data.token);
         localStorage.setItem('smartdriving_user', JSON.stringify(response.data.user));
@@ -36,7 +57,25 @@ export const authService = {
         };
       }
 
+      if (isStaticTester) {
+        const token = 'static-tester-token-' + Date.now();
+        localStorage.setItem('smartdriving_token', token);
+        localStorage.setItem('smartdriving_user', JSON.stringify(mockTesterUser));
+        return {
+          status: 'success',
+          message: 'Authorized Tester Static Demo Login Successful',
+          token,
+          user: mockTesterUser,
+        };
+      }
+
       if (isStaticCustomer) {
+        if (options.isSecureLogin || options.require_preview) {
+          const error = new Error('Access denied: Only administrators and explicitly authorized testers have preview access during development mode.');
+          error.response = { status: 403, data: { message: error.message } };
+          throw error;
+        }
+
         const token = 'static-customer-token-' + Date.now();
         localStorage.setItem('smartdriving_token', token);
         localStorage.setItem('smartdriving_user', JSON.stringify(mockCustomerUser));

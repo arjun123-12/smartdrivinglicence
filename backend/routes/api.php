@@ -69,7 +69,8 @@ Route::prefix('v1')->group(function () {
     Route::post('/payments/process', [PaymentController::class, 'processPayment']);
     Route::post('/payments/webhook', [PaymentController::class, 'webhook']);
 
-    // Public CMS & enquiries
+    // Public CMS & enquiries & site status
+    Route::get('/site/status', [PublicDataController::class, 'siteStatus']);
     Route::get('/faqs', [PublicDataController::class, 'faqs']);
     Route::get('/testimonials', [PublicDataController::class, 'testimonials']);
     Route::post('/contact', [PublicDataController::class, 'submitEnquiry']);

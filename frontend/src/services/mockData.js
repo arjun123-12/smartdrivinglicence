@@ -28,6 +28,18 @@ export const mockCustomerUser = {
   },
 };
 
+export const mockTesterUser = {
+  id: 35,
+  name: 'Authorized QA Tester',
+  email: 'tester@smartdriving.com.au',
+  phone: '+61 412 000 999',
+  role: 'customer',
+  is_admin: false,
+  is_tester: true,
+  can_preview: true,
+  customer_profile: null,
+};
+
 export const mockServices = [
   { id: 1, name: 'VORT Driving Test', slug: 'vort-test', is_test: true, default_price: '240.00', default_duration_minutes: 90, duration_minutes: 90, description: 'Official South Australia Vehicle On Road Test' },
   { id: 2, name: 'PreVORT Warmup + VORT Test Bundle', slug: 'prevort-warmup-test', is_test: true, default_price: '340.00', default_duration_minutes: 150, duration_minutes: 150, description: '1-hr warm-up lesson followed immediately by the official VORT test' },

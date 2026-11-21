@@ -12,8 +12,12 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        $middleware->api(prepend: [
+            \App\Http\Middleware\EnforceDevelopmentMode::class,
+        ]);
         $middleware->alias([
             'admin' => \App\Http\Middleware\EnsureAdmin::class,
+            'dev_mode' => \App\Http\Middleware\EnforceDevelopmentMode::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

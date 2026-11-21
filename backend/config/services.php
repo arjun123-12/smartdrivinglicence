@@ -49,4 +49,9 @@ return [
         ],
     ],
 
+    'site' => [
+        'development_mode' => (bool) env('SITE_DEVELOPMENT_MODE', false),
+        'tester_emails' => array_filter(array_map('trim', explode(',', env('SITE_TESTER_EMAILS', 'tester@smartdriving.com.au,stripetest@smartdriving.com.au')))),
+    ],
+
 ];

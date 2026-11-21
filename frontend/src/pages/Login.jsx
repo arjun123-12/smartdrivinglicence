@@ -23,6 +23,8 @@ export default function Login() {
     try {
       const data = await login({ email, password });
       const isAdminUser = data.user?.is_admin || data.user?.role === 'admin';
+      const isTesterUser = data.user?.is_tester || data.user?.role === 'tester' ||
+        (data.user?.email && ['tester@smartdriving.com.au', 'stripetest@smartdriving.com.au'].includes(data.user.email.toLowerCase()));
 
       if (isAdminUser) {
         if (from && from.startsWith('/admin')) {
@@ -30,6 +32,8 @@ export default function Login() {
         } else {
           navigate('/admin', { replace: true });
         }
+      } else if (isTesterUser) {
+        navigate(from || '/', { replace: true });
       } else {
         if (from && !from.startsWith('/admin')) {
           navigate(from, { replace: true });

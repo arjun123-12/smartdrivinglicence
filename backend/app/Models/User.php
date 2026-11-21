@@ -51,6 +51,21 @@ class User extends Authenticatable
         return $this->role === 'instructor';
     }
 
+    public function isAuthorizedTester(): bool
+    {
+        if ($this->role === 'tester') {
+            return true;
+        }
+
+        $testerEmails = config('services.site.tester_emails', []);
+        return in_array(strtolower($this->email), array_map('strtolower', (array) $testerEmails));
+    }
+
+    public function canAccessDevelopmentPreview(): bool
+    {
+        return $this->isAdmin() || $this->isAuthorizedTester();
+    }
+
     public function customerProfile()
     {
         return $this->hasOne(CustomerProfile::class);

@@ -88,10 +88,37 @@ class PublicDataController extends Controller
         ];
 
         $settings = Setting::whereIn('key', $keys)->pluck('value', 'key');
+        $settings['development_mode'] = (bool) config('services.site.development_mode', false);
 
         return response()->json([
             'status' => 'success',
             'settings' => $settings,
+        ]);
+    }
+
+    /**
+     * Return current development mode and preview authorization status.
+     */
+    public function siteStatus(Request $request): JsonResponse
+    {
+        $isDevMode = (bool) config('services.site.development_mode', false);
+        $user = $request->user('sanctum') ?? auth('sanctum')->user();
+        $canPreview = $user ? $user->canAccessDevelopmentPreview() : false;
+
+        return response()->json([
+            'status' => 'success',
+            'development_mode' => $isDevMode,
+            'preview_allowed' => $canPreview,
+            'authenticated' => (bool) $user,
+            'user' => $user ? [
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+                'role' => $user->role,
+                'is_admin' => $user->isAdmin(),
+                'is_tester' => $user->isAuthorizedTester(),
+                'can_preview' => $canPreview,
+            ] : null,
         ]);
     }
 }

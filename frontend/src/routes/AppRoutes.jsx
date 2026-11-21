@@ -1,5 +1,6 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 // Layouts
 import PublicLayout from '../layouts/PublicLayout';
@@ -9,6 +10,10 @@ import AdminLayout from '../layouts/AdminLayout';
 // Route Guards
 import ProtectedRoute from './ProtectedRoute';
 import AdminRoute from './AdminRoute';
+
+// Development Mode & Preview Pages
+import UnderDevelopment from '../pages/UnderDevelopment';
+import SecureLogin from '../pages/SecureLogin';
 
 // Public Pages
 import Home from '../pages/Home';
@@ -57,11 +62,37 @@ import AdminTestimonials from '../pages/admin/Testimonials';
 import AdminSettings from '../pages/admin/Settings';
 
 export default function AppRoutes() {
+  const { isDevelopmentMode, hasPreviewAccess, siteStatusLoaded } = useAuth();
+
+  // If initial site status check is loading, show clean loader to avoid layout flash
+  if (!siteStatusLoaded) {
+    return (
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#0f172a' }}>
+        <div className="loading-spinner" />
+      </div>
+    );
+  }
+
+  // 1. When development mode is active and the visitor is NOT an authorized previewer:
+  // Show "Website Under Development" at / and send unauthenticated visitors from other public pages to /
+  // /securelogin remains accessible as the private preview entry
+  if (isDevelopmentMode && !hasPreviewAccess) {
+    return (
+      <Routes>
+        <Route path="/" element={<UnderDevelopment />} />
+        <Route path="/securelogin" element={<SecureLogin />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    );
+  }
+
+  // 2. Normal site routes (when development mode is off OR when visitor is an authorized previewer)
   return (
     <Routes>
       {/* Public Pages with PublicLayout */}
       <Route element={<PublicLayout />}>
         <Route path="/" element={<Home />} />
+        <Route path="/securelogin" element={<SecureLogin />} />
         <Route path="/book-test" element={<BookTest />} />
         <Route path="/book-lesson" element={<BookLesson />} />
         <Route path="/first-lesson" element={<FirstLesson />} />
@@ -134,4 +165,3 @@ export default function AppRoutes() {
     </Routes>
   );
 }
-

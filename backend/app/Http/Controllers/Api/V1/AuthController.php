@@ -37,6 +37,16 @@ class AuthController extends Controller
             ], 403);
         }
 
+        $isDevMode = (bool) config('services.site.development_mode', false);
+        $canPreview = $user->canAccessDevelopmentPreview();
+
+        if ($request->boolean('require_preview') && !$canPreview) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Access denied: Only administrators and explicitly authorized testers have preview access during development mode.',
+            ], 403);
+        }
+
         // Revoke prior tokens if any, or generate fresh one
         $token = $user->createToken('auth-token', [$user->role])->plainTextToken;
 
@@ -44,6 +54,8 @@ class AuthController extends Controller
             'status' => 'success',
             'message' => 'Login successful',
             'token' => $token,
+            'development_mode' => $isDevMode,
+            'can_preview' => $canPreview,
             'user' => [
                 'id' => $user->id,
                 'name' => $user->name,
@@ -51,6 +63,8 @@ class AuthController extends Controller
                 'phone' => $user->phone,
                 'role' => $user->role,
                 'is_admin' => $user->isAdmin(),
+                'is_tester' => $user->isAuthorizedTester(),
+                'can_preview' => $canPreview,
                 'customer_profile' => $user->customerProfile,
             ],
         ]);
@@ -123,6 +137,8 @@ class AuthController extends Controller
                 'phone' => $user->phone,
                 'role' => $user->role,
                 'is_admin' => $user->isAdmin(),
+                'is_tester' => $user->isAuthorizedTester(),
+                'can_preview' => $user->canAccessDevelopmentPreview(),
                 'customer_profile' => $user->customerProfile,
                 'unread_notifications' => $user->notifications()->whereNull('read_at')->count(),
             ],
