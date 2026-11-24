@@ -25,6 +25,7 @@ import StudentStories from '../components/home/StudentStories';
 import WhyPreVort from '../components/home/WhyPreVort';
 import FaqSection from '../components/home/FaqSection';
 import ImportantInfo from '../components/home/ImportantInfo';
+import SectionHeading from '../components/typography/SectionHeading';
 import TiltCard from '../components/effects/TiltCard';
 import ScrollReveal from '../components/effects/ScrollReveal';
 import MagneticButton from '../components/effects/MagneticButton';
@@ -157,13 +158,16 @@ export default function Home() {
       {/* 4. POPULAR LESSON PACKAGES */}
       <section className="section">
         <div className="container">
-          <div className="section-header">
-            <span className="section-tag">Save with Package Bundles</span>
-            <h2 className="section-title">South Australia Lesson Packages</h2>
-            <p className="section-description">
-              Compare package hours, pre-test warmups, and VORT exam inclusions. Backed by our high pass rate guarantee.
-            </p>
-          </div>
+          <SectionHeading
+            eyebrow="Save with Package Bundles"
+            eyebrowIcon={Award}
+            liveDot={true}
+            title="South Australia Lesson Packages"
+            highlightWord="Lesson Packages"
+            subtitle="Compare package hours, pre-test warmups, and VORT exam inclusions. Backed by our high pass rate guarantee."
+            theme="light"
+            size="lg"
+          />
 
           <div className="grid grid-4">
             {safeArray(packages).map((pkg, idx) => (
@@ -223,13 +227,16 @@ export default function Home() {
       {/* 4. VERIFIED INSTRUCTORS & EXAMINERS */}
       <section className="section section-subtle">
         <div className="container">
-          <div className="section-header">
-            <span className="section-tag">Qualified Professionals</span>
-            <h2 className="section-title">Meet Our Adelaide Instructors & Examiners</h2>
-            <p className="section-description">
-              All instructors hold current South Australian Motor Driving Instructor licenses, Working with Children clearances, and dual-controlled 5-star ANCAP vehicles.
-            </p>
-          </div>
+          <SectionHeading
+            eyebrow="Qualified Professionals"
+            eyebrowIcon={ShieldCheck}
+            liveDot={true}
+            title="Meet Our Adelaide Instructors & Examiners"
+            highlightWord="Instructors & Examiners"
+            subtitle="All instructors hold current South Australian Motor Driving Instructor licenses, Working with Children clearances, and dual-controlled 5-star ANCAP vehicles."
+            theme="light"
+            size="lg"
+          />
 
           <div className="grid grid-4">
             {safeArray(instructors).map((inst, idx) => (
@@ -296,15 +303,19 @@ export default function Home() {
                   boxShadow: 'var(--shadow-3d-floating)',
                 }}
               >
-                <span className="badge-3d" style={{ background: 'rgba(255, 255, 255, 0.15)', borderColor: 'rgba(255, 255, 255, 0.4)', color: '#ffffff', marginBottom: '1.25rem' }}>
-                  South Australia Official Test Pathway
-                </span>
-                <h2 style={{ fontSize: 'clamp(2rem, 3.5vw, 2.75rem)', color: '#ffffff', marginBottom: '1rem', fontWeight: 800 }}>
-                  Ready to Get Your P-Plates?
-                </h2>
-                <p style={{ fontSize: '1.15rem', color: '#e2e8f0', marginBottom: '2.5rem', maxWidth: '620px', margin: '0 auto 2.5rem' }}>
-                  Book your driving lesson or official South Australian VORT test online today. Instant real-time confirmation with accredited examiners.
-                </p>
+                <SectionHeading
+                  eyebrow="South Australia Official Test Pathway"
+                  eyebrowIcon={Sparkles}
+                  liveDot={true}
+                  title="Ready to Get Your P-Plates?"
+                  highlightWord="P-Plates?"
+                  highlightVariant="emerald"
+                  subtitle="Book your driving lesson or official South Australian VORT test online today. Instant real-time confirmation with accredited examiners."
+                  theme="dark"
+                  size="lg"
+                  underline={true}
+                  style={{ marginBottom: '2.5rem' }}
+                />
                 <div style={{ display: 'flex', gap: '1.25rem', justifyContent: 'center', flexWrap: 'wrap' }}>
                   <MagneticButton as={Link} to="/book-test" variant="gold">
                     <span>Book a VORT Test Now</span>

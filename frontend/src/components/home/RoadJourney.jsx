@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import ScrollReveal from '../effects/ScrollReveal';
 import TiltCard from '../effects/TiltCard';
 import MagneticButton from '../effects/MagneticButton';
+import SectionHeading from '../typography/SectionHeading';
 import {
   Compass,
   FileCheck,
@@ -93,49 +94,16 @@ export default function RoadJourney() {
     >
       <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
         {/* Section Header */}
-        <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 4rem' }}>
-          <div
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              backgroundColor: 'var(--color-primary-light, #EBF5EE)',
-              color: 'var(--color-primary, #1B6C31)',
-              padding: '6px 14px',
-              borderRadius: '9999px',
-              fontSize: '0.85rem',
-              fontWeight: 700,
-              textTransform: 'uppercase',
-              letterSpacing: '0.05em',
-              marginBottom: '1rem',
-            }}
-          >
-            <Compass size={16} /> The Adelaide Licence Journey
-          </div>
-
-          <h2
-            style={{
-              fontSize: 'clamp(2.1rem, 3.8vw, 3rem)',
-              fontWeight: 900,
-              color: 'var(--color-secondary, #0D2645)',
-              letterSpacing: '-0.02em',
-              lineHeight: 1.15,
-            }}
-          >
-            From Learner Ls to Provisional Ps in 4 Simple Steps
-          </h2>
-
-          <p
-            style={{
-              fontSize: '1.05rem',
-              color: 'var(--color-text-muted, #5A6E7F)',
-              marginTop: '1rem',
-              lineHeight: 1.6,
-            }}
-          >
-            No guesswork, no stress. Follow our proven South Australian training roadmap designed to get you test-ready and licensed with first-time confidence.
-          </p>
-        </div>
+        <SectionHeading
+          eyebrow="The Adelaide Licence Journey"
+          eyebrowIcon={Compass}
+          liveDot={true}
+          title="From Learner Ls to Provisional Ps in 4 Simple Steps"
+          highlightWord="Provisional Ps"
+          subtitle="No guesswork, no stress. Follow our proven South Australian training roadmap designed to get you test-ready and licensed with first-time confidence."
+          theme="light"
+          size="lg"
+        />
 
         {/* 4-Step Interactive Grid */}
         <div

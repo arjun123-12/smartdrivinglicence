@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Info } from 'lucide-react';
+import SectionHeading from '../typography/SectionHeading';
 import '../../styles/home-sections.css';
 
 const importantCards = [
@@ -39,7 +40,16 @@ export default function ImportantInfo() {
   return (
     <section className="important-info-section">
       <div className="important-info-container">
-        <h2 className="important-info-title">Important Information</h2>
+        <SectionHeading
+          eyebrow="Transparent Service"
+          eyebrowIcon={Info}
+          liveDot={true}
+          title="Important Information Before You Book"
+          highlightWord="Before You Book"
+          subtitle="Everything you need to know about independent examiner regulations, scoring criteria, and test day requirements."
+          theme="light"
+          size="md"
+        />
 
         <div className="important-info-list">
           {(Array.isArray(importantCards) ? importantCards : []).map((card, index) => {

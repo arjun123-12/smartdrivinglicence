@@ -4,6 +4,8 @@ import { CheckCircle, AlertTriangle, Award, Car, Clock, ArrowRight, ShieldCheck,
 import TiltCard from '../components/effects/TiltCard';
 import ScrollReveal from '../components/effects/ScrollReveal';
 import MagneticButton from '../components/effects/MagneticButton';
+import PageHeading from '../components/typography/PageHeading';
+import SectionHeading from '../components/typography/SectionHeading';
 
 const RoadScenario3D = lazy(() => import('../components/3d/RoadScenario3D'));
 
@@ -11,48 +13,29 @@ export default function HowItWorks() {
   return (
     <div className="scene-perspective-container">
       {/* 3D Page Header */}
-      <section
-        className="page-header"
-        style={{
-          background: 'linear-gradient(135deg, #07172b 0%, #0d2645 100%)',
-          color: '#ffffff',
-          position: 'relative',
-          overflow: 'hidden',
-          padding: '4rem 1.5rem 3.5rem',
-          textAlign: 'center',
-          borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-        }}
-      >
-        <div className="container" style={{ maxWidth: '900px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
-          <ScrollReveal direction="down" distance={25}>
-            <span className="badge-3d" style={{ marginBottom: '1.25rem' }}>
-              <ShieldCheck size={14} /> South Australia Official Licensing Guide
-            </span>
-            <h1 style={{ fontSize: 'clamp(2.2rem, 4vw, 3.2rem)', fontWeight: 800, marginBottom: '1rem', color: '#ffffff', letterSpacing: '-0.02em' }}>
-              How the Vehicle On Road Test (VORT) Works
-            </h1>
-            <p style={{ fontSize: '1.15rem', color: '#cbd5e1', maxWidth: '750px', margin: '0 auto', lineHeight: 1.6 }}>
-              Understand the complete path from learner's permit to P1 provisional licence in South Australia, including test hubs, manoeuvres, and scoring benchmarks.
-            </p>
-          </ScrollReveal>
-        </div>
-      </section>
+      <PageHeading
+        badge="South Australia Official Licensing Guide"
+        badgeIcon={ShieldCheck}
+        liveDot={true}
+        title="How the Vehicle On Road Test (VORT) Works"
+        highlightWord="VORT"
+        subtitle="Understand the complete path from learner's permit to P1 provisional licence in South Australia, including test hubs, manoeuvres, and scoring benchmarks."
+      />
 
       <div className="container section">
         {/* Interactive 3D Manoeuvre Showcase */}
         <div style={{ maxWidth: '960px', margin: '0 auto 4rem auto' }}>
           <ScrollReveal direction="up" distance={30}>
-            <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-              <span className="badge-3d" style={{ marginBottom: '0.5rem' }}>
-                <Compass size={14} /> Interactive 3D Simulation
-              </span>
-              <h2 style={{ fontSize: '2rem', color: '#ffffff', fontWeight: 800 }}>
-                Visualise the 5 Mandatory Manoeuvres
-              </h2>
-              <p style={{ color: '#94a3b8', fontSize: '1rem', maxWidth: '650px', margin: '0 auto' }}>
-                Test criteria require safe vehicle control, accurate mirror observation, and blind spot checks. Toggle between manoeuvres in 3D:
-              </p>
-            </div>
+          <SectionHeading
+            eyebrow="Interactive 3D Simulation"
+            eyebrowIcon={Compass}
+            liveDot={true}
+            title="Visualise the 5 Mandatory Manoeuvres"
+            highlightWord="5 Mandatory Manoeuvres"
+            subtitle="Test criteria require safe vehicle control, accurate mirror observation, and blind spot checks. Toggle between manoeuvres in 3D:"
+            theme="dark"
+            size="md"
+          />
             <Suspense fallback={<div className="loading-spinner" style={{ minHeight: '380px' }} />}>
               <RoadScenario3D />
             </Suspense>

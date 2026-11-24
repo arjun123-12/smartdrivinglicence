@@ -29,21 +29,60 @@ body {
   flex-direction: column;
 }
 
-/* Headings */
+/* Headings - Modern Automotive Typography System */
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-family-heading);
-  font-weight: 700;
-  line-height: 1.25;
-  color: var(--color-primary);
+  font-family: var(--font-family-heading, 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif);
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--color-secondary, #0D2645);
+  margin-top: 0;
   margin-bottom: var(--spacing-sm);
+  text-wrap: balance;
 }
 
-h1 { font-size: var(--font-size-4xl); }
-h2 { font-size: var(--font-size-3xl); }
-h3 { font-size: var(--font-size-2xl); }
-h4 { font-size: var(--font-size-xl); }
-h5 { font-size: var(--font-size-lg); }
-h6 { font-size: var(--font-size-base); }
+h1 {
+  font-size: var(--font-size-h1, var(--sd-font-h1, clamp(2.15rem, 3.8vw, 3.25rem)));
+  font-weight: 850;
+  line-height: var(--lh-heading, 1.18);
+  letter-spacing: var(--tracking-tightest, -0.035em);
+}
+
+h2 {
+  font-size: var(--font-size-h2, var(--sd-font-h2, clamp(1.75rem, 2.9vw, 2.5rem)));
+  font-weight: 800;
+  line-height: var(--lh-heading, 1.18);
+  letter-spacing: var(--tracking-tighter, -0.025em);
+}
+
+h3 {
+  font-size: var(--font-size-h3, var(--sd-font-h3, clamp(1.3rem, 2.0vw, 1.75rem)));
+  font-weight: 750;
+  line-height: var(--lh-card, 1.32);
+  letter-spacing: var(--tracking-tight, -0.015em);
+}
+
+h4 {
+  font-size: var(--font-size-h4, var(--sd-font-h4, clamp(1.1rem, 1.4vw, 1.35rem)));
+  font-weight: 700;
+  line-height: var(--lh-card, 1.32);
+  letter-spacing: var(--tracking-normal, 0em);
+}
+
+h5 {
+  font-size: var(--font-size-h5, var(--sd-font-h5, clamp(0.95rem, 1.1vw, 1.15rem)));
+  font-weight: 650;
+  line-height: var(--lh-card, 1.32);
+}
+
+h6 {
+  font-size: var(--font-size-h6, var(--sd-font-h6, 0.875rem));
+  font-weight: 700;
+  letter-spacing: var(--tracking-wide, 0.03em);
+  text-transform: uppercase;
+  color: var(--color-text-muted, #5A6E7F);
+}
 
 p {
   margin-bottom: var(--spacing-md);

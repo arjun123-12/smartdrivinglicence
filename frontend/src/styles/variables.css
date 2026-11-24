@@ -53,7 +53,7 @@
   --color-info-bg: #E8EFF8;
   --color-info-border: #B7D0EC;
 
-  /* Typography */
+  /* Typography Foundations */
   --font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --font-family-heading: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-size-xs: 0.75rem;
@@ -65,6 +65,29 @@
   --font-size-3xl: 1.875rem;
   --font-size-4xl: 2.25rem;
   --font-size-5xl: 3rem;
+
+  /* Fluid Responsive Typography Scale (Automotive Precision) */
+  --font-size-hero: clamp(2.4rem, 4.8vw, 4.1rem);
+  --font-size-h1: clamp(2.15rem, 3.8vw, 3.25rem);
+  --font-size-h2: clamp(1.75rem, 2.9vw, 2.5rem);
+  --font-size-h3: clamp(1.3rem, 2.0vw, 1.75rem);
+  --font-size-h4: clamp(1.1rem, 1.4vw, 1.35rem);
+  --font-size-h5: clamp(0.95rem, 1.1vw, 1.15rem);
+  --font-size-h6: 0.875rem;
+
+  /* Optical Letter Spacing */
+  --tracking-tightest: -0.035em;
+  --tracking-tighter: -0.025em;
+  --tracking-tight: -0.015em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.03em;
+  --tracking-eyebrow: 0.16em;
+
+  /* Proportional Line Heights */
+  --lh-display: 1.08;
+  --lh-heading: 1.18;
+  --lh-card: 1.32;
+  --lh-body: 1.65;
 
   /* Sizing and Layout */
   --container-width: 1200px;

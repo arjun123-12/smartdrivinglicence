@@ -23,6 +23,7 @@ import './styles/mock-test.css';
 import './styles/3d-global.css';
 import './styles/3d-components.css';
 import './styles/3d-responsive.css';
+import './styles/typography.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

@@ -1,0 +1,433 @@
+/* ==========================================================================
+   A1 SMART DRIVING — GLOBAL AUTOMOTIVE TYPOGRAPHY DESIGN SYSTEM
+   Inspired by luxury automotive precision engineering & Apple typography
+   ========================================================================== */
+
+:root {
+  /* Fluid Typographic Scale */
+  --sd-font-hero: clamp(2.4rem, 4.8vw, 4.1rem);
+  --sd-font-h1: clamp(2.15rem, 3.8vw, 3.25rem);
+  --sd-font-h2: clamp(1.75rem, 2.9vw, 2.5rem);
+  --sd-font-h3: clamp(1.3rem, 2.0vw, 1.75rem);
+  --sd-font-h4: clamp(1.1rem, 1.4vw, 1.35rem);
+  --sd-font-h5: clamp(0.95rem, 1.1vw, 1.15rem);
+  --sd-font-h6: 0.875rem;
+
+  /* Optical Letter Spacing */
+  --sd-track-tightest: -0.035em;
+  --sd-track-tighter: -0.025em;
+  --sd-track-tight: -0.015em;
+  --sd-track-normal: 0em;
+  --sd-track-wide: 0.03em;
+  --sd-track-eyebrow: 0.16em;
+
+  /* Line Heights */
+  --sd-lh-display: 1.08;
+  --sd-lh-heading: 1.18;
+  --sd-lh-card: 1.32;
+  --sd-lh-body: 1.65;
+
+  /* Brand Typography Gradients */
+  --sd-grad-emerald-dark: linear-gradient(135deg, #ffffff 0%, #86efac 45%, #22c55e 100%);
+  --sd-grad-emerald-light: linear-gradient(135deg, #0d2645 0%, #1b6c31 55%, #22c55e 100%);
+  --sd-grad-pure-green: linear-gradient(135deg, #1b6c31 0%, #22c55e 100%);
+  --sd-grad-navy: linear-gradient(135deg, #08192E 0%, #0D2645 60%, #163B66 100%);
+  --sd-grad-silver: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, #94a3b8 100%);
+  --sd-grad-metallic-gold: linear-gradient(135deg, #ffffff 0%, #fef08a 60%, #eab308 100%);
+}
+
+/* ==========================================================================
+   1. Base Semantic Headings Reset & Automotive Upgrades
+   ========================================================================== */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-heading, 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif);
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin-top: 0;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--sd-font-h1);
+  font-weight: 850;
+  line-height: var(--sd-lh-heading);
+  letter-spacing: var(--sd-track-tightest);
+  color: var(--color-secondary, #0D2645);
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: var(--sd-font-h2);
+  font-weight: 800;
+  line-height: var(--sd-lh-heading);
+  letter-spacing: var(--sd-track-tighter);
+  color: var(--color-secondary, #0D2645);
+  margin-bottom: 0.85rem;
+}
+
+h3 {
+  font-size: var(--sd-font-h3);
+  font-weight: 750;
+  line-height: var(--sd-lh-card);
+  letter-spacing: var(--sd-track-tight);
+  color: var(--color-secondary, #0D2645);
+  margin-bottom: 0.65rem;
+}
+
+h4 {
+  font-size: var(--sd-font-h4);
+  font-weight: 700;
+  line-height: var(--sd-lh-card);
+  letter-spacing: var(--sd-track-normal);
+  color: var(--color-secondary, #0D2645);
+  margin-bottom: 0.5rem;
+}
+
+h5 {
+  font-size: var(--sd-font-h5);
+  font-weight: 650;
+  line-height: var(--sd-lh-card);
+  letter-spacing: var(--sd-track-normal);
+  color: var(--color-secondary, #0D2645);
+  margin-bottom: 0.4rem;
+}
+
+h6 {
+  font-size: var(--sd-font-h6);
+  font-weight: 700;
+  line-height: var(--sd-lh-card);
+  letter-spacing: var(--sd-track-wide);
+  text-transform: uppercase;
+  color: var(--color-text-muted, #5A6E7F);
+  margin-bottom: 0.35rem;
+}
+
+/* ==========================================================================
+   2. Brand Gradient Text Utilities
+   ========================================================================== */
+.gradient-text-emerald {
+  background: var(--sd-grad-emerald-dark);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.gradient-text-emerald-light {
+  background: var(--sd-grad-emerald-light);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.gradient-text-green {
+  background: var(--sd-grad-pure-green);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.gradient-text-navy {
+  background: var(--sd-grad-navy);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.gradient-text-silver {
+  background: var(--sd-grad-silver);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.gradient-text-gold {
+  background: var(--sd-grad-metallic-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+/* ==========================================================================
+   3. Master Section Heading (.sd-sec-heading)
+   ========================================================================== */
+.sd-sec-heading {
+  position: relative;
+  margin-bottom: clamp(2.5rem, 4.5vw, 3.8rem);
+  perspective: 1000px;
+}
+
+.sd-sec-heading.align-center {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sd-sec-heading.align-left {
+  text-align: left;
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.sd-sec-heading.align-right {
+  text-align: right;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+/* Eyebrow Pill Label */
+.sd-heading-eyebrow-wrap {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 0.85rem;
+}
+
+.sd-heading-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.785rem;
+  font-weight: 700;
+  letter-spacing: var(--sd-track-eyebrow);
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+/* Eyebrow Theme Variants */
+.theme-light .sd-heading-eyebrow {
+  background: var(--color-primary-light, #EBF5EE);
+  color: var(--color-primary, #1B6C31);
+  border: 1px solid var(--color-primary-subtle, #D2E7D7);
+}
+
+.theme-dark .sd-heading-eyebrow {
+  background: rgba(27, 108, 49, 0.25);
+  color: #86efac;
+  border: 1px solid rgba(34, 197, 94, 0.35);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 15px rgba(27, 108, 49, 0.2);
+}
+
+.sd-eyebrow-live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 8px #22c55e;
+  animation: sd-dot-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes sd-dot-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.85); }
+}
+
+/* Section Heading Title */
+.sd-heading-title {
+  margin: 0 0 0.75rem;
+  position: relative;
+  display: inline-block;
+  transform-style: preserve-3d;
+}
+
+.theme-light .sd-heading-title {
+  color: var(--color-secondary, #0D2645);
+}
+
+.theme-dark .sd-heading-title {
+  color: #ffffff;
+  text-shadow:
+    0 2px 4px rgba(6, 23, 37, 0.4),
+    0 8px 18px rgba(6, 23, 37, 0.5);
+}
+
+/* Size Variants */
+.size-sm .sd-heading-title {
+  font-size: clamp(1.4rem, 2.2vw, 1.95rem);
+}
+
+.size-md .sd-heading-title {
+  font-size: var(--sd-font-h2);
+}
+
+.size-lg .sd-heading-title {
+  font-size: var(--sd-font-h1);
+}
+
+/* Underline Reveal */
+.sd-heading-underline-wrap {
+  display: flex;
+  margin-top: 0.65rem;
+}
+
+.align-center .sd-heading-underline-wrap {
+  justify-content: center;
+}
+
+.align-left .sd-heading-underline-wrap {
+  justify-content: flex-start;
+}
+
+.align-right .sd-heading-underline-wrap {
+  justify-content: flex-end;
+}
+
+.sd-heading-underline {
+  height: 3px;
+  width: 64px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #1b6c31 0%, #22c55e 100%);
+  box-shadow: 0 0 12px rgba(34, 197, 94, 0.45);
+  transition: width 0.4s ease;
+}
+
+.theme-dark .sd-heading-underline {
+  background: linear-gradient(90deg, #22c55e 0%, #86efac 100%);
+  box-shadow: 0 0 14px rgba(134, 239, 172, 0.5);
+}
+
+/* Section Heading Subtitle */
+.sd-heading-subtitle {
+  font-size: clamp(1rem, 1.25vw, 1.15rem);
+  line-height: var(--sd-lh-body);
+  max-width: 720px;
+  margin: 0.85rem 0 0;
+}
+
+.align-center .sd-heading-subtitle {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.theme-light .sd-heading-subtitle {
+  color: var(--color-text-muted, #5A6E7F);
+}
+
+.theme-dark .sd-heading-subtitle {
+  color: #94a3b8;
+}
+
+/* ==========================================================================
+   4. Page Banner Header (.sd-page-banner)
+   ========================================================================== */
+.sd-page-banner {
+  position: relative;
+  background: linear-gradient(135deg, #061725 0%, #0D2645 55%, #0f3057 100%);
+  color: #ffffff;
+  padding: clamp(3.5rem, 6vw, 5.25rem) 1.5rem clamp(2.5rem, 4vw, 3.75rem);
+  text-align: center;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.sd-page-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1000px;
+  height: 400px;
+  background: radial-gradient(circle at 50% 0%, rgba(34, 197, 94, 0.16) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.sd-page-banner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle at 85% 10%, rgba(27, 108, 49, 0.12) 0%, transparent 40%),
+    radial-gradient(circle at 15% 90%, rgba(13, 38, 69, 0.3) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.sd-page-banner-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.sd-page-banner-title {
+  color: #ffffff;
+  font-size: var(--sd-font-h1);
+  font-weight: 850;
+  line-height: var(--sd-lh-heading);
+  letter-spacing: var(--sd-track-tightest);
+  margin: 0.65rem 0 1rem;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.sd-page-banner-desc {
+  color: #cbd5e1;
+  font-size: clamp(1.05rem, 1.3vw, 1.2rem);
+  line-height: 1.68;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.sd-page-banner-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.85rem;
+  flex-wrap: wrap;
+}
+
+/* ==========================================================================
+   5. Card Headings (.sd-card-heading)
+   ========================================================================== */
+.sd-card-heading {
+  font-weight: 750;
+  line-height: var(--sd-lh-card);
+  letter-spacing: var(--sd-track-tight);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.25s ease;
+}
+
+.sd-card-heading.theme-dark {
+  color: #ffffff;
+}
+
+.sd-card-heading.theme-light {
+  color: var(--color-secondary, #0D2645);
+}
+
+.sd-card-heading-icon {
+  flex-shrink: 0;
+  color: #22c55e;
+}
+
+/* ==========================================================================
+   6. Motion & Accessibility
+   ========================================================================== */
+@keyframes sd-word-reveal {
+  0% {
+    opacity: 0;
+    transform: translateY(18px) rotateX(15deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotateX(0deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sd-heading-title,
+  .sd-heading-underline,
+  .sd-eyebrow-live-dot,
+  .sd-reveal-word {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}

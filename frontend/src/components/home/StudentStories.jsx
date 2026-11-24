@@ -2,6 +2,7 @@ import React from 'react';
 import { Star, Quote, Award } from 'lucide-react';
 import TiltCard from '../effects/TiltCard';
 import ScrollReveal from '../effects/ScrollReveal';
+import SectionHeading from '../typography/SectionHeading';
 import '../../styles/vort-and-reviews.css';
 
 const stories = [
@@ -38,17 +39,16 @@ export default function StudentStories() {
   return (
     <section className="student-stories-section scene-perspective-container">
       <div className="student-stories-container">
-        <ScrollReveal direction="up" distance={35}>
-          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-            <span className="badge-3d" style={{ marginBottom: '0.75rem' }}>
-              <Award size={14} /> 4.9 ★ Average Adelaide Rating
-            </span>
-            <h2 className="student-stories-title">Real Success Stories From Our Students</h2>
-            <p style={{ color: '#94a3b8', maxWidth: '680px', margin: '0 auto', fontSize: '1.05rem' }}>
-              Read verified testimonials from South Australian learner drivers who secured their licence with A1 Smart Driving.
-            </p>
-          </div>
-        </ScrollReveal>
+        <SectionHeading
+          eyebrow="4.9 ★ Average Adelaide Rating"
+          eyebrowIcon={Award}
+          liveDot={true}
+          title="Real Success Stories From Our Students"
+          highlightWord="Success Stories"
+          subtitle="Read verified testimonials from South Australian learner drivers who secured their licence with A1 Smart Driving."
+          theme="light"
+          size="md"
+        />
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
           {stories.map((story, index) => (

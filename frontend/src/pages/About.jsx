@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import TiltCard from '../components/effects/TiltCard';
 import ScrollReveal from '../components/effects/ScrollReveal';
 import MagneticButton from '../components/effects/MagneticButton';
+import PageHeading from '../components/typography/PageHeading';
+import SectionHeading from '../components/typography/SectionHeading';
+import CardHeading from '../components/typography/CardHeading';
 import { 
   ShieldCheck, 
   Award, 
@@ -24,27 +27,21 @@ export default function About() {
   return (
     <div style={{ backgroundColor: 'var(--color-background)', minHeight: '100vh', paddingBottom: '4rem' }}>
       {/* Hero Header */}
-      <section className="page-header" style={{ background: 'linear-gradient(135deg, var(--color-secondary-dark) 0%, var(--color-secondary) 100%)', color: '#fff', padding: '4rem 1rem 3.5rem 1rem', textAlign: 'center' }}>
-        <div className="container" style={{ maxWidth: '900px', margin: '0 auto' }}>
-          <span className="section-tag" style={{ background: 'rgba(255,255,255,0.15)', color: '#ffffff', marginBottom: '1rem', display: 'inline-block' }}>
-            Adelaide Driving School &amp; VORT Test Preparation
-          </span>
-          <h1 style={{ fontSize: '2.75rem', fontWeight: 800, marginBottom: '1rem', letterSpacing: '-0.02em', color: '#ffffff' }}>
-            About A1 Smart Driving
-          </h1>
-          <p style={{ fontSize: '1.15rem', color: 'rgba(255,255,255,0.9)', maxWidth: '750px', margin: '0 auto', lineHeight: 1.6 }}>
-            A1 Smart Driving helps Adelaide learners and overseas licence holders build the skills and confidence they need for everyday driving. We work with people taking their first lesson, practising for a test, or getting familiar with South Australian roads.
-          </p>
-          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', marginTop: '1.75rem', flexWrap: 'wrap' }}>
-            <Link to="/book-lesson" className="button button-accent" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
-              Book a Lesson <ArrowRight size={16} />
-            </Link>
-            <Link to="/lesson-packages" className="button button-outline" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', borderColor: 'rgba(255,255,255,0.3)' }}>
-              Explore Packages
-            </Link>
-          </div>
-        </div>
-      </section>
+      <PageHeading
+        badge="Adelaide Driving School & VORT Test Preparation"
+        badgeIcon={ShieldCheck}
+        liveDot={true}
+        title="About A1 Smart Driving"
+        highlightWord="Smart Driving"
+        subtitle="A1 Smart Driving helps Adelaide learners and overseas licence holders build the skills and confidence they need for everyday driving. We work with people taking their first lesson, practising for a test, or getting familiar with South Australian roads."
+      >
+        <Link to="/book-lesson" className="button button-accent" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
+          Book a Lesson <ArrowRight size={16} />
+        </Link>
+        <Link to="/lesson-packages" className="button button-outline" style={{ background: 'rgba(255,255,255,0.1)', color: '#fff', borderColor: 'rgba(255,255,255,0.3)' }}>
+          Explore Packages
+        </Link>
+      </PageHeading>
 
       {/* Main Container */}
       <div className="container" style={{ maxWidth: '1100px', margin: '-2rem auto 0 auto', padding: '0 1rem' }}>
@@ -54,7 +51,7 @@ export default function About() {
           <div className="grid grid-2" style={{ gap: '2.5rem', alignItems: 'center' }}>
             <div>
               <span className="section-tag" style={{ marginBottom: '0.75rem', display: 'inline-block' }}>Our Teaching Approach</span>
-              <h2 style={{ fontSize: '1.85rem', color: 'var(--color-secondary)', marginBottom: '1rem', fontWeight: 700 }}>
+              <h2 style={{ fontSize: '1.85rem', color: 'var(--color-secondary)', marginBottom: '1rem', fontWeight: 800 }}>
                 How We Teach You to Drive
               </h2>
               <p style={{ color: 'var(--color-text)', lineHeight: 1.7, marginBottom: '1rem' }}>
@@ -79,15 +76,15 @@ export default function About() {
 
         {/* The 3 Core Pillars of Training */}
         <div style={{ marginBottom: '3.5rem' }}>
-          <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-            <span className="section-tag">Comprehensive Services</span>
-            <h2 style={{ fontSize: '2rem', color: 'var(--color-secondary)', fontWeight: 800 }}>
-              Tailored Driver Training For Every Stage
-            </h2>
-            <p style={{ color: 'var(--color-text-muted)', maxWidth: '620px', margin: '0.5rem auto 0 auto' }}>
-              Whether you are sitting behind the wheel for the very first time or converting an overseas licence to South Australia, we have you covered.
-            </p>
-          </div>
+          <SectionHeading
+            eyebrow="Comprehensive Services"
+            eyebrowIcon={Sparkles}
+            title="Tailored Driver Training For Every Stage"
+            highlightWord="Every Stage"
+            subtitle="Whether you are sitting behind the wheel for the very first time or converting an overseas licence to South Australia, we have you covered."
+            theme="light"
+            size="md"
+          />
 
           <div className="grid grid-3" style={{ gap: '1.5rem' }}>
             {/* Pillar 1: Learner Lessons */}
@@ -142,15 +139,16 @@ export default function About() {
 
         {/* Our Standards and Accreditations */}
         <div className="card" style={{ padding: '2.5rem', marginBottom: '3.5rem', background: 'var(--color-surface-subtle)', boxShadow: 'var(--shadow-sm)' }}>
-          <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-            <span className="section-tag">Safety First</span>
-            <h2 style={{ fontSize: '1.85rem', color: 'var(--color-secondary)', fontWeight: 800 }}>
-              Accreditation, Safety &amp; High Pass Rates
-            </h2>
-            <p style={{ color: 'var(--color-text-muted)', maxWidth: '600px', margin: '0.5rem auto 0 auto' }}>
-              We take road safety seriously. Every lesson is conducted according to the highest industry standards.
-            </p>
-          </div>
+          <SectionHeading
+            eyebrow="Safety First"
+            eyebrowIcon={ShieldCheck}
+            liveDot={true}
+            title="Accreditation, Safety & High Pass Rates"
+            highlightWord="High Pass Rates"
+            subtitle="We take road safety seriously. Every lesson is conducted according to the highest industry standards."
+            theme="light"
+            size="md"
+          />
 
           <div className="grid grid-3" style={{ gap: '1.5rem' }}>
             <div style={{ background: '#fff', padding: '1.5rem', borderRadius: 'var(--radius-md)', boxShadow: 'var(--shadow-sm)' }}>

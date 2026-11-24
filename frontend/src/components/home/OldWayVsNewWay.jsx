@@ -1,13 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { X, CheckSquare, ArrowRight } from 'lucide-react';
+import { X, CheckSquare, ArrowRight, Layers } from 'lucide-react';
+import SectionHeading from '../typography/SectionHeading';
 import '../../styles/comparison.css';
 
 export default function OldWayVsNewWay() {
   return (
     <section className="comparison-section">
       {/* <div className="container">
-        <h2 className="comparison-title">Still Booking Tests the Old Way?</h2>
+        <SectionHeading
+          eyebrow="Modern Test Booking"
+          eyebrowIcon={Layers}
+          liveDot={true}
+          title="Still Booking Tests the Old Way?"
+          highlightWord="The Old Way?"
+          subtitle="Say goodbye to phone tag, unreturned voicemails, and weeks of waiting."
+          theme="light"
+          size="lg"
+        />
 
         <div className="comparison-grid">
        

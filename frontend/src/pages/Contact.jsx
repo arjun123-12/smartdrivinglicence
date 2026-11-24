@@ -3,6 +3,7 @@ import api from '../services/api';
 import TiltCard from '../components/effects/TiltCard';
 import ScrollReveal from '../components/effects/ScrollReveal';
 import MagneticButton from '../components/effects/MagneticButton';
+import PageHeading from '../components/typography/PageHeading';
 import { Phone, Mail, MapPin, Clock, CheckCircle, Send, AlertCircle, ShieldCheck } from 'lucide-react';
 
 export default function Contact() {
@@ -37,17 +38,14 @@ export default function Contact() {
 
   return (
     <div>
-      <section className="page-header">
-        <div className="container">
-          <span className="section-tag" style={{ background: 'rgba(255,255,255,0.2)', color: '#ffffff' }}>
-            We're Here to Help
-          </span>
-          <h1>Contact SmartDriving South Australia</h1>
-          <p>
-            Have questions about VORT testing regulations, booking a package, or test hub availability? Reach out to our Adelaide support team.
-          </p>
-        </div>
-      </section>
+      <PageHeading
+        badge="We're Here to Help"
+        badgeIcon={ShieldCheck}
+        liveDot={true}
+        title="Contact A1 Smart Driving South Australia"
+        highlightWord="South Australia"
+        subtitle="Have questions about VORT testing regulations, booking a package, or test hub availability? Reach out to our Adelaide support team."
+      />
 
       <div className="container section">
         <div className="grid grid-2" style={{ gap: '3rem', alignItems: 'start' }}>

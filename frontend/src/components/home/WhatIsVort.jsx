@@ -1,8 +1,9 @@
 import React, { lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Check } from 'lucide-react';
+import { ArrowRight, Check, Compass } from 'lucide-react';
 import ScrollReveal from '../effects/ScrollReveal';
 import TiltCard from '../effects/TiltCard';
+import SectionHeading from '../typography/SectionHeading';
 import '../../styles/vort-and-reviews.css';
 
 const RoadScenario3D = lazy(() => import('../3d/RoadScenario3D'));
@@ -11,19 +12,16 @@ export default function WhatIsVort() {
   return (
     <section className="vort-intro-section scene-perspective-container">
       <div className="vort-intro-container">
-        <ScrollReveal direction="up" distance={40}>
-          <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-            <span className="badge-3d" style={{ marginBottom: '0.75rem' }}>
-              South Australia Driving Examination
-            </span>
-            <h2 className="vort-intro-title">What is a VORT?</h2>
-            <p className="vort-intro-desc" style={{ maxWidth: '780px', margin: '0 auto' }}>
-              A VORT (Vehicle On Road Test) is a practical driving assessment conducted by an authorised examiner
-              to evaluate your safe vehicle control, system of vehicle control, and road law compliance. It is the
-              official pathway to obtaining your P1 provisional licence in South Australia.
-            </p>
-          </div>
-        </ScrollReveal>
+        <SectionHeading
+          eyebrow="South Australia Driving Examination"
+          eyebrowIcon={Compass}
+          liveDot={true}
+          title="What is a VORT Driving Test?"
+          highlightWord="VORT Driving Test"
+          subtitle="A VORT (Vehicle On Road Test) is a practical driving assessment conducted by an authorised examiner to evaluate your safe vehicle control, system of vehicle control, and road law compliance. It is the official pathway to obtaining your P1 provisional licence in South Australia."
+          theme="light"
+          size="md"
+        />
 
         <div className="vort-intro-grid" style={{ alignItems: 'center' }}>
           {/* Left: Interactive 3D Road Test Manoeuvre Simulation */}

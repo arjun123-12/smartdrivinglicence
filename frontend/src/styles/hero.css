@@ -499,41 +499,43 @@
   width: 100%;
   max-width: 440px;
 
-  padding: 20px;
+  padding: 20px 22px;
 
-  background: rgba(8, 29, 43, 0.74);
-  border: 1px solid rgba(255, 255, 255, 0.40);
-  border-radius: 16px;
+  background: rgba(6, 23, 37, 0.70);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 20px;
 
   color: #ffffff;
 
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
 
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.05);
 
-  transition:
-    background 0.25s ease,
-    transform 0.25s ease;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .sdh-glass-card:hover {
-  background: rgba(8, 29, 43, 0.9);
+  background: rgba(6, 23, 37, 0.85);
+  border-color: rgba(121, 220, 130, 0.45);
   transform: translateY(-4px);
+  box-shadow: 0 25px 55px rgba(0, 0, 0, 0.45), 0 0 25px rgba(121, 220, 130, 0.18);
 }
 
 .sdh-glass-icon {
   display: grid;
   place-items: center;
 
-  width: 58px;
-  height: 58px;
+  width: 54px;
+  height: 54px;
   flex-shrink: 0;
 
-  background: rgba(224, 250, 229, 0.95);
-  color: var(--sdh-green);
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.2) 0%, rgba(27, 108, 49, 0.4) 100%);
+  border: 1px solid rgba(121, 220, 130, 0.35);
+  color: #79dc82;
 
-  border-radius: 50%;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(27, 108, 49, 0.25);
 }
 
 .sdh-glass-content {
@@ -546,10 +548,10 @@
 
   margin-bottom: 7px;
 
-  color: #a7e4b0;
-  font-size: 9px;
+  color: #79dc82;
+  font-size: 10px;
   font-weight: 800;
-  letter-spacing: 1.2px;
+  letter-spacing: 1.4px;
 }
 
 .sdh-glass-content h2 {
@@ -565,50 +567,55 @@
 .sdh-glass-content p {
   margin: 0;
 
-  color: #e2e8ed;
-  font-size: 12px;
-  line-height: 1.7;
+  color: #cbd5e1;
+  font-size: 13px;
+  line-height: 1.6;
 }
 
 .sdh-glass-arrow {
   display: grid;
   place-items: center;
 
-  width: 39px;
-  height: 39px;
+  width: 40px;
+  height: 40px;
   flex-shrink: 0;
 
   color: #ffffff;
-  background: var(--sdh-green);
+  background: linear-gradient(135deg, #1b6c31 0%, #22c55e 100%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 50%;
+  box-shadow: 0 4px 14px rgba(34, 197, 94, 0.35);
 
-  transition: transform 0.25s ease;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .sdh-glass-card:hover .sdh-glass-arrow {
-  transform: rotate(10deg);
+  transform: translate(2px, -2px) rotate(8deg);
 }
 
 .sdh-image-caption {
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: 10px;
 
   margin-top: auto;
   padding-top: 25px;
 
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(241, 245, 249, 0.9);
 
-  font-size: 10px;
-  font-weight: 650;
+  font-size: 11px;
+  font-weight: 700;
   letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
 .sdh-image-caption>span {
-  width: 25px;
+  width: 28px;
   height: 2px;
+  border-radius: 2px;
 
-  background: #79dc82;
+  background: #22c55e;
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.6);
 }
 
 /* =============================================

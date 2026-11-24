@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import TiltCard from '../effects/TiltCard';
 import ScrollReveal from '../effects/ScrollReveal';
 import MagneticButton from '../effects/MagneticButton';
+import SectionHeading from '../typography/SectionHeading';
 import {
   Car,
   ShieldCheck,
@@ -28,49 +29,16 @@ export default function BentoServices({ services = [] }) {
     >
       <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
         {/* Section Header */}
-        <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 3.5rem' }}>
-          <div
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              backgroundColor: 'var(--color-primary-light, #EBF5EE)',
-              color: 'var(--color-primary, #1B6C31)',
-              padding: '6px 14px',
-              borderRadius: '9999px',
-              fontSize: '0.85rem',
-              fontWeight: 700,
-              textTransform: 'uppercase',
-              letterSpacing: '0.05em',
-              marginBottom: '1rem',
-            }}
-          >
-            <Sparkles size={16} /> Elite Automotive Training
-          </div>
-
-          <h2
-            style={{
-              fontSize: 'clamp(2rem, 3.5vw, 2.75rem)',
-              fontWeight: 900,
-              color: 'var(--color-secondary, #0D2645)',
-              letterSpacing: '-0.02em',
-              lineHeight: 1.15,
-            }}
-          >
-            Everything You Need to Get on Adelaide Roads
-          </h2>
-
-          <p
-            style={{
-              fontSize: '1.05rem',
-              color: 'var(--color-text-muted, #5A6E7F)',
-              marginTop: '1rem',
-              lineHeight: 1.6,
-            }}
-          >
-            Tailored South Australian driver education—from your very first steering wheel touch to official VORT test day in an ANCAP 5-star dual-control vehicle.
-          </p>
-        </div>
+        <SectionHeading
+          eyebrow="Elite Automotive Training"
+          eyebrowIcon={Sparkles}
+          liveDot={true}
+          title="Everything You Need to Get on Adelaide Roads"
+          highlightWord="Adelaide Roads"
+          subtitle="Tailored South Australian driver education—from your very first steering wheel touch to official VORT test day in an ANCAP 5-star dual-control vehicle."
+          theme="light"
+          size="lg"
+        />
 
         {/* Bento Grid */}
         <div

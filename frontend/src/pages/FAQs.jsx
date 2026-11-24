@@ -6,6 +6,7 @@ import { mockFaqs } from '../services/mockData';
 import ScrollReveal from '../components/effects/ScrollReveal';
 import TiltCard from '../components/effects/TiltCard';
 import MagneticButton from '../components/effects/MagneticButton';
+import PageHeading from '../components/typography/PageHeading';
 import { HelpCircle, ChevronDown, ChevronUp, ArrowRight, Sparkles } from 'lucide-react';
 
 export default function FAQs() {
@@ -51,17 +52,14 @@ export default function FAQs() {
 
   return (
     <div>
-      <section className="page-header">
-        <div className="container">
-          <span className="section-tag" style={{ background: 'rgba(255,255,255,0.2)', color: '#ffffff' }}>
-            Knowledge Base
-          </span>
-          <h1>Frequently Asked Questions</h1>
-          <p>
-            Find immediate answers regarding South Australian logbooks, VORT testing rules, vehicle requirements, cancellations, and pass criteria.
-          </p>
-        </div>
-      </section>
+      <PageHeading
+        badge="Knowledge Base"
+        badgeIcon={HelpCircle}
+        liveDot={true}
+        title="Frequently Asked Questions"
+        highlightWord="Questions"
+        subtitle="Find immediate answers regarding South Australian logbooks, VORT testing rules, vehicle requirements, cancellations, and pass criteria."
+      />
 
       <div className="container section">
         {/* Category Tabs */}

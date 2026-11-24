@@ -5,6 +5,8 @@ import { extractArray, safeArray } from '../utils/apiHelpers';
 import { mockLocations } from '../services/mockData';
 import TiltCard from '../components/effects/TiltCard';
 import ScrollReveal from '../components/effects/ScrollReveal';
+import PageHeading from '../components/typography/PageHeading';
+import SectionHeading from '../components/typography/SectionHeading';
 import { MapPin, Search, CheckCircle, Car, ArrowRight, ShieldCheck } from 'lucide-react';
 
 export default function Locations() {
@@ -40,17 +42,14 @@ export default function Locations() {
 
   return (
     <div>
-      <section className="page-header">
-        <div className="container">
-          <span className="section-tag" style={{ background: 'rgba(255,255,255,0.2)', color: '#ffffff' }}>
-            Greater Adelaide & Regional SA
-          </span>
-          <h1>Service Locations & Official VORT Test Hubs</h1>
-          <p>
-            We cover all designated South Australian Government test centres and provide door-to-door lesson pickups across metropolitan Adelaide.
-          </p>
-        </div>
-      </section>
+      <PageHeading
+        badge="Greater Adelaide & Regional SA"
+        badgeIcon={MapPin}
+        liveDot={true}
+        title="Service Locations & Official VORT Test Hubs"
+        highlightWord="VORT Test Hubs"
+        subtitle="We cover all designated South Australian Government test centres and provide door-to-door lesson pickups across metropolitan Adelaide."
+      />
 
       <div className="container section">
         {/* Search bar */}
@@ -70,10 +69,14 @@ export default function Locations() {
 
         {/* Section 1: Official VORT Test Centres */}
         <div style={{ marginBottom: '3rem' }}>
-          <div className="flex" style={{ gap: '0.5rem', alignItems: 'center', marginBottom: '1.25rem' }}>
-            <span className="badge badge-warning" style={{ fontSize: '12px' }}>OFFICIAL DIT HUBS</span>
-            <h2 style={{ fontSize: '1.5rem', margin: 0 }}>Designated VORT Test Centres</h2>
-          </div>
+          <SectionHeading
+            eyebrow="Official DIT Hubs"
+            title="Designated VORT Test Centres"
+            highlightWord="Test Centres"
+            align="left"
+            size="sm"
+            theme="light"
+          />
 
           <div className="grid grid-3">
             {safeArray(testCentres).map((centre, idx) => (
@@ -115,10 +118,14 @@ export default function Locations() {
 
         {/* Section 2: Lesson Coverage Suburbs */}
         <div>
-          <div className="flex" style={{ gap: '0.5rem', alignItems: 'center', marginBottom: '1.25rem' }}>
-            <span className="badge badge-success" style={{ fontSize: '12px' }}>DOOR-TO-DOOR PICKUP</span>
-            <h2 style={{ fontSize: '1.5rem', margin: 0 }}>Lesson Service Areas & Suburbs</h2>
-          </div>
+          <SectionHeading
+            eyebrow="Door-to-Door Pickup"
+            title="Lesson Service Areas & Suburbs"
+            highlightWord="Service Areas"
+            align="left"
+            size="sm"
+            theme="light"
+          />
 
           <div className="grid grid-4">
             {safeArray(suburbs).map((sub, idx) => (

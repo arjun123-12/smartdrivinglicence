@@ -1,9 +1,10 @@
 import React, { lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, MapPin, CheckCircle, Trophy, Sparkles } from 'lucide-react';
+import { ArrowRight, MapPin, CheckCircle, Trophy, Sparkles, Award } from 'lucide-react';
 import DepthCarousel from '../effects/DepthCarousel';
 import TiltCard from '../effects/TiltCard';
 import ScrollReveal from '../effects/ScrollReveal';
+import SectionHeading from '../typography/SectionHeading';
 import '../../styles/passwall.css';
 
 const TrophyPass3D = lazy(() => import('../3d/TrophyPass3D'));
@@ -63,30 +64,26 @@ export default function PassedWall() {
         {/* Left Column: Heading & 3D Trophy Shield */}
         <ScrollReveal direction="left" distance={40}>
           <div className="passwall-content">
-            <div className="passwall-tag">
-              <span className="passwall-tag-dot" />
-              CELEBRATING EVERY SOUTH AUSTRALIAN MILESTONE
-            </div>
-
-            <h2 id="passwall-heading" className="passwall-title">
-              Passed with
-              <br />
-              <span>A1 Smart</span>
-              <br />
-              <span>Driving.</span>
-            </h2>
+            <SectionHeading
+              eyebrow="South Australian Milestones"
+              eyebrowIcon={Award}
+              liveDot={true}
+              title="Passed with A1 Smart Driving."
+              highlightWord="A1 Smart Driving."
+              subtitle="Over 1,200 Adelaide drivers have achieved their provisional licence through our accredited network. Join South Australia’s highest-rated driving school."
+              align="left"
+              theme="light"
+              size="lg"
+              underline={true}
+              style={{ marginBottom: '1.5rem', width: '100%' }}
+            />
 
             {/* 3D SA P-Plate Trophy Emblem */}
             <Suspense fallback={<div style={{ minHeight: '180px' }} />}>
               <TrophyPass3D />
             </Suspense>
 
-            <p className="passwall-desc">
-              Over 1,200 Adelaide drivers have achieved their provisional licence through our accredited network.
-              Join South Australia’s highest-rated driving school.
-            </p>
-
-            <div className="passwall-content-actions">
+            <div className="passwall-content-actions" style={{ marginTop: '1.25rem' }}>
               <Link to="/book-test" className="magnetic-btn" style={{ textDecoration: 'none' }}>
                 <span>Book Your VORT Test</span>
                 <ArrowRight size={19} />

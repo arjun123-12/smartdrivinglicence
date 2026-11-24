@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronDown, HelpCircle, ArrowRight } from 'lucide-react';
 import ScrollReveal from '../effects/ScrollReveal';
+import SectionHeading from '../typography/SectionHeading';
 import '../../styles/home-sections.css';
 
 const defaultFaqs = [
@@ -49,17 +50,16 @@ export default function FaqSection({ faqs = defaultFaqs }) {
   return (
     <section className="faq-section-modern scene-perspective-container">
       <div className="faq-container-modern" style={{ maxWidth: '850px', margin: '0 auto' }}>
-        <ScrollReveal direction="up" distance={30}>
-          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-            <span className="badge-3d" style={{ marginBottom: '0.75rem' }}>
-              <HelpCircle size={14} /> Clear Answers
-            </span>
-            <h2 className="faq-title-modern">Frequently Asked Questions</h2>
-            <p style={{ color: '#94a3b8', fontSize: '1.05rem', margin: '0.5rem auto 0', maxWidth: '600px' }}>
-              Everything you need to know about Adelaide driving lessons, VORT testing, and booking procedures.
-            </p>
-          </div>
-        </ScrollReveal>
+        <SectionHeading
+          eyebrow="Clear Answers"
+          eyebrowIcon={HelpCircle}
+          liveDot={true}
+          title="Frequently Asked Questions"
+          highlightWord="Questions"
+          subtitle="Everything you need to know about Adelaide driving lessons, VORT testing, and booking procedures."
+          theme="light"
+          size="md"
+        />
 
         <div className="faq-3d-list">
           {displayFaqs.map((faq, index) => {

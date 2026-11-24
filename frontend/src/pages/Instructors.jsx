@@ -6,6 +6,7 @@ import { extractArray, safeArray } from '../utils/apiHelpers';
 import { mockInstructors, mockLocations } from '../services/mockData';
 import TiltCard from '../components/effects/TiltCard';
 import ScrollReveal from '../components/effects/ScrollReveal';
+import PageHeading from '../components/typography/PageHeading';
 import { Star, ShieldCheck, Car, Award, MapPin, ArrowRight } from 'lucide-react';
 
 export default function Instructors() {
@@ -60,17 +61,14 @@ export default function Instructors() {
 
   return (
     <div>
-      <section className="page-header">
-        <div className="container">
-          <span className="section-tag" style={{ background: 'rgba(255,255,255,0.2)', color: '#ffffff' }}>
-            Verified & Police Checked
-          </span>
-          <h1>Accredited Instructors & VORT Examiners</h1>
-          <p>
-            Connect with highly rated South Australian driving professionals. Experienced in guiding anxious beginners, refining logbook skills, and conducting official VORT testing.
-          </p>
-        </div>
-      </section>
+      <PageHeading
+        badge="Verified & Police Checked"
+        badgeIcon={ShieldCheck}
+        liveDot={true}
+        title="Accredited Instructors & VORT Examiners"
+        highlightWord="VORT Examiners"
+        subtitle="Connect with highly rated South Australian driving professionals. Experienced in guiding anxious beginners, refining logbook skills, and conducting official VORT testing."
+      />
 
       <div className="container section">
         {/* Filters */}

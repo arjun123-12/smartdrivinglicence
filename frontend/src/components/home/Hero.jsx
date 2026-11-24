@@ -1,7 +1,5 @@
-import React, { lazy, Suspense } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-
-const HeroCarCanvas = lazy(() => import('../3d/HeroCarCanvas'));
 
 import {
   ShieldCheck,
@@ -216,13 +214,9 @@ export default function Hero({
 
           </div>
 
-          {/* RIGHT 3D CAR & VISUAL AREA */}
+          {/* RIGHT VISUAL AREA */}
 
-          <div className="sdh-visual" style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-
-            <Suspense fallback={<div className="loading-spinner" style={{ minHeight: '380px', margin: 'auto' }} />}>
-              <HeroCarCanvas />
-            </Suspense>
+          <div className="sdh-visual">
 
             <Link
               to="/how-it-works"
@@ -230,7 +224,7 @@ export default function Hero({
             >
 
               <div className="sdh-glass-icon">
-                <GraduationCap size={30} strokeWidth={1.7} />
+                <GraduationCap size={28} strokeWidth={1.8} />
               </div>
 
               <div className="sdh-glass-content">
@@ -247,7 +241,7 @@ export default function Hero({
               </div>
 
               <div className="sdh-glass-arrow">
-                <ArrowUpRight size={22} />
+                <ArrowUpRight size={20} />
               </div>
 
             </Link>

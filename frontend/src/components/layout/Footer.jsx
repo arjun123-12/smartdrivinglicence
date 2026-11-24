@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin, MessageSquare, ArrowRight, ShieldCheck, Award, Car, Clock } from 'lucide-react';
+import SectionHeading from '../typography/SectionHeading';
 import '../../styles/footer.css';
 
 export default function Footer() {
@@ -19,50 +20,16 @@ export default function Footer() {
         }}
       >
         <div style={{ maxWidth: '1200px', margin: '0 auto', textAlign: 'center', position: 'relative' }}>
-          <div
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-              backgroundColor: 'rgba(27, 108, 49, 0.3)',
-              border: '1px solid rgba(34, 197, 94, 0.4)',
-              color: '#4ade80',
-              padding: '6px 16px',
-              borderRadius: '9999px',
-              fontSize: '0.85rem',
-              fontWeight: 800,
-              textTransform: 'uppercase',
-              letterSpacing: '0.08em',
-              marginBottom: '1.25rem',
-            }}
-          >
-            <Award size={15} /> South Australia Official Test Pathway
-          </div>
-
-          <h2
-            style={{
-              fontSize: 'clamp(2rem, 3.8vw, 3rem)',
-              fontWeight: 900,
-              color: '#FFFFFF',
-              letterSpacing: '-0.02em',
-              lineHeight: 1.15,
-              marginBottom: '1rem',
-            }}
-          >
-            Ready to Pass Your Driving Test First Time?
-          </h2>
-
-          <p
-            style={{
-              fontSize: '1.1rem',
-              color: 'rgba(255, 255, 255, 0.8)',
-              maxWidth: '650px',
-              margin: '0 auto 2.5rem',
-              lineHeight: 1.6,
-            }}
-          >
-            Book your driving lesson or official VORT driving test with Adelaide’s top-rated accredited examiners. Real-time availability with instant appointment confirmation.
-          </p>
+          <SectionHeading
+            eyebrow="South Australia Official Test Pathway"
+            eyebrowIcon={Award}
+            liveDot={true}
+            title="Ready to Pass Your Driving Test First Time?"
+            highlightWord="First Time?"
+            subtitle="Book your driving lesson or official VORT driving test with Adelaide’s top-rated accredited examiners. Real-time availability with instant appointment confirmation."
+            theme="dark"
+            size="lg"
+          />
 
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', alignItems: 'center' }}>
             <Link

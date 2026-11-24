@@ -4,6 +4,7 @@ import BookingWizard from '../components/booking/BookingWizard';
 import TiltCard from '../components/effects/TiltCard';
 import ScrollReveal from '../components/effects/ScrollReveal';
 import MagneticButton from '../components/effects/MagneticButton';
+import SectionHeading from '../components/typography/SectionHeading';
 import {
   ShieldCheck,
   CheckCircle,
@@ -132,17 +133,16 @@ export default function MockTest() {
       <section style={{ padding: '3rem 1rem' }}>
         <div className="container" style={{ maxWidth: '960px', margin: '0 auto' }}>
           <ScrollReveal direction="up" distance={30}>
-            <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-              <span className="badge-3d" style={{ marginBottom: '0.5rem' }}>
-                <Compass size={14} /> 3D Manoeuvre Inspection
-              </span>
-              <h2 style={{ fontSize: '2rem', color: '#ffffff', fontWeight: 800 }}>
-                Practice Test Scenarios Before You Sit The VORT
-              </h2>
-              <p style={{ color: '#94a3b8', fontSize: '1rem', maxWidth: '640px', margin: '0 auto' }}>
-                Simulate kerb stops, 3-point turns, and parallel parking in interactive 3D:
-              </p>
-            </div>
+            <SectionHeading
+              eyebrow="3D Manoeuvre Inspection"
+              eyebrowIcon={Compass}
+              liveDot={true}
+              title="Practice Test Scenarios Before You Sit The VORT"
+              highlightWord="VORT"
+              subtitle="Simulate kerb stops, 3-point turns, and parallel parking in interactive 3D:"
+              theme="dark"
+              size="md"
+            />
             <Suspense fallback={<div className="loading-spinner" style={{ minHeight: '380px' }} />}>
               <RoadScenario3D />
             </Suspense>
@@ -153,17 +153,16 @@ export default function MockTest() {
       {/* 2. THE 3-STAGE BREAKDOWN */}
       <section className="mock-stages-section">
         <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '36px' }}>
-            <span className="badge-3d" style={{ marginBottom: '0.5rem' }}>
-              <Sparkles size={13} /> Official Scoring Criteria
-            </span>
-            <h2 style={{ fontSize: 'clamp(26px, 3.2vw, 36px)', fontWeight: 850, color: '#ffffff', margin: '0 0 12px' }}>
-              What Your VORT Mock Test Covers
-            </h2>
-            <p style={{ color: '#94a3b8', fontSize: '15px', maxWidth: '640px', margin: '0 auto', lineHeight: 1.65 }}>
-              Your accredited instructor replicates the silent, formal conditions of an official government examination so nothing surprises you on the day.
-            </p>
-          </div>
+          <SectionHeading
+            eyebrow="Official Scoring Criteria"
+            eyebrowIcon={Sparkles}
+            liveDot={true}
+            title="What Your VORT Mock Test Covers"
+            highlightWord="VORT Mock Test"
+            subtitle="Your accredited instructor replicates the silent, formal conditions of an official government examination so nothing surprises you on the day."
+            theme="dark"
+            size="md"
+          />
 
           <div className="mock-stages-grid">
             {stages.map((stage, idx) => (

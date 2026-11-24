@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, ShieldCheck, Sparkles } from 'lucide-react';
 import ScrollReveal from '../effects/ScrollReveal';
 import TiltCard from '../effects/TiltCard';
+import SectionHeading from '../typography/SectionHeading';
 import '../../styles/home-sections.css';
 
 const VehicleInspection3D = lazy(() => import('../3d/VehicleInspection3D'));
@@ -38,17 +39,16 @@ export default function WhyPreVort() {
   return (
     <section className="prevort-section scene-perspective-container">
       <div className="prevort-container">
-        <ScrollReveal direction="up" distance={35}>
-          <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
-            <span className="badge-3d" style={{ marginBottom: '0.75rem' }}>
-              <Sparkles size={14} /> Proven Success Strategy
-            </span>
-            <h2 className="prevort-title">Why Choose PreVORT Warmup + VORT?</h2>
-            <p style={{ color: '#94a3b8', maxWidth: '720px', margin: '0 auto', fontSize: '1.05rem' }}>
-              Experience the dual benefit of immediate pre-test calibration and our accredited dual-controlled training vehicle.
-            </p>
-          </div>
-        </ScrollReveal>
+        <SectionHeading
+          eyebrow="Proven Success Strategy"
+          eyebrowIcon={Sparkles}
+          liveDot={true}
+          title="Why Choose PreVORT Warmup + VORT?"
+          highlightWord="PreVORT Warmup"
+          subtitle="Experience the dual benefit of immediate pre-test calibration and our accredited dual-controlled training vehicle."
+          theme="light"
+          size="md"
+        />
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', alignItems: 'center' }}>
           {/* Left Column: Interactive 3D Vehicle Inspection */}

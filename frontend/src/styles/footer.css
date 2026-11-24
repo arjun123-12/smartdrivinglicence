@@ -148,11 +148,23 @@
 /* Link Columns */
 .footer-col-title {
   color: #ffffff;
-  font-size: 12px;
+  font-size: 0.8rem;
   font-weight: 800;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--sd-track-eyebrow, 0.16em);
   text-transform: uppercase;
   margin: 0 0 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-col-title::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 6px #22c55e;
 }
 
 .footer-col-links {
