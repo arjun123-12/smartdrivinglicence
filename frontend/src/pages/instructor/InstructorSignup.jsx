@@ -193,7 +193,7 @@ export default function InstructorSignup() {
       <div style={{ maxWidth: '780px', margin: '0 auto' }}>
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-          <div style={{ display: 'inline-flex', padding: '0.6rem', borderRadius: '50%', background: 'rgba(230, 57, 70, 0.1)', color: 'var(--color-primary, #e63946)', marginBottom: '0.75rem' }}>
+          <div style={{ display: 'inline-flex', padding: '0.6rem', borderRadius: '50%', background: 'rgba(27, 108, 49, 0.1)', color: 'var(--color-primary, #1B6C31)', marginBottom: '0.75rem' }}>
             <Award size={28} />
           </div>
           <h1 style={{ fontSize: '2rem', fontWeight: 800, marginBottom: '0.5rem', color: '#1e293b' }}>
@@ -225,7 +225,7 @@ export default function InstructorSignup() {
                   padding: '0.6rem 0.75rem',
                   borderRadius: '8px',
                   background: isActive ? '#ffffff' : isDone ? 'rgba(34, 197, 94, 0.1)' : '#ffffff',
-                  border: isActive ? '2px solid var(--color-primary, #e63946)' : isDone ? '1px solid #22c55e' : '1px solid #e2e8f0',
+                  border: isActive ? '2px solid var(--color-primary, #1B6C31)' : isDone ? '1px solid #22c55e' : '1px solid #e2e8f0',
                   boxShadow: isActive ? '0 4px 6px -1px rgba(0, 0, 0, 0.05)' : 'none',
                 }}
               >
@@ -239,7 +239,7 @@ export default function InstructorSignup() {
                     justifyContent: 'center',
                     fontSize: '12px',
                     fontWeight: 700,
-                    background: isDone ? '#22c55e' : isActive ? 'var(--color-primary, #e63946)' : '#e2e8f0',
+                    background: isDone ? '#22c55e' : isActive ? 'var(--color-primary, #1B6C31)' : '#e2e8f0',
                     color: isDone || isActive ? '#ffffff' : '#64748b',
                     flexShrink: 0,
                   }}
@@ -271,7 +271,7 @@ export default function InstructorSignup() {
             {step === 1 && (
               <div>
                 <h3 style={{ fontSize: '1.25rem', marginBottom: '0.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <UserCheck size={20} color="var(--color-primary, #e63946)" />
+                  <UserCheck size={20} color="var(--color-primary, #1B6C31)" />
                   Instructor Account Information
                 </h3>
                 <p style={{ color: '#64748b', fontSize: '0.875rem', marginBottom: '1.25rem' }}>
@@ -364,7 +364,7 @@ export default function InstructorSignup() {
             {step === 2 && (
               <div>
                 <h3 style={{ fontSize: '1.25rem', marginBottom: '0.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <Shield size={20} color="var(--color-primary, #e63946)" />
+                  <Shield size={20} color="var(--color-primary, #1B6C31)" />
                   Required Identity & Accreditation Documents
                 </h3>
                 <p style={{ color: '#64748b', fontSize: '0.875rem', marginBottom: '1.25rem' }}>
@@ -470,7 +470,7 @@ export default function InstructorSignup() {
             {step === 3 && (
               <div>
                 <h3 style={{ fontSize: '1.25rem', marginBottom: '0.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <Car size={20} color="var(--color-primary, #e63946)" />
+                  <Car size={20} color="var(--color-primary, #1B6C31)" />
                   Training Vehicle Specifications
                 </h3>
                 <p style={{ color: '#64748b', fontSize: '0.875rem', marginBottom: '1.25rem' }}>
@@ -562,7 +562,7 @@ export default function InstructorSignup() {
             {step === 4 && (
               <div>
                 <h3 style={{ fontSize: '1.25rem', marginBottom: '0.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                  <Award size={20} color="var(--color-primary, #e63946)" />
+                  <Award size={20} color="var(--color-primary, #1B6C31)" />
                   Instructor Experience & Bio
                 </h3>
                 <p style={{ color: '#64748b', fontSize: '0.875rem', marginBottom: '1.25rem' }}>
@@ -613,8 +613,8 @@ export default function InstructorSignup() {
                             fontSize: '13px',
                             fontWeight: 600,
                             cursor: 'pointer',
-                            border: selected ? '1px solid var(--color-primary, #e63946)' : '1px solid #cbd5e1',
-                            background: selected ? 'var(--color-primary, #e63946)' : '#ffffff',
+                            border: selected ? '1px solid var(--color-primary, #1B6C31)' : '1px solid #cbd5e1',
+                            background: selected ? 'var(--color-primary, #1B6C31)' : '#ffffff',
                             color: selected ? '#ffffff' : '#334155',
                             transition: 'all 0.15s ease',
                           }}
@@ -656,7 +656,7 @@ export default function InstructorSignup() {
         {/* Existing Member Footer */}
         <div style={{ textAlign: 'center', marginTop: '1.5rem', fontSize: '0.875rem', color: '#64748b' }}>
           Already an instructor?{' '}
-          <Link to="/instructor/login" style={{ color: 'var(--color-primary, #e63946)', fontWeight: 700 }}>
+          <Link to="/instructor/login" style={{ color: 'var(--color-primary, #1B6C31)', fontWeight: 700 }}>
             Sign in with SMS OTP
           </Link>
           {' | '}

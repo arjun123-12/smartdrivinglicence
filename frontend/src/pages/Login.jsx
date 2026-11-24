@@ -59,15 +59,42 @@ export default function Login() {
   };
 
   return (
-    <div className="section flex-center" style={{ minHeight: 'calc(100vh - 150px)', padding: '2rem 1rem' }}>
-      <div className="card" style={{ maxWidth: '440px', width: '100%', padding: '2.25rem', boxShadow: 'var(--shadow-xl)' }}>
-        <div style={{ textAlign: 'center', marginBottom: '1.75rem' }}>
-          <div className="brand-icon" style={{ width: '48px', height: '48px', borderRadius: 'var(--radius-full)', margin: '0 auto 0.75rem auto' }}>
-            <LogIn size={22} />
-          </div>
-          <h2 style={{ fontSize: '1.75rem', marginBottom: '0.25rem' }}>Sign In</h2>
-          <p style={{ color: 'var(--color-text-muted)', fontSize: 'var(--font-size-sm)' }}>
-            Access your SmartDriving lessons, bookings, and profile
+    <div
+      style={{
+        minHeight: 'calc(100vh - 120px)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '3rem 1.5rem',
+        background: 'radial-gradient(circle at 50% 15%, rgba(27, 108, 49, 0.08) 0%, #F8FAF8 70%)',
+      }}
+    >
+      <div
+        className="card"
+        style={{
+          maxWidth: '460px',
+          width: '100%',
+          padding: '2.5rem',
+          borderRadius: '20px',
+          boxShadow: '0 20px 45px rgba(13, 38, 69, 0.08)',
+          border: '1px solid var(--color-border, #DCE5DE)',
+          backgroundColor: '#FFFFFF',
+        }}
+      >
+        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+          <Link to="/" style={{ display: 'inline-block', marginBottom: '1.25rem' }}>
+            <img
+              src="/logo.png"
+              alt="A1 Smart Driving"
+              style={{ height: '42px', width: 'auto', objectFit: 'contain' }}
+            />
+          </Link>
+
+          <h1 style={{ fontSize: '1.75rem', fontWeight: 800, color: 'var(--color-secondary, #0D2645)', marginBottom: '0.35rem' }}>
+            Welcome Back
+          </h1>
+          <p style={{ color: 'var(--color-text-muted, #5A6E7F)', fontSize: '0.9rem' }}>
+            Sign in to manage your driving lessons, test bookings, and profile
           </p>
         </div>
 
@@ -85,8 +112,8 @@ export default function Login() {
         )}
 
         <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label className="form-label">Email Address</label>
+          <div className="form-group" style={{ marginBottom: '1.25rem' }}>
+            <label className="form-label" style={{ fontWeight: 600, fontSize: '0.875rem' }}>Email Address</label>
             <input
               type="email"
               className="form-control"
@@ -94,13 +121,14 @@ export default function Login() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@example.com"
+              style={{ borderRadius: '10px', padding: '12px 14px' }}
             />
           </div>
 
-          <div className="form-group">
+          <div className="form-group" style={{ marginBottom: '1.5rem' }}>
             <div className="flex-between">
-              <label className="form-label">Password</label>
-              <Link to="/forgot-password" style={{ fontSize: 'var(--font-size-xs)' }}>
+              <label className="form-label" style={{ fontWeight: 600, fontSize: '0.875rem' }}>Password</label>
+              <Link to="/forgot-password" style={{ fontSize: '0.8rem', color: 'var(--color-primary, #1B6C31)', fontWeight: 600 }}>
                 Forgot password?
               </Link>
             </div>
@@ -111,6 +139,7 @@ export default function Login() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
+              style={{ borderRadius: '10px', padding: '12px 14px' }}
             />
           </div>
 
@@ -118,30 +147,35 @@ export default function Login() {
             type="submit"
             disabled={loading}
             className="button button-primary button-full button-lg"
-            style={{ marginTop: '1rem' }}
+            style={{
+              padding: '12px',
+              fontSize: '1rem',
+              fontWeight: 700,
+              borderRadius: '10px',
+            }}
           >
             {loading ? 'Signing in...' : 'Sign In'}
           </button>
         </form>
 
         {/* Demo Fast Fill Buttons */}
-        <div style={{ marginTop: '1.5rem', paddingTop: '1.25rem', borderTop: '1px solid var(--color-border)' }}>
-          <div style={{ fontSize: '11px', textTransform: 'uppercase', color: 'var(--color-text-muted)', fontWeight: 700, marginBottom: '0.5rem', textAlign: 'center' }}>
-            Quick Demo Login Buttons
+        <div style={{ marginTop: '1.75rem', paddingTop: '1.25rem', borderTop: '1px solid var(--color-border, #DCE5DE)' }}>
+          <div style={{ fontSize: '11px', textTransform: 'uppercase', color: 'var(--color-text-muted)', fontWeight: 700, marginBottom: '0.6rem', textAlign: 'center', letterSpacing: '0.05em' }}>
+            Quick Demo Login
           </div>
           <div style={{ display: 'flex', gap: '0.5rem' }}>
-            <button type="button" onClick={fillAdmin} className="button button-sm button-outline" style={{ flex: 1 }}>
-              <Shield size={14} /> Admin Account
+            <button type="button" onClick={fillAdmin} className="button button-sm button-outline" style={{ flex: 1, fontSize: '12px' }}>
+              <Shield size={13} /> Admin
             </button>
-            <button type="button" onClick={fillCustomer} className="button button-sm button-outline" style={{ flex: 1 }}>
-              <User size={14} /> Learner Account
+            <button type="button" onClick={fillCustomer} className="button button-sm button-outline" style={{ flex: 1, fontSize: '12px' }}>
+              <User size={13} /> Learner
             </button>
           </div>
         </div>
 
-        <div style={{ textAlign: 'center', marginTop: '1.5rem', fontSize: 'var(--font-size-sm)', color: 'var(--color-text-muted)' }}>
+        <div style={{ textAlign: 'center', marginTop: '1.5rem', fontSize: '0.875rem', color: 'var(--color-text-muted)' }}>
           Don't have an account yet?{' '}
-          <Link to="/register" style={{ fontWeight: 600 }}>
+          <Link to="/register" style={{ fontWeight: 700, color: 'var(--color-primary, #1B6C31)' }}>
             Register here
           </Link>
         </div>

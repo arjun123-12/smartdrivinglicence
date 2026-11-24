@@ -3,7 +3,10 @@ import { Link } from 'react-router-dom';
 import api from '../services/api';
 import { extractArray, safeArray } from '../utils/apiHelpers';
 import { mockFaqs } from '../services/mockData';
-import { HelpCircle, ChevronDown, ChevronUp, ArrowRight } from 'lucide-react';
+import ScrollReveal from '../components/effects/ScrollReveal';
+import TiltCard from '../components/effects/TiltCard';
+import MagneticButton from '../components/effects/MagneticButton';
+import { HelpCircle, ChevronDown, ChevronUp, ArrowRight, Sparkles } from 'lucide-react';
 
 export default function FAQs() {
   const [faqs, setFaqs] = useState([]);
@@ -79,52 +82,50 @@ export default function FAQs() {
           {safeArray(filtered).map((faq) => {
             const isOpen = !!openIds[faq.id];
             return (
-              <div key={faq.id} className="card" style={{ overflow: 'hidden' }}>
-                <button
-                  type="button"
-                  onClick={() => toggle(faq.id)}
-                  style={{
-                    width: '100%',
-                    padding: '1.25rem 1.5rem',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    background: isOpen ? 'var(--color-surface-subtle)' : '#ffffff',
-                    border: 'none',
-                    textAlign: 'left',
-                    cursor: 'pointer',
-                    fontWeight: 700,
-                    fontSize: '1.05rem',
-                    color: 'var(--color-primary)',
-                  }}
-                >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                    <HelpCircle size={18} color="var(--color-secondary)" style={{ flexShrink: 0 }} />
-                    <span>{faq.question}</span>
-                  </div>
-                  {isOpen ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
-                </button>
+              <ScrollReveal key={faq.id} direction="up" distance={20} delay={idx * 0.05}>
+                <div className={`accordion-3d-item ${isOpen ? 'is-open' : ''}`} style={{ background: '#ffffff', borderColor: '#e2e8f0' }}>
+                  <button
+                    type="button"
+                    onClick={() => toggle(faq.id)}
+                    className="accordion-3d-trigger"
+                    style={{ color: '#0f172a' }}
+                    aria-expanded={isOpen}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                      <HelpCircle size={18} color="var(--color-primary)" style={{ flexShrink: 0 }} />
+                      <span style={{ fontWeight: 700 }}>{faq.question}</span>
+                    </div>
+                    <div className="accordion-3d-icon" style={{ background: isOpen ? '#1B6C31' : 'rgba(0,0,0,0.05)', color: isOpen ? '#ffffff' : '#1B6C31' }}>
+                      <ChevronDown size={18} />
+                    </div>
+                  </button>
 
-                {isOpen && (
-                  <div style={{ padding: '1.25rem 1.5rem', borderTop: '1px solid var(--color-border)', backgroundColor: '#ffffff', fontSize: 'var(--font-size-sm)', lineHeight: 1.7, color: 'var(--color-text)' }}>
-                    {faq.answer}
-                  </div>
-                )}
-              </div>
+                  {isOpen && (
+                    <div className="accordion-3d-content" style={{ color: '#475569', borderTop: '1px solid #f1f5f9', paddingTop: '1rem' }}>
+                      <p style={{ margin: 0, lineHeight: 1.7 }}>{faq.answer}</p>
+                    </div>
+                  )}
+                </div>
+              </ScrollReveal>
             );
           })}
         </div>
 
         {/* Still have questions banner */}
-        <div className="card" style={{ maxWidth: '850px', margin: '3rem auto 0 auto', padding: '2rem', textAlign: 'center', backgroundColor: 'var(--color-primary-light)' }}>
-          <h3 style={{ color: 'var(--color-primary)', marginBottom: '0.5rem' }}>Still Have Questions?</h3>
-          <p style={{ color: 'var(--color-text)', marginBottom: '1.25rem', fontSize: 'var(--font-size-sm)' }}>
-            Can't find the answer you're looking for? Chat with our Adelaide booking coordinators.
-          </p>
-          <Link to="/contact" className="button button-primary">
-            Contact Support Team <ArrowRight size={16} />
-          </Link>
-        </div>
+        <ScrollReveal direction="scale" distance={25} delay={0.2}>
+          <TiltCard maxTilt={6} scale={1.01}>
+            <div className="card glass-panel-3d" style={{ maxWidth: '850px', margin: '3rem auto 0 auto', padding: '2.5rem', textAlign: 'center', background: 'linear-gradient(135deg, rgba(27, 108, 49, 0.9) 0%, rgba(13, 38, 69, 0.9) 100%)', color: '#ffffff' }}>
+              <h3 style={{ color: '#ffffff', fontSize: '1.75rem', marginBottom: '0.5rem', fontWeight: 800 }}>Still Have Questions?</h3>
+              <p style={{ color: '#e2e8f0', marginBottom: '1.75rem', fontSize: '1.05rem', maxWidth: '550px', margin: '0 auto 1.75rem' }}>
+                Can't find the answer you're looking for? Chat with our accredited Adelaide booking coordinators.
+              </p>
+              <MagneticButton as={Link} to="/contact" variant="gold">
+                <span>Contact Support Team</span>
+                <ArrowRight size={16} />
+              </MagneticButton>
+            </div>
+          </TiltCard>
+        </ScrollReveal>
       </div>
     </div>
   );

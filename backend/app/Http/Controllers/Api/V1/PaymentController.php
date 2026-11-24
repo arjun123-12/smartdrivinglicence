@@ -8,6 +8,7 @@ use App\Models\Booking;
 use App\Models\Notification;
 use App\Models\Payment;
 use App\Services\StripePaymentService;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -142,7 +143,7 @@ class PaymentController extends Controller
     public function getBookingPaymentStatus(Request $request, string $reference): JsonResponse
     {
         $booking = Booking::where('booking_reference', $reference)
-            ->with(['customer', 'instructor', 'serviceType', 'package', 'location', 'latestPayment'])
+            ->with(['customer', 'instructor.user', 'serviceType', 'package', 'location', 'latestPayment', 'payments'])
             ->firstOrFail();
 
         $user = $request->user();
@@ -170,25 +171,91 @@ class PaymentController extends Controller
 
         $isExpired = $booking->expires_at && $booking->expires_at->isPast() && $booking->payment_status !== 'paid';
 
-        return response()->json([
+        // Verified payment resolution from payment records
+        $verifiedPayment = $booking->payments
+            ->where('payment_status', 'succeeded')
+            ->sortByDesc('paid_at')
+            ->first();
+
+        if (!$verifiedPayment && $booking->latestPayment && $booking->latestPayment->payment_status === 'succeeded') {
+            $verifiedPayment = $booking->latestPayment;
+        }
+
+        $verifiedAmount = null;
+        if ($verifiedPayment && (float) $verifiedPayment->amount > 0) {
+            $verifiedAmount = (float) $verifiedPayment->amount;
+        } elseif ($booking->payment_status === 'paid' && (float) $booking->price_snapshot > 0) {
+            $verifiedAmount = (float) $booking->price_snapshot;
+        }
+
+        // Sanitize latest payment to avoid leaking internal checkout urls or sensitive session tokens
+        $paymentToReport = $verifiedPayment ?? $booking->latestPayment;
+        $latestPaymentData = null;
+        if ($paymentToReport) {
+            $latestPaymentData = [
+                'payment_reference' => $paymentToReport->payment_reference,
+                'payment_status' => $paymentToReport->payment_status,
+                'amount' => (float) $paymentToReport->amount > 0 ? number_format((float) $paymentToReport->amount, 2, '.', '') : null,
+                'currency' => $paymentToReport->currency ?: 'AUD',
+                'payment_method' => $paymentToReport->payment_method,
+                'paid_at' => $paymentToReport->paid_at?->toIso8601String(),
+            ];
+        }
+
+        // Date, time, and timezone resolution without double conversion
+        $tz = $booking->timezone ?: 'Australia/Adelaide';
+        $rawStart = $booking->getRawOriginal('start_time');
+        $rawEnd = $booking->getRawOriginal('end_time');
+        $startTime = $rawStart ? Carbon::parse($rawStart, $tz) : null;
+        $endTime = $rawEnd ? Carbon::parse($rawEnd, $tz) : null;
+
+        $displayDate = $startTime ? $startTime->format('D, j M Y') : null;
+        $displayTime = ($startTime && $endTime)
+            ? ($startTime->format('g:i A') . ' - ' . $endTime->format('g:i A'))
+            : null;
+
+        $instructorName = $booking->instructor?->name
+            ?? $booking->instructor?->user?->name
+            ?? 'Assigned Instructor';
+
+        $instructorData = $booking->instructor ? [
+            'id' => $booking->instructor->id,
+            'name' => $instructorName,
+            'profile_image' => $booking->instructor->profile_image,
+        ] : null;
+
+        $amountFormatted = $verifiedAmount !== null ? number_format($verifiedAmount, 2, '.', '') : null;
+        $priceSnapshotFormatted = (float) $booking->price_snapshot > 0 ? number_format((float) $booking->price_snapshot, 2, '.', '') : null;
+
+        $responseData = [
             'status' => 'success',
             'booking_reference' => $booking->booking_reference,
             'booking_status' => $booking->booking_status,
             'payment_status' => $booking->payment_status,
             'is_paid' => $booking->payment_status === 'paid',
             'is_expired' => $isExpired,
-            'start_time' => $booking->start_time->toIso8601String(),
-            'end_time' => $booking->end_time->toIso8601String(),
-            'display_date' => $booking->start_time->format('l, j F Y'),
-            'display_time' => $booking->start_time->format('g:i A') . ' - ' . $booking->end_time->format('g:i A'),
+            'start_time' => $startTime?->toIso8601String(),
+            'end_time' => $endTime?->toIso8601String(),
+            'display_date' => $displayDate,
+            'display_time' => $displayTime,
+            'timezone' => $tz,
             'service_name' => $booking->serviceType?->name,
-            'instructor_name' => $booking->instructor?->name,
+            'service_type' => $booking->serviceType ? ['id' => $booking->serviceType->id, 'name' => $booking->serviceType->name] : null,
+            'instructor_name' => $instructorName,
+            'instructor' => $instructorData,
             'pickup_address' => $booking->pickup_address,
-            'amount' => $booking->price_snapshot,
-            'currency' => $booking->currency,
+            'amount' => $amountFormatted ?? $priceSnapshotFormatted,
+            'paid_amount' => $amountFormatted,
+            'price_snapshot' => $priceSnapshotFormatted,
+            'currency' => $booking->currency ?: 'AUD',
             'expires_at' => $booking->expires_at?->toIso8601String(),
-            'latest_payment' => $booking->latestPayment,
-        ]);
+            'latest_payment' => $latestPaymentData,
+        ];
+
+        // Also provide nested booking object for full compatibility with consumers accessing data.booking
+        $responseData['booking'] = $responseData;
+
+        return response()->json($responseData);
     }
 
     /**

@@ -1,19 +1,38 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
+import GlobalAtmosphere from '../components/3d/GlobalAtmosphere';
 import { useAuth } from '../context/AuthContext';
+import { useLenisSmoothScroll } from '../hooks/useLenisSmoothScroll';
 import { Lock, LogOut } from 'lucide-react';
 
 export default function PublicLayout() {
   const { isDevelopmentMode, hasPreviewAccess, user, logout } = useAuth();
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
+
+  // Initialize smooth scrolling synchronized with GSAP ScrollTrigger
+  useLenisSmoothScroll();
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    <div
+      className={`scene-perspective-container ${isHomePage ? 'has-homepage-hero' : ''}`}
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '100vh',
+        position: 'relative',
+        backgroundColor: 'var(--color-background, #F8FAF8)',
+      }}
+    >
+      {/* Global 3D Ambient WebGL Background */}
+      <GlobalAtmosphere />
+
       {isDevelopmentMode && hasPreviewAccess && (
         <div
           style={{
-            background: 'linear-gradient(90deg, #b91c1c 0%, #e63946 100%)',
+            background: 'linear-gradient(90deg, #0d2645 0%, #1b6c31 100%)',
             color: '#ffffff',
             padding: '0.45rem 1rem',
             fontSize: '0.8rem',
@@ -57,10 +76,13 @@ export default function PublicLayout() {
           </button>
         </div>
       )}
-      <Navbar />
-      <main style={{ flex: 1 }}>
+
+      <Navbar isHomePage={isHomePage} />
+
+      <main key={location.pathname} className={`immersive-page-wrapper ${isHomePage ? 'is-homepage-main' : ''}`} style={{ flex: 1 }}>
         <Outlet />
       </main>
+
       <Footer />
     </div>
   );

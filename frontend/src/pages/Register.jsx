@@ -48,15 +48,42 @@ export default function Register() {
   };
 
   return (
-    <div className="section flex-center" style={{ minHeight: 'calc(100vh - 150px)', padding: '2rem 1rem' }}>
-      <div className="card" style={{ maxWidth: '500px', width: '100%', padding: '2.25rem', boxShadow: 'var(--shadow-xl)' }}>
-        <div style={{ textAlign: 'center', marginBottom: '1.75rem' }}>
-          <div className="brand-icon" style={{ width: '48px', height: '48px', borderRadius: 'var(--radius-full)', margin: '0 auto 0.75rem auto' }}>
-            <UserPlus size={22} />
-          </div>
-          <h2 style={{ fontSize: '1.75rem', marginBottom: '0.25rem' }}>Create Customer Account</h2>
-          <p style={{ color: 'var(--color-text-muted)', fontSize: 'var(--font-size-sm)' }}>
-            Join SmartDriving to book lessons, schedule your VORT, and track progress
+    <div
+      style={{
+        minHeight: 'calc(100vh - 120px)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '3rem 1.5rem',
+        background: 'radial-gradient(circle at 50% 15%, rgba(27, 108, 49, 0.08) 0%, #F8FAF8 70%)',
+      }}
+    >
+      <div
+        className="card"
+        style={{
+          maxWidth: '520px',
+          width: '100%',
+          padding: '2.5rem',
+          borderRadius: '20px',
+          boxShadow: '0 20px 45px rgba(13, 38, 69, 0.08)',
+          border: '1px solid var(--color-border, #DCE5DE)',
+          backgroundColor: '#FFFFFF',
+        }}
+      >
+        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+          <Link to="/" style={{ display: 'inline-block', marginBottom: '1.25rem' }}>
+            <img
+              src="/logo.png"
+              alt="A1 Smart Driving"
+              style={{ height: '42px', width: 'auto', objectFit: 'contain' }}
+            />
+          </Link>
+
+          <h1 style={{ fontSize: '1.75rem', fontWeight: 800, color: 'var(--color-secondary, #0D2645)', marginBottom: '0.35rem' }}>
+            Create Learner Account
+          </h1>
+          <p style={{ color: 'var(--color-text-muted, #5A6E7F)', fontSize: '0.9rem' }}>
+            Join A1 Smart Driving to book lessons, schedule your VORT, and track progress
           </p>
         </div>
 

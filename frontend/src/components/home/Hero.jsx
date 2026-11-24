@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
+
+const HeroCarCanvas = lazy(() => import('../3d/HeroCarCanvas'));
 
 import {
   ShieldCheck,
@@ -126,14 +128,13 @@ export default function Hero({
               ADELAIDE DRIVING SCHOOL
             </div>
 
-            <h1 className="sdh-title">
-              Your Road to
-              <br />
-
-              Driving Confidence
-              <br />
-
-              <span>Starts Here.</span>
+            <h1 className="sdh-title sdh-title-3d">
+              <span className="sdh-heading-row sdh-row-1">Your Road to</span>
+              <span className="sdh-heading-row sdh-row-2">Driving Confidence</span>
+              <span className="sdh-heading-row sdh-row-3">
+                <span>Starts Here.</span>
+                <span className="sdh-title-underline" aria-hidden="true" />
+              </span>
             </h1>
 
             <div
@@ -215,9 +216,13 @@ export default function Hero({
 
           </div>
 
-          {/* RIGHT IMAGE AREA */}
+          {/* RIGHT 3D CAR & VISUAL AREA */}
 
-          <div className="sdh-visual">
+          <div className="sdh-visual" style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+
+            <Suspense fallback={<div className="loading-spinner" style={{ minHeight: '380px', margin: 'auto' }} />}>
+              <HeroCarCanvas />
+            </Suspense>
 
             <Link
               to="/how-it-works"

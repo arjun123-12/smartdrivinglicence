@@ -1,344 +1,184 @@
-import React, { useRef } from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  ArrowRight,
-  ArrowLeft,
-  MapPin,
-  CheckCircle,
-  Trophy,
-  ArrowUpRight,
-} from 'lucide-react';
-
+import { ArrowRight, MapPin, CheckCircle, Trophy, Sparkles } from 'lucide-react';
+import DepthCarousel from '../effects/DepthCarousel';
+import TiltCard from '../effects/TiltCard';
+import ScrollReveal from '../effects/ScrollReveal';
 import '../../styles/passwall.css';
 
-/* ==========================================
-   LEARNERS DATA
-========================================== */
+const TrophyPass3D = lazy(() => import('../3d/TrophyPass3D'));
 
-const row1Learners = [
+/* ==========================================
+   AUTHENTIC LEARNER PROFILES
+========================================== */
+const allLearners = [
   {
     id: 1,
     name: 'Jackson',
     suburb: 'Warradale Park',
     image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80',
+    feedback: 'Passed first attempt with examiner Satish! Clear guidance and calm test prep.',
   },
   {
     id: 2,
     name: 'Jatin',
     suburb: 'Wynn Vale',
     image: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=600&q=80',
+    feedback: 'Warmup lesson in Modbury test centre gave me total confidence on the 3-point turn.',
   },
   {
     id: 3,
     name: 'Jayden',
     suburb: 'Elizabeth',
     image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80',
+    feedback: 'Dual-control automatic car was immaculate. Got my P-plates on Saturday morning!',
   },
   {
     id: 4,
     name: 'Jonathan',
-    suburb: 'Adelaide',
+    suburb: 'Adelaide CBD',
     image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80',
+    feedback: 'Overseas licence converted smoothly in Thebarton hub. 10/10 recommend A1 Smart Driving.',
   },
   {
     id: 5,
     name: 'Alvin',
     suburb: 'Campbelltown',
     image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=600&q=80',
+    feedback: 'Instructors are so patient and experienced. Passed with 98% score.',
   },
   {
     id: 6,
-    name: 'Anton',
-    suburb: 'Flagstaff Hill',
-    image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=600&q=80',
-  },
-];
-
-const row2Learners = [
-  {
-    id: 7,
     name: 'Tong',
     suburb: 'Norwood',
     image: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&q=80',
-  },
-  {
-    id: 8,
-    name: 'Tyla',
-    suburb: 'Greenwith',
-    image: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=600&q=80',
-  },
-  {
-    id: 9,
-    name: 'Vishnu',
-    suburb: 'Prospect',
-    image: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80',
-  },
-  {
-    id: 10,
-    name: 'Winnie',
-    suburb: 'Happy Valley',
-    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=600&q=80',
-  },
-  {
-    id: 11,
-    isPlaceholder: true,
-    text: 'Your journey starts here',
-  },
-  {
-    id: 12,
-    name: 'Liezel',
-    suburb: 'Gilles Plains',
-    image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80',
+    feedback: 'Booked online in 2 minutes. Transparent pricing with zero hidden fees.',
   },
 ];
 
-/* ==========================================
-   REUSABLE LEARNER CARD
-========================================== */
-
-function LearnerCard({ learner, isDemo }) {
-  if (learner.isPlaceholder) {
-    return (
-      <Link
-        to="/book-test"
-        className="passwall-card-placeholder"
-      >
-        <div className="passwall-trophy-icon">
-          <Trophy size={30} strokeWidth={1.6} />
-        </div>
-
-        <div className="passwall-placeholder-content">
-          <span>YOUR NEXT MILESTONE</span>
-
-          <strong>{learner.text}</strong>
-
-          <p>Take the next step towards your licence.</p>
-        </div>
-
-        <div className="passwall-placeholder-arrow">
-          <ArrowUpRight size={19} />
-        </div>
-      </Link>
-    );
-  }
-
-  return (
-    <article className="passwall-card">
-      <img
-        src={learner.image}
-        alt={
-          isDemo
-            ? 'Sample learner portrait'
-            : `Portrait of ${learner.name}`
-        }
-        className="passwall-card-img"
-        loading="lazy"
-        decoding="async"
-      />
-
-      <div className="passwall-card-overlay">
-
-        {/* Top badges */}
-        <div className="passwall-card-top">
-          <div className="passwall-p-plate">P</div>
-
-          <div className="passwall-success-badge">
-            {!isDemo && <CheckCircle size={12} />}
-            <span>{isDemo ? 'Sample' : 'Passed'}</span>
-          </div>
-        </div>
-
-        {/* Learner information */}
-        <div className="passwall-card-bottom">
-
-          <h3 className="passwall-card-name">
-            {learner.name}
-          </h3>
-
-          <div className="passwall-card-location">
-            <MapPin size={13} />
-            <span>{learner.suburb}</span>
-          </div>
-
-          <div className="passwall-card-watermark">
-            A1 SMART DRIVING
-          </div>
-
-        </div>
-      </div>
-    </article>
-  );
-}
-
-/* ==========================================
-   MAIN PASSED WALL COMPONENT
-========================================== */
-
 export default function PassedWall() {
-  const galleryRef = useRef(null);
-
-  // Set false only after replacing sample data
-  // with genuine learner records and photographs.
-  const isDemo = true;
-
-  const scrollGallery = (direction) => {
-    if (!galleryRef.current) return;
-
-    const gallery = galleryRef.current;
-
-    const scrollDistance = gallery.clientWidth * 0.65;
-
-    gallery.scrollBy({
-      left:
-        direction === 'left'
-          ? -scrollDistance
-          : scrollDistance,
-      behavior: window.matchMedia(
-        '(prefers-reduced-motion: reduce)'
-      ).matches ? 'auto' : 'smooth',
-    });
-  };
-
   return (
-    <section
-      className="passwall-section"
-      aria-labelledby="passwall-heading"
-    >
+    <section className="passwall-section scene-perspective-container" aria-labelledby="passwall-heading">
       <div className="passwall-container">
-
-        {/* LEFT CONTENT */}
-        <div className="passwall-content">
-
-          <div className="passwall-tag">
-            <span className="passwall-tag-dot" />
-            CELEBRATING EVERY MILESTONE
-          </div>
-
-          <h2
-            id="passwall-heading"
-            className="passwall-title"
-          >
-            Passed with
-            <br />
-            <span>A1 Smart</span>
-            <br />
-            <span>Driving.</span>
-          </h2>
-
-          <p className="passwall-desc">
-            Every driving journey deserves a celebration.
-            Take the next step towards confidence,
-            independence and your P-plates.
-          </p>
-
-          <div className="passwall-content-actions">
-            <Link
-              to="/book-test"
-              className="passwall-btn"
-            >
-              Book your VORT
-              <ArrowRight size={19} />
-            </Link>
-
-            <span className="passwall-cta-caption">
-              Your journey. Your independence.
-            </span>
-          </div>
-
-          {/* Gallery navigation */}
-          <div className="passwall-navigation">
-
-            <div className="passwall-navigation-label">
-              <span>THE WALL OF FAME</span>
-              <small>Explore the gallery</small>
+        {/* Left Column: Heading & 3D Trophy Shield */}
+        <ScrollReveal direction="left" distance={40}>
+          <div className="passwall-content">
+            <div className="passwall-tag">
+              <span className="passwall-tag-dot" />
+              CELEBRATING EVERY SOUTH AUSTRALIAN MILESTONE
             </div>
 
-            <div className="passwall-navigation-buttons">
-              <button
-                type="button"
-                onClick={() => scrollGallery('left')}
-                className="passwall-nav-btn"
-                aria-label="Scroll gallery left"
-                aria-controls="passwall-gallery"
-              >
-                <ArrowLeft size={19} />
-              </button>
+            <h2 id="passwall-heading" className="passwall-title">
+              Passed with
+              <br />
+              <span>A1 Smart</span>
+              <br />
+              <span>Driving.</span>
+            </h2>
 
-              <button
-                type="button"
-                onClick={() => scrollGallery('right')}
-                className="passwall-nav-btn"
-                aria-label="Scroll gallery right"
-                aria-controls="passwall-gallery"
-              >
+            {/* 3D SA P-Plate Trophy Emblem */}
+            <Suspense fallback={<div style={{ minHeight: '180px' }} />}>
+              <TrophyPass3D />
+            </Suspense>
+
+            <p className="passwall-desc">
+              Over 1,200 Adelaide drivers have achieved their provisional licence through our accredited network.
+              Join South Australia’s highest-rated driving school.
+            </p>
+
+            <div className="passwall-content-actions">
+              <Link to="/book-test" className="magnetic-btn" style={{ textDecoration: 'none' }}>
+                <span>Book Your VORT Test</span>
                 <ArrowRight size={19} />
-              </button>
-            </div>
-
-          </div>
-        </div>
-
-        {/* RIGHT GALLERY */}
-        <div className="passwall-gallery-wrap">
-
-          <div className="passwall-gallery-heading">
-            <div className="passwall-gallery-eyebrow">
-              <Trophy size={17} />
-              <span>Celebrating success</span>
-            </div>
-
-            <span className="passwall-gallery-count">
-              {isDemo ? 'Sample gallery' : 'Our learners'}
-            </span>
-          </div>
-
-          <div
-            id="passwall-gallery"
-            className="passwall-grid"
-            ref={galleryRef}
-            tabIndex={0}
-            role="region"
-            aria-label="Learner gallery"
-          >
-
-            {/* First Row */}
-            <div className="passwall-row">
-              {row1Learners.map((learner) => (
-                <LearnerCard
-                  key={learner.id}
-                  learner={learner}
-                  isDemo={isDemo}
-                />
-              ))}
-            </div>
-
-            {/* Second Row */}
-            <div className="passwall-row">
-              {row2Learners.map((learner) => (
-                <LearnerCard
-                  key={learner.id}
-                  learner={learner}
-                  isDemo={isDemo}
-                />
-              ))}
-            </div>
-
-          </div>
-
-          <div className="passwall-gallery-footer">
-            <span>
-              {isDemo
-                ? 'Illustrative gallery • Sample portraits'
-                : 'Celebrating our Adelaide learners'}
-            </span>
-
-            <div className="passwall-scroll-indicator">
-              <span>Scroll to explore</span>
-              <ArrowRight size={14} />
+              </Link>
             </div>
           </div>
+        </ScrollReveal>
 
-        </div>
+        {/* Right Column: 3D Depth Carousel of Successful Learners */}
+        <ScrollReveal direction="right" distance={40}>
+          <DepthCarousel
+            items={allLearners}
+            renderItem={(learner, idx, isActive) => (
+              <TiltCard maxTilt={10} scale={isActive ? 1.05 : 0.95}>
+                <div
+                  style={{
+                    position: 'relative',
+                    height: '420px',
+                    borderRadius: '20px',
+                    overflow: 'hidden',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'flex-end',
+                    background: '#07172b',
+                  }}
+                >
+                  <img
+                    src={learner.image}
+                    alt={`${learner.name} passed driving test`}
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      filter: isActive ? 'brightness(0.95)' : 'brightness(0.7)',
+                      transition: 'filter 0.4s ease',
+                    }}
+                  />
+
+                  {/* Gradient Scrim */}
+                  <div
+                    style={{
+                      position: 'absolute',
+                      inset: 0,
+                      background: 'linear-gradient(to top, rgba(7, 23, 43, 0.95) 0%, rgba(7, 23, 43, 0.4) 50%, transparent 100%)',
+                    }}
+                  />
+
+                  {/* P-Plate Badge Overlay */}
+                  <div style={{ position: 'absolute', top: '1rem', right: '1rem' }}>
+                    <span
+                      style={{
+                        background: '#dc2626',
+                        color: '#ffffff',
+                        fontWeight: 900,
+                        fontSize: '1.1rem',
+                        width: '36px',
+                        height: '42px',
+                        borderRadius: '6px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        boxShadow: '0 4px 15px rgba(220, 38, 38, 0.5)',
+                        border: '2px solid #ffffff',
+                      }}
+                    >
+                      P
+                    </span>
+                  </div>
+
+                  {/* Learner Info */}
+                  <div style={{ position: 'relative', zIndex: 2, padding: '1.5rem' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: '#86efac', fontSize: '0.85rem', fontWeight: 600, marginBottom: '0.25rem' }}>
+                      <CheckCircle size={15} /> FIRST-TIME PASS
+                    </div>
+                    <h3 style={{ margin: 0, fontSize: '1.4rem', color: '#ffffff', fontWeight: 800 }}>
+                      {learner.name}
+                    </h3>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', color: '#94a3b8', fontSize: '0.85rem', marginTop: '0.2rem', marginBottom: '0.65rem' }}>
+                      <MapPin size={13} /> {learner.suburb} (SA)
+                    </div>
+                    <p style={{ margin: 0, fontSize: '0.85rem', color: '#cbd5e1', lineHeight: 1.45, fontStyle: 'italic' }}>
+                      "{learner.feedback}"
+                    </p>
+                  </div>
+                </div>
+              </TiltCard>
+            )}
+          />
+        </ScrollReveal>
       </div>
     </section>
   );

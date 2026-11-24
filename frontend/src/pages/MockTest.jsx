@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import BookingWizard from '../components/booking/BookingWizard';
+import TiltCard from '../components/effects/TiltCard';
+import ScrollReveal from '../components/effects/ScrollReveal';
+import MagneticButton from '../components/effects/MagneticButton';
 import {
   ShieldCheck,
   CheckCircle,
@@ -14,8 +17,11 @@ import {
   Car,
   Compass,
   DollarSign,
+  Sparkles,
 } from 'lucide-react';
 import '../styles/mock-test.css';
+
+const RoadScenario3D = lazy(() => import('../components/3d/RoadScenario3D'));
 
 export default function MockTest() {
   const [openFaq, setOpenFaq] = useState(null);
@@ -81,42 +87,66 @@ export default function MockTest() {
   ];
 
   return (
-    <div className="mock-test-page">
+    <div className="scene-perspective-container">
       {/* 1. HERO SECTION */}
       <section className="mock-hero">
         <div className="mock-hero-bg" aria-hidden="true" />
         <div className="mock-hero-container">
-          <div className="mock-pill-badge">
-            <ShieldCheck size={15} />
-            Official South Australian DIT Scoring Standards
-          </div>
+          <ScrollReveal direction="down" distance={25}>
+            <div className="mock-pill-badge">
+              <span className="mock-pill-dot" />
+              95%+ First-Time Pass Rate Guarantee Pathway
+            </div>
 
-          <h1 className="mock-hero-title">
-            Official VORT <span>Mock Driving Test</span> in Adelaide
-          </h1>
+            <h1 className="mock-hero-title">
+              VORT Mock Driving Test — <span>Adelaide</span>
+            </h1>
 
-          <p className="mock-hero-desc">
-            A realistic 90-minute trial assessment marked on the authentic South Australian Vehicle On Road Test score sheet. Discover exactly where you stand, eliminate costly $240+ re-test fees, and pass on your first attempt.
-          </p>
+            <p className="mock-hero-desc">
+              Experience the pressure, routes, and scoring of an official South Australian Vehicle On Road Test before the real thing. Certified instructors score you on the official DIT marking sheet.
+            </p>
 
-          <div className="mock-value-ribbon">
-            <div className="mock-value-item">
-              <Clock size={16} />
-              <span>Full 90-Minute Simulation</span>
+            <div className="mock-value-ribbon">
+              <div className="mock-value-item">
+                <Clock size={16} />
+                <span>Full 90-Minute Simulation</span>
+              </div>
+              <div className="mock-value-item">
+                <FileCheck size={16} />
+                <span>Official DIT Score Sheet</span>
+              </div>
+              <div className="mock-value-item">
+                <Award size={16} />
+                <span>90%+ Pass Benchmark</span>
+              </div>
+              <div className="mock-value-item">
+                <MapPin size={16} />
+                <span>Thebarton, Port Adelaide & Marion Hubs</span>
+              </div>
             </div>
-            <div className="mock-value-item">
-              <FileCheck size={16} />
-              <span>Official DIT Score Sheet</span>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* 3D MANOEUVRE SIMULATION */}
+      <section style={{ padding: '3rem 1rem' }}>
+        <div className="container" style={{ maxWidth: '960px', margin: '0 auto' }}>
+          <ScrollReveal direction="up" distance={30}>
+            <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+              <span className="badge-3d" style={{ marginBottom: '0.5rem' }}>
+                <Compass size={14} /> 3D Manoeuvre Inspection
+              </span>
+              <h2 style={{ fontSize: '2rem', color: '#ffffff', fontWeight: 800 }}>
+                Practice Test Scenarios Before You Sit The VORT
+              </h2>
+              <p style={{ color: '#94a3b8', fontSize: '1rem', maxWidth: '640px', margin: '0 auto' }}>
+                Simulate kerb stops, 3-point turns, and parallel parking in interactive 3D:
+              </p>
             </div>
-            <div className="mock-value-item">
-              <Award size={16} />
-              <span>90%+ Pass Benchmark</span>
-            </div>
-            <div className="mock-value-item">
-              <MapPin size={16} />
-              <span>Thebarton, Port Adelaide & Marion Hubs</span>
-            </div>
-          </div>
+            <Suspense fallback={<div className="loading-spinner" style={{ minHeight: '380px' }} />}>
+              <RoadScenario3D />
+            </Suspense>
+          </ScrollReveal>
         </div>
       </section>
 
@@ -124,42 +154,36 @@ export default function MockTest() {
       <section className="mock-stages-section">
         <div className="container">
           <div style={{ textAlign: 'center', marginBottom: '36px' }}>
-            <span
-              style={{
-                color: '#16a34a',
-                fontSize: '11px',
-                fontWeight: 800,
-                textTransform: 'uppercase',
-                letterSpacing: '0.08em',
-                display: 'block',
-                marginBottom: '6px',
-              }}
-            >
-              Simulate Real Exam Conditions
+            <span className="badge-3d" style={{ marginBottom: '0.5rem' }}>
+              <Sparkles size={13} /> Official Scoring Criteria
             </span>
-            <h2 style={{ fontSize: 'clamp(26px, 3.2vw, 36px)', fontWeight: 850, color: '#0f172a', margin: '0 0 12px' }}>
+            <h2 style={{ fontSize: 'clamp(26px, 3.2vw, 36px)', fontWeight: 850, color: '#ffffff', margin: '0 0 12px' }}>
               What Your VORT Mock Test Covers
             </h2>
-            <p style={{ color: '#64748b', fontSize: '14.5px', maxWidth: '640px', margin: '0 auto', lineHeight: 1.65 }}>
+            <p style={{ color: '#94a3b8', fontSize: '15px', maxWidth: '640px', margin: '0 auto', lineHeight: 1.65 }}>
               Your accredited instructor replicates the silent, formal conditions of an official government examination so nothing surprises you on the day.
             </p>
           </div>
 
           <div className="mock-stages-grid">
-            {(Array.isArray(stages) ? stages : []).map((stage, idx) => (
-              <div key={idx} className="mock-stage-card">
-                <span className="mock-stage-badge">{stage.badge}</span>
-                <h3 className="mock-stage-title">{stage.title}</h3>
-                <p className="mock-stage-desc">{stage.desc}</p>
-                <ul className="mock-stage-checklist">
-                  {(Array.isArray(stage?.items) ? stage.items : []).map((item, i) => (
-                    <li key={i}>
-                      <CheckCircle size={15} />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+            {stages.map((stage, idx) => (
+              <ScrollReveal key={idx} direction="up" distance={30} delay={idx * 0.12}>
+                <TiltCard maxTilt={8} scale={1.02} style={{ height: '100%' }}>
+                  <div className="mock-stage-card" style={{ height: '100%', margin: 0 }}>
+                    <span className="mock-stage-badge">{stage.badge}</span>
+                    <h3 className="mock-stage-title">{stage.title}</h3>
+                    <p className="mock-stage-desc">{stage.desc}</p>
+                    <ul className="mock-stage-checklist">
+                      {stage.items.map((item, i) => (
+                        <li key={i}>
+                          <CheckCircle size={15} color="#22c55e" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </TiltCard>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -168,7 +192,7 @@ export default function MockTest() {
       {/* 3. BOOKING ENGINE WIZARD */}
       <section style={{ padding: 'clamp(40px, 5vw, 64px) 0' }}>
         <div className="mock-booking-card-wrap">
-          <div className="mock-booking-card">
+          <div className="mock-booking-card glass-panel-3d" style={{ background: '#ffffff' }}>
             <div
               style={{
                 display: 'flex',
@@ -200,121 +224,41 @@ export default function MockTest() {
                   textAlign: 'right',
                 }}
               >
-                <span style={{ fontSize: '24px', fontWeight: 900, lineHeight: 1, display: 'block' }}>$160</span>
-                <span style={{ fontSize: '11px', fontWeight: 750, textTransform: 'uppercase' }}>90-Min Full Mock Test</span>
+                <div style={{ fontSize: '20px', fontWeight: 900 }}>$190 AUD</div>
+                <div style={{ fontSize: '11px', fontWeight: 700 }}>90-Min Full Mock Assessment</div>
               </div>
             </div>
 
-            <BookingWizard defaultServiceSlug="driving-lesson-120" forcedIsTest={false} />
+            <BookingWizard defaultServiceSlug="vort-mock-test" forcedIsTest={false} />
           </div>
         </div>
       </section>
 
-      {/* 4. WHY MOCK TEST IS YOUR BEST INVESTMENT */}
-      <section className="mock-why-section">
-        <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '36px' }}>
-            <h2 style={{ fontSize: 'clamp(26px, 3.2vw, 36px)', fontWeight: 850, color: '#0f172a', margin: '0 0 10px' }}>
-              Why a Mock Test is Your Best Investment
-            </h2>
-            <p style={{ color: '#64748b', fontSize: '14.5px', maxWidth: '600px', margin: '0 auto', lineHeight: 1.65 }}>
-              Over 88% of learners who complete a formal mock test pass their official VORT on their first attempt.
-            </p>
-          </div>
-
-          <div className="mock-why-grid">
-            <div className="mock-why-card">
-              <div className="mock-why-icon">
-                <DollarSign size={24} />
-              </div>
-              <h4>Avoid Costly $240+ Retests</h4>
-              <p>
-                Failing the real VORT means re-paying the full government examiner fee and car hire costs. A mock test ensures you only sit the test when you are truly guaranteed to succeed.
-              </p>
-            </div>
-
-            <div className="mock-why-card">
-              <div className="mock-why-icon">
-                <AlertTriangle size={24} />
-              </div>
-              <h4>Catch Immediate Fail Items</h4>
-              <p>
-                A rolling stop at a STOP sign, creeping over 50 km/h, or omitting a single blind-spot head check results in an automatic exam termination. Discover these habits before test day.
-              </p>
-            </div>
-
-            <div className="mock-why-card">
-              <div className="mock-why-icon">
-                <Compass size={24} />
-              </div>
-              <h4>Master Adelaide Test Hub Routes</h4>
-              <p>
-                Practice in the actual designated testing zones surrounding Thebarton, Port Adelaide, and Marion customer service centres so you know every turn and tricky intersection.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 5. FAQS ACCORDION */}
-      <section style={{ padding: 'clamp(52px, 6vw, 84px) 0', backgroundColor: '#ffffff' }}>
-        <div className="container" style={{ maxWidth: '820px' }}>
-          <div style={{ textAlign: 'center', marginBottom: '36px' }}>
-            <h2 style={{ fontSize: 'clamp(24px, 3vw, 32px)', fontWeight: 850, color: '#16a34a', margin: '0 0 8px' }}>
-              Mock Test FAQs
-            </h2>
-            <p style={{ color: '#64748b', fontSize: '14px', margin: 0 }}>
-              Common questions about preparing for and sitting your trial assessment.
-            </p>
-          </div>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            {(Array.isArray(faqs) ? faqs : []).map((faq, idx) => {
-              const isOpen = openFaq === idx;
+      {/* 4. FAQ ACCORDION */}
+      <section style={{ padding: '3rem 1rem 5rem' }}>
+        <div className="container" style={{ maxWidth: '850px', margin: '0 auto' }}>
+          <h2 style={{ textAlign: 'center', color: '#ffffff', fontSize: '2rem', fontWeight: 800, marginBottom: '2.5rem' }}>
+            Mock Test Common Questions
+          </h2>
+          <div className="faq-3d-list">
+            {faqs.map((f, i) => {
+              const isOpen = openFaq === i;
               return (
-                <div
-                  key={idx}
-                  style={{
-                    backgroundColor: '#ffffff',
-                    border: '1px solid #e2e8f0',
-                    borderRadius: '14px',
-                    overflow: 'hidden',
-                  }}
-                >
+                <div key={i} className={`accordion-3d-item ${isOpen ? 'is-open' : ''}`}>
                   <button
                     type="button"
-                    onClick={() => toggleFaq(idx)}
-                    style={{
-                      width: '100%',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      padding: '18px 22px',
-                      background: 'transparent',
-                      border: 'none',
-                      cursor: 'pointer',
-                      textAlign: 'left',
-                      font: 'inherit',
-                      color: '#1e293b',
-                      fontSize: '15px',
-                      fontWeight: 750,
-                    }}
+                    className="accordion-3d-trigger"
+                    onClick={() => toggleFaq(i)}
+                    aria-expanded={isOpen}
                   >
-                    <span>{faq.q}</span>
-                    <ChevronDown
-                      size={18}
-                      color="#64748b"
-                      style={{
-                        transform: isOpen ? 'rotate(180deg)' : 'none',
-                        transition: 'transform 0.2s ease',
-                        flexShrink: 0,
-                      }}
-                    />
+                    <span>{f.q}</span>
+                    <div className="accordion-3d-icon">
+                      <ChevronDown size={18} />
+                    </div>
                   </button>
-
                   {isOpen && (
-                    <div style={{ padding: '0 22px 18px', color: '#475569', fontSize: '13.5px', lineHeight: 1.65 }}>
-                      <p style={{ margin: 0 }}>{faq.a}</p>
+                    <div className="accordion-3d-content">
+                      <p style={{ margin: 0 }}>{f.a}</p>
                     </div>
                   )}
                 </div>
@@ -323,37 +267,6 @@ export default function MockTest() {
           </div>
         </div>
       </section>
-
-      {/* 6. BOTTOM CTA */}
-      <section
-        style={{
-          background: 'linear-gradient(135deg, #09182d 0%, #0d2847 100%)',
-          color: '#ffffff',
-          padding: 'clamp(52px, 6vw, 76px) 24px',
-          textAlign: 'center',
-        }}
-      >
-        <div style={{ maxWidth: '720px', margin: '0 auto' }}>
-          <h2 style={{ color: '#ffffff', fontSize: 'clamp(28px, 3.5vw, 40px)', fontWeight: 850, margin: '0 0 16px' }}>
-            Are You Ready to Pass Your VORT?
-          </h2>
-          <p style={{ color: 'rgba(255, 255, 255, 0.85)', fontSize: '15px', lineHeight: 1.65, margin: '0 0 28px' }}>
-            Take our authentic 90-minute trial test, get your official score sheet breakdown, and head into your South Australian test day with absolute confidence.
-          </p>
-          <a
-            href="#top"
-            onClick={(e) => {
-              e.preventDefault();
-              window.scrollTo({ top: 400, behavior: 'smooth' });
-            }}
-            className="button button-accent button-lg"
-            style={{ borderRadius: '9999px', padding: '14px 34px', fontSize: '15.5px', fontWeight: 800 }}
-          >
-            Book Your VORT Mock Test Now <ArrowRight size={18} />
-          </a>
-        </div>
-      </section>
     </div>
   );
 }
-

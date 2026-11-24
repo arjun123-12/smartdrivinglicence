@@ -3,6 +3,23 @@
    PREMIUM AUTOMOTIVE HERO V2
 ============================================= */
 
+/* Seamless homepage integration with floating navbar */
+.is-homepage-main {
+  margin-top: -80px;
+}
+
+@media (max-width: 1080px) {
+  .is-homepage-main {
+    margin-top: -72px;
+  }
+}
+
+@media (max-width: 640px) {
+  .is-homepage-main {
+    margin-top: -64px;
+  }
+}
+
 .sd-hero-v2 {
   --sdh-navy: #0b2136;
   --sdh-navy-dark: #061725;
@@ -16,7 +33,7 @@
 
   position: relative;
   width: 100%;
-  background: #ffffff;
+  background: var(--sdh-navy-dark);
   isolation: isolate;
 }
 
@@ -56,11 +73,23 @@
   isolation: isolate;
   overflow: hidden;
 
-  min-height: 690px;
-  padding: 85px 0 155px;
+  min-height: 720px;
+  padding: 135px 0 155px;
 
   background: var(--sdh-navy-dark);
   color: #ffffff;
+}
+
+@media (max-width: 1080px) {
+  .sdh-banner {
+    padding: 120px 0 130px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sdh-banner {
+    padding: 105px 0 95px;
+  }
 }
 
 /* =============================================
@@ -201,8 +230,91 @@
 
   font-size: clamp(38px, 4.1vw, 68px);
   font-weight: 800;
-  line-height: 1.08;
-  letter-spacing: -2.8px;
+  line-height: 1.1;
+  letter-spacing: -2.5px;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.sdh-heading-row {
+  display: block;
+  transform-origin: 50% 100% -25px;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+  animation: sdh-heading-rotate-in 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+  text-shadow:
+    0 2px 4px rgba(6, 23, 37, 0.45),
+    0 8px 18px rgba(6, 23, 37, 0.6),
+    0 22px 45px rgba(6, 23, 37, 0.4);
+}
+
+.sdh-row-1 {
+  animation-delay: 0.12s;
+}
+
+.sdh-row-2 {
+  animation-delay: 0.26s;
+}
+
+.sdh-row-3 {
+  animation-delay: 0.42s;
+  position: relative;
+  display: inline-block;
+}
+
+.sdh-row-3 span:first-child {
+  color: var(--sdh-green-bright, #79dc82);
+  text-shadow:
+    0 2px 10px rgba(121, 220, 130, 0.4),
+    0 8px 25px rgba(6, 23, 37, 0.65);
+}
+
+@keyframes sdh-heading-rotate-in {
+  0% {
+    opacity: 0;
+    transform: translateY(26px) rotateX(18deg) scale(0.97);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotateX(0deg) scale(1);
+  }
+}
+
+/* Underline Reveal beneath "Starts Here." */
+.sdh-title-underline {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #79dc82 0%, #22c55e 75%, rgba(34, 197, 94, 0.1) 100%);
+  box-shadow: 0 0 14px rgba(121, 220, 130, 0.6);
+  transform-origin: left center;
+  animation: sdh-underline-reveal 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.62s both;
+}
+
+@keyframes sdh-underline-reveal {
+  0% {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .sdh-heading-row,
+  .sdh-title-underline {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
 }
 
 .sdh-title span {
@@ -1069,8 +1181,8 @@
 
   .sdh-overlay {
     background: linear-gradient(90deg,
-      rgba(6, 23, 37, 0.94) 0%,
-      rgba(6, 23, 37, 0.75) 100%);
+        rgba(6, 23, 37, 0.94) 0%,
+        rgba(6, 23, 37, 0.75) 100%);
   }
 
   .sdh-road-shape {

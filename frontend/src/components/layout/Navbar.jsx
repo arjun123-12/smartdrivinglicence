@@ -14,13 +14,42 @@ import {
 } from 'lucide-react';
 import '../../styles/navbar.css';
 
-export default function Navbar() {
+export default function Navbar({ isHomePage = false }) {
   const { isAuthenticated, isAdmin, isInstructor, logout } = useAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [resourcesOpen, setResourcesOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [pastHero, setPastHero] = useState(false);
   const resourceRef = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
+
+  const isHome = isHomePage || location.pathname === '/';
+
+  // Track scroll position for dynamic floating island elevation and hero transition
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      setScrolled(scrollY > 15);
+
+      if (isHome) {
+        const heroBanner = document.querySelector('.sdh-banner') || document.querySelector('.sd-hero-v2');
+        if (heroBanner) {
+          const rect = heroBanner.getBoundingClientRect();
+          // Past hero when the bottom of the hero banner reaches near the top of the viewport
+          setPastHero(rect.bottom <= 85);
+        } else {
+          setPastHero(scrollY > 550);
+        }
+      } else {
+        setPastHero(true);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isHome]);
 
   // Close menus on route change
   useEffect(() => {
@@ -88,9 +117,13 @@ export default function Navbar() {
     `sd-nav-link${isActive ? ' active' : ''}`;
 
   return (
-    <header className="sd-header">
-      <div className="sd-mainbar">
-        <div className="sd-container sd-mainbar-inner">
+    <header
+      className={`sd-header-wrap ${scrolled ? 'is-scrolled' : ''} ${
+        isHome ? 'is-homepage' : ''
+      } ${pastHero ? 'is-past-hero' : 'on-hero'}`}
+    >
+      <div className="sd-header-pill">
+        <div className="sd-mainbar-inner">
           {/* Brand Logo */}
           <Link to="/" className="sd-brand" onClick={closeMenu}>
             <img
@@ -189,6 +222,15 @@ export default function Navbar() {
               </>
             ) : (
               <>
+                <a
+                  href="tel:0430580111"
+                  className="sd-phone-badge"
+                  title="Direct Adelaide Phone / SMS Helpline"
+                >
+                  <span className="sd-phone-live-dot" />
+                  <span>0430 580 111</span>
+                </a>
+
                 <Link
                   to="/login"
                   className="sd-login-button"

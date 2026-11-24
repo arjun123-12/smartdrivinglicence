@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import bookingService from '../services/bookingService';
 import { extractArray, safeArray } from '../utils/apiHelpers';
 import { mockLocations } from '../services/mockData';
-import { MapPin, Search, CheckCircle, Car, ArrowRight } from 'lucide-react';
+import TiltCard from '../components/effects/TiltCard';
+import ScrollReveal from '../components/effects/ScrollReveal';
+import { MapPin, Search, CheckCircle, Car, ArrowRight, ShieldCheck } from 'lucide-react';
 
 export default function Locations() {
   const [locations, setLocations] = useState([]);
@@ -74,35 +76,39 @@ export default function Locations() {
           </div>
 
           <div className="grid grid-3">
-            {safeArray(testCentres).map((centre) => (
-              <div key={centre.id} className="card" style={{ padding: '1.5rem', border: '2px solid var(--color-secondary)' }}>
-                <div className="flex-between" style={{ marginBottom: '0.75rem' }}>
-                  <div style={{ fontWeight: 800, fontSize: '1.2rem', color: 'var(--color-primary)' }}>
-                    {centre.name}
-                  </div>
-                  <span className="badge badge-info">Postcode {centre.postcode}</span>
-                </div>
+            {safeArray(testCentres).map((centre, idx) => (
+              <ScrollReveal key={centre.id} direction="up" distance={30} delay={idx * 0.08}>
+                <TiltCard maxTilt={8} scale={1.02} style={{ height: '100%' }}>
+                  <div className="card" style={{ padding: '1.5rem', border: '2px solid var(--color-secondary)', height: '100%', margin: 0, display: 'flex', flexDirection: 'column' }}>
+                    <div className="flex-between" style={{ marginBottom: '0.75rem' }}>
+                      <div style={{ fontWeight: 800, fontSize: '1.2rem', color: 'var(--color-primary)' }}>
+                        {centre.name}
+                      </div>
+                      <span className="badge badge-info">Postcode {centre.postcode}</span>
+                    </div>
 
-                <div style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-muted)', marginBottom: '1rem' }}>
-                  Official DIT Test Location: <strong>{centre.test_centre_name || centre.name + ' Service Centre'}</strong>
-                </div>
+                    <div style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-muted)', marginBottom: '1rem' }}>
+                      Official DIT Test Location: <strong>{centre.test_centre_name || centre.name + ' Service Centre'}</strong>
+                    </div>
 
-                <div style={{ fontSize: 'var(--font-size-xs)', marginBottom: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
-                  <div className="flex" style={{ gap: '0.4rem', alignItems: 'center' }}>
-                    <CheckCircle size={14} color="var(--color-success)" /> VORT test starting point
-                  </div>
-                  <div className="flex" style={{ gap: '0.4rem', alignItems: 'center' }}>
-                    <CheckCircle size={14} color="var(--color-success)" /> Dual-control examiner vehicles
-                  </div>
-                  <div className="flex" style={{ gap: '0.4rem', alignItems: 'center' }}>
-                    <CheckCircle size={14} color="var(--color-success)" /> PreVORT warmups available
-                  </div>
-                </div>
+                    <div style={{ fontSize: 'var(--font-size-xs)', marginBottom: '1.25rem', display: 'flex', flexDirection: 'column', gap: '0.35rem', flex: 1 }}>
+                      <div className="flex" style={{ gap: '0.4rem', alignItems: 'center' }}>
+                        <CheckCircle size={14} color="var(--color-success)" /> VORT test starting point
+                      </div>
+                      <div className="flex" style={{ gap: '0.4rem', alignItems: 'center' }}>
+                        <CheckCircle size={14} color="var(--color-success)" /> Dual-control examiner vehicles
+                      </div>
+                      <div className="flex" style={{ gap: '0.4rem', alignItems: 'center' }}>
+                        <CheckCircle size={14} color="var(--color-success)" /> PreVORT warmups available
+                      </div>
+                    </div>
 
-                <Link to={`/book-test?location_id=${centre.id}`} className="button button-accent button-sm button-full">
-                  Book Test at {centre.name} <ArrowRight size={14} />
-                </Link>
-              </div>
+                    <Link to={`/book-test?location_id=${centre.id}`} className="button button-accent button-sm button-full" style={{ marginTop: 'auto' }}>
+                      Book Test at {centre.name} <ArrowRight size={14} />
+                    </Link>
+                  </div>
+                </TiltCard>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -115,19 +121,23 @@ export default function Locations() {
           </div>
 
           <div className="grid grid-4">
-            {safeArray(suburbs).map((sub) => (
-              <div key={sub.id} className="card" style={{ padding: '1.25rem' }}>
-                <div className="flex-between" style={{ marginBottom: '0.5rem' }}>
-                  <span style={{ fontWeight: 700, color: 'var(--color-primary)' }}>{sub.name}</span>
-                  <span style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-muted)' }}>{sub.postcode}</span>
-                </div>
-                <div style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-muted)', marginBottom: '1rem' }}>
-                  Free instructor home/school pickup
-                </div>
-                <Link to={`/book-lesson?location_id=${sub.id}`} className="button button-outline button-sm button-full">
-                  Book in {sub.name}
-                </Link>
-              </div>
+            {safeArray(suburbs).map((sub, idx) => (
+              <ScrollReveal key={sub.id} direction="up" distance={25} delay={(idx % 4) * 0.08}>
+                <TiltCard maxTilt={8} scale={1.02} style={{ height: '100%' }}>
+                  <div className="card" style={{ padding: '1.25rem', height: '100%', margin: 0, display: 'flex', flexDirection: 'column' }}>
+                    <div className="flex-between" style={{ marginBottom: '0.5rem' }}>
+                      <span style={{ fontWeight: 700, color: 'var(--color-primary)' }}>{sub.name}</span>
+                      <span style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-muted)' }}>{sub.postcode}</span>
+                    </div>
+                    <div style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-muted)', marginBottom: '1rem', flex: 1 }}>
+                      Free instructor home/school pickup
+                    </div>
+                    <Link to={`/book-lesson?location_id=${sub.id}`} className="button button-outline button-sm button-full" style={{ marginTop: 'auto' }}>
+                      Book in {sub.name}
+                    </Link>
+                  </div>
+                </TiltCard>
+              </ScrollReveal>
             ))}
           </div>
         </div>

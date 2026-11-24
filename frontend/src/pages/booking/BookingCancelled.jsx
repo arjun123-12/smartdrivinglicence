@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate, Link } from 'react-router-dom';
 import { paymentService } from '../../services/paymentService';
 import {
+  formatPaymentAmount,
+  formatAppointmentDate,
+  formatAppointmentTime,
+} from './BookingConfirmed';
+import {
   AlertTriangle,
   Clock,
   ArrowRight,
@@ -135,13 +140,13 @@ export default function BookingCancelled() {
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem', marginBottom: '0.4rem' }}>
                 <span style={{ color: '#64748b' }}>Date & Time:</span>
                 <span style={{ fontWeight: 600 }}>
-                  {new Date(booking.start_time).toLocaleDateString()} @ {new Date(booking.start_time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                  {formatAppointmentDate(booking)} @ {formatAppointmentTime(booking)}
                 </span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}>
                 <span style={{ color: '#64748b' }}>Total Payable:</span>
                 <span style={{ fontWeight: 700, color: 'var(--color-primary, #1e3a8a)' }}>
-                  ${Number(booking.price_snapshot).toFixed(2)} AUD
+                  {formatPaymentAmount(booking)}
                 </span>
               </div>
             </div>

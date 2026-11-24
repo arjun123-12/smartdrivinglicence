@@ -1,23 +1,34 @@
 :root {
   /* Brand Colors from A1 SMART DRIVING Logo */
-  --color-primary: #1B6C31;             /* Forest / Racing Green from "SMART DRIVING" text & 1 road */
-  --color-primary-hover: #145325;       /* Deep rich forest green */
-  --color-primary-light: #EBF5EE;       /* Fresh pastel green surface */
-  --color-primary-subtle: #D2E7D7;      /* Subtle border green */
+  --color-primary: #1B6C31;
+  /* Forest / Racing Green from "SMART DRIVING" text & 1 road */
+  --color-primary-hover: #145325;
+  /* Deep rich forest green */
+  --color-primary-light: #EBF5EE;
+  /* Fresh pastel green surface */
+  --color-primary-subtle: #D2E7D7;
+  /* Subtle border green */
 
-  --color-secondary: #0D2645;           /* Deep Navy Blue from "A" body & steering wheel */
-  --color-secondary-hover: #163B66;     /* Lighter navy */
-  --color-secondary-light: #E8EFF8;     /* Soft navy-tinted surface */
-  --color-secondary-dark: #08192E;      /* Midnight dark navy for footer/headers */
+  --color-secondary: #0D2645;
+  /* Deep Navy Blue from "A" body & steering wheel */
+  --color-secondary-hover: #163B66;
+  /* Lighter navy */
+  --color-secondary-light: #E8EFF8;
+  /* Soft navy-tinted surface */
+  --color-secondary-dark: #08192E;
+  /* Midnight dark navy for footer/headers */
 
-  --color-accent: #F59E0B;              /* Warm Amber Gold */
-  --color-accent-hover: #D97706;        /* Deep amber / warm gold */
-  --color-accent-light: #FEF3C7;        /* Soft amber surface */
+  --color-accent: #0D2645;
+  /* Deep Midnight Navy Accent */
+  --color-accent-hover: #1B6C31;
+  /* Forest Green on Hover */
+  --color-accent-light: #EBF5EE;
+  /* Fresh Pastel Green Surface */
 
   /* Specific A1 Palette shortcuts */
   --color-a1-green: #1B6C31;
   --color-a1-navy: #0D2645;
-  --color-a1-gold: #F59E0B;
+  --color-a1-gold: #FFFFFF;
 
   /* Neutrals */
   --color-background: #F8FAF8;

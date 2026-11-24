@@ -3,13 +3,25 @@
 ========================================== */
 
 .site-footer-premium {
-  background-color: #08192E;
+  background: radial-gradient(circle at 50% 0%, rgba(27, 108, 49, 0.18) 0%, #07172b 70%);
   color: #8da2bc;
   padding-top: clamp(52px, 6vw, 76px);
   padding-bottom: 32px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
   font-size: 13px;
   position: relative;
+  overflow: hidden;
+}
+
+.site-footer-premium::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #22c55e, #ffffff, transparent);
+  pointer-events: none;
 }
 
 .footer-premium-container {
@@ -285,4 +297,3 @@
     gap: 18px;
   }
 }
-

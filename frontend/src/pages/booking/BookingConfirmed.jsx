@@ -16,6 +16,125 @@ import {
   Mail,
 } from 'lucide-react';
 
+/**
+ * Safely format the verified payment amount from the booking record.
+ * Handles numbers, numeric strings like "240.00", and currency strings.
+ * Formats using Intl.NumberFormat ('en-AU', 'AUD').
+ * Returns "Amount unavailable" if missing, invalid, or non-positive.
+ */
+export function formatPaymentAmount(booking) {
+  if (!booking) return 'Amount unavailable';
+
+  const rawCandidate =
+    booking.paid_amount ??
+    booking.latest_payment?.amount ??
+    booking.latestPayment?.amount ??
+    booking.amount ??
+    booking.price_snapshot;
+
+  if (rawCandidate === null || rawCandidate === undefined || rawCandidate === '') {
+    return 'Amount unavailable';
+  }
+
+  let numericAmount;
+  if (typeof rawCandidate === 'number') {
+    numericAmount = rawCandidate;
+  } else if (typeof rawCandidate === 'string') {
+    const cleaned = rawCandidate.replace(/[^0-9.-]+/g, '');
+    numericAmount = cleaned !== '' ? parseFloat(cleaned) : NaN;
+  } else {
+    numericAmount = NaN;
+  }
+
+  if (isNaN(numericAmount) || !isFinite(numericAmount) || numericAmount <= 0) {
+    return 'Amount unavailable';
+  }
+
+  try {
+    return new Intl.NumberFormat('en-AU', {
+      style: 'currency',
+      currency: 'AUD',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(numericAmount);
+  } catch (err) {
+    return `$${numericAmount.toFixed(2)} AUD`;
+  }
+}
+
+/**
+ * Format appointment date using backend display_date or Australia/Adelaide timezone.
+ */
+export function formatAppointmentDate(booking) {
+  if (!booking) return 'Date unavailable';
+  if (booking.display_date) {
+    return booking.display_date;
+  }
+  if (!booking.start_time) return 'Date unavailable';
+
+  try {
+    const d = new Date(booking.start_time);
+    if (isNaN(d.getTime())) return 'Date unavailable';
+    return d.toLocaleDateString('en-AU', {
+      timeZone: booking.timezone || 'Australia/Adelaide',
+      weekday: 'short',
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    });
+  } catch (e) {
+    return 'Date unavailable';
+  }
+}
+
+/**
+ * Format appointment time range using backend display_time or Australia/Adelaide timezone.
+ */
+export function formatAppointmentTime(booking) {
+  if (!booking) return 'Time unavailable';
+  if (booking.display_time) {
+    return booking.display_time;
+  }
+  if (!booking.start_time || !booking.end_time) return 'Time unavailable';
+
+  try {
+    const s = new Date(booking.start_time);
+    const e = new Date(booking.end_time);
+    if (isNaN(s.getTime()) || isNaN(e.getTime())) return 'Time unavailable';
+
+    const tz = booking.timezone || 'Australia/Adelaide';
+    const startStr = s.toLocaleTimeString('en-AU', {
+      timeZone: tz,
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true,
+    });
+    const endStr = e.toLocaleTimeString('en-AU', {
+      timeZone: tz,
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true,
+    });
+
+    return `${startStr} - ${endStr}`;
+  } catch (e) {
+    return 'Time unavailable';
+  }
+}
+
+/**
+ * Resolve instructor name with robust fallback.
+ */
+export function getInstructorName(booking) {
+  if (!booking) return 'Assigned Instructor';
+  if (booking.instructor?.name) return booking.instructor.name;
+  if (booking.instructor_name) return booking.instructor_name;
+  if (typeof booking.instructor === 'string' && booking.instructor.trim() !== '') {
+    return booking.instructor;
+  }
+  return 'Assigned Instructor';
+}
+
 export default function BookingConfirmed() {
   const [searchParams] = useSearchParams();
   const reference = searchParams.get('reference');
@@ -194,12 +313,7 @@ export default function BookingConfirmed() {
                     <Calendar size={16} /> Date:
                   </span>
                   <span style={{ fontWeight: 600 }}>
-                    {new Date(booking.start_time).toLocaleDateString('en-AU', {
-                      weekday: 'short',
-                      year: 'numeric',
-                      month: 'short',
-                      day: 'numeric',
-                    })}
+                    {formatAppointmentDate(booking)}
                   </span>
                 </div>
 
@@ -208,15 +322,7 @@ export default function BookingConfirmed() {
                     <Clock size={16} /> Time:
                   </span>
                   <span style={{ fontWeight: 600 }}>
-                    {new Date(booking.start_time).toLocaleTimeString('en-AU', {
-                      hour: '2-digit',
-                      minute: '2-digit',
-                    })}{' '}
-                    -{' '}
-                    {new Date(booking.end_time).toLocaleTimeString('en-AU', {
-                      hour: '2-digit',
-                      minute: '2-digit',
-                    })}
+                    {formatAppointmentTime(booking)}
                   </span>
                 </div>
 
@@ -224,7 +330,7 @@ export default function BookingConfirmed() {
                   <span style={{ color: '#64748b', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                     <User size={16} /> Instructor:
                   </span>
-                  <span style={{ fontWeight: 600 }}>{booking.instructor?.name || 'Assigned Instructor'}</span>
+                  <span style={{ fontWeight: 600 }}>{getInstructorName(booking)}</span>
                 </div>
 
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -232,14 +338,14 @@ export default function BookingConfirmed() {
                     <MapPin size={16} /> Pickup Address:
                   </span>
                   <span style={{ fontWeight: 600, textAlign: 'right', maxWidth: '250px' }}>
-                    {booking.pickup_address}
+                    {booking.pickup_address || 'To be confirmed'}
                   </span>
                 </div>
 
                 <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px dashed #e2e8f0', paddingTop: '0.75rem', marginTop: '0.25rem' }}>
                   <span style={{ color: '#334155', fontWeight: 700 }}>Total Paid (AUD):</span>
                   <span style={{ fontWeight: 800, color: '#16a34a', fontSize: '1.1rem' }}>
-                    ${Number(booking.price_snapshot).toFixed(2)} AUD
+                    {formatPaymentAmount(booking)}
                   </span>
                 </div>
               </div>

@@ -109,7 +109,7 @@ export default function InstructorVerifyPhone() {
     <div className="section flex-center" style={{ minHeight: 'calc(100vh - 160px)', padding: '2.5rem 1rem', background: 'var(--color-bg-secondary, #f8fafc)' }}>
       <div className="card" style={{ maxWidth: '480px', width: '100%', padding: '2.25rem', boxShadow: '0 10px 25px -5px rgba(0,0,0,0.06)' }}>
         <div style={{ textAlign: 'center', marginBottom: '1.75rem' }}>
-          <div style={{ width: '52px', height: '52px', borderRadius: '50%', background: 'rgba(230, 57, 70, 0.1)', color: 'var(--color-primary, #e63946)', margin: '0 auto 0.75rem auto', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ width: '52px', height: '52px', borderRadius: '50%', background: 'rgba(27, 108, 49, 0.1)', color: 'var(--color-primary, #1B6C31)', margin: '0 auto 0.75rem auto', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <Smartphone size={26} />
           </div>
           <h2 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '0.25rem', color: '#0f172a' }}>
@@ -202,7 +202,7 @@ export default function InstructorVerifyPhone() {
               background: 'none',
               border: 'none',
               cursor: cooldown > 0 || resending ? 'not-allowed' : 'pointer',
-              color: cooldown > 0 ? '#94a3b8' : 'var(--color-primary, #e63946)',
+              color: cooldown > 0 ? '#94a3b8' : 'var(--color-primary, #1B6C31)',
               fontWeight: 600,
               display: 'flex',
               alignItems: 'center',

@@ -122,10 +122,49 @@ export default function InstructorLogin() {
   };
 
   return (
-    <div className="section flex-center" style={{ minHeight: 'calc(100vh - 160px)', padding: '2.5rem 1rem', background: 'var(--color-bg-secondary, #f8fafc)' }}>
-      <div className="card" style={{ maxWidth: '460px', width: '100%', padding: '2.25rem', boxShadow: '0 10px 25px -5px rgba(0,0,0,0.06)' }}>
-        <div style={{ textAlign: 'center', marginBottom: '1.75rem' }}>
-          <div style={{ width: '52px', height: '52px', borderRadius: '50%', background: 'rgba(230, 57, 70, 0.1)', color: 'var(--color-primary, #e63946)', margin: '0 auto 0.75rem auto', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <div
+      style={{
+        minHeight: 'calc(100vh - 120px)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '3rem 1.5rem',
+        background: 'radial-gradient(circle at 50% 15%, rgba(27, 108, 49, 0.08) 0%, #F8FAF8 70%)',
+      }}
+    >
+      <div
+        className="card"
+        style={{
+          maxWidth: '460px',
+          width: '100%',
+          padding: '2.5rem',
+          borderRadius: '20px',
+          boxShadow: '0 20px 45px rgba(13, 38, 69, 0.08)',
+          border: '1px solid var(--color-border, #DCE5DE)',
+          backgroundColor: '#FFFFFF',
+        }}
+      >
+        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+          <Link to="/" style={{ display: 'inline-block', marginBottom: '1.25rem' }}>
+            <img
+              src="/logo.png"
+              alt="A1 Smart Driving"
+              style={{ height: '42px', width: 'auto', objectFit: 'contain' }}
+            />
+          </Link>
+          <div
+            style={{
+              width: '52px',
+              height: '52px',
+              borderRadius: '50%',
+              background: 'var(--color-primary-light, #EBF5EE)',
+              color: 'var(--color-primary, #1B6C31)',
+              margin: '0 auto 0.75rem auto',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
             <Car size={26} />
           </div>
           <h2 style={{ fontSize: '1.5rem', fontWeight: 800, marginBottom: '0.25rem', color: '#0f172a' }}>
@@ -244,7 +283,7 @@ export default function InstructorLogin() {
                   background: 'none',
                   border: 'none',
                   cursor: cooldown > 0 || loading ? 'not-allowed' : 'pointer',
-                  color: cooldown > 0 ? '#94a3b8' : 'var(--color-primary, #e63946)',
+                  color: cooldown > 0 ? '#94a3b8' : 'var(--color-primary, #1B6C31)',
                   fontWeight: 600,
                   fontSize: '13px',
                   display: 'inline-flex',
@@ -262,7 +301,7 @@ export default function InstructorLogin() {
         <div style={{ borderTop: '1px solid #e2e8f0', marginTop: '1.5rem', paddingTop: '1.25rem', textAlign: 'center', fontSize: '0.875rem', color: '#64748b' }}>
           <div>
             Want to teach with us?{' '}
-            <Link to="/instructor/signup" style={{ color: 'var(--color-primary, #e63946)', fontWeight: 700 }}>
+            <Link to="/instructor/signup" style={{ color: 'var(--color-primary, #1B6C31)', fontWeight: 700 }}>
               Apply as Instructor
             </Link>
           </div>

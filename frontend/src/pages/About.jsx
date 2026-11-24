@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
+import TiltCard from '../components/effects/TiltCard';
+import ScrollReveal from '../components/effects/ScrollReveal';
+import MagneticButton from '../components/effects/MagneticButton';
 import { 
   ShieldCheck, 
   Award, 
@@ -14,6 +17,8 @@ import {
   Sparkles, 
   FileCheck2 
 } from 'lucide-react';
+
+const VehicleInspection3D = lazy(() => import('../components/3d/VehicleInspection3D'));
 
 export default function About() {
   return (
@@ -64,33 +69,10 @@ export default function About() {
               </div>
             </div>
 
-            <div style={{ background: 'var(--color-primary-light)', padding: '2rem', borderRadius: 'var(--radius-lg)' }}>
-              <h3 style={{ fontSize: '1.25rem', color: 'var(--color-primary)', marginBottom: '1rem', fontWeight: 700 }}>
-                What Happens After You Book
-              </h3>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                <div style={{ display: 'flex', gap: '0.75rem' }}>
-                  <div style={{ width: '28px', height: '28px', borderRadius: '50%', background: 'var(--color-primary)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '0.85rem', flexShrink: 0 }}>1</div>
-                  <div>
-                    <strong style={{ color: 'var(--color-secondary)' }}>Choose Your Lesson Type:</strong>
-                    <div style={{ fontSize: 'var(--font-size-sm)', color: 'var(--color-text-muted)', marginTop: '2px' }}>Pick from beginner learner lessons, VORT test preparation, or overseas licence conversion sessions.</div>
-                  </div>
-                </div>
-                <div style={{ display: 'flex', gap: '0.75rem' }}>
-                  <div style={{ width: '28px', height: '28px', borderRadius: '50%', background: 'var(--color-primary)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '0.85rem', flexShrink: 0 }}>2</div>
-                  <div>
-                    <strong style={{ color: 'var(--color-secondary)' }}>Tell Us Your Experience:</strong>
-                    <div style={{ fontSize: 'var(--font-size-sm)', color: 'var(--color-text-muted)', marginTop: '2px' }}>At your first session, we assess what you’ve already practised and which driving scenarios make you anxious.</div>
-                  </div>
-                </div>
-                <div style={{ display: 'flex', gap: '0.75rem' }}>
-                  <div style={{ width: '28px', height: '28px', borderRadius: '50%', background: 'var(--color-primary)', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700, fontSize: '0.85rem', flexShrink: 0 }}>3</div>
-                  <div>
-                    <strong style={{ color: 'var(--color-secondary)' }}>Personalised Practice &amp; Debrief:</strong>
-                    <div style={{ fontSize: 'var(--font-size-sm)', color: 'var(--color-text-muted)', marginTop: '2px' }}>We explain what went well and outline specific goals for your next practice drive or VORT test readiness.</div>
-                  </div>
-                </div>
-              </div>
+            <div>
+              <Suspense fallback={<div className="loading-spinner" style={{ minHeight: '380px' }} />}>
+                <VehicleInspection3D />
+              </Suspense>
             </div>
           </div>
         </div>

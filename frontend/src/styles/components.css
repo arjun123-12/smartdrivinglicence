@@ -49,40 +49,52 @@
 }
 
 .button-accent {
-  background-color: var(--color-accent);
-  color: var(--color-primary);
-  border-color: var(--color-accent);
+  background-color: var(--color-accent, #0D2645);
+  color: #ffffff;
+  border: 1.5px solid var(--color-accent, #0D2645);
   font-weight: 700;
+  box-shadow: 0 4px 12px rgba(13, 38, 69, 0.25);
+  transition: all 0.2s ease;
 }
 
 .button-accent:hover:not(:disabled) {
-  background-color: var(--color-accent-hover);
-  border-color: var(--color-accent-hover);
+  background-color: var(--color-accent-hover, #1B6C31);
+  border-color: var(--color-accent-hover, #1B6C31);
   color: #ffffff;
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 6px 18px rgba(27, 108, 49, 0.35);
+  transform: translateY(-1px);
 }
 
 .button-outline {
   background-color: transparent;
-  color: var(--color-primary);
-  border-color: var(--color-border-subtle);
+  color: var(--color-primary, #1B6C31);
+  border: 1.5px solid var(--color-primary, #1B6C31);
+  font-weight: 600;
+  transition: all 0.2s ease;
 }
 
 .button-outline:hover:not(:disabled) {
-  background-color: var(--color-surface-subtle);
-  border-color: var(--color-primary);
+  background-color: var(--color-primary, #1B6C31);
+  border-color: var(--color-primary, #1B6C31);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(27, 108, 49, 0.25);
+  transform: translateY(-1px);
 }
 
 .button-outline-white {
   background-color: transparent;
   color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.4);
+  border: 1.5px solid rgba(255, 255, 255, 0.6);
+  font-weight: 600;
+  transition: all 0.2s ease;
 }
 
 .button-outline-white:hover:not(:disabled) {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-color: #ffffff;
+  background-color: var(--color-primary, #1B6C31);
+  border-color: var(--color-primary, #1B6C31);
   color: #ffffff;
+  box-shadow: 0 4px 14px rgba(27, 108, 49, 0.35);
+  transform: translateY(-1px);
 }
 
 .button-danger {
@@ -244,7 +256,7 @@
 .rating-stars {
   display: flex;
   gap: 0.2rem;
-  color: #f59e0b;
+  color: #ffffff;
   margin-bottom: var(--spacing-sm);
 }
 
@@ -537,4 +549,20 @@
   background-color: var(--color-warning-bg);
   border: 1px solid var(--color-warning-border);
   color: #92400e;
+}
+
+/* Skeleton Loading Shimmer */
+@keyframes skeleton-pulse {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(90deg, rgba(226, 232, 240, 0.6) 0%, rgba(241, 245, 249, 0.9) 50%, rgba(226, 232, 240, 0.6) 100%);
+  background-size: 200% 100%;
+  animation: skeleton-pulse 1.6s ease-in-out infinite;
 }

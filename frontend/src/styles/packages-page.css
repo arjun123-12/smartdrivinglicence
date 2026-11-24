@@ -301,10 +301,13 @@
   background-color: #0D2645;
   color: #ffffff;
   box-shadow: 0 4px 14px rgba(13, 38, 69, 0.3);
+  transition: all 0.2s ease;
 }
 
 .pkg-book-btn.accent:hover {
-  background-color: #163B66;
+  background-color: #1B6C31;
+  color: #ffffff;
+  box-shadow: 0 6px 18px rgba(27, 108, 49, 0.35);
   transform: translateY(-2px);
 }
 

@@ -1,37 +1,44 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronDown, ArrowRight } from 'lucide-react';
+import { ChevronDown, HelpCircle, ArrowRight } from 'lucide-react';
+import ScrollReveal from '../effects/ScrollReveal';
 import '../../styles/home-sections.css';
 
 const defaultFaqs = [
   {
     id: 1,
-    question: 'Can I use my own car?',
+    question: 'Can I use my own car for the VORT test?',
     answer:
-      'Yes, you can use your own vehicle for the VORT test provided it is roadworthy, currently registered, insured, clean, and equipped with properly functioning seatbelts and mirrors. Alternatively, you can opt to use your instructor’s dual-controlled vehicle for maximum safety and comfort.',
+      'Yes, you can use your own vehicle provided it is roadworthy, registered, insured, clean, and equipped with a working handbrake and rear-view mirrors. However, most students choose our dual-controlled instructor car to avoid any compliance disqualification on test day.',
   },
   {
     id: 2,
-    question: 'What if I need to reschedule?',
+    question: 'What happens during a VORT driving test?',
     answer:
-      'You can easily reschedule your booking through your student dashboard or by reaching out to our support team. In compliance with South Australian DIT guidelines, appointments rescheduled at least 48 hours prior to test time incur no penalty.',
+      'The VORT consists of two main parts: five slow-speed manoeuvres (3-point turn, reverse parallel park, angle park, straight line reverse, kerb stop) and a comprehensive road assessment measuring observation, signalling, speed control, vehicle positioning, and hazard perception across Adelaide roads.',
   },
   {
     id: 3,
-    question: 'How do I book a VORT test?',
+    question: 'How do I reschedule if my plans change?',
     answer:
-      'Booking takes under 2 minutes: select your preferred Adelaide test location or hub (Thebarton, Port Adelaide, Marion, etc.), choose your date and time slot from real-time live availability, select any warmup lesson or vehicle hire options, and confirm securely online.',
+      'Rescheduling is self-serve through your Student Dashboard. Under South Australian DIT guidelines, requests made with at least 48 hours notice incur zero penalties and allow you to select a new appointment slot instantly.',
   },
   {
     id: 4,
-    question: 'What payment methods do you accept?',
+    question: 'Are your driving instructors DIT accredited?',
     answer:
-      'We accept all major credit and debit cards (Visa, MasterCard, American Express) through our secure Stripe-encrypted gateway, as well as digital wallets like Apple Pay and Google Pay. All payments are encrypted and PCI-DSS compliant.',
+      'Yes. 100% of instructors and examiners on A1 Smart Driving hold current Motor Driving Instructor (MDI) authorisations issued by the South Australian Department for Infrastructure and Transport, alongside valid Working with Children Checks (WWCC).',
+  },
+  {
+    id: 5,
+    question: 'How does the online payment work?',
+    answer:
+      'We use bank-grade 256-bit Stripe encryption. Your payment is securely reserved with immediate confirmation. We support Visa, Mastercard, AMEX, and digital wallets.',
   },
 ];
 
 export default function FaqSection({ faqs = defaultFaqs }) {
-  const [openIndex, setOpenIndex] = useState(null);
+  const [openIndex, setOpenIndex] = useState(0);
 
   const toggleFaq = (index) => {
     setOpenIndex((prev) => (prev === index ? null : index));
@@ -40,51 +47,58 @@ export default function FaqSection({ faqs = defaultFaqs }) {
   const displayFaqs = Array.isArray(faqs) && faqs.length > 0 ? faqs : defaultFaqs;
 
   return (
-    <section className="faq-section-modern">
-      <div className="faq-container-modern">
-        <h2 className="faq-title-modern">Frequently Asked Questions</h2>
+    <section className="faq-section-modern scene-perspective-container">
+      <div className="faq-container-modern" style={{ maxWidth: '850px', margin: '0 auto' }}>
+        <ScrollReveal direction="up" distance={30}>
+          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+            <span className="badge-3d" style={{ marginBottom: '0.75rem' }}>
+              <HelpCircle size={14} /> Clear Answers
+            </span>
+            <h2 className="faq-title-modern">Frequently Asked Questions</h2>
+            <p style={{ color: '#94a3b8', fontSize: '1.05rem', margin: '0.5rem auto 0', maxWidth: '600px' }}>
+              Everything you need to know about Adelaide driving lessons, VORT testing, and booking procedures.
+            </p>
+          </div>
+        </ScrollReveal>
 
-        <div className="faq-list-modern">
-          {(Array.isArray(displayFaqs) ? displayFaqs : defaultFaqs).map((faq, index) => {
+        <div className="faq-3d-list">
+          {displayFaqs.map((faq, index) => {
             const isOpen = openIndex === index;
             return (
-              <div
-                key={faq.id || index}
-                className={`faq-card-modern ${isOpen ? 'open' : ''}`}
-              >
-                <button
-                  type="button"
-                  className="faq-question-btn"
-                  onClick={() => toggleFaq(index)}
-                  aria-expanded={isOpen}
-                >
-                  <span>{faq.question}</span>
-                  <ChevronDown size={19} className="faq-chevron" />
-                </button>
+              <ScrollReveal key={faq.id || index} direction="up" distance={20} delay={index * 0.08}>
+                <div className={`accordion-3d-item ${isOpen ? 'is-open' : ''}`}>
+                  <button
+                    type="button"
+                    className="accordion-3d-trigger"
+                    onClick={() => toggleFaq(index)}
+                    aria-expanded={isOpen}
+                  >
+                    <span>{faq.question}</span>
+                    <div className="accordion-3d-icon">
+                      <ChevronDown size={18} />
+                    </div>
+                  </button>
 
-                {isOpen && (
-                  <div className="faq-answer-wrap">
-                    <p style={{ margin: 0 }}>{faq.answer}</p>
-                  </div>
-                )}
-              </div>
+                  {isOpen && (
+                    <div className="accordion-3d-content">
+                      <p style={{ margin: 0 }}>{faq.answer}</p>
+                    </div>
+                  )}
+                </div>
+              </ScrollReveal>
             );
           })}
         </div>
 
-        {/* Action Buttons */}
-        <div className="faq-actions-modern">
-          <Link to="/faqs" className="faq-view-all-btn">
-            View All FAQs
-          </Link>
-
-          <Link to="/book-test" className="prevort-cta-btn">
-            Find My VORT Slot Now
-            <ArrowRight size={17} />
-          </Link>
-        </div>
+        <ScrollReveal direction="up" distance={20} delay={0.4}>
+          <div style={{ textAlign: 'center', marginTop: '2.5rem' }}>
+            <Link to="/faqs" className="button button-outline" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
+              <span>View Full FAQ Knowledge Base</span>
+              <ArrowRight size={16} />
+            </Link>
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   );
 }
-

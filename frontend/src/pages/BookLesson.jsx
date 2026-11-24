@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import BookingWizard from '../components/booking/BookingWizard';
+import TiltCard from '../components/effects/TiltCard';
+import ScrollReveal from '../components/effects/ScrollReveal';
+import MagneticButton from '../components/effects/MagneticButton';
 import {
   Car,
   MapPin,
@@ -149,48 +152,64 @@ export default function BookLesson() {
 
           <div className="fl-features-grid">
             {/* Card 1 */}
-            <div className="fl-feature-card">
-              <div className="fl-feature-icon-wrap">
-                <Clock size={24} />
-              </div>
-              <h3 className="fl-feature-title">60-Minute 1-on-1 Lesson</h3>
-              <p className="fl-feature-desc">
-                Settle your nerves in a modern 5-star ANCAP dual-controlled car with an accredited, patient instructor. Learn at your own pace without pressure.
-              </p>
-            </div>
+            <ScrollReveal direction="up" distance={30} delay={0.1}>
+              <TiltCard maxTilt={8} scale={1.02} style={{ height: '100%' }}>
+                <div className="fl-feature-card" style={{ height: '100%', margin: 0 }}>
+                  <div className="fl-feature-icon-wrap">
+                    <Clock size={24} />
+                  </div>
+                  <h3 className="fl-feature-title">60-Minute 1-on-1 Lesson</h3>
+                  <p className="fl-feature-desc">
+                    Settle your nerves in a modern 5-star ANCAP dual-controlled car with an accredited, patient instructor. Learn at your own pace without pressure.
+                  </p>
+                </div>
+              </TiltCard>
+            </ScrollReveal>
 
             {/* Card 2 */}
-            <div className="fl-feature-card">
-              <div className="fl-feature-icon-wrap">
-                <FileText size={24} />
-              </div>
-              <h3 className="fl-feature-title">Full Skills Assessment</h3>
-              <p className="fl-feature-desc">
-                Your instructor evaluates vehicle control, steering, speed management, mirrors, and safety awareness to highlight your current strengths.
-              </p>
-            </div>
+            <ScrollReveal direction="up" distance={30} delay={0.2}>
+              <TiltCard maxTilt={8} scale={1.02} style={{ height: '100%' }}>
+                <div className="fl-feature-card" style={{ height: '100%', margin: 0 }}>
+                  <div className="fl-feature-icon-wrap">
+                    <FileText size={24} />
+                  </div>
+                  <h3 className="fl-feature-title">Full Skills Assessment</h3>
+                  <p className="fl-feature-desc">
+                    Your instructor evaluates vehicle control, steering, speed management, mirrors, and safety awareness to highlight your current strengths.
+                  </p>
+                </div>
+              </TiltCard>
+            </ScrollReveal>
 
             {/* Card 3 */}
-            <div className="fl-feature-card">
-              <div className="fl-feature-icon-wrap">
-                <Compass size={24} />
-              </div>
-              <h3 className="fl-feature-title">Custom P-Plate Roadmap</h3>
-              <p className="fl-feature-desc">
-                Receive an honest, tailored step-by-step plan showing exactly how many practice hours and lessons you need to achieve a 90%+ VORT pass score.
-              </p>
-            </div>
+            <ScrollReveal direction="up" distance={30} delay={0.3}>
+              <TiltCard maxTilt={8} scale={1.02} style={{ height: '100%' }}>
+                <div className="fl-feature-card" style={{ height: '100%', margin: 0 }}>
+                  <div className="fl-feature-icon-wrap">
+                    <Compass size={24} />
+                  </div>
+                  <h3 className="fl-feature-title">Custom P-Plate Roadmap</h3>
+                  <p className="fl-feature-desc">
+                    Receive an honest, tailored step-by-step plan showing exactly how many practice hours and lessons you need to achieve a 90%+ VORT pass score.
+                  </p>
+                </div>
+              </TiltCard>
+            </ScrollReveal>
 
             {/* Card 4 */}
-            <div className="fl-feature-card">
-              <div className="fl-feature-icon-wrap">
-                <DollarSign size={24} />
-              </div>
-              <h3 className="fl-feature-title">100% Credit Guarantee</h3>
-              <p className="fl-feature-desc">
-                If you continue learning with us on any package of 6 or more hours, your entire $99 fee is deducted from the total—making your first lesson free!
-              </p>
-            </div>
+            <ScrollReveal direction="up" distance={30} delay={0.4}>
+              <TiltCard maxTilt={8} scale={1.02} style={{ height: '100%' }}>
+                <div className="fl-feature-card" style={{ height: '100%', margin: 0 }}>
+                  <div className="fl-feature-icon-wrap">
+                    <DollarSign size={24} />
+                  </div>
+                  <h3 className="fl-feature-title">100% Credit Guarantee</h3>
+                  <p className="fl-feature-desc">
+                    If you continue learning with us on any package of 6 or more hours, your entire $99 fee is deducted from the total—making your first lesson free!
+                  </p>
+                </div>
+              </TiltCard>
+            </ScrollReveal>
           </div>
         </div>
       </section>

@@ -90,7 +90,7 @@ export default function UnderDevelopment() {
             letterSpacing: '-0.5px',
           }}
         >
-          Website Under <span style={{ color: 'var(--color-primary, #e63946)' }}>Development</span>
+          Website Under <span style={{ color: 'var(--color-primary, #1B6C31)' }}>Development</span>
         </h1>
 
         <p
@@ -118,7 +118,7 @@ export default function UnderDevelopment() {
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>
-            <ShieldCheck size={20} color="var(--color-primary, #e63946)" />
+            <ShieldCheck size={20} color="var(--color-primary, #1B6C31)" />
             <h2 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#ffffff', margin: 0 }}>
               Need to book a lesson or urgent VORT test?
             </h2>
@@ -143,8 +143,8 @@ export default function UnderDevelopment() {
                 gap: '0.75rem',
                 padding: '0.85rem 1rem',
                 borderRadius: '10px',
-                background: 'rgba(230, 57, 70, 0.1)',
-                border: '1px solid rgba(230, 57, 70, 0.3)',
+                background: 'rgba(27, 108, 49, 0.12)',
+                border: '1px solid rgba(27, 108, 49, 0.35)',
                 color: '#ffffff',
                 textDecoration: 'none',
                 transition: 'background 0.2s ease',
@@ -155,7 +155,7 @@ export default function UnderDevelopment() {
                   width: '36px',
                   height: '36px',
                   borderRadius: '50%',
-                  background: 'var(--color-primary, #e63946)',
+                  background: 'var(--color-primary, #1B6C31)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -212,7 +212,7 @@ export default function UnderDevelopment() {
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '1.25rem', fontSize: '0.85rem', color: '#64748b' }}>
-            <MapPin size={15} color="var(--color-primary, #e63946)" />
+            <MapPin size={15} color="var(--color-primary, #1B6C31)" />
             <span>Serving all Metropolitan Adelaide suburbs &amp; DIT Driving Test Hubs</span>
           </div>
         </div>

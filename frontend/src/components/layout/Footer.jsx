@@ -1,11 +1,128 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin, MessageSquare } from 'lucide-react';
+import { Mail, Phone, MapPin, MessageSquare, ArrowRight, ShieldCheck, Award, Car, Clock } from 'lucide-react';
 import '../../styles/footer.css';
 
 export default function Footer() {
   return (
     <>
+      {/* Pre-Footer High-Impact Automotive CTA */}
+      <section
+        style={{
+          background: 'linear-gradient(135deg, #0A1E35 0%, #07172B 100%)',
+          borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+          borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+          padding: '4rem 1.5rem',
+          position: 'relative',
+          overflow: 'hidden',
+          zIndex: 2,
+        }}
+      >
+        <div style={{ maxWidth: '1200px', margin: '0 auto', textAlign: 'center', position: 'relative' }}>
+          <div
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              backgroundColor: 'rgba(27, 108, 49, 0.3)',
+              border: '1px solid rgba(34, 197, 94, 0.4)',
+              color: '#4ade80',
+              padding: '6px 16px',
+              borderRadius: '9999px',
+              fontSize: '0.85rem',
+              fontWeight: 800,
+              textTransform: 'uppercase',
+              letterSpacing: '0.08em',
+              marginBottom: '1.25rem',
+            }}
+          >
+            <Award size={15} /> South Australia Official Test Pathway
+          </div>
+
+          <h2
+            style={{
+              fontSize: 'clamp(2rem, 3.8vw, 3rem)',
+              fontWeight: 900,
+              color: '#FFFFFF',
+              letterSpacing: '-0.02em',
+              lineHeight: 1.15,
+              marginBottom: '1rem',
+            }}
+          >
+            Ready to Pass Your Driving Test First Time?
+          </h2>
+
+          <p
+            style={{
+              fontSize: '1.1rem',
+              color: 'rgba(255, 255, 255, 0.8)',
+              maxWidth: '650px',
+              margin: '0 auto 2.5rem',
+              lineHeight: 1.6,
+            }}
+          >
+            Book your driving lesson or official VORT driving test with Adelaide’s top-rated accredited examiners. Real-time availability with instant appointment confirmation.
+          </p>
+
+          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', alignItems: 'center' }}>
+            <Link
+              to="/book-test"
+              className="button button-accent button-lg"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                padding: '14px 28px',
+                fontSize: '1rem',
+                fontWeight: 800,
+                borderRadius: '12px',
+                boxShadow: '0 10px 25px rgba(245, 158, 11, 0.35)',
+              }}
+            >
+              Book a VORT Test <ArrowRight size={18} />
+            </Link>
+
+            <Link
+              to="/book-lesson"
+              className="button button-outline button-lg"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                padding: '14px 28px',
+                fontSize: '1rem',
+                fontWeight: 800,
+                borderRadius: '12px',
+                color: '#FFFFFF',
+                borderColor: 'rgba(255, 255, 255, 0.3)',
+                background: 'rgba(255, 255, 255, 0.05)',
+              }}
+            >
+              <Car size={18} /> Book Driving Lesson
+            </Link>
+
+            <a
+              href="tel:0430580111"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                color: '#4ade80',
+                fontSize: '0.95rem',
+                fontWeight: 700,
+                textDecoration: 'none',
+                padding: '10px 16px',
+                borderRadius: '8px',
+                backgroundColor: 'rgba(34, 197, 94, 0.1)',
+                border: '1px solid rgba(34, 197, 94, 0.25)',
+              }}
+            >
+              <Phone size={16} /> Call 0430 580 111
+            </a>
+          </div>
+        </div>
+      </section>
+
       <footer className="site-footer-premium">
         <div className="footer-premium-container">
           <div className="footer-premium-grid">
@@ -20,7 +137,7 @@ export default function Footer() {
               </Link>
 
               <p className="footer-tagline">
-                Your trusted partner in learning to drive. Book your driving lessons & VORT Test with A1 Smart Driving.
+                Your trusted partner in learning to drive. Book accredited driving lessons &amp; official VORT Test with A1 Smart Driving across Greater Adelaide.
               </p>
 
               <ul className="footer-contact-list">
@@ -36,6 +153,10 @@ export default function Footer() {
                   <MapPin size={16} />
                   <span>Adelaide, South Australia</span>
                 </li>
+                <li className="footer-contact-item">
+                  <Clock size={16} />
+                  <span>Mon – Sun: 7:00 AM – 7:00 PM</span>
+                </li>
               </ul>
             </div>
 
@@ -43,32 +164,39 @@ export default function Footer() {
             <div>
               <h4 className="footer-col-title">FOR LEARNERS</h4>
               <ul className="footer-col-links">
-                <li><Link to="/how-it-works">How It Works</Link></li>
-                <li><Link to="/faqs">Lesson FAQs</Link></li>
-                <li><Link to="/faqs">VORT Test FAQs</Link></li>
-                <li><Link to="/terms">Terms &amp; Conditions</Link></li>
-                <li><Link to="/terms">Booking &amp; Cancellation Policy</Link></li>
+                <li><Link to="/book-test">Book VORT Test</Link></li>
+                <li><Link to="/book-lesson">Driving Lessons</Link></li>
+                <li><Link to="/lesson-packages">Discount Packages</Link></li>
+                <li><Link to="/mock-test">Pre-VORT Mock Test</Link></li>
+                <li><Link to="/first-lesson">First Lesson Guide</Link></li>
+                <li><Link to="/how-it-works">Licence Roadmap</Link></li>
+                <li><Link to="/faqs">Frequently Asked Questions</Link></li>
               </ul>
             </div>
 
-            {/* 3. For Instructors */}
+            {/* 3. Adelaide Test Hubs */}
             <div>
-              <h4 className="footer-col-title">FOR INSTRUCTORS</h4>
+              <h4 className="footer-col-title">TEST CENTRES</h4>
               <ul className="footer-col-links">
-                <li><Link to="/instructor/signup">Apply as Instructor</Link></li>
-                <li><Link to="/instructor/login">Instructor Portal (SMS Login)</Link></li>
+                <li><Link to="/locations">Thebarton DIT Hub</Link></li>
+                <li><Link to="/locations">Marion Test Centre</Link></li>
+                <li><Link to="/locations">Port Adelaide DIT Hub</Link></li>
+                <li><Link to="/locations">Regency Park Test Centre</Link></li>
+                <li><Link to="/locations">Gawler Service SA Hub</Link></li>
+                <li><Link to="/locations">Modbury / Tea Tree Gully</Link></li>
+                <li><Link to="/locations">Noarlunga Centre Hub</Link></li>
+              </ul>
+            </div>
+
+            {/* 4. Instructors & Company */}
+            <div>
+              <h4 className="footer-col-title">INSTRUCTORS &amp; COMPANY</h4>
+              <ul className="footer-col-links">
                 <li><Link to="/instructors">Instructor Directory</Link></li>
-                <li><Link to="/terms">Instructor Terms and Conditions</Link></li>
-              </ul>
-            </div>
-
-            {/* 4. Company */}
-            <div>
-              <h4 className="footer-col-title">COMPANY</h4>
-              <ul className="footer-col-links">
-                <li><Link to="/about">About Us</Link></li>
-                <li><Link to="/locations">Locations</Link></li>
-                <li><Link to="/contact">Contact</Link></li>
+                <li><Link to="/instructor/signup">Apply as Instructor</Link></li>
+                <li><Link to="/instructor/login">Instructor SMS Portal</Link></li>
+                <li><Link to="/about">About A1 Smart Driving</Link></li>
+                <li><Link to="/contact">Contact Support</Link></li>
                 <li><Link to="/privacy">Privacy Policy</Link></li>
                 <li><Link to="/terms">Terms &amp; Conditions</Link></li>
               </ul>
@@ -135,7 +263,7 @@ export default function Footer() {
         </div>
       </footer>
 
-      {/* Floating Chat Bubble Widget (bottom left as shown in reference) */}
+      {/* Floating Chat Bubble Widget */}
       <Link
         to="/contact"
         className="footer-floating-chat"

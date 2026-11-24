@@ -19,6 +19,23 @@ import {
   ArrowLeft,
 } from 'lucide-react';
 
+const formatAdelaideDate = (dateString) => {
+  if (!dateString) return '';
+  try {
+    const d = new Date(dateString);
+    if (isNaN(d.getTime())) return String(dateString);
+    return new Intl.DateTimeFormat('en-AU', {
+      timeZone: 'Australia/Adelaide',
+      weekday: 'short',
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    }).format(d);
+  } catch {
+    return String(dateString);
+  }
+};
+
 export default function BookingWizard({ defaultServiceSlug = null, forcedIsTest = null }) {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
@@ -685,7 +702,7 @@ export default function BookingWizard({ defaultServiceSlug = null, forcedIsTest 
               <div style={{ fontWeight: 700, marginBottom: '0.5rem' }}>Reservation Summary</div>
               <div className="grid grid-2" style={{ fontSize: 'var(--font-size-sm)' }}>
                 <div><strong>Service:</strong> {selectedSlot.service_name}</div>
-                <div><strong>Date & Time:</strong> {new Date(selectedSlot.start_time).toLocaleDateString()} @ {selectedSlot.display_time}</div>
+                <div><strong>Date & Time:</strong> {formatAdelaideDate(selectedSlot.start_time)} @ {selectedSlot.display_time}</div>
                 <div><strong>Instructor:</strong> {selectedSlot.instructor_name}</div>
                 <div><strong>Total Payable:</strong> ${selectedSlot.price} AUD</div>
               </div>
@@ -721,7 +738,7 @@ export default function BookingWizard({ defaultServiceSlug = null, forcedIsTest 
               <div className="grid grid-2" style={{ fontSize: 'var(--font-size-sm)', gap: '0.5rem' }}>
                 <div><strong>Instructor:</strong> {selectedSlot.instructor_name}</div>
                 <div><strong>Location:</strong> {selectedLocation?.name || 'Selected Suburb'}</div>
-                <div><strong>Date:</strong> {new Date(selectedSlot.start_time).toLocaleDateString()}</div>
+                <div><strong>Date:</strong> {formatAdelaideDate(selectedSlot.start_time)}</div>
                 <div><strong>Time:</strong> {selectedSlot.display_time}</div>
                 <div><strong>Learner:</strong> {customerDetails.name}</div>
                 <div><strong>Contact:</strong> {customerDetails.phone}</div>

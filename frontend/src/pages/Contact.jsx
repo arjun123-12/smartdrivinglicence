@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import api from '../services/api';
-import { Phone, Mail, MapPin, Clock, CheckCircle, Send, AlertCircle } from 'lucide-react';
+import TiltCard from '../components/effects/TiltCard';
+import ScrollReveal from '../components/effects/ScrollReveal';
+import MagneticButton from '../components/effects/MagneticButton';
+import { Phone, Mail, MapPin, Clock, CheckCircle, Send, AlertCircle, ShieldCheck } from 'lucide-react';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -49,79 +52,88 @@ export default function Contact() {
       <div className="container section">
         <div className="grid grid-2" style={{ gap: '3rem', alignItems: 'start' }}>
           {/* Contact Details */}
-          <div>
-            <h2 style={{ fontSize: '1.75rem', marginBottom: '1.25rem', color: 'var(--color-primary)' }}>
-              Get in Touch
-            </h2>
-            <p style={{ color: 'var(--color-text-muted)', lineHeight: 1.6, marginBottom: '2rem' }}>
-              Our booking team is available Monday to Saturday to assist with instructor scheduling, overseas licence conversions, and VORT test preparation.
-            </p>
+          <ScrollReveal direction="left" distance={30}>
+            <TiltCard maxTilt={6} scale={1.01}>
+              <div className="glass-panel-3d" style={{ padding: '2.5rem' }}>
+                <span className="badge-3d" style={{ marginBottom: '1rem' }}>
+                  <ShieldCheck size={14} /> Adelaide Support Hub
+                </span>
+                <h2 style={{ fontSize: '1.75rem', marginBottom: '1.25rem', color: '#ffffff' }}>
+                  Get in Touch
+                </h2>
+                <p style={{ color: '#cbd5e1', lineHeight: 1.6, marginBottom: '2rem' }}>
+                  Our booking team is available Monday to Saturday to assist with instructor scheduling, overseas licence conversions, and VORT test preparation.
+                </p>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginBottom: '2.5rem' }}>
-              <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                <div style={{ width: '48px', height: '48px', borderRadius: 'var(--radius-md)', backgroundColor: 'var(--color-primary-light)', color: 'var(--color-secondary)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                  <Phone size={22} />
-                </div>
-                <div>
-                  <div style={{ fontSize: 'var(--font-size-xs)', textTransform: 'uppercase', color: 'var(--color-text-muted)', fontWeight: 700 }}>
-                    Phone Support
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                  <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                    <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(27, 108, 49, 0.3)', color: '#86efac', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, border: '1px solid rgba(34, 197, 94, 0.4)' }}>
+                      <Phone size={22} />
+                    </div>
+                    <div>
+                      <div style={{ fontSize: 'var(--font-size-xs)', textTransform: 'uppercase', color: '#94a3b8', fontWeight: 700 }}>
+                        Phone Support
+                      </div>
+                      <div style={{ fontWeight: 700, fontSize: '1.1rem', color: '#ffffff' }}>
+                        <a href="tel:0430580111" style={{ color: 'inherit', textDecoration: 'none' }}>0430 580 111</a>
+                      </div>
+                    </div>
                   </div>
-                  <div style={{ fontWeight: 700, fontSize: '1.1rem', color: 'var(--color-primary)' }}>
-                    <a href="tel:0430580111" style={{ color: 'inherit', textDecoration: 'none' }}>0430 580 111</a>
+
+                  <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                    <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(27, 108, 49, 0.3)', color: '#86efac', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, border: '1px solid rgba(34, 197, 94, 0.4)' }}>
+                      <Mail size={22} />
+                    </div>
+                    <div>
+                      <div style={{ fontSize: 'var(--font-size-xs)', textTransform: 'uppercase', color: '#94a3b8', fontWeight: 700 }}>
+                        Email Enquiries
+                      </div>
+                      <div style={{ fontWeight: 700, fontSize: '1.1rem', color: '#ffffff' }}>
+                        <a href="mailto:enquiries@a1smartdriving.com.au" style={{ color: 'inherit', textDecoration: 'none' }}>enquiries@a1smartdriving.com.au</a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                    <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(27, 108, 49, 0.3)', color: '#86efac', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, border: '1px solid rgba(34, 197, 94, 0.4)' }}>
+                      <MapPin size={22} />
+                    </div>
+                    <div>
+                      <div style={{ fontSize: 'var(--font-size-xs)', textTransform: 'uppercase', color: '#94a3b8', fontWeight: 700 }}>
+                        Location & Business Entity
+                      </div>
+                      <div style={{ fontWeight: 700, fontSize: '1rem', color: '#ffffff' }}>
+                        Adelaide, South Australia
+                      </div>
+                      <div style={{ fontSize: 'var(--font-size-xs)', color: '#94a3b8', marginTop: '0.2rem' }}>
+                        MB &amp; HB GROUP PTY LTD · ABN 92 662 509 720
+                      </div>
+                    </div>
+                  </div>
+
+                  <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+                    <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(27, 108, 49, 0.3)', color: '#86efac', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, border: '1px solid rgba(34, 197, 94, 0.4)' }}>
+                      <Clock size={22} />
+                    </div>
+                    <div>
+                      <div style={{ fontSize: 'var(--font-size-xs)', textTransform: 'uppercase', color: '#94a3b8', fontWeight: 700 }}>
+                        Support Hours
+                      </div>
+                      <div style={{ fontWeight: 600, fontSize: 'var(--font-size-sm)', color: '#cbd5e1' }}>
+                        Mon - Fri: 8:00 AM – 6:00 PM | Sat: 8:30 AM – 3:00 PM
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-
-              <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                <div style={{ width: '48px', height: '48px', borderRadius: 'var(--radius-md)', backgroundColor: 'var(--color-primary-light)', color: 'var(--color-secondary)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                  <Mail size={22} />
-                </div>
-                <div>
-                  <div style={{ fontSize: 'var(--font-size-xs)', textTransform: 'uppercase', color: 'var(--color-text-muted)', fontWeight: 700 }}>
-                    Email Enquiries
-                  </div>
-                  <div style={{ fontWeight: 700, fontSize: '1.1rem', color: 'var(--color-primary)' }}>
-                    <a href="mailto:enquiries@a1smartdriving.com.au" style={{ color: 'inherit', textDecoration: 'none' }}>enquiries@a1smartdriving.com.au</a>
-                  </div>
-                </div>
-              </div>
-
-              <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                <div style={{ width: '48px', height: '48px', borderRadius: 'var(--radius-md)', backgroundColor: 'var(--color-primary-light)', color: 'var(--color-secondary)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                  <MapPin size={22} />
-                </div>
-                <div>
-                  <div style={{ fontSize: 'var(--font-size-xs)', textTransform: 'uppercase', color: 'var(--color-text-muted)', fontWeight: 700 }}>
-                    Location & Business Entity
-                  </div>
-                  <div style={{ fontWeight: 700, fontSize: '1rem', color: 'var(--color-primary)' }}>
-                    Adelaide, South Australia
-                  </div>
-                  <div style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-muted)', marginTop: '0.2rem' }}>
-                    MB &amp; HB GROUP PTY LTD · ABN 92 662 509 720
-                  </div>
-                </div>
-              </div>
-
-              <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                <div style={{ width: '48px', height: '48px', borderRadius: 'var(--radius-md)', backgroundColor: 'var(--color-primary-light)', color: 'var(--color-secondary)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                  <Clock size={22} />
-                </div>
-                <div>
-                  <div style={{ fontSize: 'var(--font-size-xs)', textTransform: 'uppercase', color: 'var(--color-text-muted)', fontWeight: 700 }}>
-                    Support Hours
-                  </div>
-                  <div style={{ fontWeight: 600, fontSize: 'var(--font-size-sm)', color: 'var(--color-text)' }}>
-                    Mon - Fri: 8:00 AM – 6:00 PM | Sat: 8:30 AM – 3:00 PM
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+            </TiltCard>
+          </ScrollReveal>
 
           {/* Form */}
-          <div className="card" style={{ padding: '2rem' }}>
-            <h3 style={{ fontSize: '1.35rem', marginBottom: '1.25rem' }}>Send Us a Message</h3>
+          <ScrollReveal direction="right" distance={30}>
+            <TiltCard maxTilt={5} scale={1.01}>
+              <div className="card glass-panel-3d" style={{ padding: '2.5rem', margin: 0 }}>
+                <h3 style={{ fontSize: '1.45rem', marginBottom: '1.25rem', color: '#ffffff', fontWeight: 700 }}>Send Us a Message</h3>
 
             {successMessage && (
               <div className="alert alert-success">
@@ -202,14 +214,18 @@ export default function Contact() {
                 />
               </div>
 
-              <button type="submit" disabled={loading} className="button button-primary button-full button-lg">
-                <Send size={18} /> {loading ? 'Sending Enquiry...' : 'Submit Message'}
-              </button>
+              <div style={{ marginTop: '1.5rem' }}>
+                <MagneticButton type="submit" disabled={loading} style={{ width: '100%' }}>
+                  <Send size={18} /> {loading ? 'Sending Enquiry...' : 'Submit Message'}
+                </MagneticButton>
+              </div>
             </form>
           </div>
-        </div>
-      </div>
+        </TiltCard>
+      </ScrollReveal>
     </div>
+  </div>
+</div>
   );
 }
 

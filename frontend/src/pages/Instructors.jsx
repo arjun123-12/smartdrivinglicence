@@ -4,6 +4,8 @@ import instructorService from '../services/instructorService';
 import bookingService from '../services/bookingService';
 import { extractArray, safeArray } from '../utils/apiHelpers';
 import { mockInstructors, mockLocations } from '../services/mockData';
+import TiltCard from '../components/effects/TiltCard';
+import ScrollReveal from '../components/effects/ScrollReveal';
 import { Star, ShieldCheck, Car, Award, MapPin, ArrowRight } from 'lucide-react';
 
 export default function Instructors() {
@@ -121,62 +123,92 @@ export default function Instructors() {
           </div>
         ) : (
           <div className="grid grid-3">
-            {safeArray(filtered).map((inst) => (
-              <div key={inst.id} className="card" style={{ padding: '1.75rem', display: 'flex', flexDirection: 'column' }}>
-                <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginBottom: '1rem' }}>
-                  <img
-                    src={inst.profile_image}
-                    alt={inst.name}
-                    style={{ width: '80px', height: '80px', borderRadius: '50%', objectFit: 'cover', border: '3px solid var(--color-surface-subtle)', flexShrink: 0 }}
-                  />
-                  <div>
-                    <h3 style={{ fontSize: '1.25rem', marginBottom: '0.25rem' }}>{inst.name}</h3>
-                    {inst.is_examiner ? (
-                      <span className="badge badge-success" style={{ fontSize: '11px' }}>
-                        <Award size={12} /> Authorised VORT Examiner
-                      </span>
-                    ) : (
-                      <span className="badge badge-info" style={{ fontSize: '11px' }}>
-                        <ShieldCheck size={12} /> Accredited Instructor
-                      </span>
-                    )}
-                    {inst.examiner_accreditation_no && (
-                      <div style={{ fontSize: '10px', color: 'var(--color-text-muted)', marginTop: '0.25rem' }}>
-                        Accreditation #{inst.examiner_accreditation_no}
+            {safeArray(filtered).map((inst, idx) => (
+              <ScrollReveal key={inst.id} direction="up" distance={30} delay={idx * 0.08}>
+                <TiltCard maxTilt={8} scale={1.02} style={{ height: '100%' }}>
+                  <div className="card" style={{ padding: '1.75rem', display: 'flex', flexDirection: 'column', height: '100%', margin: 0 }}>
+                    <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginBottom: '1rem' }}>
+                      <img
+                        src={inst.profile_image}
+                        alt={inst.name}
+                        style={{ width: '80px', height: '80px', borderRadius: '50%', objectFit: 'cover', border: '3px solid var(--color-surface-subtle)', flexShrink: 0 }}
+                      />
+                      <div>
+                        <h3 style={{ fontSize: '1.25rem', marginBottom: '0.25rem' }}>{inst.name}</h3>
+                        {inst.is_examiner ? (
+                          <span className="badge badge-success" style={{ fontSize: '11px' }}>
+                            <Award size={12} /> Authorised VORT Examiner
+                          </span>
+                        ) : (
+                          <span className="badge badge-info" style={{ fontSize: '11px' }}>
+                            <ShieldCheck size={12} /> Accredited Instructor
+                          </span>
+                        )}
+                        {inst.examiner_accreditation_no && (
+                          <div style={{ fontSize: '10px', color: 'var(--color-text-muted)', marginTop: '0.25rem' }}>
+                            Accreditation #{inst.examiner_accreditation_no}
+                          </div>
+                        )}
+                        {inst.experience_years && (
+                          <div style={{ fontSize: '11px', fontWeight: 700, color: 'var(--color-primary, #1B6C31)', marginTop: '0.25rem' }}>
+                            {inst.experience_years}+ Years Experience
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    <p style={{ fontSize: 'var(--font-size-sm)', color: 'var(--color-text-muted)', lineHeight: 1.6, marginBottom: '0.75rem', flex: 1 }}>
+                      {inst.bio}
+                    </p>
+
+                    {/* Spoken Languages */}
+                    {inst.languages && (Array.isArray(inst.languages) ? inst.languages : [inst.languages]).length > 0 && (
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', marginBottom: '0.75rem' }}>
+                        {(Array.isArray(inst.languages) ? inst.languages : [inst.languages]).map((lang) => (
+                          <span
+                            key={lang}
+                            style={{
+                              padding: '2px 8px',
+                              borderRadius: '12px',
+                              fontSize: '11px',
+                              fontWeight: 600,
+                              background: 'rgba(27, 108, 49, 0.08)',
+                              color: 'var(--color-primary, #1B6C31)',
+                            }}
+                          >
+                            {lang}
+                          </span>
+                        ))}
                       </div>
                     )}
+
+                    <div style={{ padding: '0.75rem', backgroundColor: 'var(--color-surface-subtle)', borderRadius: 'var(--radius-md)', fontSize: 'var(--font-size-xs)', marginBottom: '1.25rem' }}>
+                      <div><strong>Vehicle:</strong> {inst.car_year ? `${inst.car_year} ` : ''}{inst.car_make || ''} {inst.car_model || 'Dual Control Car'} ({inst.car_transmission ? (inst.car_transmission.charAt(0).toUpperCase() + inst.car_transmission.slice(1)) : 'Automatic'})</div>
+                      <div><strong>Qualifications:</strong> {inst.qualifications || 'Cert IV Transport & Logistics'}</div>
+                      <div><strong>Hourly Rate:</strong> ${inst.base_hourly_rate || '85'} AUD {inst.vort_test_rate > 0 && `| VORT: $${inst.vort_test_rate} AUD`}</div>
+                    </div>
+
+                    <div style={{ display: 'flex', gap: '0.5rem', marginTop: 'auto' }}>
+                      <Link
+                        to={`/book-lesson?instructor_id=${inst.id}`}
+                        className="button button-primary button-sm"
+                        style={{ flex: 1, textAlign: 'center' }}
+                      >
+                        Book Lesson
+                      </Link>
+                      {inst.is_examiner && (
+                        <Link
+                          to={`/book-test?instructor_id=${inst.id}`}
+                          className="button button-accent button-sm"
+                          style={{ flex: 1, textAlign: 'center' }}
+                        >
+                          Book VORT Test
+                        </Link>
+                      )}
+                    </div>
                   </div>
-                </div>
-
-                <p style={{ fontSize: 'var(--font-size-sm)', color: 'var(--color-text-muted)', lineHeight: 1.6, marginBottom: '1rem', flex: 1 }}>
-                  {inst.bio}
-                </p>
-
-                <div style={{ padding: '0.75rem', backgroundColor: 'var(--color-surface-subtle)', borderRadius: 'var(--radius-md)', fontSize: 'var(--font-size-xs)', marginBottom: '1.25rem' }}>
-                  <div><strong>Vehicle:</strong> {inst.car_model || 'Dual Control Car'} (Automatic)</div>
-                  <div><strong>Qualifications:</strong> {inst.qualifications || 'Cert IV Transport & Logistics'}</div>
-                  <div><strong>Hourly Rate:</strong> ${inst.base_hourly_rate || '85'} AUD {inst.vort_test_rate > 0 && `| VORT: $${inst.vort_test_rate} AUD`}</div>
-                </div>
-
-                <div style={{ display: 'flex', gap: '0.5rem' }}>
-                  <Link
-                    to={`/book-lesson?instructor_id=${inst.id}`}
-                    className="button button-primary button-sm"
-                    style={{ flex: 1, textAlign: 'center' }}
-                  >
-                    Book Lesson
-                  </Link>
-                  {inst.is_examiner && (
-                    <Link
-                      to={`/book-test?instructor_id=${inst.id}`}
-                      className="button button-accent button-sm"
-                      style={{ flex: 1, textAlign: 'center' }}
-                    >
-                      Book VORT Test
-                    </Link>
-                  )}
-                </div>
-              </div>
+                </TiltCard>
+              </ScrollReveal>
             ))}
           </div>
         )}

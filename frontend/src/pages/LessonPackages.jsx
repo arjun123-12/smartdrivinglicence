@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import packageService from '../services/packageService';
 import { extractArray, safeArray } from '../utils/apiHelpers';
 import { mockPackages } from '../services/mockData';
+import TiltCard from '../components/effects/TiltCard';
+import ScrollReveal from '../components/effects/ScrollReveal';
+import MagneticButton from '../components/effects/MagneticButton';
 import {
   CheckCircle,
   ArrowRight,
@@ -210,52 +213,57 @@ export default function LessonPackages() {
             </div>
           ) : (
             <div className="pkg-grid-main">
-              {safeArray(filteredPackages).map((pkg) => {
+              {safeArray(filteredPackages).map((pkg, idx) => {
                 const hourlyRate = Math.round(Number(pkg.current_price || 0) / Math.max(1, Number(pkg.lesson_hours || 1)));
                 return (
-                  <div
-                    key={pkg.id}
-                    className={`pkg-card-premium ${pkg.is_featured ? 'featured' : ''}`}
-                  >
-                    {pkg.is_featured && (
-                      <span className="pkg-badge-top">Top Recommendation</span>
-                    )}
+                  <ScrollReveal key={pkg.id} direction="up" distance={30} delay={idx * 0.08}>
+                    <TiltCard maxTilt={8} scale={1.02} style={{ height: '100%' }}>
+                      <div
+                        className={`pkg-card-premium ${pkg.is_featured ? 'featured' : ''}`}
+                        style={{ height: '100%', margin: 0, display: 'flex', flexDirection: 'column' }}
+                      >
+                        {pkg.is_featured && (
+                          <span className="pkg-badge-top">Top Recommendation</span>
+                        )}
 
-                    <h3 className="pkg-card-title">{pkg.name}</h3>
-                    <span className="pkg-card-hours">
-                      {pkg.lesson_hours} Hours Total ({pkg.lesson_count} Lessons)
-                    </span>
+                        <h3 className="pkg-card-title">{pkg.name}</h3>
+                        <span className="pkg-card-hours">
+                          {pkg.lesson_hours} Hours Total ({pkg.lesson_count} Lessons)
+                        </span>
 
-                    <div className="pkg-card-pricing">
-                      <span className="pkg-price-now">${pkg.current_price}</span>
-                      {pkg.original_price && (
-                        <span className="pkg-price-old">${pkg.original_price}</span>
-                      )}
-                    </div>
-                    <span className="pkg-hourly-rate">
-                      ~${hourlyRate}/Hour · Save ${Number(pkg.original_price || 0) - Number(pkg.current_price || 0)}
-                    </span>
+                        <div className="pkg-card-pricing">
+                          <span className="pkg-price-now">${pkg.current_price}</span>
+                          {pkg.original_price && (
+                            <span className="pkg-price-old">${pkg.original_price}</span>
+                          )}
+                        </div>
+                        <span className="pkg-hourly-rate">
+                          ~${hourlyRate}/Hour · Save ${Number(pkg.original_price || 0) - Number(pkg.current_price || 0)}
+                        </span>
 
-                    <p className="pkg-card-desc">{pkg.short_description}</p>
+                        <p className="pkg-card-desc">{pkg.short_description}</p>
 
-                    <div className="pkg-inclusions-title">What&apos;s Included:</div>
-                    <ul className="pkg-features-list">
-                      {safeArray(pkg.features).map((f) => (
-                        <li key={f.id || f.feature_text} className="pkg-feature-item">
-                          <CheckCircle size={15} />
-                          <span>{f.feature_text}</span>
-                        </li>
-                      ))}
-                    </ul>
+                        <div className="pkg-inclusions-title">What&apos;s Included:</div>
+                        <ul className="pkg-features-list" style={{ flex: 1, marginBottom: '1.5rem' }}>
+                          {safeArray(pkg.features).map((f) => (
+                            <li key={f.id || f.feature_text} className="pkg-feature-item">
+                              <CheckCircle size={15} />
+                              <span>{f.feature_text}</span>
+                            </li>
+                          ))}
+                        </ul>
 
-                    <Link
-                      to={`/book-lesson?package_id=${pkg.id}`}
-                      className={`pkg-book-btn ${pkg.is_featured ? 'accent' : 'primary'}`}
-                    >
-                      Book This Package
-                      <ArrowRight size={16} />
-                    </Link>
-                  </div>
+                        <Link
+                          to={`/book-lesson?package_id=${pkg.id}`}
+                          className={`pkg-book-btn ${pkg.is_featured ? 'accent' : 'primary'}`}
+                          style={{ marginTop: 'auto' }}
+                        >
+                          Book This Package
+                          <ArrowRight size={16} />
+                        </Link>
+                      </div>
+                    </TiltCard>
+                  </ScrollReveal>
                 );
               })}
             </div>

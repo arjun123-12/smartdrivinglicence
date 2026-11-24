@@ -14,6 +14,10 @@ import {
   mockFaqs,
 } from '../services/mockData';
 import Hero from '../components/home/Hero';
+import StatCounter from '../components/home/StatCounter';
+import BentoServices from '../components/home/BentoServices';
+import RoadJourney from '../components/home/RoadJourney';
+import InfiniteMarquee from '../components/home/InfiniteMarquee';
 import OldWayVsNewWay from '../components/home/OldWayVsNewWay';
 import PassedWall from '../components/home/PassedWall';
 import WhatIsVort from '../components/home/WhatIsVort';
@@ -21,6 +25,9 @@ import StudentStories from '../components/home/StudentStories';
 import WhyPreVort from '../components/home/WhyPreVort';
 import FaqSection from '../components/home/FaqSection';
 import ImportantInfo from '../components/home/ImportantInfo';
+import TiltCard from '../components/effects/TiltCard';
+import ScrollReveal from '../components/effects/ScrollReveal';
+import MagneticButton from '../components/effects/MagneticButton';
 import {
   Car,
   Calendar,
@@ -120,131 +127,23 @@ export default function Home() {
         heroConfig={heroConfig}
       />
 
-      {/* 2. OLD WAY VS A1 SMART DRIVING WAY COMPARISON */}
+      {/* 2. ANIMATED STATISTICS & TRUST INDICATORS */}
+      <StatCounter />
+
+      {/* 3. MODERN BENTO GRID DRIVING SERVICES */}
+      <BentoServices services={services} />
+
+      {/* 4. OLD WAY VS A1 SMART DRIVING WAY COMPARISON */}
       <OldWayVsNewWay />
 
-      {/* 2. HOW BOOKING WORKS */}
-      <section className="booking-process-section">
+      {/* 5. SCROLL-DRIVEN 4-STEP ADELAIDE ROAD JOURNEY */}
+      <RoadJourney />
 
-        {/* Decorative background */}
-        <div className="bp-decoration bp-decoration-top" />
-        <div className="bp-decoration bp-decoration-bottom" />
-
-        <div className="container bp-container">
-
-          {/* Section Heading */}
-          <div className="bp-header">
-
-            <div className="bp-tag-wrapper">
-              <span className="bp-tag-line" />
-
-              <span className="bp-tag">
-                Simple 4-Step Process
-              </span>
-
-              <span className="bp-tag-line" />
-            </div>
-
-            <h2 className="bp-title">
-              How Booking <span>Works</span>
-            </h2>
-
-            <p className="bp-description">
-              Getting your P-plates in South Australia is easy.
-              Book your accredited instructor or VORT examiner
-              in under 3 minutes.
-            </p>
-
-          </div>
-
-          {/* Booking Process Cards */}
-          <div className="bp-grid">
-
-            {[
-              {
-                number: '01',
-                icon: MapPin,
-                title: 'Choose Location',
-                description:
-                  'Select your Adelaide suburb or preferred test centre hub (Thebarton, Port Adelaide, Marion).',
-              },
-              {
-                number: '02',
-                icon: Calendar,
-                title: 'Pick Date & Time',
-                description:
-                  'Real-time appointment slots from our verified database with immediate availability confirmation.',
-              },
-              {
-                number: '03',
-                icon: ShieldCheck,
-                title: 'Secure Reservation',
-                description:
-                  'Instant card payment with double-booking prevention and email confirmation.',
-              },
-              {
-                number: '04',
-                icon: Car,
-                title: 'Take Your Test',
-                description:
-                  'Meet your instructor with a dual-control vehicle and take the next step towards your Certificate of Competency.',
-              },
-            ].map((step, index) => {
-              const Icon = step.icon;
-
-              return (
-                <article
-                  key={step.number}
-                  className="bp-card"
-                  style={{ '--step-index': index }}
-                >
-
-                  {/* Step Number */}
-                  <div className="bp-step-number">
-                    {step.number}
-                  </div>
-
-                  {/* Premium Icon */}
-                  <div className="bp-icon-wrapper">
-
-                    <div className="bp-icon">
-
-                      <Icon
-                        size={34}
-                        strokeWidth={1.8}
-                        aria-hidden="true"
-                      />
-
-                    </div>
-
-                  </div>
-
-                  {/* Card Content */}
-                  <div className="bp-card-content">
-
-                    <h3>{step.title}</h3>
-
-                    <span className="bp-card-divider" />
-
-                    <p>{step.description}</p>
-
-                  </div>
-
-                  {/* Bottom Accent */}
-                  <div className="bp-card-accent" />
-
-                </article>
-              );
-            })}
-
-          </div>
-
-        </div>
-
-      </section>
-
-      {/* 3. PASSED WITH A1 SMART DRIVING WALL */}
+      {/* 6. PASSED WITH A1 SMART DRIVING WALL & 3D TROPHY */}
       <PassedWall />
+
+      {/* 7. INFINITE STUDENT PASS MARQUEE */}
+      <InfiniteMarquee />
 
       {/* 4. WHAT IS A VORT? */}
       <WhatIsVort />
@@ -267,45 +166,49 @@ export default function Home() {
           </div>
 
           <div className="grid grid-4">
-            {safeArray(packages).map((pkg) => (
-              <div key={pkg.id} className={`package-card card ${pkg.is_featured ? 'featured' : ''}`}>
-                {pkg.is_featured && <div className="package-badge">Most Popular</div>}
-                <div className="card-body">
-                  <h3 style={{ fontSize: '1.25rem', marginBottom: '0.25rem' }}>{pkg.name}</h3>
-                  <div style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-muted)' }}>
-                    {pkg.lesson_hours} Hours Total ({pkg.lesson_count} Lessons)
+            {safeArray(packages).map((pkg, idx) => (
+              <ScrollReveal key={pkg.id} direction="up" distance={30} delay={idx * 0.08}>
+                <TiltCard maxTilt={8} scale={1.02} style={{ height: '100%' }}>
+                  <div className={`package-card card ${pkg.is_featured ? 'featured' : ''}`} style={{ height: '100%', margin: 0 }}>
+                    {pkg.is_featured && <div className="package-badge">Most Popular</div>}
+                    <div className="card-body" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+                      <h3 style={{ fontSize: '1.25rem', marginBottom: '0.25rem' }}>{pkg.name}</h3>
+                      <div style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-muted)' }}>
+                        {pkg.lesson_hours} Hours Total ({pkg.lesson_count} Lessons)
+                      </div>
+
+                      <div className="package-price">
+                        ${pkg.current_price}
+                        {pkg.original_price && (
+                          <span className="package-price-original">${pkg.original_price}</span>
+                        )}
+                      </div>
+                      <div style={{ fontSize: '11px', color: 'var(--color-text-muted)' }}>Includes GST & Dual-Control Car</div>
+
+                      <p style={{ fontSize: 'var(--font-size-xs)', margin: '1rem 0', color: 'var(--color-text)' }}>
+                        {pkg.short_description}
+                      </p>
+
+                      <ul className="package-features" style={{ marginBottom: '1.5rem', flex: 1 }}>
+                        {safeArray(pkg.features).map((f) => (
+                          <li key={f.id || f.feature_text}>
+                            <CheckCircle size={15} color={f.is_highlighted ? 'var(--color-secondary)' : 'var(--color-success)'} style={{ flexShrink: 0 }} />
+                            <span>{f.feature_text}</span>
+                          </li>
+                        ))}
+                      </ul>
+
+                      <Link
+                        to={`/book-lesson?package_id=${pkg.id}`}
+                        className={`button button-full ${pkg.is_featured ? 'button-accent' : 'button-primary'}`}
+                        style={{ marginTop: 'auto' }}
+                      >
+                        Select Package
+                      </Link>
+                    </div>
                   </div>
-
-                  <div className="package-price">
-                    ${pkg.current_price}
-                    {pkg.original_price && (
-                      <span className="package-price-original">${pkg.original_price}</span>
-                    )}
-                  </div>
-                  <div style={{ fontSize: '11px', color: 'var(--color-text-muted)' }}>Includes GST & Dual-Control Car</div>
-
-                  <p style={{ fontSize: 'var(--font-size-xs)', margin: '1rem 0', color: 'var(--color-text)' }}>
-                    {pkg.short_description}
-                  </p>
-
-                  <ul className="package-features">
-                    {safeArray(pkg.features).map((f) => (
-                      <li key={f.id || f.feature_text}>
-                        <CheckCircle size={15} color={f.is_highlighted ? 'var(--color-secondary)' : 'var(--color-success)'} style={{ flexShrink: 0 }} />
-                        <span>{f.feature_text}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <Link
-                    to={`/book-lesson?package_id=${pkg.id}`}
-                    className={`button button-full ${pkg.is_featured ? 'button-accent' : 'button-primary'}`}
-                    style={{ marginTop: 'auto' }}
-                  >
-                    Select Package
-                  </Link>
-                </div>
-              </div>
+                </TiltCard>
+              </ScrollReveal>
             ))}
           </div>
 
@@ -329,35 +232,39 @@ export default function Home() {
           </div>
 
           <div className="grid grid-4">
-            {safeArray(instructors).map((inst) => (
-              <div key={inst.id} className="instructor-card card">
-                <img
-                  src={inst.profile_image}
-                  alt={inst.name}
-                  style={{ width: '96px', height: '96px', borderRadius: '50%', objectFit: 'cover', marginBottom: '1rem', border: '3px solid #ffffff', boxShadow: 'var(--shadow-sm)' }}
-                />
-                <h4 style={{ marginBottom: '0.25rem' }}>{inst.name}</h4>
-                <div style={{ marginBottom: '0.75rem' }}>
-                  {inst.is_examiner ? (
-                    <span className="badge badge-success">Authorised VORT Examiner</span>
-                  ) : (
-                    <span className="badge badge-info">Accredited Instructor</span>
-                  )}
-                </div>
+            {safeArray(instructors).map((inst, idx) => (
+              <ScrollReveal key={inst.id} direction="up" distance={30} delay={idx * 0.08}>
+                <TiltCard maxTilt={8} scale={1.02} style={{ height: '100%' }}>
+                  <div className="instructor-card card" style={{ height: '100%', margin: 0, display: 'flex', flexDirection: 'column' }}>
+                    <img
+                      src={inst.profile_image}
+                      alt={inst.name}
+                      style={{ width: '96px', height: '96px', borderRadius: '50%', objectFit: 'cover', marginBottom: '1rem', border: '3px solid #ffffff', boxShadow: 'var(--shadow-sm)' }}
+                    />
+                    <h4 style={{ marginBottom: '0.25rem' }}>{inst.name}</h4>
+                    <div style={{ marginBottom: '0.75rem' }}>
+                      {inst.is_examiner ? (
+                        <span className="badge badge-success">Authorised VORT Examiner</span>
+                      ) : (
+                        <span className="badge badge-info">Accredited Instructor</span>
+                      )}
+                    </div>
 
-                <p style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-muted)', marginBottom: '1rem', flex: 1 }}>
-                  {(inst.bio || 'Professional South Australian accredited driving instructor.').slice(0, 110)}...
-                </p>
+                    <p style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-muted)', marginBottom: '1rem', flex: 1 }}>
+                      {(inst.bio || 'Professional South Australian accredited driving instructor.').slice(0, 110)}...
+                    </p>
 
-                <div style={{ width: '100%', fontSize: 'var(--font-size-xs)', borderTop: '1px solid var(--color-border)', paddingTop: '0.75rem', marginBottom: '1rem', textAlign: 'left' }}>
-                  <div><strong>Vehicle:</strong> {inst.car_model || 'Dual Control Car'} (Automatic)</div>
-                  <div><strong>Rate:</strong> ${inst.base_hourly_rate || '85'}/hr {inst.vort_test_rate > 0 && `| VORT: $${inst.vort_test_rate}`}</div>
-                </div>
+                    <div style={{ width: '100%', fontSize: 'var(--font-size-xs)', borderTop: '1px solid var(--color-border)', paddingTop: '0.75rem', marginBottom: '1rem', textAlign: 'left' }}>
+                      <div><strong>Vehicle:</strong> {inst.car_model || 'Dual Control Car'} (Automatic)</div>
+                      <div><strong>Rate:</strong> ${inst.base_hourly_rate || '85'}/hr {inst.vort_test_rate > 0 && `| VORT: $${inst.vort_test_rate}`}</div>
+                    </div>
 
-                <Link to={`/book-lesson?instructor_id=${inst.id}`} className="button button-outline button-sm button-full">
-                  Book with {inst.name ? inst.name.split(' ')[0] : 'Instructor'}
-                </Link>
-              </div>
+                    <Link to={`/book-lesson?instructor_id=${inst.id}`} className="button button-outline button-sm button-full" style={{ marginTop: 'auto' }}>
+                      Book with {inst.name ? inst.name.split(' ')[0] : 'Instructor'}
+                    </Link>
+                  </div>
+                </TiltCard>
+              </ScrollReveal>
             ))}
           </div>
 
@@ -376,20 +283,41 @@ export default function Home() {
       <ImportantInfo />
 
       {/* 7. BOTTOM CTA */}
-      <section className="section section-primary" style={{ textAlign: 'center' }}>
-        <div className="container" style={{ maxWidth: '720px' }}>
-          <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Ready to Get Your P-Plates?</h2>
-          <p style={{ fontSize: 'var(--font-size-lg)', marginBottom: '2rem' }}>
-            Book your driving lesson or official South Australian VORT test online today. Instant confirmation with accredited examiners.
-          </p>
-          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link to="/book-test" className="button button-accent button-lg">
-              Book a VORT Test Now
-            </Link>
-            <Link to="/contact" className="button button-outline-white button-lg">
-              <Phone size={18} /> Contact Support
-            </Link>
-          </div>
+      <section className="section" style={{ textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
+        <div className="container" style={{ maxWidth: '820px' }}>
+          <ScrollReveal direction="scale" distance={30}>
+            <TiltCard maxTilt={6} scale={1.01}>
+              <div
+                style={{
+                  background: 'linear-gradient(135deg, rgba(27, 108, 49, 0.95) 0%, rgba(13, 38, 69, 0.95) 100%)',
+                  padding: '3.5rem 2rem',
+                  borderRadius: '24px',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  boxShadow: 'var(--shadow-3d-floating)',
+                }}
+              >
+                <span className="badge-3d" style={{ background: 'rgba(255, 255, 255, 0.15)', borderColor: 'rgba(255, 255, 255, 0.4)', color: '#ffffff', marginBottom: '1.25rem' }}>
+                  South Australia Official Test Pathway
+                </span>
+                <h2 style={{ fontSize: 'clamp(2rem, 3.5vw, 2.75rem)', color: '#ffffff', marginBottom: '1rem', fontWeight: 800 }}>
+                  Ready to Get Your P-Plates?
+                </h2>
+                <p style={{ fontSize: '1.15rem', color: '#e2e8f0', marginBottom: '2.5rem', maxWidth: '620px', margin: '0 auto 2.5rem' }}>
+                  Book your driving lesson or official South Australian VORT test online today. Instant real-time confirmation with accredited examiners.
+                </p>
+                <div style={{ display: 'flex', gap: '1.25rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+                  <MagneticButton as={Link} to="/book-test" variant="gold">
+                    <span>Book a VORT Test Now</span>
+                    <ArrowRight size={18} />
+                  </MagneticButton>
+                  <MagneticButton as={Link} to="/contact" variant="outline" style={{ background: 'rgba(255, 255, 255, 0.1)', borderColor: 'rgba(255, 255, 255, 0.3)' }}>
+                    <Phone size={18} />
+                    <span>Contact Support</span>
+                  </MagneticButton>
+                </div>
+              </div>
+            </TiltCard>
+          </ScrollReveal>
         </div>
       </section>
     </div>
