@@ -14,6 +14,7 @@ export default function HowItWorks() {
     <div className="scene-perspective-container">
       {/* 3D Page Header */}
       <PageHeading
+        className="premium-page-hero--road"
         badge="South Australia Official Licensing Guide"
         badgeIcon={ShieldCheck}
         liveDot={true}

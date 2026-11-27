@@ -84,7 +84,7 @@ export default function BookLesson() {
   return (
     <div className="first-lesson-page">
       {/* 1. HERO SECTION */}
-      <section className="fl-hero">
+      <section className="fl-hero premium-page-hero">
         <div className="fl-hero-bg" aria-hidden="true" />
         <div className="fl-hero-container">
           <div className="fl-pill-badge">
@@ -137,7 +137,9 @@ export default function BookLesson() {
               </div>
             </div>
 
-            <BookingWizard defaultServiceSlug="first-lesson-assessment" forcedIsTest={false} />
+            <div className="premium-booking-wizard">
+              <BookingWizard defaultServiceSlug="first-lesson-assessment" forcedIsTest={false} />
+            </div>
           </div>
         </div>
       </section>

@@ -43,6 +43,7 @@ export default function Locations() {
   return (
     <div>
       <PageHeading
+        className="premium-page-hero--road"
         badge="Greater Adelaide & Regional SA"
         badgeIcon={MapPin}
         liveDot={true}

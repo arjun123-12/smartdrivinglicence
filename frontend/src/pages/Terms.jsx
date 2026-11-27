@@ -4,9 +4,9 @@ import { FileText, Clock, AlertTriangle, ShieldCheck, CheckCircle2, RotateCcw, P
 
 export default function Terms() {
   return (
-    <div style={{ backgroundColor: 'var(--color-background)', minHeight: '100vh', paddingBottom: '4rem' }}>
+    <div className="public-pattern-surface" style={{ backgroundColor: 'var(--color-background)', minHeight: '100vh', paddingBottom: '4rem' }}>
       {/* Header */}
-      <section className="page-header" style={{ background: 'linear-gradient(135deg, var(--color-secondary-dark) 0%, var(--color-secondary) 100%)', color: '#fff', padding: '3.5rem 1rem', textAlign: 'center' }}>
+      <section className="page-header premium-page-hero premium-page-hero--compact premium-page-hero--road">
         <div className="container" style={{ maxWidth: '900px', margin: '0 auto' }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(255,255,255,0.12)', padding: '0.4rem 1rem', borderRadius: 'var(--radius-full)', marginBottom: '1rem', fontSize: 'var(--font-size-sm)', fontWeight: 600 }}>
             <FileText size={16} color="var(--color-accent)" />

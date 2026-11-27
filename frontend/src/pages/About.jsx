@@ -25,7 +25,7 @@ const VehicleInspection3D = lazy(() => import('../components/3d/VehicleInspectio
 
 export default function About() {
   return (
-    <div style={{ backgroundColor: 'var(--color-background)', minHeight: '100vh', paddingBottom: '4rem' }}>
+    <div className="public-pattern-surface" style={{ backgroundColor: 'var(--color-background)', minHeight: '100vh', paddingBottom: '4rem' }}>
       {/* Hero Header */}
       <PageHeading
         badge="Adelaide Driving School & VORT Test Preparation"

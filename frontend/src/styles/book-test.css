@@ -1,0 +1,144 @@
+.vort-booking-page {
+  background: #f3f8f5;
+  color: #0d2645;
+}
+
+.vort-booking-hero {
+  background: radial-gradient(ellipse at 85% 25%, #1d513e, transparent 55%), #0a192d;
+  padding-block: clamp(3rem, 8vw, 7rem);
+}
+
+.vort-booking-hero__layout {
+  display: grid;
+  grid-template-columns: 1.15fr minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(2rem, 6vw, 6rem);
+}
+
+.vort-booking-heading.sd-sec-heading {
+  margin-bottom: 1.5rem;
+}
+
+.vort-booking-hero__photo .tilt-card-inner {
+  border: 6px solid #c9e3d33d;
+  border-radius: 28px;
+  background: #142d3e;
+  box-shadow: 0 10px 0 #071323, 0 28px 50px #030b17a6;
+}
+
+.vort-booking-hero__photo img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1.55;
+  object-fit: cover;
+}
+
+.vort-booking-hero__actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem 1.5rem;
+}
+
+.vort-booking-hero__actions a {
+  color: #e4f6eb;
+  font-weight: 700;
+  text-underline-offset: 4px;
+}
+
+.vort-booking-hero__actions .vort-booking-start {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.85rem 1.2rem;
+  border-radius: 12px;
+  background: #a7edb6;
+  color: #103423;
+  box-shadow: 0 4px 0 #408955, 0 10px 20px #0715228c;
+  text-decoration: none;
+}
+
+.vort-booking-body {
+  display: grid;
+  gap: clamp(3.5rem, 8vw, 6.5rem);
+  padding-block: clamp(3rem, 7vw, 6rem);
+}
+
+.vort-booking-section {
+  width: min(100%, 68rem);
+  min-width: 0;
+  margin-inline: auto;
+  scroll-margin-top: 7rem;
+}
+
+.vort-booking-notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: clamp(1rem, 3vw, 1.5rem);
+  border: 1px solid #c8e3d0;
+  border-radius: 18px;
+  background: #e8f5ec;
+}
+
+.vort-booking-icon {
+  display: inline-grid;
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  border-radius: 12px;
+  background: linear-gradient(145deg, #e1f6e5, #bfe8ca);
+  color: #176338;
+  box-shadow: inset 0 1px #fff, 0 3px #a2cdb0;
+}
+
+.vort-booking-notice h3,
+.vort-booking-detail h3 {
+  color: #0d2645;
+  font-size: 1.12rem;
+  margin: 0 0 0.45rem;
+}
+
+.vort-booking-notice p,
+.vort-booking-detail p {
+  margin: 0;
+  color: #43586b;
+  line-height: 1.65;
+}
+
+.vort-booking-wizard {
+  padding: clamp(0.75rem, 2.5vw, 1.65rem);
+  border: 1px solid #d7e5de;
+  border-radius: clamp(16px, 3vw, 28px);
+  background: #fff;
+  box-shadow: 0 6px 0 #dce9e2, 0 22px 44px #102c4010;
+}
+
+.vort-booking-details {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.vort-booking-detail .tilt-card-inner {
+  border: 1px solid #d7e5de;
+  background: linear-gradient(155deg, #fff, #eef8f1);
+  box-shadow: 0 4px 0 #dce9e2, 0 16px 30px #102c4010;
+}
+
+.vort-booking-detail__body {
+  padding: clamp(1.15rem, 3vw, 1.75rem);
+}
+
+.vort-booking-detail h3 {
+  margin-top: 1rem;
+}
+
+@media (max-width: 760px) {
+  .vort-booking-hero__layout,
+  .vort-booking-details {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

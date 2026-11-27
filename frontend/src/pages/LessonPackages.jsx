@@ -85,7 +85,7 @@ export default function LessonPackages() {
   return (
     <div className="packages-page">
       {/* 1. HERO SECTION */}
-      <section className="pkg-hero">
+      <section className="pkg-hero premium-page-hero premium-page-hero--road">
         <div className="pkg-hero-bg" aria-hidden="true" />
         <div className="pkg-hero-container">
           <div className="pkg-pill-badge">

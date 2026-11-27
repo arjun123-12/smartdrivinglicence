@@ -1,3 +1,4 @@
+import '../../styles/booking-wizard.css';
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import bookingService from '../../services/bookingService';
@@ -322,23 +323,23 @@ export default function BookingWizard({ defaultServiceSlug = null, forcedIsTest 
       {/* Wizard Step Header */}
       <div className="card-header" style={{ flexDirection: 'column', gap: '1rem' }}>
         <div className="booking-steps-nav" style={{ width: '100%', marginBottom: 0 }}>
-          <div className={`booking-step-indicator ${step >= 1 ? 'active' : ''} ${step > 1 ? 'completed' : ''}`}>
+          <div className={`booking-step-indicator ${step >= 1 ? 'active' : ''} ${step > 1 ? 'completed' : ''}`} aria-current={step === 1 ? 'step' : undefined}>
             <div className="step-number">1</div>
             <span className="step-label">Service & Area</span>
           </div>
-          <div className={`booking-step-indicator ${step >= 2 ? 'active' : ''} ${step > 2 ? 'completed' : ''}`}>
+          <div className={`booking-step-indicator ${step >= 2 ? 'active' : ''} ${step > 2 ? 'completed' : ''}`} aria-current={step === 2 ? 'step' : undefined}>
             <div className="step-number">2</div>
             <span className="step-label">Date & Time</span>
           </div>
-          <div className={`booking-step-indicator ${step >= 3 ? 'active' : ''} ${step > 3 ? 'completed' : ''}`}>
+          <div className={`booking-step-indicator ${step >= 3 ? 'active' : ''} ${step > 3 ? 'completed' : ''}`} aria-current={step === 3 ? 'step' : undefined}>
             <div className="step-number">3</div>
             <span className="step-label">Learner Details</span>
           </div>
-          <div className={`booking-step-indicator ${step >= 4 ? 'active' : ''} ${step > 4 ? 'completed' : ''}`}>
+          <div className={`booking-step-indicator ${step >= 4 ? 'active' : ''} ${step > 4 ? 'completed' : ''}`} aria-current={step === 4 ? 'step' : undefined}>
             <div className="step-number">4</div>
             <span className="step-label">Payment</span>
           </div>
-          <div className={`booking-step-indicator ${step === 5 ? 'active completed' : ''}`}>
+          <div className={`booking-step-indicator ${step === 5 ? 'active completed' : ''}`} aria-current={step === 5 ? 'step' : undefined}>
             <div className="step-number">5</div>
             <span className="step-label">Confirmed</span>
           </div>
@@ -364,7 +365,7 @@ export default function BookingWizard({ defaultServiceSlug = null, forcedIsTest 
                 {safeArray(services).map((service) => (
                   <label
                     key={service.id}
-                    className="card"
+                    className="card booking-service-option"
                     style={{
                       padding: '1rem',
                       cursor: 'pointer',

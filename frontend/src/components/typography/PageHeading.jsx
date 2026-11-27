@@ -40,7 +40,7 @@ export default function PageHeading({
   };
 
   return (
-    <section className={`sd-page-banner ${className}`} style={style}>
+    <section className={`sd-page-banner premium-page-hero ${className}`} style={style}>
       <div className="sd-page-banner-inner" style={{ maxWidth, textAlign: align }}>
         {badge && (
           <div style={{ display: 'inline-flex', marginBottom: '1rem' }}>

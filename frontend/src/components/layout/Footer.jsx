@@ -1,95 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin, MessageSquare, ArrowRight, ShieldCheck, Award, Car, Clock } from 'lucide-react';
-import SectionHeading from '../typography/SectionHeading';
+import { Mail, Phone, MapPin, MessageSquare, Clock, MessageCircle } from 'lucide-react';
 import '../../styles/footer.css';
+
+const shareUrl = encodeURIComponent('https://a1smartdriving.com.au/');
 
 export default function Footer() {
   return (
     <>
-      {/* Pre-Footer High-Impact Automotive CTA */}
-      <section
-        style={{
-          background: 'linear-gradient(135deg, #0A1E35 0%, #07172B 100%)',
-          borderTop: '1px solid rgba(255, 255, 255, 0.1)',
-          borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
-          padding: '4rem 1.5rem',
-          position: 'relative',
-          overflow: 'hidden',
-          zIndex: 2,
-        }}
-      >
-        <div style={{ maxWidth: '1200px', margin: '0 auto', textAlign: 'center', position: 'relative' }}>
-          <SectionHeading
-            eyebrow="South Australia Official Test Pathway"
-            eyebrowIcon={Award}
-            liveDot={true}
-            title="Ready to Pass Your Driving Test First Time?"
-            highlightWord="First Time?"
-            subtitle="Book your driving lesson or official VORT driving test with Adelaide’s top-rated accredited examiners. Real-time availability with instant appointment confirmation."
-            theme="dark"
-            size="lg"
-          />
-
-          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', alignItems: 'center' }}>
-            <Link
-              to="/book-test"
-              className="button button-accent button-lg"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                padding: '14px 28px',
-                fontSize: '1rem',
-                fontWeight: 800,
-                borderRadius: '12px',
-                boxShadow: '0 10px 25px rgba(245, 158, 11, 0.35)',
-              }}
-            >
-              Book a VORT Test <ArrowRight size={18} />
-            </Link>
-
-            <Link
-              to="/book-lesson"
-              className="button button-outline button-lg"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                padding: '14px 28px',
-                fontSize: '1rem',
-                fontWeight: 800,
-                borderRadius: '12px',
-                color: '#FFFFFF',
-                borderColor: 'rgba(255, 255, 255, 0.3)',
-                background: 'rgba(255, 255, 255, 0.05)',
-              }}
-            >
-              <Car size={18} /> Book Driving Lesson
-            </Link>
-
-            <a
-              href="tel:0430580111"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                color: '#4ade80',
-                fontSize: '0.95rem',
-                fontWeight: 700,
-                textDecoration: 'none',
-                padding: '10px 16px',
-                borderRadius: '8px',
-                backgroundColor: 'rgba(34, 197, 94, 0.1)',
-                border: '1px solid rgba(34, 197, 94, 0.25)',
-              }}
-            >
-              <Phone size={16} /> Call 0430 580 111
-            </a>
-          </div>
-        </div>
-      </section>
-
       <footer className="site-footer-premium">
         <div className="footer-premium-container">
           <div className="footer-premium-grid">
@@ -176,15 +94,16 @@ export default function Footer() {
               <span className="footer-copyright">
                 &copy; {new Date().getFullYear()} A1 Smart Driving. All rights reserved.
               </span>
-              <span className="footer-legal-subline">
-                MB &amp; HB GROUP PTY LTD trading as A1 Smart Driving · ABN 92 662 509 720 · Adelaide, South Australia
-              </span>
               <div className="footer-bottom-legal-links">
                 <Link to="/privacy">Privacy Policy</Link>
-                <span className="sep">·</span>
                 <Link to="/terms">Terms &amp; Conditions</Link>
-                <span className="sep">·</span>
                 <Link to="/terms">Cancellation &amp; Lesson Credit Policy</Link>
+                <details className="footer-imprint">
+                  <summary>Legal Imprint</summary>
+                  <p className="footer-legal-subline">
+                    MB &amp; HB GROUP PTY LTD trading as A1 Smart Driving · ABN 92 662 509 720 · Adelaide, South Australia
+                  </p>
+                </details>
               </div>
             </div>
 
@@ -194,7 +113,7 @@ export default function Footer() {
                 href="https://facebook.com"
                 target="_blank"
                 rel="noreferrer noopener"
-                className="footer-social-icon"
+                className="footer-social-icon footer-social-icon--facebook"
                 aria-label="Facebook"
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
@@ -207,7 +126,7 @@ export default function Footer() {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noreferrer noopener"
-                className="footer-social-icon"
+                className="footer-social-icon footer-social-icon--instagram"
                 aria-label="Instagram"
               >
                 <svg
@@ -224,6 +143,26 @@ export default function Footer() {
                   <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
                   <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
                 </svg>
+              </a>
+              <a
+                href={`https://wa.me/?text=${shareUrl}`}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="footer-social-icon footer-social-icon--whatsapp"
+                aria-label="Share on WhatsApp"
+                title="Share on WhatsApp"
+              >
+                <MessageCircle size={20} aria-hidden="true" />
+              </a>
+              <a
+                href={`https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}`}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="footer-social-icon footer-social-icon--linkedin"
+                aria-label="Share on LinkedIn"
+                title="Share on LinkedIn"
+              >
+                <span className="footer-linkedin-mark" aria-hidden="true">in</span>
               </a>
             </div>
           </div>

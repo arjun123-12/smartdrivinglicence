@@ -120,11 +120,11 @@
 .fl-booking-card {
   max-width: 1060px;
   margin: 0 auto;
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 24px;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
-  padding: clamp(24px, 3.5vw, 44px);
+  padding: clamp(12px, 3.5vw, 40px);
+  border: 1px solid #d7e5de;
+  border-radius: clamp(18px, 3vw, 28px);
+  background: linear-gradient(150deg, #eaf6ee, #fff 60%);
+  box-shadow: 0 6px 0 #dce9e2, 0 22px 44px #102c401a;
 }
 
 .fl-booking-header {
@@ -132,33 +132,38 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  margin-bottom: 28px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #f1f5f9;
+  max-width: 900px;
+  margin: 0 auto clamp(18px, 3vw, 28px);
+  padding: clamp(10px, 2vw, 16px);
 }
 
 .fl-booking-title-group h2 {
-  font-size: 22px;
+  margin: 0 0 0.45rem;
+  color: #0d2645;
+  font-size: clamp(1.3rem, 3vw, 2rem);
   font-weight: 850;
-  color: #0f172a;
-  margin: 0 0 4px;
+  line-height: 1.15;
+  text-wrap: balance;
 }
 
 .fl-booking-title-group p {
-  color: #64748b;
-  font-size: 13.5px;
   margin: 0;
+  color: #43586b;
+  line-height: 1.6;
 }
 
 .fl-price-badge {
   display: flex;
+  flex-shrink: 0;
   flex-direction: column;
-  align-items: flex-end;
-  background-color: #EBF5EE;
-  border: 1.5px solid #1B6C31;
+  align-items: flex-start;
+  gap: 0.25rem;
+  padding: 10px 16px;
+  border: 1px solid #39785a;
   border-radius: 14px;
-  padding: 8px 16px;
-  color: #1B6C31;
+  background: linear-gradient(145deg, #236a46, #113e30);
+  color: #fff;
+  box-shadow: 0 4px 0 #103a28, 0 9px 18px #154b3133;
 }
 
 .fl-price-amount {

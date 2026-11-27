@@ -1,0 +1,144 @@
+.vort-practice {
+  overflow: hidden;
+  padding: clamp(1.25rem, 4vw, 4rem);
+  background: radial-gradient(ellipse at 100% 130%, #159123 0 26%, #d9efe2 26.2% 33%, transparent 33.2%), #f8fbfc;
+  color: #0a1b30;
+}
+
+.vort-practice__banner {
+  display: grid;
+  grid-template-columns: minmax(0, 44fr) minmax(0, 56fr);
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  max-width: 94rem;
+  margin-inline: auto;
+}
+
+.vort-practice__images {
+  position: relative;
+  isolation: isolate;
+  margin: 1.75rem 0;
+}
+
+.vort-practice__images::before {
+  position: absolute;
+  z-index: -1;
+  inset: -3% 10% 1% 1%;
+  border-radius: 14%;
+  background: linear-gradient(145deg, #54c906, #087312);
+  transform: rotate(7deg);
+  content: '';
+}
+
+.vort-practice__car,
+.vort-practice__inset {
+  display: block;
+  object-fit: cover;
+  border: clamp(4px, 0.6vw, 9px) solid #fff;
+  box-shadow: 0 1rem 2rem #102f4733;
+}
+
+.vort-practice__car {
+  width: 100%;
+  aspect-ratio: 1.12;
+  border-radius: 15%;
+  transform: rotate(4deg);
+}
+
+.vort-practice__inset {
+  position: absolute;
+  top: -5%;
+  right: -1%;
+  width: 33%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+}
+
+.vort-practice__book {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65em;
+  font-weight: 750;
+}
+
+.vort-practice__heading.sd-sec-heading {
+  margin-bottom: 0;
+}
+
+.vort-practice__benefits {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  list-style: none;
+  max-width: 38rem;
+  margin: 1.5rem 0;
+  padding: 0;
+}
+
+.vort-practice__benefits li {
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 0.45rem;
+  padding-inline: 0.45rem;
+  text-align: center;
+  font-weight: 750;
+  line-height: 1.2;
+}
+
+.vort-practice__benefits li + li {
+  border-left: 1px solid #cbd7e3;
+}
+
+.vort-practice__benefits li span {
+  display: grid;
+  place-items: center;
+  width: 3.4rem;
+  aspect-ratio: 1;
+  border-radius: 0.9rem;
+  background: linear-gradient(135deg, #e0f7eb, #ebfbd2);
+  color: #086d10;
+}
+
+.vort-practice__book {
+  padding: 0.85em 1.35em;
+  border-radius: 0.9rem;
+  background: linear-gradient(145deg, #218e0a, #034807);
+  box-shadow: 0 0.6rem 1.2rem #065d192e;
+  color: #fff;
+  text-decoration: none;
+}
+
+.vort-practice__book:hover {
+  background: #065d19;
+  color: #fff;
+}
+
+.vort-practice__simulator {
+  max-width: 94rem;
+  margin: 1.5rem auto 0;
+}
+
+.vort-practice__simulator summary {
+  width: fit-content;
+  padding: 0.55rem 0.85rem;
+  border-radius: 0.65rem;
+  background: #fff;
+  color: #075e12;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.vort-practice__simulator[open] summary {
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 760px) {
+  .vort-practice__banner {
+    grid-template-columns: 1fr;
+  }
+
+  .vort-practice__images {
+    width: min(94%, 30rem);
+    margin-inline: auto;
+  }
+}

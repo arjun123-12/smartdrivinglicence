@@ -90,7 +90,7 @@ export default function MockTest() {
   return (
     <div className="scene-perspective-container">
       {/* 1. HERO SECTION */}
-      <section className="mock-hero">
+      <section className="mock-hero premium-page-hero premium-page-hero--road">
         <div className="mock-hero-bg" aria-hidden="true" />
         <div className="mock-hero-container">
           <ScrollReveal direction="down" distance={25}>

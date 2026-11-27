@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import TiltCard from '../effects/TiltCard';
 import ScrollReveal from '../effects/ScrollReveal';
-import MagneticButton from '../effects/MagneticButton';
 import SectionHeading from '../typography/SectionHeading';
 import {
   Car,
@@ -19,10 +18,10 @@ import {
 
 export default function BentoServices({ services = [] }) {
   return (
-    <section
+    <section className="public-pattern-surface"
       style={{
         padding: '5rem 1.5rem',
-        background: 'var(--color-background, #F8FAF8)',
+        backgroundColor: 'var(--color-background, #F8FAF8)',
         position: 'relative',
         zIndex: 2,
       }}
@@ -52,112 +51,27 @@ export default function BentoServices({ services = [] }) {
           <div style={{ gridColumn: 'span 12', '@media(min-width: 992px)': { gridColumn: 'span 7' } }} className="bento-col-7">
             <ScrollReveal delay={0.1}>
               <TiltCard maxTilt={7} glareOpacity={0.25}>
-                <div
-                  style={{
-                    backgroundColor: 'var(--color-secondary, #0D2645)',
-                    color: '#FFFFFF',
-                    borderRadius: '20px',
-                    padding: '2.5rem',
-                    height: '100%',
-                    position: 'relative',
-                    overflow: 'hidden',
-                    border: '1px solid rgba(255, 255, 255, 0.12)',
-                    boxShadow: '0 20px 45px rgba(13, 38, 69, 0.25)',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-between',
-                  }}
-                >
-                  {/* Subtle Background Glow Accent */}
-                  <div
-                    style={{
-                      position: 'absolute',
-                      top: '-10%',
-                      right: '-10%',
-                      width: '300px',
-                      height: '300px',
-                      background: 'radial-gradient(circle, rgba(27, 108, 49, 0.4) 0%, transparent 70%)',
-                      filter: 'blur(40px)',
-                      pointerEvents: 'none',
-                    }}
-                  />
-
+                <article className="bento-vort">
                   <div>
-                    <div
-                      style={{
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '6px',
-                        backgroundColor: 'rgba(27, 108, 49, 0.35)',
-                        border: '1px solid rgba(34, 197, 94, 0.4)',
-                        color: '#4ade80',
-                        padding: '4px 12px',
-                        borderRadius: '9999px',
-                        fontSize: '0.8rem',
-                        fontWeight: 700,
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.05em',
-                        marginBottom: '1.25rem',
-                      }}
-                    >
-                      <Award size={14} /> Most Popular Service
-                    </div>
-
-                    <h3 style={{ fontSize: '1.85rem', fontWeight: 900, marginBottom: '0.75rem', lineHeight: 1.2 }}>
-                      Official VORT Test &amp; Vehicle Hire Package
-                    </h3>
-
-                    <p style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: '0.95rem', lineHeight: 1.6, maxWidth: '520px' }}>
-                      Complete Vehicle On Road Test (VORT) package with accredited Authorised Examiner. Includes a 45-minute warm-up drive right before your test, car hire for the test, and government submission upon passing.
-                    </p>
-
-                    <div
-                      style={{
-                        display: 'grid',
-                        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-                        gap: '0.75rem',
-                        marginTop: '1.5rem',
-                        marginBottom: '2rem',
-                      }}
-                    >
-                      {[
-                        'Dual-control Toyota Corolla Hybrid',
-                        'Warm-up mock maneuvers included',
-                        'Marion, Port Adelaide & Regency Park',
-                        'Direct DIT score submission',
-                      ].map((item) => (
-                        <div key={item} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.875rem', color: '#E2E8F0' }}>
-                          <CheckCircle2 size={16} color="#22c55e" style={{ flexShrink: 0 }} />
-                          <span>{item}</span>
-                        </div>
-                      ))}
-                    </div>
+                    <span className="bento-vort__badge"><Award size={16} aria-hidden="true" /> Most Popular Service</span>
+                    <h3>VORT Test &amp; Vehicle Hire</h3>
+                    <p>Book your practical test with an authorised examiner.</p>
+                    <ul className="bento-vort__features">
+                      <li><CheckCircle2 size={16} aria-hidden="true" /> 45-minute warm-up</li>
+                      <li><CheckCircle2 size={16} aria-hidden="true" /> Dual-control car hire</li>
+                    </ul>
                   </div>
-
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', borderTop: '1px solid rgba(255, 255, 255, 0.1)', paddingTop: '1.5rem' }}>
-                    <div>
-                      <div style={{ fontSize: '0.8rem', color: '#94A3B8', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Starting From</div>
-                      <div style={{ fontSize: '1.75rem', fontWeight: 900, color: '#FFFFFF' }}>$240.00 <span style={{ fontSize: '0.9rem', color: '#94A3B8', fontWeight: 500 }}>AUD</span></div>
+                  <div className="bento-vort__footer">
+                    <div className="bento-vort__price">
+                      <span>From</span>
+                      <strong>$240.00</strong>
+                      <span>AUD</span>
                     </div>
-                    <MagneticButton>
-                      <Link
-                        to="/book-test"
-                        className="button button-accent"
-                        style={{
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          gap: '0.5rem',
-                          padding: '12px 24px',
-                          fontSize: '0.95rem',
-                          fontWeight: 800,
-                          borderRadius: '12px',
-                        }}
-                      >
-                        Book VORT Test <ArrowRight size={16} />
-                      </Link>
-                    </MagneticButton>
+                    <Link to="/book-test" className="button button-primary bento-vort__book">
+                      Book VORT Test <ArrowRight size={16} aria-hidden="true" />
+                    </Link>
                   </div>
-                </div>
+                </article>
               </TiltCard>
             </ScrollReveal>
           </div>
@@ -369,12 +283,12 @@ export default function BentoServices({ services = [] }) {
               <TiltCard maxTilt={8} glareOpacity={0.2}>
                 <div
                   style={{
-                    backgroundColor: 'linear-gradient(135deg, #EBF5EE 0%, #FFFFFF 100%)',
+                    backgroundColor: '#FFFFFF',
                     borderRadius: '20px',
                     padding: '2rem',
                     height: '100%',
-                    border: '1.5px solid var(--color-primary-subtle, #D2E7D7)',
-                    boxShadow: '0 12px 30px rgba(27, 108, 49, 0.08)',
+                    border: '1px solid var(--color-border, #DCE5DE)',
+                    boxShadow: '0 12px 30px rgba(13, 38, 69, 0.06)',
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'space-between',

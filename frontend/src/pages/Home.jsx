@@ -169,14 +169,16 @@ export default function Home() {
             size="lg"
           />
 
-          <div className="grid grid-4">
+          <div className="grid grid-4 home-packages-grid">
             {safeArray(packages).map((pkg, idx) => (
               <ScrollReveal key={pkg.id} direction="up" distance={30} delay={idx * 0.08}>
-                <TiltCard maxTilt={8} scale={1.02} style={{ height: '100%' }}>
-                  <div className={`package-card card ${pkg.is_featured ? 'featured' : ''}`} style={{ height: '100%', margin: 0 }}>
-                    {pkg.is_featured && <div className="package-badge">Most Popular</div>}
-                    <div className="card-body" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-                      <h3 style={{ fontSize: '1.25rem', marginBottom: '0.25rem' }}>{pkg.name}</h3>
+                <TiltCard maxTilt={8} scale={1.02}>
+                  <div className={`package-card card ${pkg.is_featured ? 'featured' : ''}`}>
+                    <div className="card-body home-package-body">
+                      <div className="home-package-badge-slot">
+                        {pkg.is_featured ? <span className="package-badge">Most Popular</span> : null}
+                      </div>
+                      <h3 className="home-package-title">{pkg.name}</h3>
                       <div style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-text-muted)' }}>
                         {pkg.lesson_hours} Hours Total ({pkg.lesson_count} Lessons)
                       </div>

@@ -1,75 +1,67 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Check, Compass } from 'lucide-react';
-import ScrollReveal from '../effects/ScrollReveal';
-import TiltCard from '../effects/TiltCard';
+import { ArrowRight, CalendarDays, CarFront, CircleDot, Route, ShieldCheck } from 'lucide-react';
 import SectionHeading from '../typography/SectionHeading';
-import '../../styles/vort-and-reviews.css';
+import '../../styles/vort-practice.css';
 
 const RoadScenario3D = lazy(() => import('../3d/RoadScenario3D'));
 
+const benefits = [
+  { Icon: CarFront, label: 'Real Test Scenarios' },
+  { Icon: Route, label: 'Step-by-Step Guidance' },
+  { Icon: ShieldCheck, label: 'Build Confidence' },
+];
+
 export default function WhatIsVort() {
+  const [simulatorOpen, setSimulatorOpen] = useState(false);
+
   return (
-    <section className="vort-intro-section scene-perspective-container">
-      <div className="vort-intro-container">
-        <SectionHeading
-          eyebrow="South Australia Driving Examination"
-          eyebrowIcon={Compass}
-          liveDot={true}
-          title="What is a VORT Driving Test?"
-          highlightWord="VORT Driving Test"
-          subtitle="A VORT (Vehicle On Road Test) is a practical driving assessment conducted by an authorised examiner to evaluate your safe vehicle control, system of vehicle control, and road law compliance. It is the official pathway to obtaining your P1 provisional licence in South Australia."
-          theme="light"
-          size="md"
-        />
+    <section className="vort-practice" aria-labelledby="vort-practice-heading">
+      <div className="vort-practice__banner">
+        <div className="vort-practice__images" aria-hidden="true">
+          <img className="vort-practice__car" src="/images/hero-car.jpg" alt="" loading="lazy" />
+          <img className="vort-practice__inset" src="/images/hero-driving.jpg" alt="" loading="lazy" />
+        </div>
 
-        <div className="vort-intro-grid" style={{ alignItems: 'center' }}>
-          {/* Left: Interactive 3D Road Test Manoeuvre Simulation */}
-          <ScrollReveal direction="left" distance={50}>
-            <Suspense fallback={<div className="loading-spinner" style={{ minHeight: '380px' }} />}>
-              <RoadScenario3D />
-            </Suspense>
-          </ScrollReveal>
+        <div className="vort-practice__content">
+          <SectionHeading
+            headingId="vort-practice-heading"
+            eyebrow="VORT Practice Simulator"
+            eyebrowIcon={CircleDot}
+            liveDot
+            title="Practice VORT Manoeuvres Like the Real Test"
+            highlightWord="VORT"
+            subtitle="Use our interactive VORT simulator to learn, practice and build confidence for your Provisional Licence test in South Australia."
+            align="left"
+            size="md"
+            className="vort-practice__heading"
+          />
 
-          {/* Right Text Content with 3D Depth Card */}
-          <ScrollReveal direction="right" distance={50}>
-            <TiltCard maxTilt={8} glare={false}>
-              <div style={{ padding: '2rem' }}>
-                <h3 className="vort-who-title" style={{ marginTop: 0 }}>
-                  Who Needs a VORT?
-                </h3>
-                <ul className="vort-who-list">
-                  <li className="vort-who-item">
-                    <Check size={18} strokeWidth={3} color="#22c55e" />
-                    <span>
-                      <strong>Learner's Permit Holders:</strong> Completed required logbook hours and ready to qualify for P-plates.
-                    </span>
-                  </li>
-                  <li className="vort-who-item">
-                    <Check size={18} strokeWidth={3} color="#22c55e" />
-                    <span>
-                      <strong>Overseas Licence Conversions:</strong> Direct conversion test required by Service SA / DIT.
-                    </span>
-                  </li>
-                  <li className="vort-who-item">
-                    <Check size={18} strokeWidth={3} color="#22c55e" />
-                    <span>
-                      <strong>Disqualified or Re-test Drivers:</strong> Court or medical re-examinations.
-                    </span>
-                  </li>
-                </ul>
+          <ul className="vort-practice__benefits">
+            {benefits.map(({ Icon, label }) => (
+              <li key={label}>
+                <span><Icon aria-hidden="true" /></span>
+                {label}
+              </li>
+            ))}
+          </ul>
 
-                <div style={{ marginTop: '1.75rem' }}>
-                  <Link to="/book-test" className="magnetic-btn" style={{ textDecoration: 'none' }}>
-                    <span>Book Your VORT Test</span>
-                    <ArrowRight size={18} />
-                  </Link>
-                </div>
-              </div>
-            </TiltCard>
-          </ScrollReveal>
+          <Link to="/book-test" className="vort-practice__book">
+            <CalendarDays aria-hidden="true" />
+            Book Your VORT Test
+            <ArrowRight aria-hidden="true" />
+          </Link>
         </div>
       </div>
+
+      <details className="vort-practice__simulator" onToggle={(event) => setSimulatorOpen(event.currentTarget.open)}>
+        <summary>Open the interactive VORT simulator</summary>
+        {simulatorOpen && (
+          <Suspense fallback={<p role="status">Loading simulator…</p>}>
+            <RoadScenario3D />
+          </Suspense>
+        )}
+      </details>
     </section>
   );
 }

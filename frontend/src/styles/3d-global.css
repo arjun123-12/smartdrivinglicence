@@ -117,3 +117,31 @@
   box-shadow: 0 4px 15px rgba(27, 108, 49, 0.25), 0 0 1px 1px rgba(255, 255, 255, 0.1) inset;
   transform: translateZ(15px);
 }
+/* Public content grid, using the same line motif as the page heroes. */
+.immersive-page-wrapper {
+  --public-background-grid: linear-gradient(90deg, rgb(27 108 49 / 5%) 1px, transparent 1px),
+    linear-gradient(rgb(27 108 49 / 5%) 1px, transparent 1px);
+  background-image: var(--public-background-grid);
+  background-size: 40px 40px;
+}
+
+.immersive-page-wrapper :is(
+  .public-pattern-surface,
+  .comparison-section,
+  .prevort-section,
+  .faq-section-modern,
+  .vort-intro-section,
+  .student-stories-section,
+  .first-lesson-page,
+  .fl-included-section,
+  .fl-steps-section,
+  .mock-test-page,
+  .mock-stages-section,
+  .packages-page,
+  .pkg-calc-section,
+  .pkg-matrix-section,
+  .vort-booking-page
+) {
+  background-image: var(--public-background-grid);
+  background-size: 40px 40px;
+}

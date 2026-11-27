@@ -178,8 +178,7 @@ h6 {
 
 /* Eyebrow Pill Label */
 .sd-heading-eyebrow-wrap {
-  display: inline-flex;
-  align-items: center;
+  display: block;
   margin-bottom: 0.85rem;
 }
 
@@ -227,10 +226,15 @@ h6 {
 
 /* Section Heading Title */
 .sd-heading-title {
-  margin: 0 0 0.75rem;
+  margin: 0;
   position: relative;
-  display: inline-block;
+  display: block;
+  overflow-wrap: anywhere;
   transform-style: preserve-3d;
+}
+
+.sd-sec-heading.theme-light {
+  --sd-grad-emerald-light: linear-gradient(135deg, #0d2645, #1b6c31 60%, #14753d);
 }
 
 .theme-light .sd-heading-title {
@@ -300,6 +304,10 @@ h6 {
 .align-center .sd-heading-subtitle {
   margin-left: auto;
   margin-right: auto;
+}
+
+.align-right .sd-heading-subtitle {
+  margin-left: auto;
 }
 
 .theme-light .sd-heading-subtitle {
@@ -429,5 +437,97 @@ h6 {
     animation: none !important;
     transition: none !important;
     transform: none !important;
+  }
+}
+
+/* Shared public page heroes */
+.premium-page-hero {
+  --page-hero-photo: url('/images/hero-driving.jpg');
+  --page-hero-position: center 55%;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: clamp(3.5rem, 7vw, 6.5rem) clamp(0.5rem, 3vw, 1.5rem);
+  border-bottom: 1px solid #406752;
+  background: radial-gradient(ellipse at 72% 0%, #255343, transparent 60%),
+    linear-gradient(125deg, #071726, #102b42 68%, #102e2e);
+  color: #fff;
+  text-align: center;
+}
+
+.premium-page-hero--road {
+  --page-hero-photo: url('/images/hero-car.jpg');
+  --page-hero-position: center 48%;
+}
+
+.premium-page-hero--compact {
+  padding-block: clamp(3.5rem, 6vw, 5.5rem);
+}
+
+.premium-page-hero::before {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  width: auto;
+  height: auto;
+  transform: none;
+  background: linear-gradient(90deg, #071726 0%, #091f31 27%, #091f31c9 56%, #091f3140 100%),
+    linear-gradient(0deg, #041421cc, transparent 70%),
+    var(--page-hero-photo) var(--page-hero-position) / cover no-repeat;
+  pointer-events: none;
+  content: '';
+}
+
+.premium-page-hero::after {
+  position: absolute;
+  z-index: -1;
+  inset: auto -30% -52% -30%;
+  height: 96%;
+  transform: perspective(320px) rotateX(44deg);
+  transform-origin: center top;
+  background: repeating-linear-gradient(90deg, #a2e5b820 0 1px, transparent 1px 62px),
+    repeating-linear-gradient(0deg, #a2e5b825 0 1px, transparent 1px 46px);
+  mask-image: linear-gradient(0deg, #000 30%, transparent);
+  pointer-events: none;
+  content: '';
+}
+
+.premium-page-hero :is(.sd-page-banner-title, .fl-hero-title, .pkg-hero-title, .mock-hero-title) {
+  color: #f7fbff;
+  font-size: clamp(2.15rem, 4.8vw, 4.1rem);
+  line-height: 1.08;
+  letter-spacing: -0.043em;
+  text-wrap: balance;
+  text-shadow: 0 4px 24px #020e1e75;
+}
+
+.premium-page-hero :is(.sd-page-banner-desc, .fl-hero-desc, .pkg-hero-desc, .mock-hero-desc) {
+  color: #d6e5eb;
+  text-wrap: pretty;
+}
+
+.premium-page-hero :is(.fl-pill-badge, .pkg-pill-badge, .mock-pill-badge) {
+  border-color: #709e80;
+  background: #143b33;
+  color: #d9f6e1;
+}
+
+.premium-page-hero :is(.fl-value-item, .pkg-value-item, .mock-value-item) {
+  border: 1px solid #aacdb344;
+  border-radius: 12px;
+  background: #0c243bd9;
+  color: #eef7fa;
+  box-shadow: inset 0 1px #ffffff20, 0 4px 0 #061521, 0 10px 18px #05121f60;
+}
+
+.premium-page-hero :is(.fl-value-item, .pkg-value-item, .mock-value-item) svg {
+  flex-shrink: 0;
+  color: #9be7ab;
+}
+
+@media (max-width: 640px) {
+  .premium-page-hero::before {
+    background: linear-gradient(105deg, #091f31eb, #091f31a6),
+      var(--page-hero-photo) var(--page-hero-position) / cover no-repeat;
   }
 }

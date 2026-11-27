@@ -20,11 +20,12 @@ export default function SectionHeading({
   liveDot = false,
   title = '',
   highlightWord = '',
-  highlightVariant = 'emerald',
+  highlightVariant,
   subtitle = '',
   align = 'center',
   theme = 'light',
   level = 'h2',
+  headingId,
   size = 'md',
   underline = true,
   animate = true,
@@ -155,7 +156,7 @@ export default function SectionHeading({
       )}
 
       {/* Main Heading */}
-      <HeadingTag className="sd-heading-title sd-heading-anim-target">
+      <HeadingTag id={headingId} className="sd-heading-title sd-heading-anim-target">
         {renderTitle()}
       </HeadingTag>
 
