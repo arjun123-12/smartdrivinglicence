@@ -98,12 +98,7 @@ export default function Footer() {
                 <Link to="/privacy">Privacy Policy</Link>
                 <Link to="/terms">Terms &amp; Conditions</Link>
                 <Link to="/terms">Cancellation &amp; Lesson Credit Policy</Link>
-                <details className="footer-imprint">
-                  <summary>Legal Imprint</summary>
-                  <p className="footer-legal-subline">
-                    MB &amp; HB GROUP PTY LTD trading as A1 Smart Driving · ABN 92 662 509 720 · Adelaide, South Australia
-                  </p>
-                </details>
+                <span className="footer-imprint">Erry Imprints</span>
               </div>
             </div>
 

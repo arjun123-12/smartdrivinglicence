@@ -380,19 +380,9 @@
   --footer-social-glow: #0a66c270;
 }
 
-.footer-imprint summary {
+.footer-imprint {
   color: #e1eaf5;
   font-size: 12px;
-  cursor: pointer;
-}
-
-.footer-imprint summary:is(:hover, :focus-visible) {
-  color: #fff;
-  text-decoration: underline;
-}
-
-.footer-imprint .footer-legal-subline {
-  margin: 0.5rem 0 0;
 }
 
 .footer-linkedin-mark {
